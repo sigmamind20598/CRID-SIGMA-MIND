@@ -28,6 +28,8 @@ import { twMerge } from 'tailwind-merge';
 
 import { Institute, Professor, ResearchTopic, INITIAL_INSTITUTES, NewsItem } from './types';
 import { getFacultyData, generateResearchTopics, generateFullProposal, getProfessorPublications, getLatestNews, getInstituteNameFromUrl } from './services/aiService';
+import { CURATED_FACULTY } from './facultyData';
+import { institutes } from './data';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -83,10 +85,42 @@ export default function App() {
     setLastError(null);
     try {
       const data = await getLatestNews();
-      if (data.length === 0) {
-        setLastError("No news found. This might be due to AI search limits or API key issues.");
+      if (data && data.length > 0) {
+        setNews(data);
+      } else {
+        // Fallback to curated news if AI fails
+        const fallbackNews: NewsItem[] = [
+          {
+            id: 'fb-1',
+            title: 'PhD Admissions Open at IIT Delhi (HSS)',
+            source: 'IIT Delhi Official',
+            url: 'https://hss.iitd.ac.in/admissions',
+            category: 'Admission',
+            summary: 'Applications are invited for the PhD program in Psychology and Cognitive Science for the upcoming semester.',
+            timestamp: new Date().toISOString()
+          },
+          {
+            id: 'fb-2',
+            title: 'New Research on Neural Correlates of Attention',
+            source: 'Nature Neuroscience',
+            url: 'https://www.nature.com/neuro',
+            category: 'Research',
+            summary: 'Recent study explores how the brain filters sensory information during complex tasks.',
+            timestamp: new Date().toISOString()
+          },
+          {
+            id: 'fb-3',
+            title: 'NIMHANS PhD Entrance Exam Dates Announced',
+            source: 'NIMHANS',
+            url: 'https://nimhans.ac.in/admissions',
+            category: 'Admission',
+            summary: 'The entrance examination for the PhD in Clinical Psychology is scheduled for next month.',
+            timestamp: new Date().toISOString()
+          }
+        ];
+        setNews(fallbackNews);
+        setLastError("AI search returned no results. Showing curated updates.");
       }
-      setNews(data);
     } catch (error) {
       console.error(error);
       setLastError(error instanceof Error ? error.message : String(error));
@@ -110,15 +144,32 @@ export default function App() {
     setIsLoading(true);
     setProfessors([]);
     setLastError(null);
+    
     try {
+      // Try AI search first for dynamism
       const data = await getFacultyData(name);
-      if (data.length === 0) {
-        setLastError(`No faculty data found for ${name}. Try searching for a different university.`);
+      if (data && data.length > 0) {
+        setProfessors(data);
+      } else {
+        // Fallback to curated data if AI fails
+        const curated = CURATED_FACULTY[name];
+        if (curated) {
+          setProfessors(curated);
+          setLastError("AI search failed. Showing curated faculty data.");
+        } else {
+          setLastError(`No faculty data found for ${name}. Try searching for a different university.`);
+        }
       }
-      setProfessors(data);
     } catch (error) {
       console.error("Failed to load faculty:", error);
-      setLastError(error instanceof Error ? error.message : String(error));
+      // Fallback to curated data on error
+      const curated = CURATED_FACULTY[name];
+      if (curated) {
+        setProfessors(curated);
+        setLastError("AI search error. Showing curated faculty data.");
+      } else {
+        setLastError(error instanceof Error ? error.message : String(error));
+      }
     } finally {
       setIsLoading(false);
       setView('faculty');

@@ -18,28 +18,16 @@ function getAIClient(): GoogleGenAI {
 }
 
 export async function getLatestNews(): Promise<NewsItem[]> {
-  const model = "gemini-3.1-pro-preview"; // Use Pro for better tool handling
-  const prompt = `Find the 10 most recent and relevant updates, notifications, or research news related to Psychology, Neuroscience, and PhD admissions in India.
+  const model = "gemini-3-flash-preview"; 
+  const prompt = `Search for the 10 most recent and relevant updates, notifications, or research news related to Psychology, Neuroscience, and PhD admissions in India (2024-2025).
   
   Include:
   - PhD Admission Forms and Deadlines
   - Job Openings (JRF, SRF, Project Assistant)
-  - Research news and breakthroughs
+  - Research breakthroughs
   
-  Focus on these specific sources:
-  - YouTube: UPS Education, Power Within Psychology, NTA UGC NET, Physics Wallah, Unacademy UGC NET, Research Methodology India.
-  - Telegram: UGC NET Mentor, Gyan Adda by SM, Psychology Study, PhD Notification Only, All India PhD Scholars, Shodhganga, CSIR NET.
-  - X (Twitter): UGC India, NIMHANS Official, RCI India, TISS Mumbai, IIT Bombay Psychology.
-  
-  For each news item, provide:
-  1. Title (concise and catchy)
-  2. Source name
-  3. URL (if available, otherwise a placeholder)
-  4. Category (YouTube, Telegram, X, or Journal)
-  5. A 1-sentence summary.
-  6. A single relevant keyword for an image search (e.g., "graduation", "microscope", "brain", "exam", "books", "university").
-  
-  Return the data as a JSON array of objects with keys: title, source, url, category, summary, imageKeyword.`;
+  Return a JSON array of objects with exactly these keys: title, source, url, category, summary, imageKeyword.
+  Do not include any other text, only the JSON array.`;
 
   try {
     const response = await getAIClient().models.generateContent({
@@ -50,36 +38,23 @@ export async function getLatestNews(): Promise<NewsItem[]> {
       },
     });
 
-    console.log("AI News Response:", response);
     const text = response.text;
-    if (!text) {
-      console.warn("AI returned empty text for news.");
-      return [];
-    }
+    if (!text) return [];
 
     // Robust JSON extraction
-    let jsonStr = text.trim();
-    if (jsonStr.includes("```json")) {
-      jsonStr = jsonStr.split("```json")[1].split("```")[0].trim();
-    } else if (jsonStr.includes("```")) {
-      jsonStr = jsonStr.split("```")[1].split("```")[0].trim();
-    } else {
-      const start = jsonStr.indexOf('[');
-      const end = jsonStr.lastIndexOf(']');
-      if (start !== -1 && end !== -1) {
-        jsonStr = jsonStr.substring(start, end + 1);
-      }
-    }
+    const match = text.match(/\[[\s\S]*\]/);
+    const jsonStr = match ? match[0] : text;
 
     try {
       const data = JSON.parse(jsonStr);
+      if (!Array.isArray(data)) return [];
       return data.map((item: any, index: number) => ({
         ...item,
         id: `news-${index}-${Date.now()}`,
         timestamp: new Date().toISOString()
       }));
     } catch (e) {
-      console.error("Failed to parse News JSON. Raw text:", text);
+      console.error("Failed to parse News JSON:", text);
       return [];
     }
   } catch (error) {
@@ -89,24 +64,20 @@ export async function getLatestNews(): Promise<NewsItem[]> {
 }
 
 export async function getFacultyData(instituteName: string): Promise<Professor[]> {
-  const model = "gemini-3.1-pro-preview"; // Use Pro for better tool handling
-  const prompt = `Find the top 5-8 professors at ${instituteName} using this EXACT filtering logic:
-  1. FIRST, locate the Department of Humanities and Social Sciences (HSS) or Behavioral Sciences.
-  2. SECOND, filter for faculty within the Psychology division/area.
-  3. THIRD, prioritize those specializing in Cognitive Neuroscience (e.g., Prof. Sumitash Jana at IIT Delhi).
-  4. FOURTH, EXCLUDE anyone whose primary research or department is related to Linguistics.
-  
-  If ${instituteName} is a URL, visit it to find the faculty. If it's a name, search for the faculty at that institution.
+  const model = "gemini-3-flash-preview";
+  const prompt = `Search for the top 5-8 professors at ${instituteName} in the field of Psychology or Cognitive Neuroscience.
   
   For each professor, provide:
   1. Name
-  2. Primary Specialization (e.g., "Cognitive Neuroscience", "Social Psychology")
-  3. Key Publication Focus (e.g., "Visual Perception", "Neural Correlates of Memory")
-  4. A DIRECT link to their Research Profile (ORCID, ResearchGate, or University page).
-  5. Citation metrics (e.g., "1500+ citations" or "H-index: 25") to help users decide on a research area.
+  2. Department
+  3. Research Area
+  4. Specialization
+  5. Focus (1 sentence)
+  6. Research Profile Link (scholarLink)
+  7. Citations/Impact (citations)
   
-  Return ONLY a valid JSON array of objects with keys: name, department, researchArea, specialization, focus, scholarLink, citations. 
-  Do not include any other text or markdown formatting.`;
+  Return a JSON array of objects with these keys: name, department, researchArea, specialization, focus, scholarLink, citations.
+  Do not include any other text, only the JSON array.`;
 
   try {
     const response = await getAIClient().models.generateContent({
@@ -117,26 +88,11 @@ export async function getFacultyData(instituteName: string): Promise<Professor[]
       },
     });
 
-    console.log("AI Faculty Response:", response);
     const text = response.text;
-    if (!text) {
-      console.warn("AI returned empty text for faculty.");
-      return [];
-    }
+    if (!text) return [];
 
-    // Clean the response text to extract JSON
-    let jsonStr = text.trim();
-    if (jsonStr.includes("```json")) {
-      jsonStr = jsonStr.split("```json")[1].split("```")[0].trim();
-    } else if (jsonStr.includes("```")) {
-      jsonStr = jsonStr.split("```")[1].split("```")[0].trim();
-    } else {
-      const start = jsonStr.indexOf('[');
-      const end = jsonStr.lastIndexOf(']');
-      if (start !== -1 && end !== -1) {
-        jsonStr = jsonStr.substring(start, end + 1);
-      }
-    }
+    const match = text.match(/\[[\s\S]*\]/);
+    const jsonStr = match ? match[0] : text;
 
     try {
       const data = JSON.parse(jsonStr);
@@ -153,7 +109,7 @@ export async function getFacultyData(instituteName: string): Promise<Professor[]
         id: `${instituteName.toLowerCase().replace(/\s+/g, '-')}-${index}-${Date.now()}`,
       }));
     } catch (e) {
-      console.error("Failed to parse Faculty JSON. Raw text:", text);
+      console.error("Failed to parse Faculty JSON:", text);
       return [];
     }
   } catch (error) {
