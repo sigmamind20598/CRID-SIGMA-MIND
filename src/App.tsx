@@ -813,6 +813,20 @@ export default function App() {
                         </div>
 
                         <div className="pt-8 border-t border-white/5">
+                          <div className="flex items-center gap-4 mb-4">
+                            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10">
+                              <div className={`w-1.5 h-1.5 rounded-full ${process.env.GEMINI_API_KEY ? 'bg-emerald-500 animate-pulse' : 'bg-red-500'}`}></div>
+                              <span className="text-[8px] font-black uppercase tracking-widest text-white/40">
+                                AI Status: {process.env.GEMINI_API_KEY ? 'Connected' : 'Key Missing'}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10">
+                              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>
+                              <span className="text-[8px] font-black uppercase tracking-widest text-white/40">
+                                Backend: Online
+                              </span>
+                            </div>
+                          </div>
                           <p className="text-[10px] text-white/30 uppercase tracking-widest leading-relaxed">
                             * WhatsApp is text-only, unless you want to hear me talk about neurons for 3 hours straight. 
                             You've been warned.
