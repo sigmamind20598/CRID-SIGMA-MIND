@@ -34,7 +34,7 @@ function cn(...inputs: ClassValue[]) {
 }
 
 export default function App() {
-  const [mode, setMode] = useState<'home' | 'directory' | 'custom' | 'news' | 'review' | 'guidance'>('home');
+  const [mode, setMode] = useState<'home' | 'directory' | 'custom' | 'news' | 'review' | 'guidance' | 'contact'>('home');
   const sortedInstitutes = [...INITIAL_INSTITUTES].sort((a, b) => {
     const isAiitA = a.name.includes('IIT') || a.name.includes('IIM');
     const isAiitB = b.name.includes('IIT') || b.name.includes('IIM');
@@ -232,16 +232,26 @@ export default function App() {
             <Brain size={28} className="text-[#0a192f]" />
           </div>
           <span className="text-[10px] font-black tracking-[0.2em] text-white uppercase mt-2">CRID</span>
+          <span className="text-[6px] font-bold tracking-[0.1em] text-white/40 uppercase mt-1 text-center whitespace-nowrap">
+            Cognitive Research Intelligence Domain
+          </span>
         </div>
 
         <div className="flex-1 flex items-center justify-end gap-6">
-          <div className="relative hidden md:block">
-            <Search className={cn("absolute left-3 top-1/2 -translate-y-1/2", mode === 'home' ? "text-white/30" : "text-black/30")} size={14} />
-            <input 
-              className={cn("rounded-full pl-10 pr-4 py-1.5 text-[10px] font-bold uppercase tracking-widest w-48 transition-all focus:ring-2 focus:ring-emerald-500/20", mode === 'home' ? "bg-white/5 border-none text-white" : "bg-black/5 border-none text-black")}
-              placeholder="Search..."
-            />
-          </div>
+          <button 
+            onClick={() => setMode('contact')}
+            className={cn(
+              "flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all",
+              mode === 'contact' 
+                ? "bg-emerald-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.4)]" 
+                : "bg-white/5 text-white/60 hover:bg-white/10"
+            )}
+          >
+            <div className="w-5 h-5 rounded-full overflow-hidden bg-emerald-500/20 flex items-center justify-center">
+              <span className="text-[8px]">👨‍🔬</span>
+            </div>
+            Contact Me
+          </button>
         </div>
       </nav>
 
@@ -715,6 +725,101 @@ export default function App() {
                         </form>
                       </>
                     )}
+                  </motion.div>
+                )}
+
+                {mode === 'contact' && (
+                  <motion.div 
+                    key="contact"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className="max-w-4xl mx-auto py-12 px-4"
+                  >
+                    <div className="grid md:grid-cols-[1fr_1.5fr] gap-12 items-start">
+                      <div className="space-y-6">
+                        <div className="aspect-[3/4] rounded-[2rem] overflow-hidden border-4 border-emerald-500/30 shadow-2xl rotate-[-2deg] hover:rotate-0 transition-transform duration-500 bg-black/40">
+                          <img 
+                            src="/sarthak.jpg" 
+                            alt="Sarthak Singh" 
+                            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = "https://picsum.photos/seed/sarthak/800/1200";
+                            }}
+                          />
+                        </div>
+                        <div className="bg-emerald-500/10 p-6 rounded-2xl border border-emerald-500/20 backdrop-blur-sm">
+                          <p className="text-[10px] font-black text-emerald-500 uppercase tracking-widest mb-2">Current Status</p>
+                          <p className="text-sm text-white/80 leading-relaxed">
+                            🧠 Analyzing neural correlates of procrastination while building this website for you.
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="space-y-8">
+                        <div>
+                          <h1 className="text-6xl font-black tracking-tighter text-white mb-2">
+                            SARTHAK <span className="text-emerald-500">SINGH</span>
+                          </h1>
+                          <p className="text-xl font-medium text-emerald-500/60 italic tracking-tight">
+                            The human behind the code (and the neurons)
+                          </p>
+                        </div>
+
+                        <div className="space-y-6 text-white/70">
+                          <p className="text-lg leading-relaxed">
+                            Hey there! I'm a <strong className="text-white">2nd year PhD student</strong> at <strong className="text-white">IIT DELHI</strong> specializing in 
+                            <span className="text-emerald-400 font-bold"> Psychology and Cognitive Neuroscience</span>. 
+                          </p>
+                          <p className="text-lg leading-relaxed">
+                            I built this platform because I realized that writing PhD proposals is 10% research and 90% 
+                            staring at a blank screen wondering if you're actually smart enough for this. (Spoiler: You are, 
+                            you just need a better starting point).
+                          </p>
+                          <p className="text-lg leading-relaxed">
+                            When I'm not overthinking about how your brain processes visual stimuli, I'm overthinking about 
+                            why my code isn't working. It's a balanced lifestyle.
+                          </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                          <a 
+                            href="mailto:sigmamind20598@gmail.com"
+                            className="flex items-center gap-4 p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-emerald-500/50 hover:bg-white/10 transition-all group"
+                          >
+                            <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all">
+                              <Send size={20} className="text-emerald-500 group-hover:text-black" />
+                            </div>
+                            <div>
+                              <p className="text-[8px] text-white/40 uppercase font-black tracking-widest">Email Me</p>
+                              <p className="text-xs font-bold text-white">sigmamind20598@gmail.com</p>
+                            </div>
+                          </a>
+
+                          <a 
+                            href="https://wa.me/917092884311"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="flex items-center gap-4 p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-emerald-500/50 hover:bg-white/10 transition-all group"
+                          >
+                            <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all">
+                              <MessageSquare size={20} className="text-emerald-500 group-hover:text-black" />
+                            </div>
+                            <div>
+                              <p className="text-[8px] text-white/40 uppercase font-black tracking-widest">WhatsApp</p>
+                              <p className="text-xs font-bold text-white">+91 7092884311</p>
+                            </div>
+                          </a>
+                        </div>
+
+                        <div className="pt-8 border-t border-white/5">
+                          <p className="text-[10px] text-white/30 uppercase tracking-widest leading-relaxed">
+                            * WhatsApp is text-only, unless you want to hear me talk about neurons for 3 hours straight. 
+                            You've been warned.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>

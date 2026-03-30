@@ -6,10 +6,9 @@ let aiClient: GoogleGenAI | null = null;
 
 function getAIClient(): GoogleGenAI {
   if (!aiClient) {
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY;
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY || (typeof process !== 'undefined' ? process.env.GEMINI_API_KEY : '');
     if (!apiKey) {
-      console.error("Missing Gemini API Key. Please set VITE_GEMINI_API_KEY in your environment.");
-      // Return a dummy client or throw error. Throwing error will be caught by the try-catch blocks in the functions.
+      console.error("CRITICAL: Missing Gemini API Key. Please set VITE_GEMINI_API_KEY in your Vercel environment variables.");
       throw new Error("Missing Gemini API Key");
     }
     aiClient = new GoogleGenAI({ apiKey });
@@ -47,33 +46,41 @@ export async function getLatestNews(): Promise<NewsItem[]> {
       contents: prompt,
       config: {
         tools: [{ googleSearch: {} }],
-        responseMimeType: "application/json",
-        responseSchema: {
-          type: Type.ARRAY,
-          items: {
-            type: Type.OBJECT,
-            properties: {
-              title: { type: Type.STRING },
-              source: { type: Type.STRING },
-              url: { type: Type.STRING },
-              category: { type: Type.STRING, enum: ['YouTube', 'Telegram', 'X', 'Journal'] },
-              summary: { type: Type.STRING },
-              imageKeyword: { type: Type.STRING }
-            },
-            required: ['title', 'source', 'category', 'summary', 'imageKeyword']
-          }
-        }
       },
     });
 
+    console.log("AI News Response:", response);
     const text = response.text;
-    if (!text) return [];
-    const data = JSON.parse(text);
-    return data.map((item: any, index: number) => ({
-      ...item,
-      id: `news-${index}-${Date.now()}`,
-      timestamp: new Date().toISOString()
-    }));
+    if (!text) {
+      console.warn("AI returned empty text for news.");
+      return [];
+    }
+
+    // Robust JSON extraction
+    let jsonStr = text.trim();
+    if (jsonStr.includes("```json")) {
+      jsonStr = jsonStr.split("```json")[1].split("```")[0].trim();
+    } else if (jsonStr.includes("```")) {
+      jsonStr = jsonStr.split("```")[1].split("```")[0].trim();
+    } else {
+      const start = jsonStr.indexOf('[');
+      const end = jsonStr.lastIndexOf(']');
+      if (start !== -1 && end !== -1) {
+        jsonStr = jsonStr.substring(start, end + 1);
+      }
+    }
+
+    try {
+      const data = JSON.parse(jsonStr);
+      return data.map((item: any, index: number) => ({
+        ...item,
+        id: `news-${index}-${Date.now()}`,
+        timestamp: new Date().toISOString()
+      }));
+    } catch (e) {
+      console.error("Failed to parse News JSON. Raw text:", text);
+      return [];
+    }
   } catch (error) {
     console.error("Error fetching news:", error);
     return [];
@@ -106,12 +113,15 @@ export async function getFacultyData(instituteName: string): Promise<Professor[]
       contents: prompt,
       config: {
         tools: [{ googleSearch: {} }],
-        // We'll parse manually to be more robust against model variations
       },
     });
 
+    console.log("AI Faculty Response:", response);
     const text = response.text;
-    if (!text) return [];
+    if (!text) {
+      console.warn("AI returned empty text for faculty.");
+      return [];
+    }
 
     // Clean the response text to extract JSON
     let jsonStr = text.trim();
@@ -119,21 +129,32 @@ export async function getFacultyData(instituteName: string): Promise<Professor[]
       jsonStr = jsonStr.split("```json")[1].split("```")[0].trim();
     } else if (jsonStr.includes("```")) {
       jsonStr = jsonStr.split("```")[1].split("```")[0].trim();
+    } else {
+      const start = jsonStr.indexOf('[');
+      const end = jsonStr.lastIndexOf(']');
+      if (start !== -1 && end !== -1) {
+        jsonStr = jsonStr.substring(start, end + 1);
+      }
     }
 
-    const data = JSON.parse(jsonStr);
-    if (!Array.isArray(data)) return [];
+    try {
+      const data = JSON.parse(jsonStr);
+      if (!Array.isArray(data)) return [];
 
-    return data.map((p: any, index: number) => ({
-      name: p.name || "Unknown Professor",
-      department: p.department || "HSS / Behavioral Sciences",
-      researchArea: p.researchArea || "Psychology / Cognitive Neuroscience",
-      specialization: p.specialization || "Cognitive Science",
-      focus: p.focus || "General Research",
-      scholarLink: p.scholarLink || "#",
-      citations: p.citations || "N/A",
-      id: `${instituteName.toLowerCase().replace(/\s+/g, '-')}-${index}-${Date.now()}`,
-    }));
+      return data.map((p: any, index: number) => ({
+        name: p.name || "Unknown Professor",
+        department: p.department || "HSS / Behavioral Sciences",
+        researchArea: p.researchArea || "Psychology / Cognitive Neuroscience",
+        specialization: p.specialization || "Cognitive Science",
+        focus: p.focus || "General Research",
+        scholarLink: p.scholarLink || "#",
+        citations: p.citations || "N/A",
+        id: `${instituteName.toLowerCase().replace(/\s+/g, '-')}-${index}-${Date.now()}`,
+      }));
+    } catch (e) {
+      console.error("Failed to parse Faculty JSON. Raw text:", text);
+      return [];
+    }
   } catch (error) {
     console.error("Error fetching faculty data:", error);
     return [];
