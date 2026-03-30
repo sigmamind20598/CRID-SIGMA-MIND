@@ -6,6 +6,7 @@ let aiClient: GoogleGenAI | null = null;
 
 function getAIClient(): GoogleGenAI {
   if (!aiClient) {
+    // @ts-ignore
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY || (typeof process !== 'undefined' ? process.env.GEMINI_API_KEY : '');
     if (!apiKey) {
       console.error("CRITICAL: Missing Gemini API Key. Please set VITE_GEMINI_API_KEY in your Vercel environment variables.");
@@ -17,7 +18,7 @@ function getAIClient(): GoogleGenAI {
 }
 
 export async function getLatestNews(): Promise<NewsItem[]> {
-  const model = "gemini-3-flash-preview";
+  const model = "gemini-3.1-pro-preview"; // Use Pro for better tool handling
   const prompt = `Find the 10 most recent and relevant updates, notifications, or research news related to Psychology, Neuroscience, and PhD admissions in India.
   
   Include:
@@ -45,7 +46,7 @@ export async function getLatestNews(): Promise<NewsItem[]> {
       model,
       contents: prompt,
       config: {
-        tools: [{ googleSearch: {} }],
+        tools: [{ googleSearch: {} }]
       },
     });
 
@@ -88,7 +89,7 @@ export async function getLatestNews(): Promise<NewsItem[]> {
 }
 
 export async function getFacultyData(instituteName: string): Promise<Professor[]> {
-  const model = "gemini-3-flash-preview";
+  const model = "gemini-3.1-pro-preview"; // Use Pro for better tool handling
   const prompt = `Find the top 5-8 professors at ${instituteName} using this EXACT filtering logic:
   1. FIRST, locate the Department of Humanities and Social Sciences (HSS) or Behavioral Sciences.
   2. SECOND, filter for faculty within the Psychology division/area.
@@ -112,7 +113,7 @@ export async function getFacultyData(instituteName: string): Promise<Professor[]
       model,
       contents: prompt,
       config: {
-        tools: [{ googleSearch: {} }],
+        tools: [{ googleSearch: {} }]
       },
     });
 

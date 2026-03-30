@@ -71,36 +71,54 @@ export default function App() {
   const [userPhone, setUserPhone] = useState('');
 
   const [searchTerm, setSearchTerm] = useState('');
+  const [lastError, setLastError] = useState<string | null>(null);
 
   const filteredInstitutes = institutes.filter(inst => 
     inst.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     inst.location?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  useEffect(() => {
-    const fetchNews = async () => {
+  const fetchNews = async () => {
+    setIsLoading(true);
+    setLastError(null);
+    try {
       const data = await getLatestNews();
+      if (data.length === 0) {
+        setLastError("No news found. This might be due to AI search limits or API key issues.");
+      }
       setNews(data);
-    };
+    } catch (error) {
+      console.error(error);
+      setLastError(error instanceof Error ? error.message : String(error));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchNews();
   }, []);
 
   useEffect(() => {
-    if (selectedInstitute && mode === 'directory') {
-      loadFaculty(selectedInstitute.url || selectedInstitute.name);
+    if (mode === 'news' && news.length === 0) {
+      fetchNews();
     }
-    setIsSubmitted(false);
-  }, [selectedInstitute, mode]);
+  }, [mode]);
 
   const loadFaculty = async (name: string) => {
     if (!name) return;
     setIsLoading(true);
     setProfessors([]);
+    setLastError(null);
     try {
       const data = await getFacultyData(name);
+      if (data.length === 0) {
+        setLastError(`No faculty data found for ${name}. Try searching for a different university.`);
+      }
       setProfessors(data);
     } catch (error) {
       console.error("Failed to load faculty:", error);
+      setLastError(error instanceof Error ? error.message : String(error));
     } finally {
       setIsLoading(false);
       setView('faculty');
@@ -408,28 +426,36 @@ export default function App() {
                     exit={{ opacity: 0 }}
                     className="max-w-5xl mx-auto"
                   >
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                      {professors.map((prof) => (
-                        <div key={prof.id} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
-                          <h3 className="text-xl font-bold text-white mb-2">{prof.name}</h3>
-                          <p className="text-sm text-white/60 mb-4">{prof.specialization}</p>
-                          <div className="flex gap-2">
-                            <button 
-                              onClick={() => handleProfessorClick(prof)}
-                              className="flex-1 bg-white/10 hover:bg-white/20 text-white py-2 rounded-lg text-xs font-bold transition-colors"
-                            >
-                              View Profile
-                            </button>
-                            <button 
-                              onClick={() => handleProfessorSelect(prof)}
-                              className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-lg text-xs font-bold transition-colors"
-                            >
-                              Generate Topics
-                            </button>
+                    {professors.length > 0 ? (
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {professors.map((prof) => (
+                          <div key={prof.id} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+                            <h3 className="text-xl font-bold text-white mb-2">{prof.name}</h3>
+                            <p className="text-sm text-white/60 mb-4">{prof.specialization}</p>
+                            <div className="flex gap-2">
+                              <button 
+                                onClick={() => handleProfessorClick(prof)}
+                                className="flex-1 bg-white/10 hover:bg-white/20 text-white py-2 rounded-lg text-xs font-bold transition-colors"
+                              >
+                                View Profile
+                              </button>
+                              <button 
+                                onClick={() => handleProfessorSelect(prof)}
+                                className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-lg text-xs font-bold transition-colors"
+                              >
+                                Generate Topics
+                              </button>
+                            </div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="h-full flex flex-col items-center justify-center text-center py-20">
+                        <Users className="w-16 h-16 text-white/10 mb-4" />
+                        <p className="text-white/40 uppercase tracking-widest text-sm font-bold">No professors found.</p>
+                        <p className="text-white/20 text-xs mt-2">Try clicking the university name again or select another one.</p>
+                      </div>
+                    )}
                   </motion.div>
                 )}
 
@@ -509,18 +535,54 @@ export default function App() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
-                    className="max-w-4xl mx-auto space-y-6"
+                    className="max-w-5xl mx-auto space-y-8"
                   >
-                    {news.map((item) => (
-                      <div key={item.id} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
-                        <h4 className="text-lg font-bold text-emerald-400 mb-2">{item.title}</h4>
-                        <p className="text-sm text-white/70 mb-4">{item.summary}</p>
-                        <div className="flex items-center justify-between text-xs text-white/40">
-                          <span>{item.source}</span>
-                          <span>{new Date(item.timestamp).toLocaleDateString()}</span>
-                        </div>
+                    <div className="flex justify-between items-center mb-8">
+                      <h3 className="text-2xl font-bold">Latest Research & Admissions</h3>
+                      <button 
+                        onClick={fetchNews}
+                        className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-xs font-bold transition-all"
+                      >
+                        <Loader2 className={cn("w-3 h-3", isLoading && "animate-spin")} />
+                        Refresh News
+                      </button>
+                    </div>
+
+                    {news.length > 0 ? (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {news.map((item) => (
+                          <div key={item.id} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+                            <div className="flex justify-between items-start mb-4">
+                              <span className="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold rounded-full uppercase tracking-wider">
+                                {item.category}
+                              </span>
+                              <span className="text-[10px] text-white/30 font-mono">
+                                {new Date(item.timestamp).toLocaleDateString()}
+                              </span>
+                            </div>
+                            <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+                            <p className="text-sm text-white/60 mb-6 line-clamp-2">{item.summary}</p>
+                            <div className="flex items-center justify-between">
+                              <span className="text-xs text-white/40 font-medium">Source: {item.source}</span>
+                              <a 
+                                href={item.url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 text-xs font-bold transition-colors"
+                              >
+                                Read More <ArrowRight size={14} />
+                              </a>
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                    ))}
+                    ) : (
+                      <div className="h-full flex flex-col items-center justify-center text-center py-20">
+                        <Database className="w-16 h-16 text-white/10 mb-4" />
+                        <p className="text-white/40 uppercase tracking-widest text-sm font-bold">No news updates found.</p>
+                        <p className="text-white/20 text-xs mt-2">The AI might be taking a break. Try refreshing in a moment.</p>
+                      </div>
+                    )}
                   </motion.div>
                 )}
 
@@ -827,6 +889,15 @@ export default function App() {
                               </span>
                             </div>
                           </div>
+                          {lastError && (
+                            <div className="mb-4 p-3 bg-red-500/10 rounded-xl border border-red-500/20">
+                              <p className="text-[10px] text-red-400 font-bold uppercase mb-1 flex items-center gap-2">
+                                <AlertCircle size={10} />
+                                Last AI Error
+                              </p>
+                              <p className="text-[10px] text-red-300/60 font-mono break-all">{lastError}</p>
+                            </div>
+                          )}
                           <p className="text-[10px] text-white/30 uppercase tracking-widest leading-relaxed">
                             * WhatsApp is text-only, unless you want to hear me talk about neurons for 3 hours straight. 
                             You've been warned.
