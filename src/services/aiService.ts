@@ -2,7 +2,20 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { Professor, ResearchTopic, NewsItem } from "../types";
 import { PROPOSAL_SYSTEM_INSTRUCTIONS } from "./proposalInstructions";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+let aiClient: GoogleGenAI | null = null;
+
+function getAIClient(): GoogleGenAI {
+  if (!aiClient) {
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      console.error("Missing Gemini API Key. Please set VITE_GEMINI_API_KEY in your environment.");
+      // Return a dummy client or throw error. Throwing error will be caught by the try-catch blocks in the functions.
+      throw new Error("Missing Gemini API Key");
+    }
+    aiClient = new GoogleGenAI({ apiKey });
+  }
+  return aiClient;
+}
 
 export async function getLatestNews(): Promise<NewsItem[]> {
   const model = "gemini-3-flash-preview";
@@ -29,7 +42,7 @@ export async function getLatestNews(): Promise<NewsItem[]> {
   Return the data as a JSON array of objects with keys: title, source, url, category, summary, imageKeyword.`;
 
   try {
-    const response = await ai.models.generateContent({
+    const response = await getAIClient().models.generateContent({
       model,
       contents: prompt,
       config: {
@@ -88,7 +101,7 @@ export async function getFacultyData(instituteName: string): Promise<Professor[]
   Do not include any other text or markdown formatting.`;
 
   try {
-    const response = await ai.models.generateContent({
+    const response = await getAIClient().models.generateContent({
       model,
       contents: prompt,
       config: {
@@ -142,7 +155,7 @@ export async function getProfessorPublications(professorName: string, institute:
   - publicationTrend (array of {year: number, count: number})`;
 
   try {
-    const response = await ai.models.generateContent({
+    const response = await getAIClient().models.generateContent({
       model,
       contents: prompt,
       config: {
@@ -171,7 +184,7 @@ export async function generateResearchTopics(professor: Professor, instituteName
   Return the data as a JSON array of objects with keys: title, description.`;
 
   try {
-    const response = await ai.models.generateContent({
+    const response = await getAIClient().models.generateContent({
       model,
       contents: prompt,
       config: {
@@ -204,7 +217,7 @@ export async function generateFullProposal(topic: string, professorName: string,
   Ensure specific methodology (EEG/Behavioural/etc. as appropriate), statistical plans, and directional hypotheses.`;
 
   try {
-    const response = await ai.models.generateContent({
+    const response = await getAIClient().models.generateContent({
       model,
       contents: prompt,
       config: {
@@ -226,7 +239,7 @@ export async function getInstituteNameFromUrl(url: string): Promise<string> {
   If you cannot find a specific name, return a shortened, readable version of the URL.`;
 
   try {
-    const response = await ai.models.generateContent({
+    const response = await getAIClient().models.generateContent({
       model,
       contents: prompt,
       config: {
