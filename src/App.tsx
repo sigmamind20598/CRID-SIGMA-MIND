@@ -151,17 +151,10 @@ export default function App() {
 
     setIsLoading(true);
     try {
-      const formData = new URLSearchParams();
-      formData.append('form-name', 'service-request');
-      formData.append('serviceType', serviceType);
-      formData.append('userEmail', userEmail);
-      formData.append('userPhone', userPhone);
-      formData.append('details', JSON.stringify(details, null, 2));
-
-      await fetch('/', {
+      await fetch('/api/submit-service', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: formData.toString()
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ serviceType, userEmail, userPhone, details })
       });
       setIsSubmitted(true);
     } catch (error) {
