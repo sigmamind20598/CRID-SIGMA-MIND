@@ -134,5 +134,46 @@ export const CURATED_FACULTY: Record<string, Professor[]> = {
       scholarLink: "https://www.bhu.ac.in/social_sciences/psychology/faculty.php",
       citations: "Expert in Psychometrics"
     }
+  ],
+  "Indian Institute of Technology Jodhpur": [
+    {
+      id: "iitj-1",
+      name: "Dr. Dipanjan Roy",
+      department: "Cognitive Science",
+      researchArea: "Large-scale Brain Network Dynamics",
+      specialization: "Computational Neuroscience",
+      focus: "Understanding brain dynamics through computational modeling and neuroimaging",
+      scholarLink: "https://iitj.ac.in/department/index.php?id=cognitive_science",
+      citations: "Highly Cited Researcher"
+    }
   ]
+};
+
+export const CURATED_PROFILES: Record<string, any> = {
+  "Dr. Dipanjan Roy": {
+    bio: "Dr. Dipanjan Roy is a Professor at the Center for Cognitive Science, IIT Jodhpur. His research focuses on large-scale brain network dynamics, computational neuroscience, and neuroimaging. He previously worked at the National Brain Research Centre (NBRC).",
+    publications: [
+      "Large-scale brain network dynamics in health and disease",
+      "Computational modeling of brain connectivity",
+      "Neuroimaging studies of cognitive processes",
+      "Dynamics of resting-state brain networks",
+      "Integration of multimodal neuroimaging data"
+    ],
+    citationTrend: [
+      { year: 2018, count: 150 },
+      { year: 2019, count: 180 },
+      { year: 2020, count: 210 },
+      { year: 2021, count: 240 },
+      { year: 2022, count: 280 },
+      { year: 2023, count: 320 }
+    ],
+    publicationTrend: [
+      { year: 2018, count: 4 },
+      { year: 2019, count: 5 },
+      { year: 2020, count: 6 },
+      { year: 2021, count: 4 },
+      { year: 2022, count: 7 },
+      { year: 2023, count: 5 }
+    ]
+  }
 };

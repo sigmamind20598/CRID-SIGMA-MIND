@@ -35,7 +35,7 @@ function cn(...inputs: ClassValue[]) {
 }
 
 export default function App() {
-  const [mode, setMode] = useState<'home' | 'directory' | 'custom' | 'news' | 'review' | 'guidance' | 'contact'>('home');
+  const [mode, setMode] = useState<'home' | 'directory' | 'custom' | 'news' | 'review' | 'guidance' | 'contact' | 'mock'>('home');
   const sortedInstitutes = [...INITIAL_INSTITUTES].sort((a, b) => {
     const isAiitA = a.name.includes('IIT') || a.name.includes('IIM');
     const isAiitB = b.name.includes('IIT') || b.name.includes('IIM');
@@ -70,6 +70,14 @@ export default function App() {
   // Contact Info State
   const [userEmail, setUserEmail] = useState('');
   const [userPhone, setUserPhone] = useState('');
+
+  // Mock Interview Form State
+  const [bachelorsDetails, setBachelorsDetails] = useState('');
+  const [mastersDetails, setMastersDetails] = useState('');
+  const [dissertationDetails, setDissertationDetails] = useState('');
+  const [projectDetails, setProjectDetails] = useState('');
+  const [jobDetails, setJobDetails] = useState('');
+  const [otherDetails, setOtherDetails] = useState('');
 
   const [searchTerm, setSearchTerm] = useState('');
   const [lastError, setLastError] = useState<string | null>(null);
@@ -143,6 +151,10 @@ export default function App() {
     fetchNews();
   }, []);
 
+  useEffect(() => {
+    setIsSubmitted(false);
+  }, [mode]);
+
   const loadFaculty = async (name: string) => {
     if (!name) return;
     
@@ -195,18 +207,42 @@ export default function App() {
     setSelectedProfessor(prof);
     setIsLoading(true);
     setView('profile');
-    const details = await getProfessorPublications(prof.name, selectedInstitute?.name || '');
-    setProfDetails(details);
-    setIsLoading(false);
+    try {
+      const details = await getProfessorPublications(prof.name, selectedInstitute?.name || '');
+      setProfDetails(details);
+    } catch (error) {
+      console.error("Failed to load professor profile:", error);
+      setProfDetails({
+        bio: "Information currently unavailable. Please try again later.",
+        publications: [],
+        citationTrend: [],
+        publicationTrend: []
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleProfessorSelect = async (prof: Professor) => {
     setSelectedProfessor(prof);
     setIsLoading(true);
-    const generatedTopics = await generateResearchTopics(prof, selectedInstitute?.name || '');
-    setTopics(generatedTopics);
-    setIsLoading(false);
-    setView('topics');
+    setTopics([]); // Clear previous topics
+    setLastError(null);
+    
+    try {
+      const generatedTopics = await generateResearchTopics(prof, selectedInstitute?.name || '');
+      if (generatedTopics && generatedTopics.length > 0) {
+        setTopics(generatedTopics);
+        setView('topics');
+      } else {
+        setLastError("Failed to generate research topics. Please try again.");
+      }
+    } catch (error) {
+      console.error("Failed to generate topics:", error);
+      setLastError("An unexpected error occurred while generating topics.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleTopicSelect = async (topic: ResearchTopic) => {
@@ -281,7 +317,7 @@ export default function App() {
               Faculty Mapping
             </button>
             <div className="relative group/services">
-              <button className={cn("hover:text-emerald-500 transition-colors flex items-center gap-1", (mode === 'custom' || mode === 'review' || mode === 'guidance') ? "text-emerald-500" : "text-white/60")}>
+              <button className={cn("hover:text-emerald-500 transition-colors flex items-center gap-1", (mode === 'custom' || mode === 'review' || mode === 'guidance' || mode === 'mock') ? "text-emerald-500" : "text-white/60")}>
                 Services <ChevronDown size={10} />
               </button>
               <div className="absolute top-full left-0 mt-4 w-64 opacity-0 invisible group-hover/services:opacity-100 group-hover/services:visible transition-all duration-300">
@@ -297,6 +333,10 @@ export default function App() {
                   <button onClick={() => setMode('review')} className="w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 transition-all">
                     <p className="text-[10px] font-bold uppercase tracking-widest mb-1">Proposal Review</p>
                     <p className="text-[8px] opacity-50 uppercase tracking-tighter">Review by Team</p>
+                  </button>
+                  <button onClick={() => setMode('mock')} className="w-full text-left px-4 py-3 rounded-xl hover:bg-white/5 transition-all">
+                    <p className="text-[10px] font-bold uppercase tracking-widest mb-1">Mock Interview</p>
+                    <p className="text-[8px] opacity-50 uppercase tracking-tighter">Preparation & Feedback</p>
                   </button>
                 </div>
               </div>
@@ -361,7 +401,7 @@ export default function App() {
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20" size={16} />
                 <input 
                   type="text" 
-                  placeholder="Search 81+ Universities..."
+                  placeholder={`Search ${institutesList.length} Universities...`}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full bg-white/5 border border-white/5 rounded-xl py-3 pl-12 pr-4 text-sm text-white focus:ring-2 focus:ring-emerald-500/20 transition-all placeholder:text-white/20"
@@ -442,6 +482,7 @@ export default function App() {
                   {mode === 'news' && `Latest News & Updates`}
                   {mode === 'guidance' && `Proposal Guidance`}
                   {mode === 'custom' && `Custom Proposal`}
+                  {mode === 'mock' && `Mock Interview & Feedback`}
                   {view === 'faculty' && mode === 'directory' && `Institute Faculty Mapping`}
                   {view === 'profile' && `Faculty Profile`}
                   {view === 'topics' && `Research Proposal Ideas`}
@@ -544,18 +585,36 @@ export default function App() {
                     className="max-w-4xl mx-auto space-y-6"
                   >
                     <h3 className="text-2xl font-bold mb-6">Research Topics for {selectedProfessor.name}</h3>
-                    {topics.map((topic) => (
-                      <div key={topic.id} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
-                        <h4 className="text-lg font-bold text-emerald-400 mb-2">{topic.title}</h4>
-                        <p className="text-sm text-white/70 mb-4">{topic.description}</p>
+                    
+                    {isLoading ? (
+                      <div className="flex flex-col items-center justify-center py-20">
+                        <div className="w-12 h-12 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin mb-4" />
+                        <p className="text-white/40 font-bold uppercase tracking-widest text-xs">Generating innovative topics...</p>
+                      </div>
+                    ) : topics.length > 0 ? (
+                      topics.map((topic) => (
+                        <div key={topic.id} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+                          <h4 className="text-lg font-bold text-emerald-400 mb-2">{topic.title}</h4>
+                          <p className="text-sm text-white/70 mb-4">{topic.description}</p>
+                          <button 
+                            onClick={() => handleTopicSelect(topic)}
+                            className="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-2 rounded-lg text-xs font-bold transition-colors"
+                          >
+                            Generate Full Proposal
+                          </button>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-center py-20 bg-white/5 rounded-2xl border border-white/10">
+                        <p className="text-white/40">No topics generated. Please try again.</p>
                         <button 
-                          onClick={() => handleTopicSelect(topic)}
-                          className="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-2 rounded-lg text-xs font-bold transition-colors"
+                          onClick={() => handleProfessorSelect(selectedProfessor)}
+                          className="mt-4 text-emerald-400 font-bold hover:underline"
                         >
-                          Generate Full Proposal
+                          Retry Generation
                         </button>
                       </div>
-                    ))}
+                    )}
                   </motion.div>
                 )}
 
@@ -866,6 +925,120 @@ export default function App() {
                   </motion.div>
                 )}
 
+                {mode === 'mock' && (
+                  <motion.div
+                    key="mock"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className="max-w-4xl mx-auto py-12"
+                  >
+                    {isSubmitted ? (
+                      <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-2xl p-12 text-center max-w-2xl mx-auto">
+                        <CheckCircle2 className="w-16 h-16 text-emerald-500 mx-auto mb-6" />
+                        <h3 className="text-2xl font-bold text-white mb-2">Request Submitted</h3>
+                        <p className="text-white/60">We will contact you shortly to schedule your mock interview.</p>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="text-center mb-16">
+                          <h2 className="text-4xl font-bold mb-4">Mock Interview & Feedback</h2>
+                          <p className="text-xl text-white/60 max-w-2xl mx-auto">Prepare for your PhD interview with our expert panel. Get detailed feedback on your performance and proposal.</p>
+                        </div>
+                        
+                        <div className="bg-white/5 border border-white/10 rounded-3xl p-8 mb-12">
+                          <h3 className="text-2xl font-bold mb-8 text-center">What's Included</h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            {[
+                              "1-on-1 Mock Interview (45-60 mins)",
+                              "Detailed performance feedback report",
+                              "Proposal defense strategy",
+                              "Common PhD interview questions prep",
+                              "Confidence building & body language tips",
+                              "Follow-up Q&A session"
+                            ].map((item, i) => (
+                              <div key={i} className="flex items-center gap-4 bg-black/40 p-4 rounded-xl border border-white/5">
+                                <CheckCircle2 className="w-6 h-6 text-emerald-500 shrink-0" />
+                                <span className="text-white/80 text-sm">{item}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        <form 
+                          onSubmit={(e) => handleServiceSubmit(e, 'Mock Interview', {
+                            bachelors: bachelorsDetails,
+                            masters: mastersDetails,
+                            dissertation: dissertationDetails,
+                            projects: projectDetails,
+                            job: jobDetails,
+                            other: otherDetails
+                          })} 
+                          className="max-w-2xl mx-auto space-y-6 text-left"
+                        >
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                              <label className="block text-sm font-medium text-white/70 mb-1.5">Bachelor's Details (CGPA, Major, Year)</label>
+                              <textarea value={bachelorsDetails} onChange={e => setBachelorsDetails(e.target.value)} className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white h-24 resize-none" placeholder="e.g. B.Tech in CSE, 8.5 CGPA, 2020" required />
+                            </div>
+                            <div>
+                              <label className="block text-sm font-medium text-white/70 mb-1.5">Master's Details (CGPA, Major, Year)</label>
+                              <textarea value={mastersDetails} onChange={e => setMastersDetails(e.target.value)} className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white h-24 resize-none" placeholder="e.g. M.Tech in AI, 9.0 CGPA, 2022" required />
+                            </div>
+                          </div>
+
+                          <div>
+                            <label className="block text-sm font-medium text-white/70 mb-1.5">Dissertation Details (Topic & Brief)</label>
+                            <textarea value={dissertationDetails} onChange={e => setDissertationDetails(e.target.value)} className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white h-24 resize-none" placeholder="Briefly describe your Master's dissertation..." required />
+                          </div>
+
+                          <div>
+                            <label className="block text-sm font-medium text-white/70 mb-1.5">Key Projects & Resume Highlights</label>
+                            <textarea value={projectDetails} onChange={e => setProjectDetails(e.target.value)} className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white h-32 resize-none" placeholder="List major projects, publications, or resume highlights..." required />
+                          </div>
+
+                          <div>
+                            <label className="block text-sm font-medium text-white/70 mb-1.5">Job/Work Experience Details</label>
+                            <textarea value={jobDetails} onChange={e => setJobDetails(e.target.value)} className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white h-24 resize-none" placeholder="Current role, company, duration, and key responsibilities..." required />
+                          </div>
+
+                          <div>
+                            <label className="block text-sm font-medium text-white/70 mb-1.5">Other Relevant Details (PhD Goals, etc.)</label>
+                            <textarea value={otherDetails} onChange={e => setOtherDetails(e.target.value)} className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white h-24 resize-none" placeholder="Anything else that will help us prepare for your interview..." />
+                          </div>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                            <div>
+                              <label className="block text-sm font-medium text-white/70 mb-1.5">Email ID</label>
+                              <input type="email" value={userEmail} onChange={e => setUserEmail(e.target.value)} className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white" placeholder="your@email.com" required />
+                            </div>
+                            <div>
+                              <label className="block text-sm font-medium text-white/70 mb-1.5">Phone Number</label>
+                              <input type="tel" value={userPhone} onChange={e => setUserPhone(e.target.value)} className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white" placeholder="+91 9876543210" required />
+                            </div>
+                          </div>
+
+                          <div className="mb-6 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
+                            <p className="text-sm text-emerald-400 flex items-start gap-2">
+                              <span className="text-lg">📧</span>
+                              <span>After submitting this form, please email your proposal document (PDF/Word) directly to <strong>sigmamind20598@gmail.com</strong> so we can review it before the interview.</span>
+                            </p>
+                          </div>
+                          
+                          <button type="submit" disabled={isLoading} className="w-full bg-emerald-600 hover:bg-emerald-500 text-white px-12 py-4 rounded-xl font-bold text-lg transition-all hover:scale-105 disabled:opacity-50 flex items-center justify-center gap-2">
+                            {isLoading ? <Loader2 className="w-5 h-5 animate-spin" /> : null}
+                            {isLoading ? 'Submitting...' : 'Book Mock Interview - ₹1,000'}
+                          </button>
+                          <a href="https://wa.me/917092884311?text=Hi%20CRID%20Team,%20I%20am%20interested%20in%20a%20Mock%20Interview." target="_blank" rel="noopener noreferrer" className="mt-4 flex items-center justify-center gap-2 text-emerald-400 hover:text-emerald-300 text-sm font-medium transition-colors">
+                            <MessageSquare className="w-4 h-4" />
+                            Contact via WhatsApp (+91 7092884311)
+                          </a>
+                        </form>
+                      </>
+                    )}
+                  </motion.div>
+                )}
+
                 {mode === 'contact' && (
                   <motion.div 
                     key="contact"
@@ -991,20 +1164,27 @@ export default function App() {
 
       {showPricingModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="bg-[#111] border border-white/10 rounded-3xl p-8 max-w-md w-full relative">
+          <div className="bg-[#111] border border-white/10 rounded-3xl p-8 max-w-md w-full relative text-center">
             <button 
               onClick={() => setShowPricingModal(false)}
               className="absolute top-4 right-4 text-white/40 hover:text-white"
             >
               ✕
             </button>
-            <h3 className="text-2xl font-bold mb-4">Upgrade to Continue</h3>
-            <p className="text-white/60 mb-8">You've reached your limit of free proposals. Upgrade to generate more detailed research proposals.</p>
+            <div className="w-20 h-20 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Brain size={40} className="text-emerald-500 animate-pulse" />
+            </div>
+            <h3 className="text-2xl font-bold mb-4">Whoa there, Eager Researcher! 🚀</h3>
+            <p className="text-white/60 mb-8 leading-relaxed">
+              You've just used your one free full proposal! Our AI is currently taking a well-deserved coffee break (and maybe a quick nap). ☕️💤
+              <br /><br />
+              To get more detailed proposals, expert human reviews, or mock interviews, head over to the <span className="text-emerald-400 font-bold">Services</span> section in the top menu. Our team of PhDs is ready to help you conquer your research goals!
+            </p>
             <button 
               onClick={() => setShowPricingModal(false)}
-              className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl font-bold transition-colors"
+              className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98]"
             >
-              View Plans
+              Got it, let's explore!
             </button>
           </div>
         </div>
