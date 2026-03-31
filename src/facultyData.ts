@@ -110,5 +110,29 @@ export const CURATED_FACULTY: Record<string, Professor[]> = {
       scholarLink: "https://cogs.iitgn.ac.in/faculty/jaison-manjaly/",
       citations: "Center Head"
     }
+  ],
+  "TISS Mumbai": [
+    {
+      id: "tiss-1",
+      name: "Prof. Surinder Jaswal",
+      department: "School of Health Systems Studies",
+      researchArea: "Public Health, Social Work",
+      specialization: "Mental Health",
+      focus: "Social determinants of health and mental well-being",
+      scholarLink: "https://tiss.edu/view/10/employee/surinder-jaswal/",
+      citations: "Senior Academician"
+    }
+  ],
+  "Banaras Hindu University (BHU)": [
+    {
+      id: "bhu-1",
+      name: "Prof. Rakesh Pandey",
+      department: "Department of Psychology",
+      researchArea: "Clinical Psychology",
+      specialization: "Health Psychology, Emotion",
+      focus: "Emotional intelligence and health outcomes",
+      scholarLink: "https://www.bhu.ac.in/social_sciences/psychology/faculty.php",
+      citations: "Expert in Psychometrics"
+    }
   ]
 };

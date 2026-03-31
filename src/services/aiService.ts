@@ -17,8 +17,34 @@ function getAIClient(): GoogleGenAI {
   return aiClient;
 }
 
+const CACHE_TTL = 3600000; // 1 hour in milliseconds
+
+function getCachedData<T>(key: string): T | null {
+  const cached = localStorage.getItem(key);
+  if (!cached) return null;
+
+  try {
+    const { data, timestamp } = JSON.parse(cached);
+    if (Date.now() - timestamp < CACHE_TTL) {
+      return data as T;
+    }
+    localStorage.removeItem(key);
+  } catch (e) {
+    localStorage.removeItem(key);
+  }
+  return null;
+}
+
+function setCachedData<T>(key: string, data: T) {
+  localStorage.setItem(key, JSON.stringify({ data, timestamp: Date.now() }));
+}
+
 export async function getLatestNews(): Promise<NewsItem[]> {
-  const model = "gemini-3-flash-preview"; 
+  const cacheKey = "crid_news_cache";
+  const cached = getCachedData<NewsItem[]>(cacheKey);
+  if (cached) return cached;
+
+  const model = "gemini-2.0-flash"; 
   const prompt = `Search for the 10 most recent and relevant updates, notifications, or research news related to Psychology, Neuroscience, and PhD admissions in India (2024-2025).
   
   Include:
@@ -30,13 +56,24 @@ export async function getLatestNews(): Promise<NewsItem[]> {
   Do not include any other text, only the JSON array.`;
 
   try {
-    const response = await getAIClient().models.generateContent({
-      model,
-      contents: prompt,
-      config: {
-        tools: [{ googleSearch: {} }]
-      },
-    });
+    let response;
+    try {
+      // Try with Google Search tool first
+      response = await getAIClient().models.generateContent({
+        model,
+        contents: prompt,
+        config: {
+          tools: [{ googleSearch: {} }]
+        },
+      });
+    } catch (searchError) {
+      console.warn("Google Search tool failed, falling back to standard generation:", searchError);
+      // Fallback to standard generation if tool fails
+      response = await getAIClient().models.generateContent({
+        model,
+        contents: prompt + " (Use your internal knowledge if search is unavailable)",
+      });
+    }
 
     const text = response.text;
     if (!text) return [];
@@ -48,11 +85,13 @@ export async function getLatestNews(): Promise<NewsItem[]> {
     try {
       const data = JSON.parse(jsonStr);
       if (!Array.isArray(data)) return [];
-      return data.map((item: any, index: number) => ({
+      const newsItems = data.map((item: any, index: number) => ({
         ...item,
         id: `news-${index}-${Date.now()}`,
         timestamp: new Date().toISOString()
       }));
+      setCachedData(cacheKey, newsItems);
+      return newsItems;
     } catch (e) {
       console.error("Failed to parse News JSON:", text);
       return [];
@@ -64,7 +103,11 @@ export async function getLatestNews(): Promise<NewsItem[]> {
 }
 
 export async function getFacultyData(instituteName: string): Promise<Professor[]> {
-  const model = "gemini-3-flash-preview";
+  const cacheKey = `crid_faculty_${instituteName}`;
+  const cached = getCachedData<Professor[]>(cacheKey);
+  if (cached) return cached;
+
+  const model = "gemini-2.0-flash";
   const prompt = `Search for the top 5-8 professors at ${instituteName} in the field of Psychology or Cognitive Neuroscience.
   
   For each professor, provide:
@@ -80,13 +123,23 @@ export async function getFacultyData(instituteName: string): Promise<Professor[]
   Do not include any other text, only the JSON array.`;
 
   try {
-    const response = await getAIClient().models.generateContent({
-      model,
-      contents: prompt,
-      config: {
-        tools: [{ googleSearch: {} }]
-      },
-    });
+    let response;
+    try {
+      // Try with Google Search tool first
+      response = await getAIClient().models.generateContent({
+        model,
+        contents: prompt,
+        config: {
+          tools: [{ googleSearch: {} }]
+        },
+      });
+    } catch (searchError) {
+      console.warn("Google Search tool failed for faculty, falling back to standard generation:", searchError);
+      response = await getAIClient().models.generateContent({
+        model,
+        contents: prompt + " (Use your internal knowledge if search is unavailable)",
+      });
+    }
 
     const text = response.text;
     if (!text) return [];
@@ -98,7 +151,7 @@ export async function getFacultyData(instituteName: string): Promise<Professor[]
       const data = JSON.parse(jsonStr);
       if (!Array.isArray(data)) return [];
 
-      return data.map((p: any, index: number) => ({
+      const professors = data.map((p: any, index: number) => ({
         name: p.name || "Unknown Professor",
         department: p.department || "HSS / Behavioral Sciences",
         researchArea: p.researchArea || "Psychology / Cognitive Neuroscience",
@@ -108,6 +161,8 @@ export async function getFacultyData(instituteName: string): Promise<Professor[]
         citations: p.citations || "N/A",
         id: `${instituteName.toLowerCase().replace(/\s+/g, '-')}-${index}-${Date.now()}`,
       }));
+      setCachedData(cacheKey, professors);
+      return professors;
     } catch (e) {
       console.error("Failed to parse Faculty JSON:", text);
       return [];
@@ -119,7 +174,11 @@ export async function getFacultyData(instituteName: string): Promise<Professor[]
 }
 
 export async function getProfessorPublications(professorName: string, institute: string): Promise<{ publications: string[], bio: string, citationTrend: { year: number; count: number }[], publicationTrend: { year: number; count: number }[] }> {
-  const model = "gemini-3-flash-preview";
+  const cacheKey = `crid_pub_${professorName}`;
+  const cached = getCachedData<any>(cacheKey);
+  if (cached) return cached;
+
+  const model = "gemini-2.0-flash";
   const prompt = `Provide a brief professional bio (2-3 sentences) and a list of the TOP 10 most cited or significant publications for Prof. ${professorName} at ${institute}.
   
   Also, provide realistic data for:
@@ -144,7 +203,9 @@ export async function getProfessorPublications(professorName: string, institute:
 
     const text = response.text;
     if (!text) return { bio: "", publications: [], citationTrend: [], publicationTrend: [] };
-    return JSON.parse(text);
+    const data = JSON.parse(text);
+    setCachedData(cacheKey, data);
+    return data;
   } catch (error) {
     console.error("Error fetching publications:", error);
     return { bio: "Information currently unavailable.", publications: [], citationTrend: [], publicationTrend: [] };
@@ -152,7 +213,7 @@ export async function getProfessorPublications(professorName: string, institute:
 }
 
 export async function generateResearchTopics(professor: Professor, instituteName: string): Promise<ResearchTopic[]> {
-  const model = "gemini-3-flash-preview";
+  const model = "gemini-2.0-flash";
   const prompt = `You are a PhD Research Proposal Assistant for Indian institutions.
   Based on the research focus of Prof. ${professor.name} at ${instituteName} (Focus: ${professor.focus}, Specialization: ${professor.specialization}), 
   generate 12-15 high-level, innovative, and technically precise research proposal topics suitable for PhD applications at this specific institute.
@@ -183,7 +244,7 @@ export async function generateResearchTopics(professor: Professor, instituteName
 }
 
 export async function generateFullProposal(topic: string, professorName: string, specialization: string, instituteName: string): Promise<string> {
-  const model = "gemini-3.1-pro-preview";
+  const model = "gemini-2.0-flash";
   const prompt = `Draft a full PhD research proposal for the following:
   Topic: "${topic}"
   Target Professor: ${professorName}
@@ -211,7 +272,7 @@ export async function generateFullProposal(topic: string, professorName: string,
 }
 
 export async function getInstituteNameFromUrl(url: string): Promise<string> {
-  const model = "gemini-3-flash-preview";
+  const model = "gemini-2.0-flash";
   const prompt = `Extract the official name of the academic institution or department from this URL: ${url}. 
   Return ONLY the name (e.g., "NIMHANS Bangalore" or "IIT Delhi"). 
   If you cannot find a specific name, return a shortened, readable version of the URL.`;

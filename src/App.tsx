@@ -29,7 +29,6 @@ import { twMerge } from 'tailwind-merge';
 import { Institute, Professor, ResearchTopic, INITIAL_INSTITUTES, NewsItem } from './types';
 import { getFacultyData, generateResearchTopics, generateFullProposal, getProfessorPublications, getLatestNews, getInstituteNameFromUrl } from './services/aiService';
 import { CURATED_FACULTY } from './facultyData';
-import { institutes } from './data';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -45,7 +44,7 @@ export default function App() {
     return a.name.localeCompare(b.name);
   });
 
-  const [institutes, setInstitutes] = useState<Institute[]>(sortedInstitutes);
+  const [institutesList, setInstitutesList] = useState<Institute[]>(sortedInstitutes);
   const [selectedInstitute, setSelectedInstitute] = useState<Institute | null>(null);
   const [professors, setProfessors] = useState<Professor[]>([]);
   const [selectedProfessor, setSelectedProfessor] = useState<Professor | null>(null);
@@ -75,12 +74,19 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [lastError, setLastError] = useState<string | null>(null);
 
-  const filteredInstitutes = institutes.filter(inst => 
+  const filteredInstitutes = institutesList.filter(inst => 
     inst.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     inst.location?.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const fetchNews = async () => {
+    // Check for API key before starting
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    if (!apiKey) {
+      setLastError("CRITICAL: Missing Gemini API Key. Please set VITE_GEMINI_API_KEY in your Vercel environment variables.");
+      return;
+    }
+
     setIsLoading(true);
     setLastError(null);
     try {
@@ -97,7 +103,8 @@ export default function App() {
             url: 'https://hss.iitd.ac.in/admissions',
             category: 'Admission',
             summary: 'Applications are invited for the PhD program in Psychology and Cognitive Science for the upcoming semester.',
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            imageKeyword: 'university'
           },
           {
             id: 'fb-2',
@@ -106,7 +113,8 @@ export default function App() {
             url: 'https://www.nature.com/neuro',
             category: 'Research',
             summary: 'Recent study explores how the brain filters sensory information during complex tasks.',
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            imageKeyword: 'brain'
           },
           {
             id: 'fb-3',
@@ -115,7 +123,8 @@ export default function App() {
             url: 'https://nimhans.ac.in/admissions',
             category: 'Admission',
             summary: 'The entrance examination for the PhD in Clinical Psychology is scheduled for next month.',
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            imageKeyword: 'exam'
           }
         ];
         setNews(fallbackNews);
@@ -133,14 +142,17 @@ export default function App() {
     fetchNews();
   }, []);
 
-  useEffect(() => {
-    if (mode === 'news' && news.length === 0) {
-      fetchNews();
-    }
-  }, [mode]);
-
   const loadFaculty = async (name: string) => {
     if (!name) return;
+    
+    // Check for API key before starting
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    if (!apiKey) {
+      setLastError("CRITICAL: Missing Gemini API Key. Please set VITE_GEMINI_API_KEY in your Vercel environment variables.");
+      setView('faculty');
+      return;
+    }
+
     setIsLoading(true);
     setProfessors([]);
     setLastError(null);
@@ -244,7 +256,7 @@ export default function App() {
         location: 'Custom Link',
         departments: ['Psychology', 'Neuroscience']
       };
-      setInstitutes([...institutes, newInst]);
+      setInstitutesList([...institutesList, newInst]);
       setNewInstituteLink('');
       setIsAddingInstitute(false);
       setSelectedInstitute(newInst);
@@ -346,11 +358,8 @@ export default function App() {
                   <button
                     key={inst.id}
                     onClick={() => {
-                      if (selectedInstitute?.id === inst.id) {
-                        loadFaculty(inst.url || inst.name);
-                      } else {
-                        setSelectedInstitute(inst);
-                      }
+                      setSelectedInstitute(inst);
+                      loadFaculty(inst.url || inst.name);
                     }}
                     className={cn(
                       "w-full text-left px-4 py-3 rounded-xl transition-all flex items-center justify-between group",

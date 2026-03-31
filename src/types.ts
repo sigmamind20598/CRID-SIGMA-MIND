@@ -38,7 +38,7 @@ export interface NewsItem {
   source: string;
   url: string;
   timestamp: string;
-  category: 'YouTube' | 'Telegram' | 'X' | 'Journal';
+  category: 'YouTube' | 'Telegram' | 'X' | 'Journal' | 'Admission' | 'Research';
   summary: string;
   imageKeyword: string;
 }
