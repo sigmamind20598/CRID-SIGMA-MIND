@@ -81,9 +81,10 @@ export default function App() {
 
   const fetchNews = async () => {
     // Check for API key before starting
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
-      setLastError("CRITICAL: Missing Gemini API Key. Please set VITE_GEMINI_API_KEY in your Vercel environment variables.");
+      console.error("GEMINI_API_KEY is missing in environment variables.");
+      setLastError("CRITICAL: Missing Gemini API Key. If you are on Vercel, please add VITE_GEMINI_API_KEY to your Environment Variables. If you are in AI Studio, ensure the key is set in the Settings menu.");
       return;
     }
 
@@ -146,8 +147,9 @@ export default function App() {
     if (!name) return;
     
     // Check for API key before starting
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
+      console.error("GEMINI_API_KEY is missing in environment variables.");
       setLastError("CRITICAL: Missing Gemini API Key. Please set VITE_GEMINI_API_KEY in your Vercel environment variables.");
       setView('faculty');
       return;
@@ -329,7 +331,21 @@ export default function App() {
             )}
           >
             <div className="w-5 h-5 rounded-full overflow-hidden bg-emerald-500/20 flex items-center justify-center">
-              <span className="text-[8px]">👨‍🔬</span>
+              <img 
+                src="/sarthak.jpg" 
+                alt="S" 
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = 'none';
+                  const parent = (e.target as HTMLImageElement).parentElement;
+                  if (parent) {
+                    const span = document.createElement('span');
+                    span.className = 'text-[8px]';
+                    span.innerText = '👨‍🔬';
+                    parent.appendChild(span);
+                  }
+                }}
+              />
             </div>
             Contact Me
           </button>

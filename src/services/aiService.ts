@@ -6,11 +6,10 @@ let aiClient: GoogleGenAI | null = null;
 
 function getAIClient(): GoogleGenAI {
   if (!aiClient) {
-    // @ts-ignore
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY || (typeof process !== 'undefined' ? process.env.GEMINI_API_KEY : '');
+    const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
-      console.error("CRITICAL: Missing Gemini API Key. Please set VITE_GEMINI_API_KEY in your Vercel environment variables.");
-      throw new Error("Missing Gemini API Key");
+      console.error("CRITICAL: Missing Gemini API Key. Please set GEMINI_API_KEY in your environment variables.");
+      throw new Error("Missing Gemini API Key. If you are on Vercel, please add VITE_GEMINI_API_KEY to your Environment Variables. If you are in AI Studio, ensure the key is set in the Settings menu.");
     }
     aiClient = new GoogleGenAI({ apiKey });
   }
@@ -44,7 +43,7 @@ export async function getLatestNews(): Promise<NewsItem[]> {
   const cached = getCachedData<NewsItem[]>(cacheKey);
   if (cached) return cached;
 
-  const model = "gemini-2.0-flash"; 
+  const model = "gemini-3-flash-preview"; 
   const prompt = `Search for the 10 most recent and relevant updates, notifications, or research news related to Psychology, Neuroscience, and PhD admissions in India (2024-2025).
   
   Include:
@@ -107,7 +106,7 @@ export async function getFacultyData(instituteName: string): Promise<Professor[]
   const cached = getCachedData<Professor[]>(cacheKey);
   if (cached) return cached;
 
-  const model = "gemini-2.0-flash";
+  const model = "gemini-3-flash-preview";
   const prompt = `Search for the top 5-8 professors at ${instituteName} in the field of Psychology or Cognitive Neuroscience.
   
   For each professor, provide:
@@ -178,7 +177,7 @@ export async function getProfessorPublications(professorName: string, institute:
   const cached = getCachedData<any>(cacheKey);
   if (cached) return cached;
 
-  const model = "gemini-2.0-flash";
+  const model = "gemini-3-flash-preview";
   const prompt = `Provide a brief professional bio (2-3 sentences) and a list of the TOP 10 most cited or significant publications for Prof. ${professorName} at ${institute}.
   
   Also, provide realistic data for:
@@ -213,7 +212,7 @@ export async function getProfessorPublications(professorName: string, institute:
 }
 
 export async function generateResearchTopics(professor: Professor, instituteName: string): Promise<ResearchTopic[]> {
-  const model = "gemini-2.0-flash";
+  const model = "gemini-3-flash-preview";
   const prompt = `You are a PhD Research Proposal Assistant for Indian institutions.
   Based on the research focus of Prof. ${professor.name} at ${instituteName} (Focus: ${professor.focus}, Specialization: ${professor.specialization}), 
   generate 12-15 high-level, innovative, and technically precise research proposal topics suitable for PhD applications at this specific institute.
@@ -244,7 +243,7 @@ export async function generateResearchTopics(professor: Professor, instituteName
 }
 
 export async function generateFullProposal(topic: string, professorName: string, specialization: string, instituteName: string): Promise<string> {
-  const model = "gemini-2.0-flash";
+  const model = "gemini-3-flash-preview";
   const prompt = `Draft a full PhD research proposal for the following:
   Topic: "${topic}"
   Target Professor: ${professorName}
@@ -272,7 +271,7 @@ export async function generateFullProposal(topic: string, professorName: string,
 }
 
 export async function getInstituteNameFromUrl(url: string): Promise<string> {
-  const model = "gemini-2.0-flash";
+  const model = "gemini-3-flash-preview";
   const prompt = `Extract the official name of the academic institution or department from this URL: ${url}. 
   Return ONLY the name (e.g., "NIMHANS Bangalore" or "IIT Delhi"). 
   If you cannot find a specific name, return a shortened, readable version of the URL.`;
