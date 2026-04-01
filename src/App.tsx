@@ -32,6 +32,7 @@ import { twMerge } from 'tailwind-merge';
 
 import { Institute, Professor, ResearchTopic, INITIAL_INSTITUTES, NewsItem } from './types';
 import { getFacultyData, generateResearchTopics, generateFullProposal, getProfessorPublications, getLatestNews, getInstituteNameFromUrl } from './services/aiService';
+import { sendProposalEmails } from './services/emailService';
 import { CURATED_FACULTY } from './facultyData';
 import { FACULTY_DATABASE, NEWS_DATABASE, getFacultyForInstitute } from './staticDatabase';
 
@@ -39,7 +40,7 @@ function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-function FunnyLoader({ isInitial = false }: { isInitial?: boolean }) {
+function FunnyLoader({ isInitial = false, customMessage = null }: { isInitial?: boolean, customMessage?: string | null }) {
   const [messageIndex, setMessageIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const messages = [
@@ -105,13 +106,13 @@ function FunnyLoader({ isInitial = false }: { isInitial?: boolean }) {
       
       <AnimatePresence mode="wait">
         <motion.p
-          key={messageIndex}
+          key={customMessage ? 'custom' : messageIndex}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           className="text-sm font-medium text-white/60 mb-2 text-center h-5"
         >
-          {messages[messageIndex]}
+          {customMessage || messages[messageIndex]}
         </motion.p>
       </AnimatePresence>
       
@@ -168,7 +169,14 @@ export default function App() {
   const [isAddingInstitute, setIsAddingInstitute] = useState(false);
   const [news, setNews] = useState<NewsItem[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [proposalsGenerated, setProposalsGenerated] = useState(0);
+  const [proposalsGenerated, setProposalsGenerated] = useState(() => {
+    const saved = localStorage.getItem('proposalsGenerated');
+    return saved ? parseInt(saved, 10) : 0;
+  });
+  const [showLeadModal, setShowLeadModal] = useState(false);
+  const [pendingTopic, setPendingTopic] = useState<ResearchTopic | null>(null);
+  const [loadingMessage, setLoadingMessage] = useState<string | null>(null);
+  const [userName, setUserName] = useState('');
   const [showPricingModal, setShowPricingModal] = useState(false);
 
   // Custom Proposal Form State
@@ -311,29 +319,85 @@ export default function App() {
     }
   };
 
-  const handleTopicSelect = async (topic: ResearchTopic) => {
+  const handleTopicSelect = (topic: ResearchTopic) => {
     if (proposalsGenerated >= 1) {
+      setPendingTopic(topic);
       setShowPricingModal(true);
       return;
     }
-    setProposalsGenerated(prev => prev + 1);
-    setSelectedTopic(topic);
+    setPendingTopic(topic);
+    setShowLeadModal(true);
+  };
+
+  const handleLeadSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!userEmail || !userPhone || !userName || !pendingTopic) return;
+    
+    setShowLeadModal(false);
+    setProposalsGenerated(prev => {
+      const newVal = prev + 1;
+      localStorage.setItem('proposalsGenerated', newVal.toString());
+      return newVal;
+    });
+    setSelectedTopic(pendingTopic);
     setIsLoading(true);
+    setLoadingMessage("Drafting your free proposal... This will take 3-4 minutes. It will be sent to your email/WhatsApp.");
     
     try {
       const fullProposal = await generateFullProposal(
-        topic, 
+        pendingTopic, 
         selectedProfessor?.name || '', 
         selectedProfessor?.specialization || '',
         selectedInstitute?.name || ''
       );
       setProposal(fullProposal);
+      
+      // Send Emails
+      await sendProposalEmails(
+        userEmail,
+        userPhone,
+        userName,
+        fullProposal,
+        pendingTopic.title,
+        false
+      );
+      
     } catch (error) {
-      console.error("Error in handleTopicSelect:", error);
+      console.error("Error in handleLeadSubmit:", error);
       setProposal("An unexpected error occurred. Please try again.");
     } finally {
       setIsLoading(false);
+      setLoadingMessage(null);
       setView('proposal');
+    }
+  };
+
+  const handleManualPaidRequest = async () => {
+    if (!userEmail || !userPhone || !userName || !pendingTopic) {
+      alert("Please ensure your contact details are filled out first.");
+      return;
+    }
+    setShowPricingModal(false);
+    setIsLoading(true);
+    setLoadingMessage("Sending your request to our team...");
+    
+    try {
+      // Send Emails for paid request (no proposal generated yet)
+      await sendProposalEmails(
+        userEmail,
+        userPhone,
+        userName,
+        "User requested a paid proposal. Awaiting payment screenshot.",
+        pendingTopic.title,
+        true
+      );
+      alert("Request sent! Please send the payment screenshot to sigmamind20598@gmail.com or WhatsApp.");
+    } catch (error) {
+      console.error("Error sending paid request:", error);
+      alert("Failed to send request. Please contact us directly.");
+    } finally {
+      setIsLoading(false);
+      setLoadingMessage(null);
     }
   };
 
@@ -661,7 +725,7 @@ export default function App() {
             {isAppInitializing ? (
               <FunnyLoader isInitial />
             ) : isLoading ? (
-              <FunnyLoader />
+              <FunnyLoader customMessage={loadingMessage} />
             ) : (
               <AnimatePresence mode="wait">
                 {mode === 'home' && (
@@ -1414,6 +1478,67 @@ export default function App() {
         </main>
       </div>
 
+      {showLeadModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+          <div className="bg-[#111] border border-white/10 rounded-3xl p-8 max-w-md w-full relative">
+            <button 
+              onClick={() => setShowLeadModal(false)}
+              className="absolute top-4 right-4 text-white/40 hover:text-white"
+            >
+              ✕
+            </button>
+            <div className="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <FileText size={32} className="text-emerald-500" />
+            </div>
+            <h3 className="text-2xl font-bold mb-2 text-center">Get Your Free Proposal</h3>
+            <p className="text-white/60 mb-6 text-center text-sm">
+              Enter your details below. We'll generate your free AI proposal and send a copy to your email!
+            </p>
+            <form onSubmit={handleLeadSubmit} className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold text-white/40 uppercase tracking-wider mb-2">Full Name</label>
+                <input 
+                  type="text" 
+                  required
+                  value={userName}
+                  onChange={e => setUserName(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500"
+                  placeholder="John Doe"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-white/40 uppercase tracking-wider mb-2">Email Address</label>
+                <input 
+                  type="email" 
+                  required
+                  value={userEmail}
+                  onChange={e => setUserEmail(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500"
+                  placeholder="john@example.com"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-bold text-white/40 uppercase tracking-wider mb-2">Phone Number (WhatsApp)</label>
+                <input 
+                  type="tel" 
+                  required
+                  value={userPhone}
+                  onChange={e => setUserPhone(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-emerald-500"
+                  placeholder="+91 98765 43210"
+                />
+              </div>
+              <button 
+                type="submit"
+                className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] mt-4"
+              >
+                Generate Free Proposal 🚀
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
       {showPricingModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
           <div className="bg-[#111] border border-white/10 rounded-3xl p-8 max-w-md w-full relative text-center">
@@ -1427,19 +1552,31 @@ export default function App() {
               <Brain size={40} className="text-emerald-500 animate-pulse" />
             </div>
             <h3 className="text-2xl font-bold mb-4">Whoa there, Eager Researcher! 🚀</h3>
-            <p className="text-white/60 mb-8 leading-relaxed">
-              You've just used your one free full proposal! Our AI is currently taking a well-deserved coffee break (and maybe a quick nap). ☕️💤
+            <p className="text-white/60 mb-6 leading-relaxed">
+              You've already used your one free full proposal! 
               <br /><br />
-              To get more detailed proposals, expert human reviews, or mock interviews, head over to the <span className="text-emerald-400 font-bold">Services</span> section in the top menu. Our team of PhDs is ready to help you conquer your research goals!
+              Additional AI-generated proposals cost <strong className="text-emerald-400">Rs 150 each</strong>.
             </p>
+            <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-6 text-left">
+              <p className="text-sm text-white/80 mb-2">1. Pay Rs 150 via UPI to:</p>
+              <p className="text-lg font-mono text-emerald-400 font-bold mb-4 text-center bg-black/50 py-2 rounded-lg">8130330373@ibl</p>
+              <p className="text-sm text-white/80 mb-2">2. Send a screenshot of your payment to <strong className="text-white">sigmamind20598@gmail.com</strong> or WhatsApp us.</p>
+              <p className="text-sm text-white/80">3. Click the button below to notify our team.</p>
+            </div>
+            <button 
+              onClick={handleManualPaidRequest}
+              className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+            >
+              I've Paid! Request Proposal 📩
+            </button>
             <button 
               onClick={() => {
                 setShowPricingModal(false);
                 setMode('guidance');
               }}
-              className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+              className="w-full mt-3 bg-transparent border border-white/20 hover:bg-white/5 text-white py-3 rounded-xl font-bold transition-all"
             >
-              Take me to Services! 🏃‍♂️💨
+              Explore Other Services
             </button>
           </div>
         </div>
