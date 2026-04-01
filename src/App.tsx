@@ -319,15 +319,22 @@ export default function App() {
     setProposalsGenerated(prev => prev + 1);
     setSelectedTopic(topic);
     setIsLoading(true);
-    const fullProposal = await generateFullProposal(
-      topic, 
-      selectedProfessor?.name || '', 
-      selectedProfessor?.specialization || '',
-      selectedInstitute?.name || ''
-    );
-    setProposal(fullProposal);
-    setIsLoading(false);
-    setView('proposal');
+    
+    try {
+      const fullProposal = await generateFullProposal(
+        topic, 
+        selectedProfessor?.name || '', 
+        selectedProfessor?.specialization || '',
+        selectedInstitute?.name || ''
+      );
+      setProposal(fullProposal);
+    } catch (error) {
+      console.error("Error in handleTopicSelect:", error);
+      setProposal("An unexpected error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
+      setView('proposal');
+    }
   };
 
   const handleServiceSubmit = async (e: React.FormEvent, serviceType: string, details: any) => {

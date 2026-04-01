@@ -342,8 +342,14 @@ export async function getProfessorPublications(professorName: string, institute:
       
       const cleanedText = cleanJson(text);
       const data = JSON.parse(cleanedText);
-      setCachedData(cacheKey, data);
-      return data;
+      const result = {
+        bio: data.bio || "No biography available.",
+        publications: Array.isArray(data.publications) ? data.publications : [],
+        citationTrend: Array.isArray(data.citationTrend) ? data.citationTrend : [],
+        publicationTrend: Array.isArray(data.publicationTrend) ? data.publicationTrend : []
+      };
+      setCachedData(cacheKey, result);
+      return result;
     } catch (parseError) {
       console.error("JSON Parse Error:", parseError, "Original text:", text);
       return { bio: "Information currently unavailable. Please try again later.", publications: [], citationTrend: [], publicationTrend: [] };
@@ -415,30 +421,32 @@ export async function generateResearchTopics(professor: Professor, instituteName
 export async function generateFullProposal(topic: ResearchTopic, professorName: string, specialization: string, instituteName: string): Promise<string> {
   const model = "gemini-3-flash-preview";
   
-  // Get publications for context in the proposal (Introduction/Lit Review)
-  const pubData = await getProfessorPublications(professorName, instituteName);
-  
-  const prompt = `Draft a full PhD research proposal following the FULL PROPOSAL GENERATION algorithm.
-  
-  CONTEXT:
-  Topic Title: "${topic.title}"
-  Topic Description: ${topic.description}
-  Gap Type: ${topic.gapType}
-  Proposed Methodology: ${topic.methodology}
-  Source Inspiration: ${topic.sourcePublication}
-  Difficulty: ${topic.difficulty}
-  
-  Target Professor: ${professorName}
-  Specialization: ${specialization}
-  Target Institution: ${instituteName}
-  
-  Professor's Recent Work (for Section 3 & 4):
-  ${pubData.publications.join("\n")}
-  
-  Ensure all 10 sections are present and follow the word count and quality rules strictly.
-  Mention Professor ${professorName} and ${instituteName} explicitly as per the rules.`;
-
   try {
+    // Get publications for context in the proposal (Introduction/Lit Review)
+    const pubData = await getProfessorPublications(professorName, instituteName);
+    
+    const publicationsList = Array.isArray(pubData?.publications) ? pubData.publications.join("\n") : "No recent publications found.";
+    
+    const prompt = `Draft a full PhD research proposal following the FULL PROPOSAL GENERATION algorithm.
+    
+    CONTEXT:
+    Topic Title: "${topic.title}"
+    Topic Description: ${topic.description}
+    Gap Type: ${topic.gapType}
+    Proposed Methodology: ${topic.methodology}
+    Source Inspiration: ${topic.sourcePublication}
+    Difficulty: ${topic.difficulty}
+    
+    Target Professor: ${professorName}
+    Specialization: ${specialization}
+    Target Institution: ${instituteName}
+    
+    Professor's Recent Work (for Section 3 & 4):
+    ${publicationsList}
+    
+    Ensure all 10 sections are present and follow the word count and quality rules strictly.
+    Mention Professor ${professorName} and ${instituteName} explicitly as per the rules.`;
+
     const response = await getAIClient().models.generateContent({
       model,
       contents: prompt,
@@ -450,7 +458,7 @@ export async function generateFullProposal(topic: ResearchTopic, professorName: 
     return response.text || "Failed to generate proposal.";
   } catch (error) {
     console.error("Error generating proposal:", error);
-    return "An error occurred while generating the proposal.";
+    return "An error occurred while generating the proposal. Please try again.";
   }
 }
 
