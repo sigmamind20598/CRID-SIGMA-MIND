@@ -3,6 +3,81 @@ import { Professor, ResearchTopic, NewsItem } from "../types";
 import { PROPOSAL_SYSTEM_INSTRUCTIONS } from "./proposalInstructions";
 import { CURATED_PROFILES } from "../facultyData";
 
+export const IDEA_GENERATION_INSTRUCTIONS = `## ALGORITHM: RESEARCH IDEA GENERATION
+You are a PhD Research Proposal Generation Engine for Indian universities.
+I will give you a professor's profile and their publications.
+You must follow this EXACT algorithm to generate research ideas.
+
+─────────────────────────────────────────────────────────
+STEP 1: DEEP READ THE PROFESSOR'S WORK
+─────────────────────────────────────────────────────────
+Read every publication provided. For each paper extract:
+  A. WHAT was studied (the exact psychological/neural phenomenon)
+  B. WHO was studied (healthy adults / clinical patients / children / Indian sample / Western sample / animals)
+  C. HOW it was studied (EEG / fMRI / behavioural task / survey / computational model / neuropsychological test)
+  D. WHAT was found (the key result in one sentence)
+  E. WHAT was NOT answered (limitations section — what did authors say needs future research)
+  F. WHAT YEAR it was published (older = more follow-up work possible, recent = cutting edge, fewer follow-ups done yet)
+Do this for every single paper before moving to Step 2.
+
+─────────────────────────────────────────────────────────
+STEP 2: BUILD THE PROFESSOR'S RESEARCH FINGERPRINT
+─────────────────────────────────────────────────────────
+After reading all papers, identify:
+  CORE THEMES (max 3): What topics does this professor keep returning to?
+  FAVOURITE METHODS (max 2): What methods do they use most?
+  FAVOURITE POPULATION (max 2): Who do they study most?
+  THEORETICAL FRAMEWORK: Which theory or model underlies most of their work?
+  RECURRING GAP: What gap do they keep mentioning across papers? This is the most important finding — it tells you exactly what THEY want studied next.
+
+─────────────────────────────────────────────────────────
+STEP 3: IDENTIFY 5 TYPES OF GAPS
+─────────────────────────────────────────────────────────
+Using the fingerprint from Step 2, find these gaps:
+  GAP TYPE 1 — METHODOLOGICAL GAP: Same research question the professor studied but using a newer or better method they haven't used yet.
+  GAP TYPE 2 — POPULATION GAP: Same research question but on a group the professor has NOT studied yet. Always prioritize Indian-specific populations.
+  GAP TYPE 3 — EXTENSION GAP: The most logical NEXT STUDY after their most cited or most recent paper.
+  GAP TYPE 4 — CROSS-DOMAIN GAP: Combine the professor's core topic with a completely different but currently hot field (AI/ML, Digital mental health, Climate anxiety, Post-COVID, Social media, Neuroeconomics, Neuroeducation).
+  GAP TYPE 5 — APPLIED/INTERVENTION GAP: Take the professor's most important finding and turn it into a real-world intervention or application.
+
+─────────────────────────────────────────────────────────
+STEP 4: GENERATE 10 IDEAS — ONE FROM EACH SLOT
+─────────────────────────────────────────────────────────
+Generate ideas in this exact distribution:
+  Idea 1 → GAP TYPE 1 (Methodological)
+  Idea 2 → GAP TYPE 1 (Methodological, different paper)
+  Idea 3 → GAP TYPE 2 (Population)
+  Idea 4 → GAP TYPE 2 (Population, different group)
+  Idea 5 → GAP TYPE 3 (Extension of most cited paper)
+  Idea 6 → GAP TYPE 3 (Extension of most recent paper)
+  Idea 7 → GAP TYPE 4 (Cross-domain, hot field 1)
+  Idea 8 → GAP TYPE 4 (Cross-domain, hot field 2)
+  Idea 9 → GAP TYPE 5 (Applied/intervention)
+  Idea 10 → GAP TYPE 5 (Applied, different context)
+
+─────────────────────────────────────────────────────────
+STEP 5: QUALITY CHECK EACH IDEA BEFORE OUTPUTTING
+─────────────────────────────────────────────────────────
+For each idea ask these 6 questions. If any answer is NO, rewrite the idea until all are YES.
+  Q1. Is this idea SPECIFIC?
+  Q2. Is this idea ORIGINAL?
+  Q3. Is this FEASIBLE in India?
+  Q4. Would THIS professor want to supervise it?
+  Q5. Is there a clear HYPOTHESIS possible?
+  Q6. Is the CONTRIBUTION clear?
+
+─────────────────────────────────────────────────────────
+STEP 6: OUTPUT FORMAT
+─────────────────────────────────────────────────────────
+Return a JSON array of 10 objects with these keys:
+- title: Short specific title under 15 words.
+- description: 2-3 sentences: what will be studied, how, and what gap it fills.
+- sourcePublication: Which of the professor's papers inspired this idea.
+- gapType: "Methodological", "Population", "Extension", "Cross-domain", or "Applied".
+- difficulty: "Feasible", "Moderate", or "Ambitious".
+- methodology: "EEG", "fMRI", "Behavioural", "Survey", "Computational", or "Mixed".
+`;
+
 let aiClient: GoogleGenAI | null = null;
 
 function getAIClient(): GoogleGenAI {
@@ -281,19 +356,28 @@ export async function getProfessorPublications(professorName: string, institute:
 
 export async function generateResearchTopics(professor: Professor, instituteName: string): Promise<ResearchTopic[]> {
   const model = "gemini-3-flash-preview";
-  const prompt = `You are a PhD Research Proposal Assistant for Indian institutions.
-  Based on the research focus of Prof. ${professor.name} at ${instituteName} (Focus: ${professor.focus}, Specialization: ${professor.specialization}), 
-  generate 12-15 high-level, innovative, and technically precise research proposal topics suitable for PhD applications at this specific institute.
   
-  Ensure topics are specific, falsifiable, and align with the technical rigor of ${instituteName}.
+  // Get professor publications first to provide context for the algorithm
+  const pubData = await getProfessorPublications(professor.name, instituteName);
   
-  Return the data as a JSON array of objects with keys: title, description.`;
+  const prompt = `Professor Profile:
+  Name: ${professor.name}
+  Institute: ${instituteName}
+  Focus: ${professor.focus}
+  Specialization: ${professor.specialization}
+  
+  Recent Publications:
+  ${pubData.publications.join("\n")}
+  
+  Follow the RESEARCH IDEA GENERATION algorithm to generate 10 high-quality PhD research ideas.
+  Ensure the output is strictly valid JSON.`;
 
   try {
     const response = await getAIClient().models.generateContent({
       model,
       contents: prompt,
       config: {
+        systemInstruction: IDEA_GENERATION_INSTRUCTIONS,
         responseMimeType: "application/json",
       },
     });
@@ -302,7 +386,6 @@ export async function generateResearchTopics(professor: Professor, instituteName
     if (!text) return [];
 
     try {
-      // Robust JSON extraction
       const cleanedText = cleanJson(text);
       const jsonMatch = cleanedText.match(/\[[\s\S]*\]/);
       const jsonStr = jsonMatch ? jsonMatch[0] : cleanedText;
@@ -311,18 +394,17 @@ export async function generateResearchTopics(professor: Professor, instituteName
       if (!Array.isArray(data)) return [];
 
       return data.map((t: any, index: number) => ({
+        id: `topic-${index}-${Date.now()}`,
         title: t.title || "Untitled Research Topic",
         description: t.description || "No description provided.",
-        id: `topic-${index}-${Date.now()}`,
+        sourcePublication: t.sourcePublication || "General research gap",
+        gapType: t.gapType || "Extension",
+        difficulty: t.difficulty || "Moderate",
+        methodology: t.methodology || "Mixed",
       }));
     } catch (parseError) {
       console.error("JSON Parse Error in generateResearchTopics:", parseError, "Original text:", text);
-      // Fallback topics if parsing fails
-      return [
-        { id: 'fb-1', title: `Advancements in ${professor.specialization}`, description: `A comprehensive study on modern techniques and methodologies in ${professor.specialization} within the context of ${instituteName}.` },
-        { id: 'fb-2', title: `Impact of ${professor.focus} on Behavioral Outcomes`, description: `Investigating the relationship between ${professor.focus} and specific psychological or cognitive metrics.` },
-        { id: 'fb-3', title: `Cross-cultural analysis of ${professor.researchArea}`, description: `Exploring how ${professor.researchArea} manifests in the diverse Indian demographic.` }
-      ];
+      return [];
     }
   } catch (error) {
     console.error("Error generating topics:", error);
@@ -330,17 +412,31 @@ export async function generateResearchTopics(professor: Professor, instituteName
   }
 }
 
-export async function generateFullProposal(topic: string, professorName: string, specialization: string, instituteName: string): Promise<string> {
+export async function generateFullProposal(topic: ResearchTopic, professorName: string, specialization: string, instituteName: string): Promise<string> {
   const model = "gemini-3-flash-preview";
-  const prompt = `Draft a full PhD research proposal for the following:
-  Topic: "${topic}"
+  
+  // Get publications for context in the proposal (Introduction/Lit Review)
+  const pubData = await getProfessorPublications(professorName, instituteName);
+  
+  const prompt = `Draft a full PhD research proposal following the FULL PROPOSAL GENERATION algorithm.
+  
+  CONTEXT:
+  Topic Title: "${topic.title}"
+  Topic Description: ${topic.description}
+  Gap Type: ${topic.gapType}
+  Proposed Methodology: ${topic.methodology}
+  Source Inspiration: ${topic.sourcePublication}
+  Difficulty: ${topic.difficulty}
+  
   Target Professor: ${professorName}
   Specialization: ${specialization}
   Target Institution: ${instituteName}
   
-  Follow the structure and technical rigor specified in your system instructions. 
-  The proposal should be approximately 2500 words (excluding references).
-  Ensure specific methodology (EEG/Behavioural/etc. as appropriate), statistical plans, and directional hypotheses.`;
+  Professor's Recent Work (for Section 3 & 4):
+  ${pubData.publications.join("\n")}
+  
+  Ensure all 10 sections are present and follow the word count and quality rules strictly.
+  Mention Professor ${professorName} and ${instituteName} explicitly as per the rules.`;
 
   try {
     const response = await getAIClient().models.generateContent({

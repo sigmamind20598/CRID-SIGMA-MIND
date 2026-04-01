@@ -21,7 +21,9 @@ import {
   Database,
   AlertCircle,
   CheckCircle2,
-  Users
+  Users,
+  Instagram,
+  ExternalLink
 } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -29,6 +31,7 @@ import { twMerge } from 'tailwind-merge';
 import { Institute, Professor, ResearchTopic, INITIAL_INSTITUTES, NewsItem } from './types';
 import { getFacultyData, generateResearchTopics, generateFullProposal, getProfessorPublications, getLatestNews, getInstituteNameFromUrl } from './services/aiService';
 import { CURATED_FACULTY } from './facultyData';
+import { FACULTY_DATABASE, NEWS_DATABASE, getFacultyForInstitute } from './staticDatabase';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -88,60 +91,18 @@ export default function App() {
   );
 
   const fetchNews = async () => {
-    // Check for API key before starting
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      console.error("GEMINI_API_KEY is missing in environment variables.");
-      setLastError("CRITICAL: Missing Gemini API Key. If you are on Vercel, please add VITE_GEMINI_API_KEY to your Environment Variables. If you are in AI Studio, ensure the key is set in the Settings menu.");
-      return;
-    }
-
     setIsLoading(true);
+    setNews(NEWS_DATABASE); // Show static news instantly
     setLastError(null);
+    
     try {
       const data = await getLatestNews();
       if (data && data.length > 0) {
-        setNews(data);
-      } else {
-        // Fallback to curated news if AI fails
-        const fallbackNews: NewsItem[] = [
-          {
-            id: 'fb-1',
-            title: 'PhD Admissions Open at IIT Delhi (HSS)',
-            source: 'IIT Delhi Official',
-            url: 'https://hss.iitd.ac.in/admissions',
-            category: 'Admission',
-            summary: 'Applications are invited for the PhD program in Psychology and Cognitive Science for the upcoming semester.',
-            timestamp: new Date().toISOString(),
-            imageKeyword: 'university'
-          },
-          {
-            id: 'fb-2',
-            title: 'New Research on Neural Correlates of Attention',
-            source: 'Nature Neuroscience',
-            url: 'https://www.nature.com/neuro',
-            category: 'Research',
-            summary: 'Recent study explores how the brain filters sensory information during complex tasks.',
-            timestamp: new Date().toISOString(),
-            imageKeyword: 'brain'
-          },
-          {
-            id: 'fb-3',
-            title: 'NIMHANS PhD Entrance Exam Dates Announced',
-            source: 'NIMHANS',
-            url: 'https://nimhans.ac.in/admissions',
-            category: 'Admission',
-            summary: 'The entrance examination for the PhD in Clinical Psychology is scheduled for next month.',
-            timestamp: new Date().toISOString(),
-            imageKeyword: 'exam'
-          }
-        ];
-        setNews(fallbackNews);
-        setLastError("AI search returned no results. Showing curated updates.");
+        setNews(data); // Replace with Gemini news if successful
       }
     } catch (error) {
-      console.error(error);
-      setLastError(error instanceof Error ? error.message : String(error));
+      console.error("Failed to fetch AI news:", error);
+      // Keep static news on error
     } finally {
       setIsLoading(false);
     }
@@ -158,44 +119,16 @@ export default function App() {
   const loadFaculty = async (name: string) => {
     if (!name) return;
     
-    // Check for API key before starting
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
-      console.error("GEMINI_API_KEY is missing in environment variables.");
-      setLastError("CRITICAL: Missing Gemini API Key. Please set VITE_GEMINI_API_KEY in your Vercel environment variables.");
-      setView('faculty');
-      return;
-    }
-
     setIsLoading(true);
     setProfessors([]);
     setLastError(null);
     
     try {
-      // Try AI search first for dynamism
-      const data = await getFacultyData(name);
-      if (data && data.length > 0) {
-        setProfessors(data);
-      } else {
-        // Fallback to curated data if AI fails
-        const curated = CURATED_FACULTY[name];
-        if (curated) {
-          setProfessors(curated);
-          setLastError("AI search failed. Showing curated faculty data.");
-        } else {
-          setLastError(`No faculty data found for ${name}. Try searching for a different university.`);
-        }
-      }
+      const data = getFacultyForInstitute(name);
+      setProfessors(data);
     } catch (error) {
       console.error("Failed to load faculty:", error);
-      // Fallback to curated data on error
-      const curated = CURATED_FACULTY[name];
-      if (curated) {
-        setProfessors(curated);
-        setLastError("AI search error. Showing curated faculty data.");
-      } else {
-        setLastError(error instanceof Error ? error.message : String(error));
-      }
+      setLastError(error instanceof Error ? error.message : String(error));
     } finally {
       setIsLoading(false);
       setView('faculty');
@@ -207,6 +140,19 @@ export default function App() {
     setSelectedProfessor(prof);
     setIsLoading(true);
     setView('profile');
+    
+    // Use static data if available
+    if (prof.topPapers && prof.topPapers.length > 0) {
+      setProfDetails({
+        bio: prof.focus || "Research profile information.",
+        publications: prof.topPapers,
+        citationTrend: prof.citationTrend || [],
+        publicationTrend: prof.publicationTrend || []
+      });
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const details = await getProfessorPublications(prof.name, selectedInstitute?.name || '');
       setProfDetails(details);
@@ -225,6 +171,14 @@ export default function App() {
 
   const handleProfessorSelect = async (prof: Professor) => {
     setSelectedProfessor(prof);
+    
+    // Use static research ideas if available
+    if (prof.researchIdeas && prof.researchIdeas.length > 0) {
+      setTopics(prof.researchIdeas);
+      setView('topics');
+      return;
+    }
+
     setIsLoading(true);
     setTopics([]); // Clear previous topics
     setLastError(null);
@@ -254,7 +208,7 @@ export default function App() {
     setSelectedTopic(topic);
     setIsLoading(true);
     const fullProposal = await generateFullProposal(
-      topic.title, 
+      topic, 
       selectedProfessor?.name || '', 
       selectedProfessor?.specialization || '',
       selectedInstitute?.name || ''
@@ -422,9 +376,9 @@ export default function App() {
                       selectedInstitute?.id === inst.id ? "bg-emerald-500/10 text-emerald-400 font-bold" : "hover:bg-white/5 text-white/60"
                     )}
                   >
-                    <div className="flex items-center gap-3 min-w-0">
-                      <GraduationCap size={18} className={selectedInstitute?.id === inst.id ? "text-emerald-500" : "text-white/20"} />
-                      <span className="text-sm truncate">{inst.name}</span>
+                    <div className="flex items-center gap-3">
+                      <GraduationCap size={18} className={selectedInstitute?.id === inst.id ? "text-emerald-500 shrink-0" : "text-white/20 shrink-0"} />
+                      <span className="text-sm leading-snug">{inst.name}</span>
                     </div>
                     <ChevronRight size={14} className={cn("transition-transform", selectedInstitute?.id === inst.id ? "translate-x-0 opacity-100" : "-translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100")} />
                   </button>
@@ -549,6 +503,25 @@ export default function App() {
                           <div key={prof.id} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
                             <h3 className="text-xl font-bold text-white mb-2">{prof.name}</h3>
                             <p className="text-sm text-white/60 mb-4">{prof.specialization}</p>
+                            
+                            {prof.researchIdeas && prof.researchIdeas.length > 0 && (
+                              <div className="mb-4 space-y-2">
+                                <p className="text-[10px] font-bold uppercase tracking-widest text-emerald-500/60">Research Ideas Available</p>
+                                <div className="flex flex-wrap gap-1">
+                                  {prof.researchIdeas.slice(0, 2).map((idea, i) => (
+                                    <span key={i} className="text-[8px] px-2 py-1 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20">
+                                      {idea.title.length > 25 ? idea.title.substring(0, 25) + '...' : idea.title}
+                                    </span>
+                                  ))}
+                                  {prof.researchIdeas.length > 2 && (
+                                    <span className="text-[8px] px-2 py-1 bg-white/5 text-white/40 rounded-full border border-white/10">
+                                      +{prof.researchIdeas.length - 2} more
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                            )}
+
                             <div className="flex gap-2">
                               <button 
                                 onClick={() => handleProfessorClick(prof)}
@@ -560,7 +533,7 @@ export default function App() {
                                 onClick={() => handleProfessorSelect(prof)}
                                 className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-lg text-xs font-bold transition-colors"
                               >
-                                Generate Topics
+                                {prof.researchIdeas && prof.researchIdeas.length > 0 ? 'View Topics' : 'Generate Topics'}
                               </button>
                             </div>
                           </div>
@@ -594,11 +567,42 @@ export default function App() {
                     ) : topics.length > 0 ? (
                       topics.map((topic) => (
                         <div key={topic.id} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
-                          <h4 className="text-lg font-bold text-emerald-400 mb-2">{topic.title}</h4>
+                          <div className="flex justify-between items-start mb-2">
+                            <h4 className="text-lg font-bold text-emerald-400">{topic.title}</h4>
+                            <div className="flex gap-2">
+                              {topic.gapType && (
+                                <span className="px-2 py-1 rounded-full text-[8px] font-black uppercase tracking-widest border bg-emerald-500/10 text-emerald-400 border-emerald-500/20">
+                                  {topic.gapType}
+                                </span>
+                              )}
+                              {topic.difficulty && (
+                                <span className={cn(
+                                  "px-2 py-1 rounded-full text-[8px] font-black uppercase tracking-widest border",
+                                  topic.difficulty === 'Feasible' ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" :
+                                  topic.difficulty === 'Moderate' ? "bg-yellow-500/10 text-yellow-400 border-yellow-500/20" :
+                                  "bg-red-500/10 text-red-400 border-red-500/20"
+                                )}>
+                                  {topic.difficulty}
+                                </span>
+                              )}
+                            </div>
+                          </div>
                           <p className="text-sm text-white/70 mb-4">{topic.description}</p>
+                          
+                          <div className="grid grid-cols-2 gap-4 mb-6">
+                            <div className="bg-white/5 p-3 rounded-xl border border-white/5">
+                              <p className="text-[8px] font-bold uppercase tracking-widest text-white/30 mb-1">Methodology</p>
+                              <p className="text-xs font-bold text-white/80">{topic.methodology}</p>
+                            </div>
+                            <div className="bg-white/5 p-3 rounded-xl border border-white/5">
+                              <p className="text-[8px] font-bold uppercase tracking-widest text-white/30 mb-1">Source Inspiration</p>
+                              <p className="text-[10px] font-medium text-white/60 line-clamp-1 italic">"{topic.sourcePublication}"</p>
+                            </div>
+                          </div>
+
                           <button 
                             onClick={() => handleTopicSelect(topic)}
-                            className="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-2 rounded-lg text-xs font-bold transition-colors"
+                            className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl text-xs font-bold transition-all hover:scale-[1.02] active:scale-[0.98]"
                           >
                             Generate Full Proposal
                           </button>
@@ -1093,35 +1097,65 @@ export default function App() {
                           </p>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                          <a 
-                            href="mailto:sigmamind20598@gmail.com"
-                            className="flex items-center gap-4 p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-emerald-500/50 hover:bg-white/10 transition-all group"
-                          >
-                            <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all">
-                              <Send size={20} className="text-emerald-500 group-hover:text-black" />
-                            </div>
-                            <div>
-                              <p className="text-[8px] text-white/40 uppercase font-black tracking-widest">Email Me</p>
-                              <p className="text-xs font-bold text-white">sigmamind20598@gmail.com</p>
-                            </div>
-                          </a>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <a 
+                              href="mailto:sigmamind20598@gmail.com"
+                              className="flex items-center gap-4 p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-emerald-500/50 hover:bg-white/10 transition-all group"
+                            >
+                              <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all">
+                                <Send size={20} className="text-emerald-500 group-hover:text-black" />
+                              </div>
+                              <div>
+                                <p className="text-[8px] text-white/40 uppercase font-black tracking-widest">Email Me</p>
+                                <p className="text-xs font-bold text-white">sigmamind20598@gmail.com</p>
+                              </div>
+                            </a>
 
-                          <a 
-                            href="https://wa.me/917092884311"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="flex items-center gap-4 p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-emerald-500/50 hover:bg-white/10 transition-all group"
-                          >
-                            <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all">
-                              <MessageSquare size={20} className="text-emerald-500 group-hover:text-black" />
-                            </div>
-                            <div>
-                              <p className="text-[8px] text-white/40 uppercase font-black tracking-widest">WhatsApp</p>
-                              <p className="text-xs font-bold text-white">+91 7092884311</p>
-                            </div>
-                          </a>
-                        </div>
+                            <a 
+                              href="https://wa.me/917092884311"
+                              target="_blank"
+                              rel="noreferrer"
+                              className="flex items-center gap-4 p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-emerald-500/50 hover:bg-white/10 transition-all group"
+                            >
+                              <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all">
+                                <MessageSquare size={20} className="text-emerald-500 group-hover:text-black" />
+                              </div>
+                              <div>
+                                <p className="text-[8px] text-white/40 uppercase font-black tracking-widest">WhatsApp</p>
+                                <p className="text-xs font-bold text-white">+91 7092884311</p>
+                              </div>
+                            </a>
+
+                            <a 
+                              href="https://t.me/sigmamindlab"
+                              target="_blank"
+                              rel="noreferrer"
+                              className="flex items-center gap-4 p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-emerald-500/50 hover:bg-white/10 transition-all group"
+                            >
+                              <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all">
+                                <Send size={20} className="text-emerald-500 group-hover:text-black rotate-[-45deg]" />
+                              </div>
+                              <div>
+                                <p className="text-[8px] text-white/40 uppercase font-black tracking-widest">Telegram</p>
+                                <p className="text-xs font-bold text-white">@sigmamindlab</p>
+                              </div>
+                            </a>
+
+                            <a 
+                              href="https://www.instagram.com/sigmamindlab?igsh=MTR4M3AydGhuaDJheQ=="
+                              target="_blank"
+                              rel="noreferrer"
+                              className="flex items-center gap-4 p-5 bg-white/5 border border-white/10 rounded-2xl hover:border-emerald-500/50 hover:bg-white/10 transition-all group"
+                            >
+                              <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all">
+                                <Instagram size={20} className="text-emerald-500 group-hover:text-black" />
+                              </div>
+                              <div>
+                                <p className="text-[8px] text-white/40 uppercase font-black tracking-widest">Instagram</p>
+                                <p className="text-xs font-bold text-white">@sigmamindlab</p>
+                              </div>
+                            </a>
+                          </div>
 
                         <div className="pt-8 border-t border-white/5">
                           <div className="flex items-center gap-4 mb-4">
@@ -1147,10 +1181,18 @@ export default function App() {
                               <p className="text-[10px] text-red-300/60 font-mono break-all">{lastError}</p>
                             </div>
                           )}
-                          <p className="text-[10px] text-white/30 uppercase tracking-widest leading-relaxed">
-                            * WhatsApp is text-only, unless you want to hear me talk about neurons for 3 hours straight. 
-                            You've been warned.
-                          </p>
+                          <div className="mt-8 p-6 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm">
+                            <p className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.2em] mb-3 flex items-center gap-2">
+                              <AlertCircle size={12} />
+                              Academic Health Warning
+                            </p>
+                            <p className="text-[11px] text-white/40 uppercase tracking-widest leading-relaxed font-medium">
+                              🚧 <strong className="text-white/60">Brain Under Construction:</strong> This site is currently a work-in-progress, much like my thesis defense prep. 
+                              Please <span className="text-emerald-500/60">verify every piece of information twice</span> before committing to anything. 
+                              Since the research data and papers are powered by Artificial Intelligence, they might occasionally hallucinate more than a sleep-deprived grad student at 4 AM. 
+                              Double-check the citations, triple-check the facts, and remember: AI is smart, but your own brain is still the primary investigator here.
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -1181,10 +1223,13 @@ export default function App() {
               To get more detailed proposals, expert human reviews, or mock interviews, head over to the <span className="text-emerald-400 font-bold">Services</span> section in the top menu. Our team of PhDs is ready to help you conquer your research goals!
             </p>
             <button 
-              onClick={() => setShowPricingModal(false)}
+              onClick={() => {
+                setShowPricingModal(false);
+                setMode('guidance');
+              }}
               className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98]"
             >
-              Got it, let's explore!
+              Take me to Services! 🏃‍♂️💨
             </button>
           </div>
         </div>
