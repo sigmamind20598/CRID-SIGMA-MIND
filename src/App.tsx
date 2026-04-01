@@ -23,7 +23,9 @@ import {
   CheckCircle2,
   Users,
   Instagram,
-  ExternalLink
+  ExternalLink,
+  Menu,
+  X
 } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -142,6 +144,7 @@ function FunnyLoader({ isInitial = false }: { isInitial?: boolean }) {
 
 export default function App() {
   const [mode, setMode] = useState<'home' | 'directory' | 'custom' | 'news' | 'review' | 'guidance' | 'contact' | 'mock'>('home');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const sortedInstitutes = React.useMemo(() => [...INITIAL_INSTITUTES].sort((a, b) => {
     const isAiitA = a.name.includes('IIT') || a.name.includes('IIM');
     const isAiitB = b.name.includes('IIT') || b.name.includes('IIM');
@@ -368,10 +371,21 @@ export default function App() {
   return (
     <div className="flex flex-col h-screen bg-[#050505] text-white font-sans selection:bg-emerald-500/30 overflow-hidden">
       <nav className={cn(
-        "h-24 border-b flex items-center px-8 shrink-0 z-50 transition-colors duration-500",
-        "bg-black/40 border-white/5 backdrop-blur-md text-white"
+        "h-24 border-b flex items-center px-4 md:px-8 shrink-0 z-50 transition-colors duration-500 relative",
+        "bg-black/40 border-white/5 backdrop-blur-md text-white justify-between"
       )}>
-        <div className="flex-1 flex items-center gap-8">
+        {/* Mobile Menu Toggle */}
+        <div className="md:hidden flex-1 flex items-center">
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 text-white/60 hover:text-white transition-colors"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        {/* Desktop Left Nav */}
+        <div className="hidden md:flex flex-1 items-center gap-8">
           <div className="flex items-center gap-6 text-[10px] font-bold uppercase tracking-[0.2em]">
             <button 
               onClick={() => { setMode('directory'); setView('faculty'); }}
@@ -413,25 +427,27 @@ export default function App() {
           </div>
         </div>
 
-        <div onClick={() => setMode('home')} className="flex flex-col items-center cursor-pointer group px-8">
-          <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center transition-all group-hover:scale-110 shadow-[0_0_20px_rgba(255,255,255,0.3)]">
-            <Brain size={28} className="text-[#0a192f]" />
+        {/* Center Logo */}
+        <div onClick={() => setMode('home')} className="flex flex-col items-center cursor-pointer group px-2 md:px-8">
+          <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white flex items-center justify-center transition-all group-hover:scale-110 shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+            <Brain size={24} className="text-[#0a192f] md:w-7 md:h-7" />
           </div>
-          <span className="text-[10px] font-black tracking-[0.2em] text-white uppercase mt-2">CRID</span>
-          <span className="text-[6px] font-bold tracking-[0.1em] text-white/40 uppercase mt-1 text-center whitespace-nowrap">
+          <span className="text-[10px] font-black tracking-[0.2em] text-white uppercase mt-1 md:mt-2">CRID</span>
+          <span className="hidden md:block text-[6px] font-bold tracking-[0.1em] text-white/40 uppercase mt-1 text-center whitespace-nowrap">
             Cognitive Research Intelligence Domain
           </span>
-          <div className="mt-2 px-3 py-1 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 rounded-full flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span className="text-[8px] font-black tracking-widest text-emerald-300 uppercase">Incubated at IIT Delhi</span>
+          <div className="mt-1 md:mt-2 px-2 md:px-3 py-0.5 md:py-1 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 rounded-full flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+            <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="text-[6px] md:text-[8px] font-black tracking-widest text-emerald-300 uppercase">Incubated at IIT Delhi</span>
           </div>
         </div>
 
+        {/* Desktop Right Nav & Mobile Spacer */}
         <div className="flex-1 flex items-center justify-end gap-6">
           <button 
             onClick={() => setMode('contact')}
             className={cn(
-              "flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all",
+              "hidden md:flex items-center gap-2 px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all",
               mode === 'contact' 
                 ? "bg-emerald-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.4)]" 
                 : "bg-white/5 text-white/60 hover:bg-white/10"
@@ -456,8 +472,83 @@ export default function App() {
             </div>
             Contact Me
           </button>
+          
+          {/* Mobile Contact Icon */}
+          <button 
+            onClick={() => setMode('contact')}
+            className={cn(
+              "md:hidden flex items-center justify-center w-10 h-10 rounded-full transition-all",
+              mode === 'contact' 
+                ? "bg-emerald-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.4)]" 
+                : "bg-white/5 text-white/60 hover:bg-white/10"
+            )}
+          >
+            <div className="w-6 h-6 rounded-full overflow-hidden bg-emerald-500/20 flex items-center justify-center">
+              <img 
+                src="/sarthak.jpg" 
+                alt="S" 
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = 'none';
+                  const parent = (e.target as HTMLImageElement).parentElement;
+                  if (parent) {
+                    const span = document.createElement('span');
+                    span.className = 'text-[10px]';
+                    span.innerText = '👨‍🔬';
+                    parent.appendChild(span);
+                  }
+                }}
+              />
+            </div>
+          </button>
         </div>
       </nav>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden absolute top-24 left-0 right-0 bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-white/10 z-40 overflow-hidden"
+          >
+            <div className="flex flex-col p-6 gap-6 text-[12px] font-bold uppercase tracking-[0.2em]">
+              <button 
+                onClick={() => { setMode('directory'); setView('faculty'); setIsMobileMenuOpen(false); }}
+                className={cn("text-left hover:text-emerald-500 transition-colors", mode === 'directory' ? "text-emerald-500" : "text-white/60")}
+              >
+                Faculty Mapping
+              </button>
+              
+              <div className="flex flex-col gap-4">
+                <span className="text-white/40 text-[10px]">Services</span>
+                <div className="flex flex-col gap-4 pl-4 border-l border-white/10">
+                  <button onClick={() => { setMode('guidance'); setIsMobileMenuOpen(false); }} className="text-left hover:text-emerald-500 transition-colors">
+                    Proposal Guidance
+                  </button>
+                  <button onClick={() => { setMode('custom'); setIsMobileMenuOpen(false); }} className="text-left hover:text-emerald-500 transition-colors">
+                    Custom Proposal
+                  </button>
+                  <button onClick={() => { setMode('review'); setIsMobileMenuOpen(false); }} className="text-left hover:text-emerald-500 transition-colors">
+                    Proposal Review
+                  </button>
+                  <button onClick={() => { setMode('mock'); setIsMobileMenuOpen(false); }} className="text-left hover:text-emerald-500 transition-colors">
+                    Mock Interview
+                  </button>
+                </div>
+              </div>
+
+              <button 
+                onClick={() => { setMode('news'); setIsMobileMenuOpen(false); }}
+                className={cn("text-left hover:text-emerald-500 transition-colors", mode === 'news' ? "text-emerald-500" : "text-white/60")}
+              >
+                Latest News
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <div className="flex-1 flex overflow-hidden">
         {mode === 'directory' && (
