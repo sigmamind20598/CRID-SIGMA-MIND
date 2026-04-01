@@ -1,4 +1,4 @@
-import { GoogleGenAI, Type } from "@google/genai";
+import { GoogleGenAI, Type, HarmCategory, HarmBlockThreshold } from "@google/genai";
 import { Professor, ResearchTopic, NewsItem } from "../types";
 import { PROPOSAL_SYSTEM_INSTRUCTIONS } from "./proposalInstructions";
 import { CURATED_PROFILES } from "../facultyData";
@@ -385,6 +385,24 @@ export async function generateResearchTopics(professor: Professor, instituteName
       config: {
         systemInstruction: IDEA_GENERATION_INSTRUCTIONS,
         responseMimeType: "application/json",
+        safetySettings: [
+          {
+            category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+            threshold: HarmBlockThreshold.BLOCK_NONE,
+          },
+          {
+            category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+            threshold: HarmBlockThreshold.BLOCK_NONE,
+          },
+          {
+            category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+            threshold: HarmBlockThreshold.BLOCK_NONE,
+          },
+          {
+            category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+            threshold: HarmBlockThreshold.BLOCK_NONE,
+          },
+        ],
       },
     });
 
@@ -452,13 +470,37 @@ export async function generateFullProposal(topic: ResearchTopic, professorName: 
       contents: prompt,
       config: {
         systemInstruction: PROPOSAL_SYSTEM_INSTRUCTIONS,
+        safetySettings: [
+          {
+            category: HarmCategory.HARM_CATEGORY_HARASSMENT,
+            threshold: HarmBlockThreshold.BLOCK_NONE,
+          },
+          {
+            category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+            threshold: HarmBlockThreshold.BLOCK_NONE,
+          },
+          {
+            category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+            threshold: HarmBlockThreshold.BLOCK_NONE,
+          },
+          {
+            category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+            threshold: HarmBlockThreshold.BLOCK_NONE,
+          },
+        ],
       }
     });
 
     return response.text || "Failed to generate proposal.";
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error generating proposal:", error);
-    return "An error occurred while generating the proposal. Please try again.";
+    
+    if (error?.status === 429 || error?.message?.includes('429') || error?.message?.includes('quota')) {
+      return "The AI is currently receiving too many requests. Please wait a minute and try again.";
+    }
+    
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    return `An error occurred while generating the proposal: ${errorMessage}. Please try again.`;
   }
 }
 
