@@ -320,12 +320,15 @@ export default function App() {
   };
 
   const handleTopicSelect = (topic: ResearchTopic) => {
+    setPendingTopic(topic);
+    if (!userEmail || !userPhone || !userName) {
+      setShowLeadModal(true);
+      return;
+    }
     if (proposalsGenerated >= 1) {
-      setPendingTopic(topic);
       setShowPricingModal(true);
       return;
     }
-    setPendingTopic(topic);
     setShowLeadModal(true);
   };
 
@@ -334,6 +337,12 @@ export default function App() {
     if (!userEmail || !userPhone || !userName || !pendingTopic) return;
     
     setShowLeadModal(false);
+    
+    if (proposalsGenerated >= 1) {
+      setShowPricingModal(true);
+      return;
+    }
+
     setProposalsGenerated(prev => {
       const newVal = prev + 1;
       localStorage.setItem('proposalsGenerated', newVal.toString());
@@ -1490,9 +1499,13 @@ export default function App() {
             <div className="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
               <FileText size={32} className="text-emerald-500" />
             </div>
-            <h3 className="text-2xl font-bold mb-2 text-center">Get Your Free Proposal</h3>
+            <h3 className="text-2xl font-bold mb-2 text-center">
+              {proposalsGenerated >= 1 ? "Enter Your Details" : "Get Your Free Proposal"}
+            </h3>
             <p className="text-white/60 mb-6 text-center text-sm">
-              Enter your details below. We'll generate your free AI proposal and send a copy to your email!
+              {proposalsGenerated >= 1 
+                ? "Please provide your contact details so we can send you the proposal after payment."
+                : "Enter your details below. We'll generate your free AI proposal and send a copy to your email!"}
             </p>
             <form onSubmit={handleLeadSubmit} className="space-y-4">
               <div>
@@ -1532,7 +1545,7 @@ export default function App() {
                 type="submit"
                 className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] mt-4"
               >
-                Generate Free Proposal 🚀
+                {proposalsGenerated >= 1 ? "Continue to Payment 💳" : "Generate Free Proposal 🚀"}
               </button>
             </form>
           </div>
