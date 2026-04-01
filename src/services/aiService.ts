@@ -496,11 +496,11 @@ export async function generateFullProposal(topic: ResearchTopic, professorName: 
     console.error("Error generating proposal:", error);
     
     if (error?.status === 429 || error?.message?.includes('429') || error?.message?.includes('quota')) {
-      return "The AI is currently receiving too many requests. Please wait a minute and try again.";
+      throw new Error("The AI is currently receiving too many requests. Please wait a minute and try again.");
     }
     
     const errorMessage = error instanceof Error ? error.message : String(error);
-    return `An error occurred while generating the proposal: ${errorMessage}. Please try again.`;
+    throw new Error(`An error occurred while generating the proposal: ${errorMessage}. Please try again.`);
   }
 }
 

@@ -36,28 +36,31 @@ export const sendProposalEmails = async (
 
     // 2. Send to User (via EmailJS)
     // We only try this if they have configured EmailJS, otherwise it will fail gracefully.
-    if (import.meta.env.VITE_EMAILJS_PUBLIC_KEY) {
-      await emailjs.send(
-        SERVICE_ID,
-        TEMPLATE_ID_USER,
-        {
-          to_email: userEmail,
-          to_name: userName,
-          topic_title: topicTitle,
-          proposal_content: proposalContent,
-          // Include services list
-          services_list: `
+    // For paid requests, we DO NOT send the proposal to the user. The admin will do it manually.
+    if (!isPaidRequest) {
+      if (import.meta.env.VITE_EMAILJS_PUBLIC_KEY) {
+        await emailjs.send(
+          SERVICE_ID,
+          TEMPLATE_ID_USER,
+          {
+            to_email: userEmail,
+            to_name: userName,
+            topic_title: topicTitle,
+            proposal_content: proposalContent,
+            // Include services list
+            services_list: `
 Here are our other services to help you conquer your research goals:
 1. Expert Human Review of your Proposal
 2. Mock PhD Interviews
 3. End-to-End Admission Guidance
 Visit our website to learn more!
-          `
-        },
-        PUBLIC_KEY
-      );
-    } else {
-      console.warn("EmailJS is not configured. User email was not sent, but Admin was notified via FormSubmit.");
+            `
+          },
+          PUBLIC_KEY
+        );
+      } else {
+        console.warn("EmailJS is not configured. User email was not sent, but Admin was notified via FormSubmit.");
+      }
     }
 
     return true;

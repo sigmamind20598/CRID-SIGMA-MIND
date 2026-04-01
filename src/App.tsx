@@ -343,11 +343,6 @@ export default function App() {
       return;
     }
 
-    setProposalsGenerated(prev => {
-      const newVal = prev + 1;
-      localStorage.setItem('proposalsGenerated', newVal.toString());
-      return newVal;
-    });
     setSelectedTopic(pendingTopic);
     setIsLoading(true);
     setLoadingMessage("Drafting your free proposal... This will take 3-4 minutes. It will be sent to your email/WhatsApp.");
@@ -359,6 +354,13 @@ export default function App() {
         selectedProfessor?.specialization || '',
         selectedInstitute?.name || ''
       );
+      
+      setProposalsGenerated(prev => {
+        const newVal = prev + 1;
+        localStorage.setItem('proposalsGenerated', newVal.toString());
+        return newVal;
+      });
+      
       setProposal(fullProposal);
       
       // Send Emails
@@ -373,7 +375,7 @@ export default function App() {
       
     } catch (error) {
       console.error("Error in handleLeadSubmit:", error);
-      setProposal("An unexpected error occurred. Please try again.");
+      setProposal(error instanceof Error ? error.message : "An unexpected error occurred. Please try again.");
     } finally {
       setIsLoading(false);
       setLoadingMessage(null);
@@ -388,22 +390,30 @@ export default function App() {
     }
     setShowPricingModal(false);
     setIsLoading(true);
-    setLoadingMessage("Sending your request to our team...");
+    setLoadingMessage("Processing your request... This will take 3-4 minutes.");
     
     try {
-      // Send Emails for paid request (no proposal generated yet)
+      // Generate the proposal for the admin
+      const fullProposal = await generateFullProposal(
+        pendingTopic, 
+        selectedProfessor?.name || '', 
+        selectedProfessor?.specialization || '',
+        selectedInstitute?.name || ''
+      );
+
+      // Send Emails for paid request (proposal generated and sent ONLY to admin)
       await sendProposalEmails(
         userEmail,
         userPhone,
         userName,
-        "User requested a paid proposal. Awaiting payment screenshot.",
+        fullProposal,
         pendingTopic.title,
         true
       );
-      alert("Request sent! Please send the payment screenshot to sigmamind20598@gmail.com or WhatsApp.");
+      alert("Request processed! Please send the payment screenshot of Rs 150 to sigmamind20598@gmail.com or WhatsApp. We will send you the proposal upon verification.");
     } catch (error) {
       console.error("Error sending paid request:", error);
-      alert("Failed to send request. Please contact us directly.");
+      alert("Failed to process request. Please contact us directly.");
     } finally {
       setIsLoading(false);
       setLoadingMessage(null);
