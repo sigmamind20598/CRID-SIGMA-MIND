@@ -421,6 +421,10 @@ export default function App() {
           <span className="text-[6px] font-bold tracking-[0.1em] text-white/40 uppercase mt-1 text-center whitespace-nowrap">
             Cognitive Research Intelligence Domain
           </span>
+          <div className="mt-2 px-3 py-1 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 rounded-full flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="text-[8px] font-black tracking-widest text-emerald-300 uppercase">Incubated at IIT Delhi</span>
+          </div>
         </div>
 
         <div className="flex-1 flex items-center justify-end gap-6">
