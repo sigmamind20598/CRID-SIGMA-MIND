@@ -15323,5 +15323,67 @@
         }
       ]
     }
+  ],
+  "Centre of Behavioural and Cognitive Sciences (CBCS), University of Allahabad": [
+    {
+      "id": "cbcs-1",
+      "name": "Prof. Bhoomika R. Kar",
+      "department": "Cognitive Science",
+      "researchArea": "Cognitive Psychology",
+      "specialization": "Cognitive control, Cognitive development, Bilingualism",
+      "focus": "Cognitive control, affective control, Cognitive development, Dyslexia, Bilingualism and cognitive control, Cognitive and emotional ageing.",
+      "scholarLink": "https://cbcs.ac.in/people/faculty/bhoomika-r-kar/",
+      "citations": "Extensive Publications",
+      "topPapers": [],
+      "researchIdeas": []
+    },
+    {
+      "id": "cbcs-2",
+      "name": "Dr. Niharika Singh",
+      "department": "Cognitive Science",
+      "researchArea": "Cognitive Psychology",
+      "specialization": "Language processing, Bilingualism",
+      "focus": "Language processing, language and attention and vision interaction, bilingualism and cognitive control.",
+      "scholarLink": "https://cbcs.ac.in/people/faculty/niharika-singh/",
+      "citations": "Recent Research",
+      "topPapers": [],
+      "researchIdeas": []
+    },
+    {
+      "id": "cbcs-3",
+      "name": "Dr. Amrendra Pratap Singh",
+      "department": "Cognitive Science",
+      "researchArea": "Cognitive Psychology",
+      "specialization": "Attention and Perception, Meditation",
+      "focus": "Attention and Perception, Meditation, Time Perception, Visual awareness.",
+      "scholarLink": "https://cbcs.ac.in/people/faculty/amrendra-pratap-singh/",
+      "citations": "Recent Research",
+      "topPapers": [],
+      "researchIdeas": []
+    },
+    {
+      "id": "cbcs-4",
+      "name": "Dr. Jay Prakash Singh",
+      "department": "Cognitive Science",
+      "researchArea": "Cognitive Psychology",
+      "specialization": "Bilingualism, Emotion and Cognition",
+      "focus": "Bilingualism and Cognitive Control, Emotion and Cognition, Literacy, Decision Making.",
+      "scholarLink": "https://cbcs.ac.in/people/faculty/jay-prakash-singh/",
+      "citations": "Recent Research",
+      "topPapers": [],
+      "researchIdeas": []
+    },
+    {
+      "id": "cbcs-5",
+      "name": "Dr. Shiv Kumar Sharma",
+      "department": "Cognitive Science",
+      "researchArea": "Cognitive Neuroscience",
+      "specialization": "Learning and Memory, Alzheimer's",
+      "focus": "Learning and Memory, Alzheimer's disease.",
+      "scholarLink": "https://cbcs.ac.in/people/faculty/shiv-kumar-sharma/",
+      "citations": "Recent Research",
+      "topPapers": [],
+      "researchIdeas": []
+    }
   ]
 }

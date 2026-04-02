@@ -406,7 +406,7 @@ export async function generateResearchTopics(professor: Professor, instituteName
       },
     });
 
-    const text = response.text;
+    const text = response.text ? response.text.replace(/\*\*/g, '') : null;
     if (!text) return [];
 
     try {
@@ -469,7 +469,7 @@ export async function generateFullProposal(topic: ResearchTopic, professorName: 
       model,
       contents: prompt,
       config: {
-        systemInstruction: PROPOSAL_SYSTEM_INSTRUCTIONS,
+        systemInstruction: PROPOSAL_SYSTEM_INSTRUCTIONS + "\n\nCRITICAL RULE: DO NOT use markdown bold formatting (**) anywhere in the proposal. Output plain text without asterisks for bolding.",
         safetySettings: [
           {
             category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -491,7 +491,7 @@ export async function generateFullProposal(topic: ResearchTopic, professorName: 
       }
     });
 
-    return response.text || "Failed to generate proposal.";
+    return response.text ? response.text.replace(/\*\*/g, '') : "Failed to generate proposal.";
   } catch (error: any) {
     console.error("Error generating proposal:", error);
     

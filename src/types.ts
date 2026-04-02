@@ -51,6 +51,7 @@ export interface NewsItem {
 
 export const INITIAL_INSTITUTES: Institute[] = [
   // Target Universities
+  { id: 'cbcs', name: 'Centre of Behavioural and Cognitive Sciences (CBCS), University of Allahabad', location: 'Prayagraj, UP', departments: ['Cognitive Science', 'Psychology'] },
   { id: 'du', name: 'University of Delhi', location: 'New Delhi', departments: ['Psychology', 'Applied Psychology'] },
   { id: 'iisc', name: 'Indian Institute of Science (IISc)', location: 'Bangalore, Karnataka', departments: ['Cognitive Science', 'Neuroscience'] },
   { id: 'nimhans', name: 'NIMHANS (National Institute of Mental Health and Neurosciences)', location: 'Bangalore, Karnataka', departments: ['Clinical Psychology', 'Neuropsychology'] },
