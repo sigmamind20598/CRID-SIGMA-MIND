@@ -897,7 +897,15 @@ export default function App() {
                             </div>
                             <div className="bg-white/5 p-3 rounded-xl border border-white/5">
                               <p className="text-[8px] font-bold uppercase tracking-widest text-white/30 mb-1">Source Inspiration</p>
-                              <p className="text-[10px] font-medium text-white/60 line-clamp-1 italic">"{topic.sourcePublication}"</p>
+                              <p className="text-[10px] font-medium text-white/60 line-clamp-1 italic mb-1">"{topic.sourcePublication.split(' - DOI: ')[0]}"</p>
+                              <a 
+                                href={`https://scholar.google.com/scholar?q=${encodeURIComponent(topic.sourcePublication.split(' - DOI: ')[0])}`} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="text-[9px] text-blue-400 hover:text-blue-300 flex items-center gap-1 transition-colors"
+                              >
+                                <Search size={10} /> Scholar
+                              </a>
                             </div>
                           </div>
 
@@ -959,11 +967,27 @@ export default function App() {
                         Recent Publications
                       </h3>
                       <div className="space-y-4">
-                        {profDetails.publications.map((pub, i) => (
-                          <div key={i} className="bg-black/40 p-4 rounded-xl border border-white/5">
-                            <p className="text-white/80 text-sm">{pub}</p>
-                          </div>
-                        ))}
+                        {profDetails.publications.map((pub, i) => {
+                          const hasDoi = pub.includes(' - DOI: ');
+                          const [titlePart, doiPart] = hasDoi ? pub.split(' - DOI: ') : [pub, null];
+                          const searchUrl = `https://scholar.google.com/scholar?q=${encodeURIComponent(titlePart)}`;
+                          
+                          return (
+                            <div key={i} className="bg-black/40 p-4 rounded-xl border border-white/5 flex flex-col gap-2">
+                              <p className="text-white/80 text-sm">{titlePart}</p>
+                              <div className="flex gap-4 mt-1">
+                                {doiPart && (
+                                  <a href={`https://doi.org/${doiPart}`} target="_blank" rel="noopener noreferrer" className="text-xs text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors">
+                                    <ExternalLink size={12} /> DOI: {doiPart}
+                                  </a>
+                                )}
+                                <a href={searchUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1 transition-colors">
+                                  <Search size={12} /> Google Scholar
+                                </a>
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   </motion.div>
