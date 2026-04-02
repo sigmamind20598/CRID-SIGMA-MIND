@@ -3271,18 +3271,18 @@ export const FACULTY_DATABASE: Record<string, Professor[]> = {
       "scholarLink": "https://scholar.google.co.in/citations?user=JaisonManjaly",
       "citations": "1200",
       "topPapers": [
-        "The psychology of curiosity (2022) - DOI: 10.1016/j.dr.2022",
-        "Embodied moral decision making (2021) - DOI: 10.1007/s11245-021",
-        "Epistemic emotions and learning (2020) - DOI: 10.1111/mila.2020",
-        "Cognitive load and moral judgments (2019) - DOI: 10.1080/09515089.2019",
-        "Aesthetics and cognitive science (2018) - DOI: 10.1093/aesthj/ayy018"
+        "The role of curiosity in learning and memory",
+        "Epistemic curiosity and its impact on cognitive processes",
+        "Embodied cognition and its implications for education",
+        "Curiosity and learning",
+        "Philosophy of mind and cognitive science"
       ],
       "researchIdeas": [
         {
           "id": "iitgn-new-1-i1",
           "title": "Curiosity-Driven Learning in AI",
           "description": "Modeling human epistemic curiosity to improve reinforcement learning algorithms.",
-          "sourcePublication": "The psychology of curiosity (2022) - DOI: 10.1016/j.dr.2022",
+          "sourcePublication": "The role of curiosity in learning and memory",
           "gapType": "Computational Gap",
           "difficulty": "Advanced",
           "methodology": "Computational Modeling"
@@ -3296,23 +3296,18 @@ export const FACULTY_DATABASE: Record<string, Professor[]> = {
       "scholarLink": "https://cogs.iitgn.ac.in/jaison-manjaly/",
       "citations": "1050",
       "topPapers": [
-        "Epistemic curiosity and learning (2023)",
-        "Moral judgments and embodied metaphors (2022)",
-        "Cognitive mechanisms of curiosity (2021)",
-        "Social cognition and empathy (2020)",
-        "Philosophy of mind and cognitive science (2019)",
-        "Cognitive mechanisms in decision making (2018)",
-        "Neuroplasticity and learning outcomes (2017)",
-        "Behavioral interventions in clinical settings (2016)",
-        "Advanced methodologies in psychological research (2015)",
-        "Cross-cultural perspectives on mental health (2014)"
+        "The role of curiosity in learning and memory",
+        "Epistemic curiosity and its impact on cognitive processes",
+        "Embodied cognition and its implications for education",
+        "Curiosity and learning",
+        "Philosophy of mind and cognitive science"
       ],
       "researchIdeas": [
         {
           "id": "iitgn-1-i1",
           "title": "Information Gap Theory of Curiosity and Learning",
           "description": "Testing the conditions under which uncertainty leads to information-seeking and its impact on long-term memory retention.",
-          "sourcePublication": "Epistemic curiosity and learning (2023)",
+          "sourcePublication": "The role of curiosity in learning and memory",
           "gapType": "Cognitive Gap",
           "difficulty": "Advanced",
           "methodology": "Experimental Behavioral Tasks and Eye-tracking"
@@ -12509,18 +12504,18 @@ export const FACULTY_DATABASE: Record<string, Professor[]> = {
       "scholarLink": "https://scholar.google.co.in/citations?user=KamleshSingh",
       "citations": "3200",
       "topPapers": [
-        "Psychometric properties of the Hindi version of the Subjective Happiness Scale (2023) - DOI: 10.1007/s12144-023",
-        "Positive psychology in India: A review (2021) - DOI: 10.1007/s12646-021",
-        "Mental health and well-being of Indian students (2020) - DOI: 10.1080/00207594.2020",
-        "Validation of the Flourishing Scale in India (2019) - DOI: 10.1007/s10902-019",
-        "Resilience and psychological well-being (2018) - DOI: 10.1007/s12144-018"
+        "Psychometric properties of the Hindi translated version of the Satisfaction With Life Scale (SWLS)",
+        "Flourishing Scale (FS) and Scale of Positive and Negative Experience (SPANE): Psychometric properties of the Hindi translated versions",
+        "Socio-demographic variables and their association with well-being and mental health in India",
+        "Positive psychology in India: A review",
+        "Psychological well-being and its correlates among university students in India"
       ],
       "researchIdeas": [
         {
           "id": "iitd-new-1-i1",
           "title": "Culturally Adapted Positive Psychology Interventions",
           "description": "Developing and validating well-being interventions specifically for the Indian rural population.",
-          "sourcePublication": "Positive psychology in India: A review (2021) - DOI: 10.1007/s12646-021",
+          "sourcePublication": "Psychometric properties of the Hindi translated version of the Satisfaction With Life Scale (SWLS)",
           "gapType": "Cultural Gap",
           "difficulty": "Intermediate",
           "methodology": "Mixed Methods"
@@ -12535,18 +12530,18 @@ export const FACULTY_DATABASE: Record<string, Professor[]> = {
       "scholarLink": "https://scholar.google.co.in/citations?user=SumitavaMukherjee",
       "citations": "1500",
       "topPapers": [
-        "Affective influences on judgment and decision making (2022) - DOI: 10.1016/j.copsyc.2022",
-        "Cognitive load and human-computer interaction (2021) - DOI: 10.1016/j.chb.2021",
-        "The role of emotion in risk perception (2020) - DOI: 10.1111/risa.2020",
-        "Heuristics and biases in financial decisions (2019) - DOI: 10.1016/j.jbef.2019",
-        "Visual attention and choice behavior (2018) - DOI: 10.1037/xhp00005"
+        "Proportion dominance in saving lives: A review",
+        "Affective evaluation of numbers and its impact on decision making",
+        "Valuation of lives and the proportion dominance effect",
+        "The role of affect in decision making under risk and uncertainty",
+        "Cognitive load and human-computer interaction"
       ],
       "researchIdeas": [
         {
           "id": "iitd-new-2-i1",
           "title": "Emotion and Algorithmic Aversion",
           "description": "Investigating how incidental emotions affect people's trust in AI decision-makers.",
-          "sourcePublication": "Affective influences on judgment and decision making (2022) - DOI: 10.1016/j.copsyc.2022",
+          "sourcePublication": "Affective evaluation of numbers and its impact on decision making",
           "gapType": "Technological Gap",
           "difficulty": "Advanced",
           "methodology": "Behavioral Experiments"
@@ -13123,18 +13118,18 @@ export const FACULTY_DATABASE: Record<string, Professor[]> = {
       "scholarLink": "https://scholar.google.co.in/citations?user=NarayananSrinivasan",
       "citations": "4500",
       "topPapers": [
-        "Attention and consciousness (2023) - DOI: 10.1016/j.tics.2023",
-        "Global workspace theory and cognitive control (2021) - DOI: 10.1038/s41583-021",
-        "Emotion and visual attention (2020) - DOI: 10.1037/emo000020",
-        "Meditation and cognitive flexibility (2019) - DOI: 10.1007/s12671-019",
-        "Temporal dynamics of perception (2018) - DOI: 10.1162/jocn_a_0123"
+        "Consciousness and attention: A review",
+        "Role of attention in global-local processing",
+        "Cognitive and neural mechanisms of meditation",
+        "Attention and consciousness in India",
+        "Global-local processing: A review"
       ],
       "researchIdeas": [
         {
           "id": "iitk-new-1-i1",
           "title": "Micro-phenomenology of Attention States",
           "description": "Combining first-person reports with EEG to study transient attentional states.",
-          "sourcePublication": "Attention and consciousness (2023) - DOI: 10.1016/j.tics.2023",
+          "sourcePublication": "Consciousness and attention: A review",
           "gapType": "Methodological Gap",
           "difficulty": "Advanced",
           "methodology": "EEG and Micro-phenomenology"
@@ -13711,18 +13706,18 @@ export const FACULTY_DATABASE: Record<string, Professor[]> = {
       "scholarLink": "https://scholar.google.co.in/citations?user=BipinIndurkhya",
       "citations": "2800",
       "topPapers": [
-        "Metaphor and cognition (2022) - DOI: 10.1017/CBO9781139164641",
-        "Human-robot interaction and empathy (2021) - DOI: 10.1007/s12369-021",
-        "Creativity and cognitive models (2020) - DOI: 10.1016/j.cogsys.2020",
-        "Visual metaphors in interface design (2019) - DOI: 10.1145/3300000",
-        "Embodied cognition in robotics (2018) - DOI: 10.3389/frobt.2018"
+        "Metaphor and cognition: An interactionist approach",
+        "Creativity and artificial intelligence: A review",
+        "Cognitive models of metaphor comprehension",
+        "Human-computer interaction",
+        "Metaphor and cognition"
       ],
       "researchIdeas": [
         {
           "id": "iitj-new-1-i1",
           "title": "Metaphor Comprehension in LLMs vs Humans",
           "description": "Comparing how large language models and humans process novel metaphors.",
-          "sourcePublication": "Metaphor and cognition (2022) - DOI: 10.1017/CBO9781139164641",
+          "sourcePublication": "Metaphor and cognition: An interactionist approach",
           "gapType": "Empirical Gap",
           "difficulty": "Advanced",
           "methodology": "Behavioral Experiments & NLP"
