@@ -640,9 +640,12 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex overflow-hidden relative">
         {mode === 'directory' && (
-          <aside className="w-80 bg-black/20 border-r border-white/5 flex flex-col shrink-0 backdrop-blur-sm">
+          <aside className={cn(
+            "w-full md:w-80 bg-[#050505] md:bg-black/20 border-r border-white/5 flex flex-col shrink-0 backdrop-blur-sm absolute md:relative z-20 h-full transition-transform duration-300",
+            selectedInstitute ? "-translate-x-full md:translate-x-0" : "translate-x-0"
+          )}>
             <div className="p-6 border-b border-white/5 text-center">
               <p className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em] mb-4">Institute Faculty Mapping</p>
               <div className="relative">
@@ -711,17 +714,22 @@ export default function App() {
           {mode !== 'home' && mode !== 'review' && (
             <header className="h-16 bg-black/40 backdrop-blur-md border-b border-white/5 flex items-center px-8 shrink-0">
               <div className="flex items-center gap-4">
-                {(view !== 'faculty' || mode === 'custom') && mode !== 'news' && mode !== 'guidance' && (
+                {((view !== 'faculty' || mode === 'custom') || (view === 'faculty' && selectedInstitute !== null)) && mode !== 'news' && mode !== 'guidance' && (
                   <button 
                     onClick={() => {
                       if (mode === 'custom') {
                         setMode('directory');
                         setView('faculty');
+                      } else if (view === 'faculty' && selectedInstitute !== null) {
+                        setSelectedInstitute(null);
                       } else {
                         setView(view === 'profile' ? 'faculty' : (view === 'proposal' ? 'topics' : 'faculty'));
                       }
                     }}
-                    className="p-2 hover:bg-white/5 rounded-full transition-colors text-white/40 hover:text-white"
+                    className={cn(
+                      "p-2 hover:bg-white/5 rounded-full transition-colors text-white/40 hover:text-white",
+                      view === 'faculty' && selectedInstitute !== null ? "md:hidden" : ""
+                    )}
                   >
                     <ArrowLeft size={20} />
                   </button>
