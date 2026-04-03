@@ -435,7 +435,7 @@ export default function App() {
         pendingTopic.title,
         true
       );
-      alert("Request processed! Please send the payment screenshot of Rs 50 to sigmamind20598@gmail.com or WhatsApp. We will send you the proposal upon verification within 12 hours.");
+      alert("Request processed! Please send the payment screenshot of Rs 150 to sigmamind20598@gmail.com or WhatsApp. We will send you the proposal upon verification within 12 hours.");
     } catch (error) {
       console.error("Error sending paid request:", error);
       alert("Failed to process request. Please contact us directly.");
@@ -1635,10 +1635,10 @@ export default function App() {
             <p className="text-white/60 mb-6 leading-relaxed">
               Our app uses complex AI models that cost us more than a PhD student's monthly coffee budget! ☕️
               <br /><br />
-              To keep the servers running, additional proposals cost just <strong className="text-emerald-400">Rs 50 each</strong>.
+              To keep the servers running, additional proposals cost just <strong className="text-emerald-400">Rs 150 each</strong>.
             </p>
             <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-6 text-left">
-              <p className="text-sm text-white/80 mb-2">1. Pay Rs 50 via UPI to:</p>
+              <p className="text-sm text-white/80 mb-2">1. Pay Rs 150 via UPI to:</p>
               <p className="text-lg font-mono text-emerald-400 font-bold mb-4 text-center bg-black/50 py-2 rounded-lg">8130330373@ibl</p>
               <p className="text-sm text-white/80 mb-2">2. Send a screenshot of your payment to <strong className="text-white">sigmamind20598@gmail.com</strong> or WhatsApp us.</p>
               <p className="text-sm text-white/80">3. We will send you the full proposal within <strong className="text-emerald-400">12 hours</strong> after verification!</p>
