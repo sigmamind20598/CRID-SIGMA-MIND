@@ -49,7 +49,7 @@ export interface NewsItem {
   source: string;
   url: string;
   timestamp: string;
-  category: 'YouTube' | 'Telegram' | 'X' | 'Journal' | 'Admission' | 'Research' | 'PHD ADMISSION' | 'JOB OPENING' | 'EXAM' | 'RESEARCH';
+  category: 'YouTube' | 'Telegram' | 'X' | 'Journal' | 'Admission' | 'Research' | 'PHD ADMISSION' | 'JOB OPENING' | 'EXAM' | 'FELLOWSHIP' | 'GUIDELINES' | 'RESEARCH';
   summary: string;
   imageKeyword: string;
 }
