@@ -3,6 +3,40 @@ import { GoogleGenAI, HarmCategory, HarmBlockThreshold, Type } from "@google/gen
 import { IDEA_GENERATION_INSTRUCTIONS } from "./ideaInstructions.ts";
 import { PROPOSAL_SYSTEM_INSTRUCTIONS } from "./proposalInstructions.ts";
 
+async function callGroq(systemPrompt: string, userPrompt: string): Promise<string> {
+  // @ts-ignore
+  const apiKey = import.meta.env.VITE_GROQ_API_KEY;
+  
+  if (!apiKey) {
+    throw new Error("Missing Groq API Key");
+  }
+
+  const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: "llama-3.3-70b-versatile",
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userPrompt }
+      ],
+      max_tokens: 2000,
+      temperature: 0.7
+    })
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(`Groq API error: ${error.error?.message}`);
+  }
+
+  const data = await response.json();
+  return data.choices[0]?.message?.content || "";
+}
+
 const CACHE_TTL = 3600000; // 1 hour in milliseconds
 
 function getCachedData<T>(key: string): T | null {
@@ -27,7 +61,7 @@ function setCachedData<T>(key: string, data: T) {
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
 
-async function callGeminiAI(task: string, params: any = {}) {
+async function callGeminiAI(task: string, params: any = {}, retryCount = 0): Promise<{ text: string }> {
   let prompt = "";
   let systemInstruction = "";
   let tools: any[] = [];
@@ -67,24 +101,38 @@ async function callGeminiAI(task: string, params: any = {}) {
       throw new Error("Invalid task");
   }
 
-  const response = await ai.models.generateContent({
-    model: "gemini-3-flash-preview",
-    contents: prompt,
-    config: {
-      systemInstruction,
-      responseMimeType,
-      responseSchema,
-      tools: tools.length > 0 ? tools : undefined,
-      safetySettings: [
-        { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
-        { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
-        { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE },
-        { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE },
-      ],
-    },
-  });
+  try {
+    const response = await ai.models.generateContent({
+      model: "gemini-3-flash-preview",
+      contents: prompt,
+      config: {
+        systemInstruction,
+        responseMimeType,
+        responseSchema,
+        tools: tools.length > 0 ? tools : undefined,
+        safetySettings: [
+          { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
+          { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
+          { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE },
+          { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE },
+        ],
+      },
+    });
 
-  return { text: response.text };
+    if (!response.text && retryCount < 2) {
+      console.warn(`Empty response for ${task}, retrying... (${retryCount + 1})`);
+      return callGeminiAI(task, params, retryCount + 1);
+    }
+
+    return { text: response.text || "" };
+  } catch (error: any) {
+    if (retryCount < 2) {
+      console.warn(`Error in ${task}, retrying... (${retryCount + 1})`, error);
+      return callGeminiAI(task, params, retryCount + 1);
+    }
+    console.error(`Gemini AI ${task} Final Error:`, error);
+    throw error;
+  }
 }
 
 export async function getLatestNews(): Promise<NewsItem[]> {
@@ -236,13 +284,60 @@ export async function generateResearchTopics(professor: Professor, instituteName
   }
 }
 
-export async function generateFullProposal(topic: ResearchTopic, professorName: string, specialization: string, instituteName: string): Promise<string> {
+export async function generateFullProposal(
+  topic: ResearchTopic | string,
+  professorName: string,
+  specialization: string,
+  instituteName: string
+): Promise<string> {
+  const topicTitle = typeof topic === 'string' ? topic : topic.title;
+
+  // Check cache first
+  const cacheKey = `proposal_${topicTitle.substring(0,30)}_${professorName.substring(0,20)}`
+    .toLowerCase()
+    .replace(/\s+/g, '_')
+    .replace(/[^a-z0-9_]/g, '');
+    
+  const cached = localStorage.getItem(cacheKey);
+  if (cached) {
+    console.log("Returning cached proposal.");
+    return cached;
+  }
+
+  const userPrompt = `Generate a full PhD research proposal for:
+Topic: "${topicTitle}"
+Target Professor: ${professorName}
+Specialization: ${specialization}
+Target Institution: ${instituteName}
+
+Follow your system instructions exactly.
+Proposal should be 1500-2000 words.
+Use formal academic tone.`;
+
   try {
-    const { text } = await callGeminiAI('proposal', { topic, professorName, specialization, instituteName });
-    return text ? text.replace(/\*\*/g, '') : "Failed to generate proposal.";
-  } catch (error: any) {
-    console.error("Error generating proposal:", error);
-    throw error;
+    // Try Groq first (free)
+    const result = await callGroq(PROPOSAL_SYSTEM_INSTRUCTIONS, userPrompt);
+    localStorage.setItem(cacheKey, result); // save to cache
+    return result;
+  } catch (groqError) {
+    console.warn("Groq failed, falling back to Gemini:", groqError);
+    
+    try {
+      const response = await ai.models.generateContent({
+        model: "gemini-2.0-flash-lite",
+        contents: userPrompt,
+        config: {
+          systemInstruction: PROPOSAL_SYSTEM_INSTRUCTIONS,
+          maxOutputTokens: 1500,
+        }
+      });
+      const result = response.text || "Failed to generate proposal.";
+      localStorage.setItem(cacheKey, result); // save to cache
+      return result;
+    } catch (geminiError) {
+      console.error("Both APIs failed:", geminiError);
+      return "An error occurred. Please try again.";
+    }
   }
 }
 
