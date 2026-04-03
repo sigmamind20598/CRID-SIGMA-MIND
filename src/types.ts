@@ -31,6 +31,11 @@ export interface ResearchTopic {
   gapType: string;
   difficulty: string;
   methodology: string;
+  keyVariables?: {
+    independent: string;
+    dependent: string;
+    population: string;
+  };
 }
 
 export interface ResearchProposal {

@@ -36,6 +36,12 @@ import { sendProposalEmails } from './services/emailService';
 import { CURATED_FACULTY } from './facultyData';
 import { FACULTY_DATABASE, NEWS_DATABASE, getFacultyForInstitute } from './staticDatabase';
 
+const isSuperUser = (email: string, phone: string) => {
+  const e = email?.toLowerCase().trim() || '';
+  const p = phone?.trim() || '';
+  return e === 'sigmamind20598@gmail.com' || p === '7092884311' || p === '8130330373';
+};
+
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -210,6 +216,11 @@ export default function App() {
     setNews(NEWS_DATABASE); // Show static news instantly
     setLastError(null);
     
+    if (isInitial) {
+      // Do not fetch AI news on initial load to save costs
+      return;
+    }
+
     try {
       const data = await getLatestNews();
       if (data && data.length > 0) {
@@ -313,19 +324,29 @@ export default function App() {
       }
     } catch (error) {
       console.error("Failed to generate topics:", error);
-      setLastError("An unexpected error occurred while generating topics.");
+      setLastError(error instanceof Error ? error.message : "An unexpected error occurred while generating topics.");
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleTopicSelect = (topic: ResearchTopic) => {
+    // Check cache first
+    const cacheKey = `proposal_${topic.id}_${selectedProfessor?.id}`;
+    const cached = localStorage.getItem(cacheKey);
+    if (cached) {
+      setProposal(cached);
+      setSelectedTopic(topic);
+      setView('proposal');
+      return;
+    }
+
     setPendingTopic(topic);
     if (!userEmail || !userPhone || !userName) {
       setShowLeadModal(true);
       return;
     }
-    if (proposalsGenerated >= 1) {
+    if (proposalsGenerated >= 1 && !isSuperUser(userEmail, userPhone)) {
       setShowPricingModal(true);
       return;
     }
@@ -338,7 +359,7 @@ export default function App() {
     
     setShowLeadModal(false);
     
-    if (proposalsGenerated >= 1) {
+    if (proposalsGenerated >= 1 && !isSuperUser(userEmail, userPhone)) {
       setShowPricingModal(true);
       return;
     }
@@ -354,6 +375,10 @@ export default function App() {
         selectedProfessor?.specialization || '',
         selectedInstitute?.name || ''
       );
+      
+      // Save to cache
+      const cacheKey = `proposal_${pendingTopic.id}_${selectedProfessor?.id}`;
+      localStorage.setItem(cacheKey, fullProposal);
       
       setProposalsGenerated(prev => {
         const newVal = prev + 1;
@@ -410,7 +435,7 @@ export default function App() {
         pendingTopic.title,
         true
       );
-      alert("Request processed! Please send the payment screenshot of Rs 150 to sigmamind20598@gmail.com or WhatsApp. We will send you the proposal upon verification.");
+      alert("Request processed! Please send the payment screenshot of Rs 50 to sigmamind20598@gmail.com or WhatsApp. We will send you the proposal upon verification within 12 hours.");
     } catch (error) {
       console.error("Error sending paid request:", error);
       alert("Failed to process request. Please contact us directly.");
@@ -1542,10 +1567,10 @@ export default function App() {
               <FileText size={32} className="text-emerald-500" />
             </div>
             <h3 className="text-2xl font-bold mb-2 text-center">
-              {proposalsGenerated >= 1 ? "Enter Your Details" : "Get Your Free Proposal"}
+              {proposalsGenerated >= 1 && !isSuperUser(userEmail, userPhone) ? "Enter Your Details" : "Get Your Free Proposal"}
             </h3>
             <p className="text-white/60 mb-6 text-center text-sm">
-              {proposalsGenerated >= 1 
+              {proposalsGenerated >= 1 && !isSuperUser(userEmail, userPhone)
                 ? "Please provide your contact details so we can send you the proposal after payment."
                 : "Enter your details below. We'll generate your free AI proposal and send a copy to your email!"}
             </p>
@@ -1587,7 +1612,7 @@ export default function App() {
                 type="submit"
                 className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] mt-4"
               >
-                {proposalsGenerated >= 1 ? "Continue to Payment 💳" : "Generate Free Proposal 🚀"}
+                {proposalsGenerated >= 1 && !isSuperUser(userEmail, userPhone) ? "Continue to Payment 💳" : "Generate Free Proposal 🚀"}
               </button>
             </form>
           </div>
@@ -1604,25 +1629,25 @@ export default function App() {
               ✕
             </button>
             <div className="w-20 h-20 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Brain size={40} className="text-emerald-500 animate-pulse" />
+              <Sparkles size={40} className="text-emerald-500 animate-bounce" />
             </div>
-            <h3 className="text-2xl font-bold mb-4">Whoa there, Eager Researcher! 🚀</h3>
+            <h3 className="text-2xl font-bold mb-4">Wait a second, Einstein! 🧠</h3>
             <p className="text-white/60 mb-6 leading-relaxed">
-              You've already used your one free full proposal! 
+              Our app uses complex AI models that cost us more than a PhD student's monthly coffee budget! ☕️
               <br /><br />
-              Additional AI-generated proposals cost <strong className="text-emerald-400">Rs 150 each</strong>.
+              To keep the servers running, additional proposals cost just <strong className="text-emerald-400">Rs 50 each</strong>.
             </p>
             <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-6 text-left">
-              <p className="text-sm text-white/80 mb-2">1. Pay Rs 150 via UPI to:</p>
+              <p className="text-sm text-white/80 mb-2">1. Pay Rs 50 via UPI to:</p>
               <p className="text-lg font-mono text-emerald-400 font-bold mb-4 text-center bg-black/50 py-2 rounded-lg">8130330373@ibl</p>
               <p className="text-sm text-white/80 mb-2">2. Send a screenshot of your payment to <strong className="text-white">sigmamind20598@gmail.com</strong> or WhatsApp us.</p>
-              <p className="text-sm text-white/80">3. Click the button below to notify our team.</p>
+              <p className="text-sm text-white/80">3. We will send you the full proposal within <strong className="text-emerald-400">12 hours</strong> after verification!</p>
             </div>
             <button 
               onClick={handleManualPaidRequest}
               className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98]"
             >
-              I've Paid! Request Proposal 📩
+              I've Paid! Notify Team 📩
             </button>
             <button 
               onClick={() => {
