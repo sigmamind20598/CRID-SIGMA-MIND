@@ -15385,5 +15385,95 @@
       "topPapers": [],
       "researchIdeas": []
     }
+  ],
+  "International Institute of Information Technology, Hyderabad": [
+    {
+      "id": "iiith-1",
+      "name": "Prof. Vishnu Sreekumar",
+      "specialization": "Cognitive Neuroscience, Episodic Memory",
+      "focus": "Computational modeling, episodic memory, spatial navigation, experience sampling.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Vishnu+Sreekumar",
+      "citations": "891",
+      "topPapers": [
+        "Behavioral signatures of temporal context retrieval during continuous recognition (2025)",
+        "Examining dependencies among different time scales in episodic memory – an experience sampling study (2024)",
+        "Evaluating adaptive and attentional accounts of sensorimotor effects in word recognition memory (2023)",
+        "Seeing Eye to AI: Comparing Human Gaze and Model Attention in Video Memorability (2023)",
+        "Low frequency traveling waves in the human cortex coordinate neural activity across spatial scales (2020)",
+        "Changing temporal context in human temporal lobe promotes memory of distinct episodes (2019)",
+        "A system for collecting and analyzing experience-sampling data (2019)",
+        "The experience of vivid autobiographical reminiscence is supported by subjective content representations in the precuneus (2018)",
+        "Signal Complexity of Human Intracranial EEG Tracks Successful Associative-Memory Formation across Individuals (2017)",
+        "Human hippocampus represents space and time during retrieval of real-world memories (2015)"
+      ],
+      "researchIdeas": [
+        {
+          "id": "iiith-1-i1",
+          "title": "Temporal Context in Continuous Recognition",
+          "description": "Investigating how temporal context retrieval influences memory performance in continuous recognition tasks.",
+          "sourcePublication": "Behavioral signatures of temporal context retrieval during continuous recognition (2025)",
+          "gapType": "Empirical Gap",
+          "difficulty": "Advanced",
+          "methodology": "Behavioral Experiments & Computational Modeling"
+        },
+        {
+          "id": "iiith-1-i2",
+          "title": "Multi-scale Temporal Dependencies in Episodic Memory",
+          "description": "Using experience sampling to understand how memories are organized across different time scales in real-world settings.",
+          "sourcePublication": "Examining dependencies among different time scales in episodic memory – an experience sampling study (2024)",
+          "gapType": "Methodological Gap",
+          "difficulty": "Advanced",
+          "methodology": "Experience Sampling & Network Analysis"
+        },
+        {
+          "id": "iiith-1-i3",
+          "title": "Human Gaze vs. AI Attention in Video Memorability",
+          "description": "Comparing human visual attention patterns with AI model attention mechanisms to predict video memorability.",
+          "sourcePublication": "Seeing Eye to AI: Comparing Human Gaze and Model Attention in Video Memorability (2023)",
+          "gapType": "Interdisciplinary Gap",
+          "difficulty": "Moderate",
+          "methodology": "Eye-tracking & Machine Learning"
+        }
+      ]
+    },
+    {
+      "id": "iiith-2",
+      "name": "Prof. Bapi Raju Surampudi",
+      "specialization": "Cognitive Science, Neural Networks",
+      "focus": "Cognitive modeling, sequence learning, neuroimaging, and machine learning applications in cognitive science.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Bapi+Raju+Surampudi",
+      "citations": "3000+",
+      "topPapers": [
+        "Sequence processing in the brain (2020)",
+        "Neural network models of cognitive functions (2018)"
+      ],
+      "researchIdeas": []
+    },
+    {
+      "id": "iiith-3",
+      "name": "Prof. Priyanka Srivastava",
+      "specialization": "Cognitive Psychology, Visual Attention",
+      "focus": "Visual attention, working memory, and cognitive ergonomics.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Priyanka+Srivastava+IIIT+Hyderabad",
+      "citations": "500+",
+      "topPapers": [
+        "Visual working memory capacity (2021)",
+        "Attention allocation in complex environments (2019)"
+      ],
+      "researchIdeas": []
+    },
+    {
+      "id": "iiith-4",
+      "name": "Prof. Kavita Vemuri",
+      "specialization": "Cognitive Science, Empathy",
+      "focus": "Empathy, moral decision making, and neuroaesthetics.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Kavita+Vemuri",
+      "citations": "400+",
+      "topPapers": [
+        "Neurocognitive basis of empathy (2022)",
+        "Moral judgments and emotional processing (2020)"
+      ],
+      "researchIdeas": []
+    }
   ]
 }

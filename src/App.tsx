@@ -885,6 +885,12 @@ export default function App() {
                   >
                     <h3 className="text-2xl font-bold mb-6">Research Topics for {selectedProfessor.name}</h3>
                     
+                    <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4 mb-6">
+                      <p className="text-yellow-400 text-sm font-medium">
+                        ⚠️ <strong className="font-bold">CAUTION:</strong> These are AI-generated proposal ideas. They might be brilliant, they might be way off, or they might be complete hallucinations (AI dreaming about electric sheep 🐑). Use them as a good starting point, not a final submission!
+                      </p>
+                    </div>
+
                     {isLoading ? (
                       <div className="flex flex-col items-center justify-center py-20">
                         <div className="w-12 h-12 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin mb-4" />

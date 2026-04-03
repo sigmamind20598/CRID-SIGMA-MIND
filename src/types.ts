@@ -70,6 +70,7 @@ export const INITIAL_INSTITUTES: Institute[] = [
   { id: 'iitg', name: 'Indian Institute of Technology Guwahati', location: 'Guwahati, Assam', departments: ['Psychology'] },
   { id: 'iitr', name: 'Indian Institute of Technology Roorkee', location: 'Roorkee, Uttarakhand', departments: ['Psychology'] },
   { id: 'iith', name: 'Indian Institute of Technology Hyderabad', location: 'Sangareddy, Telangana', departments: ['Psychology'] },
+  { id: 'iiith', name: 'International Institute of Information Technology, Hyderabad', location: 'Gachibowli, Hyderabad, Telangana', departments: ['Cognitive Science', 'Computer Science'] },
   { id: 'iitj', name: 'Indian Institute of Technology Jodhpur', location: 'Jodhpur, Rajasthan', departments: ['Psychology', 'Cognitive Science'] },
   { id: 'iitgn', name: 'Indian Institute of Technology Gandhinagar', location: 'Gandhinagar, Gujarat', departments: ['Psychology', 'Cognitive Science'] },
   { id: 'iiti', name: 'Indian Institute of Technology Indore', location: 'Indore, MP', departments: ['Psychology'] },
