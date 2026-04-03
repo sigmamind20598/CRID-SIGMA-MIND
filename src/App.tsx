@@ -116,7 +116,7 @@ function FunnyLoader({ isInitial = false, customMessage = null }: { isInitial?: 
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="text-sm font-medium text-white/60 mb-2 text-center h-5"
+          className="text-sm font-medium text-white/60 mb-2 text-center min-h-[40px] max-w-md"
         >
           {customMessage || messages[messageIndex]}
         </motion.p>
@@ -366,7 +366,7 @@ export default function App() {
 
     setSelectedTopic(pendingTopic);
     setIsLoading(true);
-    setLoadingMessage("Drafting your free proposal... This will take 3-4 minutes. It will be sent to your email/WhatsApp.");
+    setLoadingMessage("Drafting your free proposal... This will take 3-4 minutes. While you wait, go to the services menu for guidance and custom made proposals by current PhD scholars.");
     
     try {
       const fullProposal = await generateFullProposal(
