@@ -25,7 +25,8 @@ import {
   Instagram,
   ExternalLink,
   Menu,
-  X
+  X,
+  FileDown
 } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -35,6 +36,7 @@ import { getFacultyData, generateResearchTopics, generateFullProposal, getProfes
 import { sendProposalEmails } from './services/emailService';
 import { CURATED_FACULTY } from './facultyData';
 import { FACULTY_DATABASE, NEWS_DATABASE, getFacultyForInstitute } from './staticDatabase';
+import { PdfModal } from './components/PdfModal';
 
 const isSuperUser = (email: string, phone: string) => {
   const e = email?.toLowerCase().trim() || '';
@@ -94,56 +96,63 @@ function FunnyLoader({ isInitial = false, customMessage = null }: { isInitial?: 
   }, [isInitial]);
 
   return (
-    <div className="h-full flex flex-col items-center justify-center text-white/40 p-8">
-      <div className="relative mb-8">
-        <div className="w-24 h-24 rounded-full border-4 border-white/5 flex items-center justify-center relative overflow-hidden">
+    <div className="h-full flex flex-col items-center justify-center text-white/40 p-8 relative overflow-hidden">
+      <div className="absolute inset-0 z-0 opacity-10 pointer-events-none flex items-center justify-center">
+        <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=2000&auto=format&fit=crop" alt="3D Brain" className="w-full h-full object-cover mix-blend-screen" />
+      </div>
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#050505]/80 via-[#050505]/90 to-[#050505] pointer-events-none"></div>
+      
+      <div className="relative z-10 flex flex-col items-center">
+        <div className="relative mb-8">
+          <div className="w-24 h-24 rounded-full border-4 border-white/5 flex items-center justify-center relative overflow-hidden">
+            <motion.div 
+              className="absolute bottom-0 left-0 right-0 bg-emerald-500/20"
+              initial={{ height: 0 }}
+              animate={{ height: `${progress}%` }}
+              transition={{ duration: 0.1 }}
+            />
+            <Loader2 className="animate-spin text-emerald-600 relative z-10" size={40} />
+          </div>
+          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-[8px] font-black px-2 py-0.5 rounded-full shadow-lg">
+            {Math.floor(progress)}%
+          </div>
+        </div>
+        
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={customMessage ? 'custom' : messageIndex}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="text-sm font-medium text-white/60 mb-2 text-center min-h-[40px] max-w-md"
+          >
+            {customMessage || messages[messageIndex]}
+          </motion.p>
+        </AnimatePresence>
+        
+        <p className="font-black animate-pulse tracking-[0.3em] uppercase text-[10px] text-emerald-500/40">
+          {isInitial ? "Initializing Research Domain" : "Loading Intelligence"}
+        </p>
+
+        <div className="mt-8 w-64 h-1 bg-white/5 rounded-full overflow-hidden">
           <motion.div 
-            className="absolute bottom-0 left-0 right-0 bg-emerald-500/20"
-            initial={{ height: 0 }}
-            animate={{ height: `${progress}%` }}
+            className="h-full bg-emerald-500"
+            initial={{ width: 0 }}
+            animate={{ width: `${progress}%` }}
             transition={{ duration: 0.1 }}
           />
-          <Loader2 className="animate-spin text-emerald-600 relative z-10" size={40} />
         </div>
-        <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-[8px] font-black px-2 py-0.5 rounded-full shadow-lg">
-          {Math.floor(progress)}%
-        </div>
-      </div>
-      
-      <AnimatePresence mode="wait">
-        <motion.p
-          key={customMessage ? 'custom' : messageIndex}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          className="text-sm font-medium text-white/60 mb-2 text-center min-h-[40px] max-w-md"
-        >
-          {customMessage || messages[messageIndex]}
-        </motion.p>
-      </AnimatePresence>
-      
-      <p className="font-black animate-pulse tracking-[0.3em] uppercase text-[10px] text-emerald-500/40">
-        {isInitial ? "Initializing Research Domain" : "Loading Intelligence"}
-      </p>
-
-      <div className="mt-8 w-64 h-1 bg-white/5 rounded-full overflow-hidden">
-        <motion.div 
-          className="h-full bg-emerald-500"
-          initial={{ width: 0 }}
-          animate={{ width: `${progress}%` }}
-          transition={{ duration: 0.1 }}
-        />
-      </div>
-      
-      <p className="mt-4 text-[8px] uppercase tracking-widest text-white/20">
-        {isInitial ? `Estimated wait: ${Math.max(0, Math.ceil((100 - progress) / 6.6))}s` : `Est. wait: ${Math.max(0, Math.ceil((100 - progress) / 5))}s`}
-      </p>
-
-      <div className="mt-12 p-4 bg-white/5 rounded-xl border border-white/10 max-w-xs text-center">
-        <p className="text-[8px] uppercase tracking-widest text-emerald-500/60 font-bold mb-1">Pro Tip</p>
-        <p className="text-[9px] text-white/40 leading-relaxed italic">
-          {isInitial ? "\"Good things take time (unlike my thesis defense).\"" : "\"A PhD is just a very long loading screen for your career.\""}
+        
+        <p className="mt-4 text-[8px] uppercase tracking-widest text-white/20">
+          {isInitial ? `Estimated wait: ${Math.max(0, Math.ceil((100 - progress) / 6.6))}s` : `Est. wait: ${Math.max(0, Math.ceil((100 - progress) / 5))}s`}
         </p>
+
+        <div className="mt-12 p-4 bg-white/5 rounded-xl border border-white/10 max-w-xs text-center backdrop-blur-sm">
+          <p className="text-[8px] uppercase tracking-widest text-emerald-500/60 font-bold mb-1">Pro Tip</p>
+          <p className="text-[9px] text-white/40 leading-relaxed italic">
+            {isInitial ? "\"Good things take time (unlike my thesis defense).\"" : "\"A PhD is just a very long loading screen for your career.\""}
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -184,6 +193,7 @@ export default function App() {
   const [loadingMessage, setLoadingMessage] = useState<string | null>(null);
   const [userName, setUserName] = useState('');
   const [showPricingModal, setShowPricingModal] = useState(false);
+  const [showPdfModal, setShowPdfModal] = useState(false);
 
   // Custom Proposal Form State
   const [customDomain, setCustomDomain] = useState('');
@@ -435,7 +445,7 @@ export default function App() {
         pendingTopic.title,
         true
       );
-      alert("Request processed! Please send the payment screenshot of Rs 150 to sigmamind20598@gmail.com or WhatsApp. We will send you the proposal upon verification within 12 hours.");
+      alert("Request processed! Please send the payment screenshot of ₹150 (for 1) or ₹299 (for 3) to sigmamind20598@gmail.com or WhatsApp. We will send you the proposal(s) upon verification within 12 hours.");
     } catch (error) {
       console.error("Error sending paid request:", error);
       alert("Failed to process request. Please contact us directly.");
@@ -788,6 +798,10 @@ export default function App() {
                     exit={{ opacity: 0 }}
                     className="min-h-full bg-[#050505] text-white relative flex flex-col items-center justify-center px-8 py-20 overflow-hidden -m-8"
                   >
+                    <div className="absolute inset-0 z-0 opacity-20 pointer-events-none flex items-center justify-center">
+                      <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=2000&auto=format&fit=crop" alt="3D Brain" className="w-full h-full object-cover mix-blend-screen" />
+                    </div>
+                    <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#050505]/50 via-transparent to-[#050505] pointer-events-none"></div>
                     <div className="relative z-10 flex flex-col items-center text-center max-w-4xl">
                       <motion.h1 
                         initial={{ opacity: 0, y: 30 }}
@@ -968,10 +982,25 @@ export default function App() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="max-w-4xl mx-auto bg-white/5 border border-white/10 rounded-2xl p-8"
+                    className="max-w-4xl mx-auto space-y-6"
                   >
-                    <div className="prose prose-invert max-w-none">
-                      <div className="whitespace-pre-wrap font-mono text-sm leading-relaxed">{proposal}</div>
+                    <div className="flex justify-end">
+                      <button
+                        onClick={() => setShowPdfModal(true)}
+                        className="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-3 rounded-xl font-bold transition-all flex items-center gap-2 shadow-lg shadow-emerald-500/20"
+                      >
+                        <FileDown size={20} />
+                        Download as PDF — ₹49
+                      </button>
+                    </div>
+                    <div className="bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 relative overflow-hidden">
+                      <div className="absolute inset-0 opacity-20 pointer-events-none flex items-center justify-center">
+                        <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=1000&auto=format&fit=crop" alt="3D Brain" className="w-full h-full object-cover mix-blend-screen" />
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/80 via-[#0a0a0a]/90 to-[#0a0a0a] pointer-events-none z-0"></div>
+                      <div className="prose prose-invert max-w-none relative z-10">
+                        <div className="whitespace-pre-wrap font-mono text-sm leading-relaxed">{proposal}</div>
+                      </div>
                     </div>
                   </motion.div>
                 )}
@@ -1641,13 +1670,13 @@ export default function App() {
             <p className="text-white/60 mb-6 leading-relaxed">
               Our app uses complex AI models that cost us more than a PhD student's monthly coffee budget! ☕️
               <br /><br />
-              To keep the servers running, additional proposals cost just <strong className="text-emerald-400">Rs 150 each</strong>.
+              To keep the servers running, additional proposals cost just <strong className="text-emerald-400">₹150 each</strong>, or get <strong className="text-emerald-400">3 proposals for ₹299</strong>!
             </p>
             <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-6 text-left">
-              <p className="text-sm text-white/80 mb-2">1. Pay Rs 150 via UPI to:</p>
+              <p className="text-sm text-white/80 mb-2">1. Pay ₹150 (for 1) or ₹299 (for 3) via UPI to:</p>
               <p className="text-lg font-mono text-emerald-400 font-bold mb-4 text-center bg-black/50 py-2 rounded-lg">8130330373@ibl</p>
               <p className="text-sm text-white/80 mb-2">2. Send a screenshot of your payment to <strong className="text-white">sigmamind20598@gmail.com</strong> or WhatsApp us.</p>
-              <p className="text-sm text-white/80">3. We will send you the full proposal within <strong className="text-emerald-400">12 hours</strong> after verification!</p>
+              <p className="text-sm text-white/80">3. We will send you the full proposal(s) within <strong className="text-emerald-400">12 hours</strong> after verification!</p>
             </div>
             <button 
               onClick={handleManualPaidRequest}
@@ -1667,6 +1696,8 @@ export default function App() {
           </div>
         </div>
       )}
+
+      {showPdfModal && <PdfModal onClose={() => setShowPdfModal(false)} />}
     </div>
   );
 }
