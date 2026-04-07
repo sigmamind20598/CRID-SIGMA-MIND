@@ -261,9 +261,10 @@ async function startServer() {
       Specialization: ${professor.specialization}
       
       Recent Publications:
-      ${pubData.publications.join("\n")}
+      ${pubData?.publications?.length > 0 ? pubData.publications.join("\n") : "No recent publications found. Base the ideas on the professor's Focus and Specialization."}
       
-      Follow the RESEARCH IDEA GENERATION algorithm to generate 10 high-quality PhD research ideas.
+      CRITICAL REQUIREMENT: You MUST generate EXACTLY 10 high-quality PhD research ideas, regardless of how much publication data is available. If publications are sparse, extrapolate based on their focus area.
+      Follow the RESEARCH IDEA GENERATION algorithm.
       Ensure the output is strictly valid JSON.`;
 
       const response = await getAIClient().models.generateContent({

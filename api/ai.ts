@@ -121,7 +121,7 @@ export default async function handler(req: any, res: any) {
         tools = [{ googleSearch: {} }];
         break;
       case 'topics':
-        prompt = `Professor Profile: ${params.professor.name}, ${params.instituteName}. Recent Publications: ${params.pubData.publications.join("\n")}. Generate 10 PhD research ideas.`;
+        prompt = `Professor Profile: ${params.professor.name}, ${params.instituteName}. Focus: ${params.professor.focus}. Specialization: ${params.professor.specialization}. Recent Publications: ${params.pubData?.publications?.length > 0 ? params.pubData.publications.join("\n") : "None found. Base ideas on focus and specialization."}. CRITICAL REQUIREMENT: You MUST generate EXACTLY 10 PhD research ideas.`;
         systemInstruction = IDEA_GENERATION_INSTRUCTIONS;
         responseMimeType = "application/json";
         break;
