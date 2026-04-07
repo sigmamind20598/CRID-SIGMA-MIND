@@ -2,6 +2,7 @@ import express from "express";
 import { createServer as createViteServer } from "vite";
 import path from "path";
 import nodemailer from "nodemailer";
+import Razorpay from "razorpay";
 import { GoogleGenAI, HarmCategory, HarmBlockThreshold } from "@google/genai";
 import { PROPOSAL_SYSTEM_INSTRUCTIONS } from "./src/services/proposalInstructions.ts";
 
@@ -84,6 +85,33 @@ async function startServer() {
   // --- API ROUTES ---
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok" });
+  });
+
+  app.post("/api/create-razorpay-order", async (req, res) => {
+    try {
+      const { amount, currency = "INR" } = req.body;
+      
+      if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+        return res.status(500).json({ error: "Razorpay keys not configured on server" });
+      }
+
+      const instance = new Razorpay({
+        key_id: process.env.RAZORPAY_KEY_ID,
+        key_secret: process.env.RAZORPAY_KEY_SECRET,
+      });
+
+      const options = {
+        amount: amount * 100, // amount in smallest currency unit (paise)
+        currency,
+        receipt: `receipt_order_${Date.now()}`,
+      };
+
+      const order = await instance.orders.create(options);
+      res.json(order);
+    } catch (error: any) {
+      console.error("Razorpay Order Error:", error);
+      res.status(500).json({ error: error.message || "Failed to create order" });
+    }
   });
 
   app.post("/api/submit-service", async (req, res) => {
@@ -388,9 +416,17 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-  });
+  if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  }
+  
+  return app;
 }
 
-startServer();
+const appPromise = startServer();
+export default async function (req: any, res: any) {
+  const app = await appPromise;
+  app(req, res);
+}

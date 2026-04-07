@@ -37,6 +37,7 @@ import { sendProposalEmails } from './services/emailService';
 import { CURATED_FACULTY } from './facultyData';
 import { FACULTY_DATABASE, NEWS_DATABASE, getFacultyForInstitute } from './staticDatabase';
 import { PdfModal } from './components/PdfModal';
+import { loadRazorpay } from './utils/razorpay';
 
 const isSuperUser = (email: string, phone: string) => {
   const e = email?.toLowerCase().trim() || '';
@@ -176,6 +177,7 @@ export default function App() {
   const [topics, setTopics] = useState<ResearchTopic[]>([]);
   const [selectedTopic, setSelectedTopic] = useState<ResearchTopic | null>(null);
   const [proposal, setProposal] = useState<string | null>(null);
+  const [isProposalUnlocked, setIsProposalUnlocked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isAppInitializing, setIsAppInitializing] = useState(true);
   const [view, setView] = useState<'faculty' | 'topics' | 'proposal' | 'profile'>('faculty');
@@ -193,7 +195,6 @@ export default function App() {
   const [loadingMessage, setLoadingMessage] = useState<string | null>(null);
   const [userName, setUserName] = useState('');
   const [showPricingModal, setShowPricingModal] = useState(false);
-  const [showPdfModal, setShowPdfModal] = useState(false);
 
   // Custom Proposal Form State
   const [customDomain, setCustomDomain] = useState('');
@@ -368,6 +369,7 @@ export default function App() {
     if (!userEmail || !userPhone || !userName || !pendingTopic) return;
     
     setShowLeadModal(false);
+    setIsProposalUnlocked(false);
     
     if (proposalsGenerated >= 1 && !isSuperUser(userEmail, userPhone)) {
       setShowPricingModal(true);
@@ -418,41 +420,71 @@ export default function App() {
     }
   };
 
-  const handleManualPaidRequest = async () => {
+  const handleUnlockProposal = () => {
+    if (!userEmail || !userPhone || !userName) {
+      alert("Please ensure your contact details are filled out first.");
+      return;
+    }
+    loadRazorpay(
+      99,
+      'Unlock Full Research Proposal + PDF',
+      userName,
+      userEmail,
+      userPhone,
+      (response) => {
+        setIsProposalUnlocked(true);
+        alert(`Payment successful! (ID: ${response.razorpay_payment_id}). Your proposal is now unlocked and a formatted PDF will be emailed to you!`);
+      }
+    );
+  };
+
+  const handleManualPaidRequest = async (amount: number, type: 'single' | 'bundle') => {
     if (!userEmail || !userPhone || !userName || !pendingTopic) {
       alert("Please ensure your contact details are filled out first.");
       return;
     }
-    setShowPricingModal(false);
-    setIsLoading(true);
-    setLoadingMessage("Processing your request... This will take 3-4 minutes.");
     
-    try {
-      // Generate the proposal for the admin
-      const fullProposal = await generateFullProposal(
-        pendingTopic, 
-        selectedProfessor?.name || '', 
-        selectedProfessor?.specialization || '',
-        selectedInstitute?.name || ''
-      );
+    setShowPricingModal(false);
 
-      // Send Emails for paid request (proposal generated and sent ONLY to admin)
-      await sendProposalEmails(
-        userEmail,
-        userPhone,
-        userName,
-        fullProposal,
-        pendingTopic.title,
-        true
-      );
-      alert("Request processed! Please send the payment screenshot of ₹150 (for 1) or ₹299 (for 3) to sigmamind20598@gmail.com or WhatsApp. We will send you the proposal(s) upon verification within 12 hours.");
-    } catch (error) {
-      console.error("Error sending paid request:", error);
-      alert("Failed to process request. Please contact us directly.");
-    } finally {
-      setIsLoading(false);
-      setLoadingMessage(null);
-    }
+    loadRazorpay(
+      amount,
+      type === 'single' ? '1 Additional Research Proposal' : '3 Additional Research Proposals',
+      userName,
+      userEmail,
+      userPhone,
+      async (response) => {
+        // On Success
+        setIsLoading(true);
+        setLoadingMessage("Payment successful! Processing your request... This will take 3-4 minutes.");
+        
+        try {
+          // Generate the proposal for the admin
+          const fullProposal = await generateFullProposal(
+            pendingTopic, 
+            selectedProfessor?.name || '', 
+            selectedProfessor?.specialization || '',
+            selectedInstitute?.name || ''
+          );
+
+          // Send Emails for paid request (proposal generated and sent ONLY to admin)
+          await sendProposalEmails(
+            userEmail,
+            userPhone,
+            userName,
+            `Payment ID: ${response.razorpay_payment_id}\nType: ${type}\n\n${fullProposal}`,
+            pendingTopic.title,
+            true
+          );
+          alert("Payment successful and request processed! We will send you the proposal(s) within 12 hours.");
+        } catch (error) {
+          console.error("Error sending paid request:", error);
+          alert("Payment was successful, but we had trouble sending the email. Please contact us with your Payment ID: " + response.razorpay_payment_id);
+        } finally {
+          setIsLoading(false);
+          setLoadingMessage(null);
+        }
+      }
+    );
   };
 
   const handleServiceSubmit = async (e: React.FormEvent, serviceType: string, details: any) => {
@@ -985,22 +1017,83 @@ export default function App() {
                     className="max-w-4xl mx-auto space-y-6"
                   >
                     <div className="flex justify-end">
-                      <button
-                        onClick={() => setShowPdfModal(true)}
-                        className="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-3 rounded-xl font-bold transition-all flex items-center gap-2 shadow-lg shadow-emerald-500/20"
-                      >
-                        <FileDown size={20} />
-                        Download as PDF — ₹49
-                      </button>
+                      {isProposalUnlocked && (
+                        <button
+                          onClick={() => {
+                            alert(`Your formatted PDF is being prepared and will be emailed to ${userEmail} shortly!`);
+                          }}
+                          className="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-3 rounded-xl font-bold transition-all flex items-center gap-2 shadow-lg shadow-emerald-500/20"
+                        >
+                          <FileDown size={20} />
+                          Request PDF Copy
+                        </button>
+                      )}
                     </div>
                     <div className="bg-[#0a0a0a] border border-white/10 rounded-2xl p-8 relative overflow-hidden">
                       <div className="absolute inset-0 opacity-20 pointer-events-none flex items-center justify-center">
                         <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=1000&auto=format&fit=crop" alt="3D Brain" className="w-full h-full object-cover mix-blend-screen" />
                       </div>
                       <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/80 via-[#0a0a0a]/90 to-[#0a0a0a] pointer-events-none z-0"></div>
-                      <div className="prose prose-invert max-w-none relative z-10">
-                        <div className="whitespace-pre-wrap font-mono text-sm leading-relaxed">{proposal}</div>
-                      </div>
+                      
+                      {(() => {
+                        if (isProposalUnlocked) {
+                          return (
+                            <div className="prose prose-invert max-w-none relative z-10">
+                              <div className="whitespace-pre-wrap font-mono text-sm leading-relaxed">{proposal}</div>
+                            </div>
+                          );
+                        }
+
+                        // Split logic
+                        const splitRegex = /(?=##\s*(?:\d+\.\s*)?(?:Literature Review|Methodology|Research Methodology))/i;
+                        const parts = proposal.split(splitRegex);
+                        
+                        let freeText = proposal;
+                        let blurredText = "";
+                        
+                        if (parts.length > 1) {
+                          freeText = parts[0];
+                          blurredText = parts.slice(1).join("");
+                        } else {
+                          // Fallback: split by length
+                          const splitIndex = Math.floor(proposal.length * 0.3);
+                          freeText = proposal.substring(0, splitIndex);
+                          blurredText = proposal.substring(splitIndex);
+                        }
+
+                        return (
+                          <div className="relative z-10">
+                            <div className="prose prose-invert max-w-none">
+                              <div className="whitespace-pre-wrap font-mono text-sm leading-relaxed">{freeText}</div>
+                            </div>
+                            
+                            <div className="relative mt-4">
+                              <div className="prose prose-invert max-w-none blur-md opacity-40 select-none pointer-events-none">
+                                <div className="whitespace-pre-wrap font-mono text-sm leading-relaxed">{blurredText.substring(0, 1500) + '...'}</div>
+                              </div>
+                              
+                              <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-20">
+                                <div className="bg-[#111]/90 border border-emerald-500/30 p-8 rounded-2xl shadow-2xl max-w-md backdrop-blur-md">
+                                  <h3 className="text-2xl font-bold mb-3 text-white">Whoa there, Einstein! 🧠</h3>
+                                  <p className="text-white/70 mb-6 text-sm leading-relaxed">
+                                    The juicy stuff (Methodology, Literature Review, Citations) is locked. 
+                                    For just <strong className="text-emerald-400">₹99</strong>, unlock the full academic masterpiece AND get a beautifully formatted PDF! 
+                                    <br/><br/>
+                                    (It costs us real money to run these AI models, help a dev out! ☕)
+                                  </p>
+                                  <button 
+                                    onClick={handleUnlockProposal}
+                                    className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2"
+                                  >
+                                    <Sparkles size={20} />
+                                    Unlock Proposal + PDF — ₹99
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })()}
                     </div>
                   </motion.div>
                 )}
@@ -1672,18 +1765,21 @@ export default function App() {
               <br /><br />
               To keep the servers running, additional proposals cost just <strong className="text-emerald-400">₹150 each</strong>, or get <strong className="text-emerald-400">3 proposals for ₹299</strong>!
             </p>
-            <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-6 text-left">
-              <p className="text-sm text-white/80 mb-2">1. Pay ₹150 (for 1) or ₹299 (for 3) via UPI to:</p>
-              <p className="text-lg font-mono text-emerald-400 font-bold mb-4 text-center bg-black/50 py-2 rounded-lg">8130330373@ibl</p>
-              <p className="text-sm text-white/80 mb-2">2. Send a screenshot of your payment to <strong className="text-white">sigmamind20598@gmail.com</strong> or WhatsApp us.</p>
-              <p className="text-sm text-white/80">3. We will send you the full proposal(s) within <strong className="text-emerald-400">12 hours</strong> after verification!</p>
+            <div className="flex flex-col gap-3 mb-6">
+              <button 
+                onClick={() => handleManualPaidRequest(150, 'single')}
+                className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+              >
+                Pay ₹150 for 1 Proposal
+              </button>
+              <button 
+                onClick={() => handleManualPaidRequest(299, 'bundle')}
+                className="w-full bg-emerald-500 hover:bg-emerald-400 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
+              >
+                <Sparkles size={20} />
+                Pay ₹299 for 3 Proposals (Best Value)
+              </button>
             </div>
-            <button 
-              onClick={handleManualPaidRequest}
-              className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98]"
-            >
-              I've Paid! Notify Team 📩
-            </button>
             <button 
               onClick={() => {
                 setShowPricingModal(false);
@@ -1697,7 +1793,6 @@ export default function App() {
         </div>
       )}
 
-      {showPdfModal && <PdfModal onClose={() => setShowPdfModal(false)} />}
     </div>
   );
 }

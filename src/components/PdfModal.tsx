@@ -1,7 +1,30 @@
 import React from 'react';
 import { FileDown, Sparkles } from 'lucide-react';
+import { loadRazorpay } from '../utils/razorpay';
 
-export function PdfModal({ onClose }: { onClose: () => void }) {
+export function PdfModal({ onClose, userName, userEmail, userPhone }: { onClose: () => void, userName: string, userEmail: string, userPhone: string }) {
+  const handlePayment = () => {
+    if (!userEmail || !userPhone || !userName) {
+      alert("Please ensure your contact details are filled out first.");
+      onClose();
+      return;
+    }
+
+    onClose();
+
+    loadRazorpay(
+      49,
+      'PDF Download of Research Proposal',
+      userName,
+      userEmail,
+      userPhone,
+      (response) => {
+        // On Success
+        alert(`Payment successful! (ID: ${response.razorpay_payment_id}). Please send this ID to sigmamind20598@gmail.com and we will email your formatted PDF immediately!`);
+      }
+    );
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
       <div className="bg-[#111] border border-white/10 rounded-3xl p-8 max-w-md w-full relative text-center">
@@ -21,20 +44,11 @@ export function PdfModal({ onClose }: { onClose: () => void }) {
           <br /><br />
           Plus, your ₹49 helps us keep the servers running (and buys our dev team a much-needed cup of chai ☕).
         </p>
-        <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-6 text-left">
-          <p className="text-sm text-white/80 mb-2">1. Pay ₹49 via UPI to:</p>
-          <p className="text-lg font-mono text-emerald-400 font-bold mb-4 text-center bg-black/50 py-2 rounded-lg">8130330373@ibl</p>
-          <p className="text-sm text-white/80 mb-2">2. Send a screenshot of your payment to <strong className="text-white">sigmamind20598@gmail.com</strong> or WhatsApp us.</p>
-          <p className="text-sm text-white/80">3. We will email you the formatted PDF within a few hours!</p>
-        </div>
         <button 
-          onClick={() => {
-            alert("Awesome! Please send the screenshot to sigmamind20598@gmail.com. We'll send your PDF soon!");
-            onClose();
-          }}
+          onClick={handlePayment}
           className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98]"
         >
-          I've Paid! Send me the PDF 📩
+          Pay ₹49 Securely
         </button>
       </div>
     </div>
