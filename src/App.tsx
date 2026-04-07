@@ -1067,7 +1067,7 @@ export default function App() {
                                 <div className="whitespace-pre-wrap font-mono text-sm leading-relaxed">{proposal}</div>
                               </div>
                               
-                              <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-20 bg-black/20">
+                              <div className="absolute inset-0 flex flex-col items-center justify-start pt-10 p-6 text-center z-20 bg-black/20">
                                 <div className="bg-[#111]/95 border border-emerald-500/30 p-8 rounded-2xl shadow-2xl max-w-md backdrop-blur-md">
                                   <h3 className="text-2xl font-bold mb-3 text-white">Whoa there, Einstein! 🧠</h3>
                                   <p className="text-white/70 mb-6 text-sm leading-relaxed">
