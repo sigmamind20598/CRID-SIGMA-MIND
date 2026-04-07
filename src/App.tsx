@@ -38,6 +38,7 @@ import { CURATED_FACULTY } from './facultyData';
 import { FACULTY_DATABASE, NEWS_DATABASE, getFacultyForInstitute } from './staticDatabase';
 import { PdfModal } from './components/PdfModal';
 import { loadRazorpay } from './utils/razorpay';
+import BrainBackground from './components/BrainBackground';
 
 const isSuperUser = (email: string, phone: string) => {
   const e = email?.toLowerCase().trim() || '';
@@ -538,6 +539,7 @@ export default function App() {
 
   return (
     <div className="flex flex-col h-screen bg-[#050505] text-white font-sans selection:bg-emerald-500/30 overflow-hidden">
+      {mode === 'home' && <BrainBackground />}
       <nav className={cn(
         "h-24 border-b flex items-center px-4 md:px-8 shrink-0 z-50 transition-colors duration-500 relative",
         "bg-black/40 border-white/5 backdrop-blur-md text-white justify-between"
@@ -841,9 +843,6 @@ export default function App() {
                     exit={{ opacity: 0 }}
                     className="min-h-full bg-[#050505] text-white relative flex flex-col items-center justify-center px-8 py-20 overflow-hidden -m-8"
                   >
-                    <div className="absolute inset-0 z-0 opacity-20 pointer-events-none flex items-center justify-center">
-                      <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=2000&auto=format&fit=crop" alt="3D Brain" className="w-full h-full object-cover mix-blend-screen" />
-                    </div>
                     <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#050505]/50 via-transparent to-[#050505] pointer-events-none"></div>
                     <div className="relative z-10 flex flex-col items-center text-center max-w-4xl">
                       <motion.h1 
