@@ -103,6 +103,10 @@ async function startServer() {
       
       // Handle potential default export issues in different environments
       const RazorpayClass = (Razorpay as any).default || Razorpay;
+      if (typeof RazorpayClass !== 'function') {
+        console.error("Razorpay constructor not found. Type:", typeof RazorpayClass, "Value:", RazorpayClass);
+        throw new Error("Razorpay library initialization failed. Please check server logs.");
+      }
       const instance = new RazorpayClass({
         key_id: keyId,
         key_secret: keySecret,

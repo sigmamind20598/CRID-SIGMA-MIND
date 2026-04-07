@@ -9,13 +9,23 @@ export const loadRazorpay = async (amount: number, description: string, name: st
     });
 
     if (!res.ok) {
-      const errorData = await res.json().catch(() => ({}));
-      throw new Error(errorData.error || 'Failed to create order');
+      console.error('Razorpay API error status:', res.status);
+      const text = await res.text();
+      console.error('Razorpay API error body:', text);
+      let errorData = { error: '' };
+      try {
+        errorData = JSON.parse(text);
+      } catch (e) {}
+      throw new Error(errorData.error || `Server returned ${res.status}: ${text.substring(0, 100)}`);
     }
 
     const order = await res.json();
 
     const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID || 'YOUR_RAZORPAY_KEY_ID';
+    if (razorpayKey === 'YOUR_RAZORPAY_KEY_ID') {
+      alert("Razorpay Client Key (VITE_RAZORPAY_KEY_ID) is not configured in the environment. Please add it to your Vercel/AI Studio environment variables.");
+      return;
+    }
     console.log("Initiating Razorpay with key:", razorpayKey.substring(0, 8) + "...");
 
     const options = {

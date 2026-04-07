@@ -192,6 +192,7 @@ export default function App() {
   });
   const [showLeadModal, setShowLeadModal] = useState(false);
   const [pendingTopic, setPendingTopic] = useState<ResearchTopic | null>(null);
+  const [pendingProfessor, setPendingProfessor] = useState<Professor | null>(null);
   const [loadingMessage, setLoadingMessage] = useState<string | null>(null);
   const [userName, setUserName] = useState('');
   const [showPricingModal, setShowPricingModal] = useState(false);
@@ -312,6 +313,11 @@ export default function App() {
   };
 
   const handleProfessorSelect = async (prof: Professor) => {
+    if (!userEmail || !userPhone || !userName) {
+      setPendingProfessor(prof);
+      setShowLeadModal(true);
+      return;
+    }
     setSelectedProfessor(prof);
     
     // Use static research ideas if available
@@ -366,9 +372,19 @@ export default function App() {
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!userEmail || !userPhone || !userName || !pendingTopic) return;
+    if (!userEmail || !userPhone || !userName) return;
     
     setShowLeadModal(false);
+
+    if (pendingProfessor) {
+      const prof = pendingProfessor;
+      setPendingProfessor(null);
+      handleProfessorSelect(prof);
+      return;
+    }
+
+    if (!pendingTopic) return;
+    
     setIsProposalUnlocked(isSuperUser(userEmail, userPhone));
     
     if (proposalsGenerated >= 1 && !isSuperUser(userEmail, userPhone)) {
@@ -1046,13 +1062,13 @@ export default function App() {
 
                         return (
                           <div className="relative z-10">
-                            <div className="relative">
+                            <div className="relative max-h-[600px] overflow-hidden rounded-xl">
                               <div className="prose prose-invert max-w-none blur-md opacity-40 select-none pointer-events-none">
                                 <div className="whitespace-pre-wrap font-mono text-sm leading-relaxed">{proposal}</div>
                               </div>
                               
-                              <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-20">
-                                <div className="bg-[#111]/90 border border-emerald-500/30 p-8 rounded-2xl shadow-2xl max-w-md backdrop-blur-md">
+                              <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-20 bg-black/20">
+                                <div className="bg-[#111]/95 border border-emerald-500/30 p-8 rounded-2xl shadow-2xl max-w-md backdrop-blur-md">
                                   <h3 className="text-2xl font-bold mb-3 text-white">Whoa there, Einstein! 🧠</h3>
                                   <p className="text-white/70 mb-6 text-sm leading-relaxed">
                                     The full academic masterpiece (Methodology, Literature Review, Citations) is ready! 
