@@ -369,7 +369,7 @@ export default function App() {
     if (!userEmail || !userPhone || !userName || !pendingTopic) return;
     
     setShowLeadModal(false);
-    setIsProposalUnlocked(false);
+    setIsProposalUnlocked(isSuperUser(userEmail, userPhone));
     
     if (proposalsGenerated >= 1 && !isSuperUser(userEmail, userPhone)) {
       setShowPricingModal(true);
