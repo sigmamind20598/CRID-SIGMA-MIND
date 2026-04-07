@@ -46,6 +46,8 @@ const isSuperUser = (email: string, phone: string) => {
   return e === 'sigmamind20598@gmail.com' || p === '7092884311' || p === '8130330373';
 };
 
+const MAX_FREE_PROPOSALS = 0; // Set to 0 to disable free proposals
+
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -359,7 +361,7 @@ export default function App() {
       setShowLeadModal(true);
       return;
     }
-    if (proposalsGenerated >= 1 && !isSuperUser(userEmail, userPhone)) {
+    if (proposalsGenerated >= MAX_FREE_PROPOSALS && !isSuperUser(userEmail, userPhone)) {
       setShowPricingModal(true);
       return;
     }
@@ -383,7 +385,7 @@ export default function App() {
     
     setIsProposalUnlocked(isSuperUser(userEmail, userPhone));
     
-    if (proposalsGenerated >= 1 && !isSuperUser(userEmail, userPhone)) {
+    if (proposalsGenerated >= MAX_FREE_PROPOSALS && !isSuperUser(userEmail, userPhone)) {
       setShowPricingModal(true);
       return;
     }
@@ -794,7 +796,7 @@ export default function App() {
         )}
 
         <main className={cn(
-          "flex-1 flex flex-col overflow-hidden relative transition-colors duration-700",
+          "flex-1 flex flex-col overflow-hidden relative transition-colors duration-700 px-4 md:px-8",
           mode === 'home' ? "bg-transparent" : "bg-[#050505]"
         )}>
           {mode !== 'home' && mode !== 'review' && (
@@ -1706,10 +1708,10 @@ export default function App() {
               <FileText size={32} className="text-emerald-500" />
             </div>
             <h3 className="text-2xl font-bold mb-2 text-center">
-              {proposalsGenerated >= 1 && !isSuperUser(userEmail, userPhone) ? "Enter Your Details" : "Get Your Free Proposal"}
+              {proposalsGenerated >= MAX_FREE_PROPOSALS && !isSuperUser(userEmail, userPhone) ? "Enter Your Details" : "Get Your Free Proposal"}
             </h3>
             <p className="text-white/60 mb-6 text-center text-sm">
-              {proposalsGenerated >= 1 && !isSuperUser(userEmail, userPhone)
+              {proposalsGenerated >= MAX_FREE_PROPOSALS && !isSuperUser(userEmail, userPhone)
                 ? "Please provide your contact details so we can send you the proposal after payment."
                 : "Enter your details below. We'll generate your free AI proposal and send a copy to your email!"}
             </p>
@@ -1751,7 +1753,7 @@ export default function App() {
                 type="submit"
                 className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] mt-4"
               >
-                {proposalsGenerated >= 1 && !isSuperUser(userEmail, userPhone) ? "Continue to Payment 💳" : "Generate Free Proposal 🚀"}
+                {proposalsGenerated >= MAX_FREE_PROPOSALS && !isSuperUser(userEmail, userPhone) ? "Continue to Payment 💳" : "Generate Free Proposal 🚀"}
               </button>
             </form>
           </div>
