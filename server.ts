@@ -91,8 +91,8 @@ async function startServer() {
     try {
       const { amount, currency = "INR" } = req.body;
       
-      const keyId = process.env.RAZORPAY_KEY_ID;
-      const keySecret = process.env.RAZORPAY_KEY_SECRET;
+      const keyId = process.env.RAZORPAY_KEY_ID?.trim();
+      const keySecret = process.env.RAZORPAY_KEY_SECRET?.trim();
 
       if (!keyId || !keySecret) {
         console.error("Razorpay keys missing. ID:", !!keyId, "Secret:", !!keySecret);
@@ -109,7 +109,7 @@ async function startServer() {
       });
 
       const options = {
-        amount: Math.round(amount * 100), // amount in smallest currency unit (paise)
+        amount: Math.floor(Number(amount) * 100), // amount in smallest currency unit (paise)
         currency,
         receipt: `receipt_order_${Date.now()}`,
       };
@@ -120,7 +120,9 @@ async function startServer() {
       res.json(order);
     } catch (error: any) {
       console.error("Razorpay Order Error Details:", error);
-      res.status(500).json({ error: error.message || "Failed to create order" });
+      // Extract the most descriptive error message possible
+      const errorMessage = error.error?.description || error.description || error.message || "Failed to create order";
+      res.status(500).json({ error: `Razorpay Error: ${errorMessage}` });
     }
   });
 
