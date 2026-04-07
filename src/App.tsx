@@ -313,11 +313,6 @@ export default function App() {
   };
 
   const handleProfessorSelect = async (prof: Professor) => {
-    if (!userEmail || !userPhone || !userName) {
-      setPendingProfessor(prof);
-      setShowLeadModal(true);
-      return;
-    }
     setSelectedProfessor(prof);
     
     // Use static research ideas if available
@@ -442,7 +437,7 @@ export default function App() {
       return;
     }
     loadRazorpay(
-      99,
+      100,
       'Unlock Full Research Proposal + PDF',
       userName,
       userEmail,
@@ -454,7 +449,7 @@ export default function App() {
     );
   };
 
-  const handleManualPaidRequest = async (amount: number, type: 'single' | 'bundle') => {
+  const handleManualPaidRequest = async (amount: number, type: 'single') => {
     if (!userEmail || !userPhone || !userName || !pendingTopic) {
       alert("Please ensure your contact details are filled out first.");
       return;
@@ -464,7 +459,7 @@ export default function App() {
 
     loadRazorpay(
       amount,
-      type === 'single' ? '1 Additional Research Proposal' : '3 Additional Research Proposals',
+      '1 Additional Research Proposal',
       userName,
       userEmail,
       userPhone,
@@ -1062,17 +1057,33 @@ export default function App() {
 
                         return (
                           <div className="relative z-10">
-                            <div className="relative max-h-[600px] overflow-hidden rounded-xl">
-                              <div className="prose prose-invert max-w-none blur-md opacity-40 select-none pointer-events-none">
-                                <div className="whitespace-pre-wrap font-mono text-sm leading-relaxed">{proposal}</div>
-                              </div>
+                            <div className="relative max-h-[800px] overflow-hidden rounded-xl">
+                              {(() => {
+                                const lines = proposal.split('\n');
+                                const introLines = lines.slice(0, 2);
+                                const restLines = lines.slice(2);
+                                return (
+                                  <>
+                                    <div className="prose prose-invert max-w-none mb-4">
+                                      <div className="whitespace-pre-wrap font-mono text-sm leading-relaxed">
+                                        {introLines.join('\n')}
+                                      </div>
+                                    </div>
+                                    <div className="prose prose-invert max-w-none blur-md opacity-40 select-none pointer-events-none">
+                                      <div className="whitespace-pre-wrap font-mono text-sm leading-relaxed">
+                                        {restLines.join('\n')}
+                                      </div>
+                                    </div>
+                                  </>
+                                );
+                              })()}
                               
                               <div className="absolute inset-0 flex flex-col items-center justify-start pt-10 p-6 text-center z-20 bg-black/20">
                                 <div className="bg-[#111]/95 border border-emerald-500/30 p-8 rounded-2xl shadow-2xl max-w-md backdrop-blur-md">
                                   <h3 className="text-2xl font-bold mb-3 text-white">Whoa there, Einstein! 🧠</h3>
                                   <p className="text-white/70 mb-6 text-sm leading-relaxed">
                                     The full academic masterpiece (Methodology, Literature Review, Citations) is ready! 
-                                    For just <strong className="text-emerald-400">₹99</strong>, unlock it now AND get a beautifully formatted PDF! 
+                                    For just <strong className="text-emerald-400">₹100</strong>, unlock it now AND get a beautifully formatted PDF! 
                                     <br/><br/>
                                     (It costs us real money to run these AI models, help a dev out! ☕)
                                   </p>
@@ -1081,7 +1092,7 @@ export default function App() {
                                     className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2"
                                   >
                                     <Sparkles size={20} />
-                                    Unlock Proposal + PDF — ₹99
+                                    Unlock Proposal + PDF — ₹100
                                   </button>
                                 </div>
                               </div>
@@ -1758,21 +1769,14 @@ export default function App() {
             <p className="text-white/60 mb-6 leading-relaxed">
               Our app uses complex AI models that cost us more than a PhD student's monthly coffee budget! ☕️
               <br /><br />
-              To keep the servers running, additional proposals cost just <strong className="text-emerald-400">₹150 each</strong>, or get <strong className="text-emerald-400">3 proposals for ₹299</strong>!
+              To keep the servers running, additional proposals cost just <strong className="text-emerald-400">₹100 each</strong>.
             </p>
             <div className="flex flex-col gap-3 mb-6">
               <button 
-                onClick={() => handleManualPaidRequest(150, 'single')}
+                onClick={() => handleManualPaidRequest(100, 'single')}
                 className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
               >
-                Pay ₹150 for 1 Proposal
-              </button>
-              <button 
-                onClick={() => handleManualPaidRequest(299, 'bundle')}
-                className="w-full bg-emerald-500 hover:bg-emerald-400 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
-              >
-                <Sparkles size={20} />
-                Pay ₹299 for 3 Proposals (Best Value)
+                Pay ₹100 for 1 Proposal
               </button>
             </div>
             <button 
