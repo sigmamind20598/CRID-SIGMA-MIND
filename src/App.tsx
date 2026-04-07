@@ -296,7 +296,7 @@ export default function App() {
     }
 
     try {
-      const details = await getProfessorPublications(prof.name, selectedInstitute?.name || '');
+      const details = await getProfessorPublications(prof.name, selectedInstitute?.name || '', prof.scholarLink);
       setProfDetails(details);
     } catch (error) {
       console.error("Failed to load professor profile:", error);
@@ -1044,40 +1044,19 @@ export default function App() {
                           );
                         }
 
-                        // Split logic
-                        const splitRegex = /(?=##\s*(?:\d+\.\s*)?(?:Literature Review|Methodology|Research Methodology))/i;
-                        const parts = proposal.split(splitRegex);
-                        
-                        let freeText = proposal;
-                        let blurredText = "";
-                        
-                        if (parts.length > 1) {
-                          freeText = parts[0];
-                          blurredText = parts.slice(1).join("");
-                        } else {
-                          // Fallback: split by length
-                          const splitIndex = Math.floor(proposal.length * 0.3);
-                          freeText = proposal.substring(0, splitIndex);
-                          blurredText = proposal.substring(splitIndex);
-                        }
-
                         return (
                           <div className="relative z-10">
-                            <div className="prose prose-invert max-w-none">
-                              <div className="whitespace-pre-wrap font-mono text-sm leading-relaxed">{freeText}</div>
-                            </div>
-                            
-                            <div className="relative mt-4">
+                            <div className="relative">
                               <div className="prose prose-invert max-w-none blur-md opacity-40 select-none pointer-events-none">
-                                <div className="whitespace-pre-wrap font-mono text-sm leading-relaxed">{blurredText.substring(0, 1500) + '...'}</div>
+                                <div className="whitespace-pre-wrap font-mono text-sm leading-relaxed">{proposal}</div>
                               </div>
                               
                               <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center z-20">
                                 <div className="bg-[#111]/90 border border-emerald-500/30 p-8 rounded-2xl shadow-2xl max-w-md backdrop-blur-md">
                                   <h3 className="text-2xl font-bold mb-3 text-white">Whoa there, Einstein! 🧠</h3>
                                   <p className="text-white/70 mb-6 text-sm leading-relaxed">
-                                    The juicy stuff (Methodology, Literature Review, Citations) is locked. 
-                                    For just <strong className="text-emerald-400">₹99</strong>, unlock the full academic masterpiece AND get a beautifully formatted PDF! 
+                                    The full academic masterpiece (Methodology, Literature Review, Citations) is ready! 
+                                    For just <strong className="text-emerald-400">₹99</strong>, unlock it now AND get a beautifully formatted PDF! 
                                     <br/><br/>
                                     (It costs us real money to run these AI models, help a dev out! ☕)
                                   </p>
@@ -1683,7 +1662,7 @@ export default function App() {
       </div>
 
       {showLeadModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xl p-4">
           <div className="bg-[#111] border border-white/10 rounded-3xl p-8 max-w-md w-full relative">
             <button 
               onClick={() => setShowLeadModal(false)}
@@ -1748,7 +1727,7 @@ export default function App() {
       )}
 
       {showPricingModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xl p-4">
           <div className="bg-[#111] border border-white/10 rounded-3xl p-8 max-w-md w-full relative text-center">
             <button 
               onClick={() => setShowPricingModal(false)}

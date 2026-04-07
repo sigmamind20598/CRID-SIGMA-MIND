@@ -80,12 +80,12 @@ async function callGeminiAI(task: string, params: any = {}, retryCount = 0): Pro
       tools = [{ googleSearch: {} }];
       break;
     case 'publications':
-      prompt = `Search for the professional profile of Prof. ${params.professorName} at ${params.institute} using Google Search.
-      Return the data as a JSON object with keys: bio, publications, citationTrend, publicationTrend.`;
+      prompt = `Search for the professional profile of Prof. ${params.professorName} at ${params.institute} using Google Search. ${params.scholarLink && params.scholarLink !== "#" ? `You MUST use this URL as your primary source of information: ${params.scholarLink}` : ''}
+      Return the data as a JSON object with keys: bio, publications (array of strings), citationTrend (array of {year, count}), publicationTrend (array of {year, count}). If trends are not available, return empty arrays.`;
       tools = [{ googleSearch: {} }];
       break;
     case 'topics':
-      prompt = `Professor Profile: ${params.professor.name}, ${params.instituteName}. Recent Publications: ${params.pubData.publications.join("\n")}. Generate 10 PhD research ideas.`;
+      prompt = `Professor Profile: ${params.professor.name}, ${params.instituteName}. Focus: ${params.professor.focus}. Specialization: ${params.professor.specialization}. Recent Publications: ${params.pubData?.publications?.length > 0 ? params.pubData.publications.join("\n") : "None found. Base ideas on focus and specialization."}. CRITICAL REQUIREMENT: You MUST generate EXACTLY 10 PhD research ideas.`;
       systemInstruction = IDEA_GENERATION_INSTRUCTIONS;
       responseMimeType = "application/json";
       break;
@@ -209,13 +209,13 @@ function cleanJson(text: string): string {
   return text.replace(/```json\n?|```/g, "").trim();
 }
 
-export async function getProfessorPublications(professorName: string, institute: string): Promise<{ publications: string[], bio: string, citationTrend: { year: number; count: number }[], publicationTrend: { year: number; count: number }[] }> {
-  const cacheKey = `crid_pub_${professorName}`;
+export async function getProfessorPublications(professorName: string, institute: string, scholarLink?: string): Promise<{ publications: string[], bio: string, citationTrend: { year: number; count: number }[], publicationTrend: { year: number; count: number }[] }> {
+  const cacheKey = `crid_pub_v2_${professorName}`;
   const cached = getCachedData<any>(cacheKey);
   if (cached) return cached;
 
   try {
-    const { text } = await callGeminiAI('publications', { professorName, institute });
+    const { text } = await callGeminiAI('publications', { professorName, institute, scholarLink });
     if (!text) {
       return { 
         bio: `Prof. ${professorName} is a researcher at ${institute}.`, 
@@ -250,7 +250,7 @@ export async function getProfessorPublications(professorName: string, institute:
 }
 
 export async function generateResearchTopics(professor: Professor, instituteName: string): Promise<ResearchTopic[]> {
-  const pubData = await getProfessorPublications(professor.name, instituteName);
+  const pubData = await getProfessorPublications(professor.name, instituteName, professor.scholarLink);
   
   try {
     const { text } = await callGeminiAI('topics', { professor, instituteName, pubData });

@@ -91,25 +91,35 @@ async function startServer() {
     try {
       const { amount, currency = "INR" } = req.body;
       
-      if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
-        return res.status(500).json({ error: "Razorpay keys not configured on server" });
+      const keyId = process.env.RAZORPAY_KEY_ID;
+      const keySecret = process.env.RAZORPAY_KEY_SECRET;
+
+      if (!keyId || !keySecret) {
+        console.error("Razorpay keys missing. ID:", !!keyId, "Secret:", !!keySecret);
+        return res.status(500).json({ error: "Razorpay keys not configured. Please add RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET in the AI Studio Settings (Secrets panel)." });
       }
 
-      const instance = new Razorpay({
-        key_id: process.env.RAZORPAY_KEY_ID,
-        key_secret: process.env.RAZORPAY_KEY_SECRET,
+      console.log("Creating Razorpay order for amount:", amount, "using key:", keyId.substring(0, 8) + "...");
+      
+      // Handle potential default export issues in different environments
+      const RazorpayClass = (Razorpay as any).default || Razorpay;
+      const instance = new RazorpayClass({
+        key_id: keyId,
+        key_secret: keySecret,
       });
 
       const options = {
-        amount: amount * 100, // amount in smallest currency unit (paise)
+        amount: Math.round(amount * 100), // amount in smallest currency unit (paise)
         currency,
         receipt: `receipt_order_${Date.now()}`,
       };
 
+      console.log("Order options:", JSON.stringify(options));
       const order = await instance.orders.create(options);
+      console.log("Order created successfully:", order.id);
       res.json(order);
     } catch (error: any) {
-      console.error("Razorpay Order Error:", error);
+      console.error("Razorpay Order Error Details:", error);
       res.status(500).json({ error: error.message || "Failed to create order" });
     }
   });

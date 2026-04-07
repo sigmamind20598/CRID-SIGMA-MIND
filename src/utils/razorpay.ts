@@ -9,13 +9,17 @@ export const loadRazorpay = async (amount: number, description: string, name: st
     });
 
     if (!res.ok) {
-      throw new Error('Failed to create order');
+      const errorData = await res.json().catch(() => ({}));
+      throw new Error(errorData.error || 'Failed to create order');
     }
 
     const order = await res.json();
 
+    const razorpayKey = import.meta.env.VITE_RAZORPAY_KEY_ID || 'YOUR_RAZORPAY_KEY_ID';
+    console.log("Initiating Razorpay with key:", razorpayKey.substring(0, 8) + "...");
+
     const options = {
-      key: import.meta.env.VITE_RAZORPAY_KEY_ID || 'YOUR_RAZORPAY_KEY_ID', // Enter the Key ID generated from the Dashboard
+      key: razorpayKey, // Enter the Key ID generated from the Dashboard
       amount: order.amount,
       currency: order.currency,
       name: 'CRID',
@@ -40,8 +44,8 @@ export const loadRazorpay = async (amount: number, description: string, name: st
       alert(`Payment Failed: ${response.error.description}`);
     });
     rzp1.open();
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error loading Razorpay:', error);
-    alert('Could not initiate payment. Please try again later.');
+    alert(`Could not initiate payment: ${error.message || 'Please try again later.'}`);
   }
 };
