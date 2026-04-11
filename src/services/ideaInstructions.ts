@@ -30,6 +30,9 @@ Identify the "white space" in the literature. Look for:
   - Unexplored populations (especially unique Indian socio-cultural contexts).
   - Missing links between their core concepts and new theoretical frameworks.
   - Variables they have consistently overlooked.
+  - **Conflict in Findings:** Identify areas where their results might contradict other major studies, suggesting a need for a moderating variable.
+  - **Technological Lag:** Identify where their traditional behavioral methods could be enhanced with real-time physiological data or AI-driven behavioral analysis.
+  - **Contextual Gap:** Specifically look for how their theories apply to the diverse, multi-lingual, and rapidly digitalizing Indian landscape.
 
 ─────────────────────────────────────────────────────────
 STEP 5: SYNTHESIS & TOPIC GENERATION
