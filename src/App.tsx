@@ -428,14 +428,8 @@ export default function App() {
       return;
     }
     
-    // Always show pricing modal after details are captured (if not superuser)
-    if (!isSuperUser(userEmail, userPhone)) {
-      setShowPricingModal(true);
-      return;
-    }
-    
-    // Superuser bypass
-    handleStartProposalGeneration(topic);
+    // Always show pricing modal after details are captured
+    setShowPricingModal(true);
   };
 
   const handleStartProposalGeneration = async (topic: ResearchTopic) => {
@@ -500,12 +494,7 @@ export default function App() {
     
     setIsProposalUnlocked(isSuperUser(userEmail, userPhone));
     
-    if (!isSuperUser(userEmail, userPhone)) {
-      setShowPricingModal(true);
-      return;
-    }
-
-    handleStartProposalGeneration(pendingTopic);
+    setShowPricingModal(true);
   };
 
   const handleUnlockProposal = () => {
@@ -513,8 +502,9 @@ export default function App() {
       alert("Please ensure your contact details are filled out first.");
       return;
     }
+    const amount = isSuperUser(userEmail, userPhone) ? 1 : 99;
     loadRazorpay(
-      99,
+      amount,
       'Unlock Full Research Proposal + PDF',
       userName,
       userEmail,
@@ -1172,7 +1162,7 @@ export default function App() {
                                     className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2"
                                   >
                                     <Sparkles size={20} />
-                                    Unlock Proposal + PDF — ₹100
+                                    Unlock Proposal + PDF — ₹{isSuperUser(userEmail, userPhone) ? 1 : 100}
                                   </button>
                                 </div>
                               </div>
@@ -1958,14 +1948,14 @@ export default function App() {
             <p className="text-white/60 mb-6 leading-relaxed">
               Our AI is currently sweating bullets trying to calculate your future. 🥵
               <br /><br />
-              To keep the servers from exploding, additional proposals cost just <strong className="text-emerald-400">₹99</strong> (that's cheaper than a fancy latte and way more useful for your career! ☕️).
+              To keep the servers from exploding, additional proposals cost just <strong className="text-emerald-400">₹{isSuperUser(userEmail, userPhone) ? 1 : 99}</strong> (that's cheaper than a fancy latte and way more useful for your career! ☕️).
             </p>
             <div className="flex flex-col gap-3 mb-6">
               <button 
-                onClick={() => handleManualPaidRequest(99, 'single')}
+                onClick={() => handleManualPaidRequest(isSuperUser(userEmail, userPhone) ? 1 : 99, 'single')}
                 className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
               >
-                Pay ₹99 & Save Your Career 🧠
+                Pay ₹{isSuperUser(userEmail, userPhone) ? 1 : 99} & Save Your Career 🧠
               </button>
             </div>
             <button 
