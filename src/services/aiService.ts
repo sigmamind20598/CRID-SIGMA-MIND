@@ -2,12 +2,14 @@ import { Professor, ResearchTopic, NewsItem } from "../types";
 import { IDEA_GENERATION_INSTRUCTIONS } from "./ideaInstructions.ts";
 import { PROPOSAL_SYSTEM_INSTRUCTIONS } from "./proposalInstructions.ts";
 import { GoogleGenAI } from "@google/genai";
+import Groq from "groq-sdk";
 import { db } from "../firebase";
 import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 
 const CACHE_TTL = 3600000; // 1 hour in milliseconds
 
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || '', dangerouslyAllowBrowser: true });
 
 function getCachedData<T>(key: string): T | null {
   const cached = localStorage.getItem(key);
@@ -82,12 +84,26 @@ async function callGeminiAI(task: string, params: any = {}, retryCount = 0): Pro
         break;
     }
 
-    const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
-      contents: prompt,
-    });
+    const modelName = task === 'proposal' ? 'gemini-3.1-pro' : 'gemini-3.1-flash';
 
-    return { text: response.text || "" };
+    try {
+      const response = await ai.models.generateContent({
+        model: modelName,
+        contents: prompt,
+      });
+      return { text: response.text || "" };
+    } catch (geminiError: any) {
+      console.warn(`Gemini failed for ${task}, trying Groq...`, geminiError);
+      
+      // Fallback to Groq
+      const groqModel = task === 'proposal' ? 'llama-3.3-70b-versatile' : 'llama-3.1-8b-instant';
+      const chatCompletion = await groq.chat.completions.create({
+        messages: [{ role: 'user', content: prompt }],
+        model: groqModel,
+      });
+      
+      return { text: chatCompletion.choices[0]?.message?.content || "" };
+    }
   } catch (error: any) {
     if (retryCount < 2) {
       console.warn(`Error in ${task}, retrying... (${retryCount + 1})`, error);
@@ -276,7 +292,7 @@ export async function generateResearchTopics(professor: Professor, instituteName
     `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-3.1-flash",
       contents: prompt,
     });
 

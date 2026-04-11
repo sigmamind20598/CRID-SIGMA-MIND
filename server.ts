@@ -3,6 +3,7 @@ import { createServer as createViteServer } from "vite";
 import path from "path";
 import { z } from "zod";
 import { GoogleGenAI } from "@google/genai";
+import Groq from "groq-sdk";
 import Razorpay from "razorpay";
 import crypto from "crypto";
 import nodemailer from "nodemailer";
@@ -67,12 +68,26 @@ async function startServer() {
           break;
       }
 
-      const response = await genAI.models.generateContent({
-        model: "gemini-3-flash-preview",
-        contents: prompt,
-      });
+      const modelName = task === 'proposal' ? 'gemini-3.1-pro' : 'gemini-3.1-flash';
 
-      res.json({ text: response.text });
+      try {
+        const response = await genAI.models.generateContent({
+          model: modelName,
+          contents: prompt,
+        });
+        res.json({ text: response.text });
+      } catch (geminiError: any) {
+        console.warn(`Gemini failed for ${task}, trying Groq...`, geminiError);
+        
+        const groq = new Groq({ apiKey: process.env.GROQ_API_KEY || '' });
+        const groqModel = task === 'proposal' ? 'llama-3.3-70b-versatile' : 'llama-3.1-8b-instant';
+        const chatCompletion = await groq.chat.completions.create({
+          messages: [{ role: 'user', content: prompt }],
+          model: groqModel,
+        });
+        
+        res.json({ text: chatCompletion.choices[0]?.message?.content || "" });
+      }
     } catch (error: any) {
       console.error("AI Error:", error);
       res.status(500).json({ error: error.message });
