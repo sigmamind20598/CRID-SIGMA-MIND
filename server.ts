@@ -12,6 +12,8 @@ import { PROPOSAL_SYSTEM_INSTRUCTIONS } from "./src/services/proposalInstruction
 import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
 
+import PDFDocument from "pdfkit";
+
 async function startServer() {
   const app = express();
   const PORT = 3000;
@@ -90,6 +92,67 @@ async function startServer() {
       }
     } catch (error: any) {
       console.error("AI Error:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // New route to send proposal as PDF
+  app.post("/api/send-proposal-pdf", async (req, res) => {
+    try {
+      const { userName, userEmail, userPhone, topicTitle, proposalContent } = req.body;
+      
+      if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+        throw new Error("SMTP credentials not configured");
+      }
+
+      // Create PDF
+      const doc = new PDFDocument();
+      let buffers: any[] = [];
+      doc.on('data', buffers.push.bind(buffers));
+      
+      // Add content to PDF
+      doc.fontSize(20).text('Research Proposal', { align: 'center' });
+      doc.moveDown();
+      doc.fontSize(14).text(`Topic: ${topicTitle}`);
+      doc.moveDown();
+      doc.fontSize(12).text(`Generated for: ${userName} (${userEmail})`);
+      doc.text(`Phone: ${userPhone}`);
+      doc.moveDown();
+      doc.text('------------------------------------------------------------');
+      doc.moveDown();
+      doc.fontSize(11).text(proposalContent);
+      doc.end();
+
+      doc.on('end', async () => {
+        const pdfData = Buffer.concat(buffers);
+
+        const transporter = nodemailer.createTransport({
+          host: process.env.SMTP_HOST || 'smtp.gmail.com',
+          port: Number(process.env.SMTP_PORT) || 587,
+          secure: false,
+          auth: {
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS,
+          },
+        });
+
+        await transporter.sendMail({
+          from: `"CRID Research Assistant" <${process.env.SMTP_USER}>`,
+          to: "sigmamind20598@gmail.com",
+          subject: `PDF Proposal: ${topicTitle}`,
+          text: `Attached is the generated PDF proposal for ${userName}.\n\nTopic: ${topicTitle}\nEmail: ${userEmail}\nPhone: ${userPhone}`,
+          attachments: [
+            {
+              filename: `${topicTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_proposal.pdf`,
+              content: pdfData
+            }
+          ]
+        });
+
+        res.json({ status: "success" });
+      });
+    } catch (error: any) {
+      console.error("PDF Email Error:", error);
       res.status(500).json({ error: error.message });
     }
   });

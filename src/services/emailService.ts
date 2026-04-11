@@ -34,7 +34,27 @@ export const sendProposalEmails = async (
       })
     });
 
-    // 2. Send to User (via EmailJS)
+    // 2. If it's a paid request, also try to send the PDF via our backend API
+    if (isPaidRequest) {
+      try {
+        await fetch("/api/send-proposal-pdf", {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            userName,
+            userEmail,
+            userPhone,
+            topicTitle,
+            proposalContent
+          })
+        });
+      } catch (pdfError) {
+        console.error("Failed to send PDF email:", pdfError);
+        // Fallback: the admin still has the content in the formsubmit email
+      }
+    }
+
+    // 3. Send to User (via EmailJS)
     // We only try this if they have configured EmailJS, otherwise it will fail gracefully.
     // For paid requests, we DO NOT send the proposal to the user. The admin will do it manually.
     if (!isPaidRequest) {

@@ -41,6 +41,7 @@ import { FACULTY_DATABASE, NEWS_DATABASE, getFacultyForInstitute } from './stati
 import { PdfModal } from './components/PdfModal';
 import BrainBackground from './components/BrainBackground';
 import { BrainMapAnimation } from './components/BrainMapAnimation';
+import { jsPDF } from 'jspdf';
 
 const isSuperUser = (email: string, phone: string) => {
   const e = email?.toLowerCase().trim() || '';
@@ -513,6 +514,32 @@ export default function App() {
     } else {
       handleStartProposalGeneration(pendingTopic);
     }
+  };
+
+  const handleDownloadPDF = () => {
+    if (!proposal || !selectedTopic) return;
+    
+    const doc = new jsPDF();
+    const margin = 10;
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const contentWidth = pageWidth - (margin * 2);
+    
+    doc.setFontSize(20);
+    doc.text('Research Proposal', pageWidth / 2, 20, { align: 'center' });
+    
+    doc.setFontSize(14);
+    doc.text(`Topic: ${selectedTopic.title}`, margin, 35);
+    
+    doc.setFontSize(10);
+    doc.text(`Generated for: ${userName} (${userEmail})`, margin, 45);
+    doc.text(`Phone: ${userPhone}`, margin, 50);
+    doc.text('------------------------------------------------------------', margin, 55);
+    
+    doc.setFontSize(11);
+    const splitText = doc.splitTextToSize(proposal, contentWidth);
+    doc.text(splitText, margin, 65);
+    
+    doc.save(`${selectedTopic.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_proposal.pdf`);
   };
 
   const handleWhatsAppRedirect = async (amount: number, context: string) => {
@@ -1146,16 +1173,45 @@ export default function App() {
                     exit={{ opacity: 0 }}
                     className="max-w-4xl mx-auto space-y-6"
                   >
-                    <div className="flex justify-end">
+                    <div className="flex justify-end gap-4">
                       {isProposalUnlocked && (
                         <button
-                          onClick={() => {
-                            alert(`Your formatted PDF is being prepared and will be emailed to ${userEmail} shortly!`);
-                          }}
+                          onClick={handleDownloadPDF}
                           className="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-3 rounded-xl font-bold transition-all flex items-center gap-2 shadow-lg shadow-emerald-500/20"
                         >
                           <FileDown size={20} />
-                          Request PDF Copy
+                          Download PDF
+                        </button>
+                      )}
+                      {isSuperUser(userEmail, userPhone) && (
+                        <button
+                          onClick={async () => {
+                            try {
+                              const response = await fetch("/api/send-proposal-pdf", {
+                                method: "POST",
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                  userName,
+                                  userEmail,
+                                  userPhone,
+                                  topicTitle: selectedTopic?.title || 'Research Proposal',
+                                  proposalContent: proposal
+                                })
+                              });
+                              const data = await response.json();
+                              if (data.status === 'success') {
+                                alert("PDF has been sent to your email (sigmamind20598@gmail.com)!");
+                              } else {
+                                throw new Error(data.error);
+                              }
+                            } catch (err: any) {
+                              alert("Failed to send PDF: " + err.message);
+                            }
+                          }}
+                          className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-xl font-bold transition-all flex items-center gap-2 shadow-lg shadow-blue-500/20"
+                        >
+                          <Send size={20} />
+                          Email PDF to Admin
                         </button>
                       )}
                     </div>
