@@ -15,7 +15,7 @@ export const NEWS_DATABASE: NewsItem[] = [
     url: "https://home.iitd.ac.in/admissions.php",
     timestamp: new Date().toISOString(),
     category: "PHD ADMISSION",
-    summary: "IIT Delhi invites applications for PhD programs in Cognitive Science and Psychology for the upcoming academic session. Apply by April 15th.",
+    summary: "IIT Delhi invites applications for PhD programs in Cognitive Science and Psychology for the upcoming academic session. Apply by April 15th, 2026.",
     imageKeyword: "iit-delhi"
   },
   {

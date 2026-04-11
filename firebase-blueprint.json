@@ -1,0 +1,38 @@
+{
+  "entities": {
+    "ProfessorResearch": {
+      "title": "Professor Research Data",
+      "description": "Cached research topics and keywords for a professor to save API costs.",
+      "type": "object",
+      "properties": {
+        "professorId": { "type": "string" },
+        "professorName": { "type": "string" },
+        "instituteName": { "type": "string" },
+        "keywords": { "type": "array", "items": { "type": "string" } },
+        "topics": { "type": "array", "items": { "$ref": "#/entities/ResearchTopic" } },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["professorId", "professorName", "topics", "updatedAt"]
+    },
+    "ResearchTopic": {
+      "title": "Research Topic",
+      "description": "A generated research topic idea.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "sourcePublication": { "type": "string" },
+        "gapType": { "type": "string" },
+        "difficulty": { "type": "string" },
+        "methodology": { "type": "string" }
+      }
+    }
+  },
+  "firestore": {
+    "/professors/{professorId}": {
+      "schema": "ProfessorResearch",
+      "description": "Collection of cached professor research data."
+    }
+  }
+}

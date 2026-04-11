@@ -35,8 +35,30 @@ export const loadRazorpay = async (amount: number, description: string, name: st
       name: 'CRID',
       description: description,
       order_id: order.id,
-      handler: function (response: any) {
-        onSuccess(response);
+      handler: async function (response: any) {
+        try {
+          const verifyRes = await fetch('/api/verify-payment', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+            }),
+          });
+
+          if (verifyRes.ok) {
+            onSuccess(response);
+          } else {
+            const error = await verifyRes.json();
+            alert(`Payment verification failed: ${error.error || 'Please contact support.'}`);
+          }
+        } catch (error) {
+          console.error('Verification error:', error);
+          alert('An error occurred during payment verification. Please contact support.');
+        }
       },
       prefill: {
         name: name,

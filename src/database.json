@@ -5,7 +5,7 @@
       "name": "Prof. Shubha Ranganathan",
       "specialization": "Cultural Psychology, Mental Health",
       "focus": "Healing practices, gender, and mental health in India.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Shubha%20Ranganathan",
+      "scholarLink": "https://scholar.google.com/scholar?q=Shubha+Ranganathan+IIT+Hyderabad",
       "citations": "119",
       "topPapers": [
         "“Just take your medicines and lose weight”: importance of an integrated care perspective in doctor–patient interactions in the case of polycystic ovarian syndrome (PCOS) (2026) - DOI: 10.1108/jica-10-2024-0061",
@@ -110,14 +110,15 @@
           "difficulty": "Intermediate",
           "methodology": "Focus Group Discussions"
         }
-      ]
+      ],
+      "researchGate": "https://www.researchgate.net/profile/Shubha-Ranganathan"
     },
     {
       "id": "indianinstituteoftechnologyhyderabad-new-1",
       "name": "Prof. Mahati Chittem",
       "specialization": "Health Psychology",
       "focus": "Psycho-oncology, chronic illness, and patient-provider communication.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Mahati%20Chittem",
+      "scholarLink": "https://scholar.google.com/scholar?q=Mahati+Chittem+IIT+Hyderabad",
       "citations": "398",
       "topPapers": [
         "“Are you safe?”: using the regulatory focus theory to understand Indian heterosexual and queer dating app users’ strategies to mitigate the risks of online dating (2026) - DOI: 10.1080/19419899.2026.2644428",
@@ -222,14 +223,15 @@
           "difficulty": "Intermediate",
           "methodology": "Correlational Study"
         }
-      ]
+      ],
+      "researchGate": "https://www.researchgate.net/profile/Mahati-Chittem"
     },
     {
       "id": "indianinstituteoftechnologyhyderabad-new-2",
       "name": "Prof. Amrita Lamba",
       "specialization": "Cognitive Science",
       "focus": "Decision making and social cognition.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Amrita%20Lamba",
+      "scholarLink": "https://scholar.google.com/scholar?q=Amrita+Lamba+cognitive+neuroscience+IIT+Hyderabad",
       "citations": "154",
       "topPapers": [
         "Clerical error, clinical risk, and the automation of primary care. (2025) - DOI: 10.3399/bjgp25X742785",
@@ -334,231 +336,8 @@
           "difficulty": "Advanced",
           "methodology": "Self-report and Behavioral Tasks"
         }
-      ]
-    },
-    {
-      "id": "indianinstituteoftechnologyhyderabad-new-3",
-      "name": "Prof. E. Reddy",
-      "specialization": "Cognitive Psychology",
-      "focus": "Memory and learning.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20E.%20Reddy",
-      "citations": "675",
-      "topPapers": [
-        "Factors Associated with Radiation Toxicity and Survival in Patients with Presumed Early-Stage Non-Small Cell Lung Cancer Receiving Empiric Stereotactic Ablative Radiotherapy. (2021) - DOI: 10.12788/fp.0129",
-        "Positivity Rates in Oropharyngeal and Nonoropharyngeal Head and Neck Cancer in the VA. (2018)",
-        "Sudden Sensorineural Hearing Loss, Methylcobalamin Betahistine, Ginkgo Biloba, Vinpocetine, Xanthinol, Intravenous Hetastarch, Methylprednisolone, Intratympanic Dexamethasone. (2015)",
-        "Role of early diagnosis and multimodal treatment in rhinocerebral mucormycosis: experience of 4 cases. (2012) - DOI: 10.1016/j.joms.2011.02.017",
-        "Chemotherapy in Head and Neck Cancer: Clinical Predictors of Tolerance and Outcomes (2011) - DOI: 10.1097/COC.0b013e3181e9c0a2",
-        "FDG-PET staging and importance of lymph node SUV in head and neck cancer (2010) - DOI: 10.1186/1758-3284-2-19",
-        "Outcomes of Concomitant Boost Accelerated Radiation Plus Concurrent Chemotherapy for Advanced Head and Neck Carcinomas (2009) - DOI: 10.1016/J.IJROBP.2009.07.931",
-        "Breast Conservation Therapy with Tumor Bed Brachytherapy Alone in Stage I Breast Cancer: Results of a Phase II Trial (2009) - DOI: 10.17161/KJM.V2I2.11289",
-        "The Influence of Heterogeneity Dose Correction and Beam Energy on Planned Field Margins for Thoracic Tumors (2009) - DOI: 10.1016/J.IJROBP.2009.07.1422",
-        "Adjuvant Radiation for Malignant Melanoma: The KUMC Experience (2008) - DOI: 10.17161/KJM.V2I1.11282"
       ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-3-i1",
-          "title": "Working Memory Training and Transfer Effects",
-          "description": "Investigating whether training on working memory tasks improves performance in other cognitive domains.",
-          "sourcePublication": "Factors Associated with Radiation Toxicity and Survival in Patients with Presumed Early-Stage Non-Small Cell Lung Cancer Receiving Empiric Stereotactic Ablative Radiotherapy. (2021) - DOI: 10.12788/fp.0129",
-          "gapType": "Transfer Gap",
-          "difficulty": "Advanced",
-          "methodology": "Pre-post Experimental Design"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-3-i2",
-          "title": "Role of Sleep in Memory Consolidation",
-          "description": "Examining how different stages of sleep contribute to the stabilization of new memories.",
-          "sourcePublication": "Positivity Rates in Oropharyngeal and Nonoropharyngeal Head and Neck Cancer in the VA. (2018)",
-          "gapType": "Biological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Polysomnography"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-3-i3",
-          "title": "Interference in Long-term Memory Retrieval",
-          "description": "How competing information affects the ability to retrieve specific long-term memories.",
-          "sourcePublication": "Sudden Sensorineural Hearing Loss, Methylcobalamin Betahistine, Ginkgo Biloba, Vinpocetine, Xanthinol, Intravenous Hetastarch, Methylprednisolone, Intratympanic Dexamethasone. (2015)",
-          "gapType": "Retrieval Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Behavioral Interference Tasks"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-3-i4",
-          "title": "Implicit Learning in Skill Acquisition",
-          "description": "Exploring the mechanisms of learning complex skills without conscious awareness.",
-          "sourcePublication": "Role of early diagnosis and multimodal treatment in rhinocerebral mucormycosis: experience of 4 cases. (2012) - DOI: 10.1016/j.joms.2011.02.017",
-          "gapType": "Awareness Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Serial Reaction Time Task"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-3-i5",
-          "title": "Cognitive Load and Online Learning",
-          "description": "Assessing how digital learning environments impact cognitive load and information retention.",
-          "sourcePublication": "Chemotherapy in Head and Neck Cancer: Clinical Predictors of Tolerance and Outcomes (2011) - DOI: 10.1097/COC.0b013e3181e9c0a2",
-          "gapType": "Instructional Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Experimental User Study"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-3-i6",
-          "title": "False Memory Formation in Social Contexts",
-          "description": "How social pressure and misinformation contribute to the creation of false memories.",
-          "sourcePublication": "FDG-PET staging and importance of lymph node SUV in head and neck cancer (2010) - DOI: 10.1186/1758-3284-2-19",
-          "gapType": "Social Gap",
-          "difficulty": "Advanced",
-          "methodology": "Deese-Roediger-McDermott (DRM) Paradigm"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-3-i7",
-          "title": "Aging and Prospective Memory",
-          "description": "Investigating age-related changes in the ability to remember to perform future actions.",
-          "sourcePublication": "Outcomes of Concomitant Boost Accelerated Radiation Plus Concurrent Chemotherapy for Advanced Head and Neck Carcinomas (2009) - DOI: 10.1016/J.IJROBP.2009.07.931",
-          "gapType": "Age Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Naturalistic Tasks"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-3-i8",
-          "title": "Neurofeedback for Enhancing Attention",
-          "description": "Evaluating the use of real-time brain activity feedback to improve attentional focus.",
-          "sourcePublication": "Breast Conservation Therapy with Tumor Bed Brachytherapy Alone in Stage I Breast Cancer: Results of a Phase II Trial (2009) - DOI: 10.17161/KJM.V2I2.11289",
-          "gapType": "Interventional Gap",
-          "difficulty": "Advanced",
-          "methodology": "EEG Biofeedback"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-3-i9",
-          "title": "Visual-Spatial Memory in Navigation",
-          "description": "Exploring how individuals encode and retrieve spatial information for navigation.",
-          "sourcePublication": "The Influence of Heterogeneity Dose Correction and Beam Energy on Planned Field Margins for Thoracic Tumors (2009) - DOI: 10.1016/J.IJROBP.2009.07.1422",
-          "gapType": "Spatial Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Virtual Reality Navigation"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-3-i10",
-          "title": "Metamemory Accuracy in Students",
-          "description": "Assessing the accuracy of students' self-monitoring of their own memory performance.",
-          "sourcePublication": "Adjuvant Radiation for Malignant Melanoma: The KUMC Experience (2008) - DOI: 10.17161/KJM.V2I1.11282",
-          "gapType": "Metacognitive Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Judgment of Learning (JOL) Tasks"
-        }
-      ]
-    },
-    {
-      "id": "indianinstituteoftechnologyhyderabad-new-4",
-      "name": "Prof. F. Rao",
-      "specialization": "Social Psychology",
-      "focus": "Intergroup relations.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20F.%20Rao",
-      "citations": "2119",
-      "topPapers": [
-        "A comparative analysis of clustering algorithms: O2 migration in truncated hemoglobin I from transition networks. (2015) - DOI: 10.1063/1.4904431",
-        "Quantum mechanics of excitation transport in photosynthetic complexes: a key issues review (2015) - DOI: 10.1088/0034-4885/78/8/082001",
-        "Topological dynamics in supramolecular rotors. (2014) - DOI: 10.1021/nl5014162",
-        "A hydro-kinetic scheme for the dynamics of hydrogen bonds in water-like fluids. (2014) - DOI: 10.1039/c4cp00921e",
-        "Structure and dynamics of water in crowded environments slows down peptide conformational changes. (2014) - DOI: 10.1063/1.4891465",
-        "Network analysis of proton transfer in liquid water. (2014) - DOI: 10.1063/1.4884455",
-        "Accelerated kinetic over-relaxation for dynamic energy minimization in lattice many-body problems (2014)",
-        "Consensus for the Fip35 folding mechanism? (2013) - DOI: 10.1063/1.4812837",
-        "Long-lived oscillatory incoherent electron dynamics in molecules : trans-polyacetylene oligomers (2013)",
-        "Lattice Boltzmann implementation of the three-dimensional Ben-Naim potential for water-like fluids. (2013) - DOI: 10.1063/1.4795008"
-      ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-4-i1",
-          "title": "Prejudice Reduction through Intergroup Contact",
-          "description": "Evaluating the effectiveness of structured contact in reducing bias between social groups.",
-          "sourcePublication": "A comparative analysis of clustering algorithms: O2 migration in truncated hemoglobin I from transition networks. (2015) - DOI: 10.1063/1.4904431",
-          "gapType": "Interventional Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Field Experiment"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-4-i2",
-          "title": "Social Identity and Collective Action",
-          "description": "Investigating the psychological drivers of group-based activism and social change.",
-          "sourcePublication": "Quantum mechanics of excitation transport in photosynthetic complexes: a key issues review (2015) - DOI: 10.1088/0034-4885/78/8/082001",
-          "gapType": "Motivational Gap",
-          "difficulty": "Advanced",
-          "methodology": "Survey and Structural Equation Modeling"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-4-i3",
-          "title": "Impact of Media on Stereotype Formation",
-          "description": "How media representations shape and reinforce social stereotypes in India.",
-          "sourcePublication": "Topological dynamics in supramolecular rotors. (2014) - DOI: 10.1021/nl5014162",
-          "gapType": "Media Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Content Analysis and Experiments"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-4-i4",
-          "title": "Intergroup Conflict in Diverse Workplaces",
-          "description": "Exploring the causes and consequences of social friction in multicultural organizations.",
-          "sourcePublication": "A hydro-kinetic scheme for the dynamics of hydrogen bonds in water-like fluids. (2014) - DOI: 10.1039/c4cp00921e",
-          "gapType": "Organizational Gap",
-          "difficulty": "Advanced",
-          "methodology": "Case Study and Interviews"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-4-i5",
-          "title": "Role of Empathy in Resolving Social Tensions",
-          "description": "Can empathy-inducing interventions reduce hostility between conflicting groups?",
-          "sourcePublication": "Structure and dynamics of water in crowded environments slows down peptide conformational changes. (2014) - DOI: 10.1063/1.4891465",
-          "gapType": "Affective Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Experimental Manipulation"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-4-i6",
-          "title": "National Identity and Xenophobia",
-          "description": "Examining the relationship between strong national identification and attitudes toward outsiders.",
-          "sourcePublication": "Network analysis of proton transfer in liquid water. (2014) - DOI: 10.1063/1.4884455",
-          "gapType": "Political Gap",
-          "difficulty": "Advanced",
-          "methodology": "Cross-national Survey Analysis"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-4-i7",
-          "title": "Social Categorization in Children",
-          "description": "How children learn to categorize others based on social groups and its impact on behavior.",
-          "sourcePublication": "Accelerated kinetic over-relaxation for dynamic energy minimization in lattice many-body problems (2014)",
-          "gapType": "Developmental Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Observational Study"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-4-i8",
-          "title": "Online Hate Speech and Group Polarization",
-          "description": "Investigating how digital platforms contribute to the radicalization of group identities.",
-          "sourcePublication": "Consensus for the Fip35 folding mechanism? (2013) - DOI: 10.1063/1.4812837",
-          "gapType": "Digital Gap",
-          "difficulty": "Advanced",
-          "methodology": "Big Data Analysis"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-4-i9",
-          "title": "Trust Building in Post-conflict Societies",
-          "description": "Psychological strategies for restoring trust between groups after prolonged conflict.",
-          "sourcePublication": "Long-lived oscillatory incoherent electron dynamics in molecules : trans-polyacetylene oligomers (2013)",
-          "gapType": "Societal Gap",
-          "difficulty": "Advanced",
-          "methodology": "Qualitative Interviews"
-        },
-        {
-          "id": "indianinstituteoftechnologyhyderabad-new-4-i10",
-          "title": "Implicit Bias in Healthcare Settings",
-          "description": "Assessing how unconscious biases among healthcare providers affect patient outcomes.",
-          "sourcePublication": "Lattice Boltzmann implementation of the three-dimensional Ben-Naim potential for water-like fluids. (2013) - DOI: 10.1063/1.4795008",
-          "gapType": "Practical Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Implicit Association Test (IAT)"
-        }
-      ]
+      "researchGate": "https://la.iith.ac.in/"
     }
   ],
   "Indian Institute of Technology Bombay": [
@@ -567,8 +346,11 @@
       "name": "Prof. Azizuddin Khan",
       "specialization": "Cognitive Psychology",
       "focus": "Working memory, prospective memory, and developmental dyslexia.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Azizuddin%20Khan",
+      "scholarLink": "https://scholar.google.com/citations?user=wHqu3CkAAAAJ",
       "citations": "533",
+      "orcid": "https://orcid.org/0000-0001-5113-4760",
+      "vidwanId": "https://vidwan.inflibnet.ac.in/profile/53412",
+      "researchGate": "https://www.researchgate.net/profile/Azizuddin-Khan-2",
       "topPapers": [
         "Time-Based and Event-Based Prospective Memory in Adults with Autism Spectrum Disorder: A Virtual Week Investigation (2023) - DOI: 10.1007/s10803-023-05975-y",
         "Mental Health, Loneliness, and Social Support Among Undergraduate Students: A Multinational Study in Asia (2023) - DOI: 10.1177/10105395231172311",
@@ -679,7 +461,7 @@
       "name": "Prof. Rashmi Gupta",
       "specialization": "Cognitive Neuroscience",
       "focus": "Visual attention, emotion, and cognitive control.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Rashmi%20Gupta",
+      "scholarLink": "https://scholar.google.com/citations?user=c3jv7VIAAAAJ",
       "citations": "928",
       "topPapers": [
         "REIMAGINING EDUCATION THROUGH INDIAN WISDOM: THE VISION OF NEP 2020 (2026) - DOI: 10.29121/granthaalayah.v14.i2.2026.6648",
@@ -784,7 +566,8 @@
           "difficulty": "Intermediate",
           "methodology": "Psychometric Analysis"
         }
-      ]
+      ],
+      "researchGate": "https://www.hss.iitb.ac.in/people/faculty/rashmi-gupta"
     },
     {
       "id": "indianinstituteoftechnologybombay-new-1",
@@ -896,7 +679,8 @@
           "difficulty": "Advanced",
           "methodology": "MRI Study"
         }
-      ]
+      ],
+      "researchGate": "https://www.hss.iitb.ac.in/people/faculty/meenakshi-gupta"
     },
     {
       "id": "indianinstituteoftechnologybombay-new-2",
@@ -1008,119 +792,8 @@
           "difficulty": "Intermediate",
           "methodology": "Psychometric Validation (CFA)"
         }
-      ]
-    },
-    {
-      "id": "indianinstituteoftechnologybombay-new-3",
-      "name": "Prof. T. Bhattacharya",
-      "specialization": "Cognitive Science",
-      "focus": "Language processing and cognitive modeling.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20T.%20Bhattacharya",
-      "citations": "18863",
-      "topPapers": [
-        "Quark chromoelectric dipole moment operator on the lattice (2023) - DOI: 10.1103/physrevd.108.074507",
-        "An Economic Hybrid Shunt Compensator for Power Factor Correction and Mitigation of Large Unbalance as in HV Traction Distribution System (2023) - DOI: 10.1109/TIA.2023.3274612",
-        "Lattice QCD at LANL (2022 PR): (2023) - DOI: 10.2172/1968170",
-        "A Communication-less Voltage Balancing Strategy for Modular Isolated DC-DC Converter Based Platform-less Offshore Windfarm (2023) - DOI: 10.1109/GlobConHT56829.2023.10087599",
-        "Reduced Switching Frequency Operation of Parallel Connected Two-level Inverters with Isolated DC-links for STATCOM Application (2023) - DOI: 10.1109/GlobConHT56829.2023.10087659",
-        "Electroweak box diagram contribution for pion and kaon decay from lattice QCD (2023) - DOI: 10.1103/physrevd.108.034508",
-        "Update on flavor diagonal nucleon charges (2023) - DOI: 10.22323/1.430.0118",
-        "Nucleon form factors and the pion-nucleon sigma term (2023) - DOI: 10.22323/1.430.0427",
-        "Vacuum Entanglement Harvesting in the Ising Model (2023)",
-        "Confronting axial-vector form factor from lattice QCD with MINERvA antineutrino-proton data (2023)"
       ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologybombay-new-3-i1",
-          "title": "Cognitive Modeling of Sentence Processing",
-          "description": "Developing computational models to simulate how humans parse complex syntactic structures.",
-          "sourcePublication": "Quark chromoelectric dipole moment operator on the lattice (2023) - DOI: 10.1103/physrevd.108.074507",
-          "gapType": "Computational Gap",
-          "difficulty": "Advanced",
-          "methodology": "Connectionist Modeling"
-        },
-        {
-          "id": "indianinstituteoftechnologybombay-new-3-i2",
-          "title": "Language Acquisition in Multilingual Environments",
-          "description": "Investigating the cognitive mechanisms of learning multiple languages simultaneously.",
-          "sourcePublication": "An Economic Hybrid Shunt Compensator for Power Factor Correction and Mitigation of Large Unbalance as in HV Traction Distribution System (2023) - DOI: 10.1109/TIA.2023.3274612",
-          "gapType": "Linguistic Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Behavioral Study"
-        },
-        {
-          "id": "indianinstituteoftechnologybombay-new-3-i3",
-          "title": "Neural Correlates of Semantic Processing",
-          "description": "Mapping brain regions involved in understanding word meanings and associations.",
-          "sourcePublication": "Lattice QCD at LANL (2022 PR): (2023) - DOI: 10.2172/1968170",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "fMRI and ERP"
-        },
-        {
-          "id": "indianinstituteoftechnologybombay-new-3-i4",
-          "title": "Impact of Cognitive Load on Language Production",
-          "description": "How limited cognitive resources affect the fluency and accuracy of speech.",
-          "sourcePublication": "A Communication-less Voltage Balancing Strategy for Modular Isolated DC-DC Converter Based Platform-less Offshore Windfarm (2023) - DOI: 10.1109/GlobConHT56829.2023.10087599",
-          "gapType": "Cognitive Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Dual-task Paradigm"
-        },
-        {
-          "id": "indianinstituteoftechnologybombay-new-3-i5",
-          "title": "Cross-linguistic Differences in Spatial Cognition",
-          "description": "Exploring how different languages influence the mental representation of space.",
-          "sourcePublication": "Reduced Switching Frequency Operation of Parallel Connected Two-level Inverters with Isolated DC-links for STATCOM Application (2023) - DOI: 10.1109/GlobConHT56829.2023.10087659",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Psycholinguistic Experiments"
-        },
-        {
-          "id": "indianinstituteoftechnologybombay-new-3-i6",
-          "title": "Quantitative Analysis of Eye-tracking Data in Reading",
-          "description": "Using hidden Markov models to analyze gaze patterns during text comprehension.",
-          "sourcePublication": "Electroweak box diagram contribution for pion and kaon decay from lattice QCD (2023) - DOI: 10.1103/physrevd.108.034508",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Eye-tracking and HMM"
-        },
-        {
-          "id": "indianinstituteoftechnologybombay-new-3-i7",
-          "title": "Behavioral Interventions for Language Disorders",
-          "description": "Evaluating the effectiveness of cognitive training for individuals with aphasia.",
-          "sourcePublication": "Update on flavor diagonal nucleon charges (2023) - DOI: 10.22323/1.430.0118",
-          "gapType": "Clinical Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Single-case Experimental Design"
-        },
-        {
-          "id": "indianinstituteoftechnologybombay-new-3-i8",
-          "title": "Applied Psycholinguistics in Human-Computer Interaction",
-          "description": "Optimizing natural language interfaces based on cognitive processing principles.",
-          "sourcePublication": "Nucleon form factors and the pion-nucleon sigma term (2023) - DOI: 10.22323/1.430.0427",
-          "gapType": "Technological Gap",
-          "difficulty": "Intermediate",
-          "methodology": "User Experience (UX) Testing"
-        },
-        {
-          "id": "indianinstituteoftechnologybombay-new-3-i9",
-          "title": "Advanced Methodologies in Corpus Linguistics",
-          "description": "Using machine learning to extract semantic patterns from large-scale text corpora.",
-          "sourcePublication": "Vacuum Entanglement Harvesting in the Ising Model (2023)",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Natural Language Processing (NLP)"
-        },
-        {
-          "id": "indianinstituteoftechnologybombay-new-3-i10",
-          "title": "Psychometric Evaluation of Language Proficiency Tests",
-          "description": "Assessing the reliability and validity of standardized tests for bilingual speakers.",
-          "sourcePublication": "Confronting axial-vector form factor from lattice QCD with MINERvA antineutrino-proton data (2023)",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Item Response Theory (IRT)"
-        }
-      ]
+      "researchGate": "https://www.hss.iitb.ac.in/people/faculty/pooja-purang"
     }
   ],
   "Indian Institute of Technology Madras": [
@@ -1234,7 +907,8 @@
           "difficulty": "Intermediate",
           "methodology": "Survey Research"
         }
-      ]
+      ],
+      "researchGate": "https://hss.iitm.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologymadras-new-0",
@@ -1346,7 +1020,8 @@
           "difficulty": "Intermediate",
           "methodology": "Psychometric Validation"
         }
-      ]
+      ],
+      "researchGate": "https://hss.iitm.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologymadras-new-2",
@@ -1458,14 +1133,15 @@
           "difficulty": "Intermediate",
           "methodology": "Item Response Theory (IRT)"
         }
-      ]
+      ],
+      "researchGate": "https://hss.iitm.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologymadras-new-3",
       "name": "Prof. Richa Gupta",
       "specialization": "Cognitive Science",
       "focus": "HCI, accessibility, and cognitive design.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Richa%20Gupta",
+      "scholarLink": "https://scholar.google.com/scholar?q=Richa+Gupta+IIT+Madras+cognitive+science",
       "citations": "1735",
       "topPapers": [
         "Leucoerythroblastosis in pregnancy: Can it be sickle cell disease? - A rare case report (2023) - DOI: 10.18231/j.ijogr.2023.016",
@@ -1570,7 +1246,8 @@
           "difficulty": "Advanced",
           "methodology": "Qualitative Interviews and Trust Scales"
         }
-      ]
+      ],
+      "researchGate": "https://hss.iitm.ac.in/"
     }
   ],
   "Indian Institute of Technology Kharagpur": [
@@ -1684,14 +1361,15 @@
           "difficulty": "Advanced",
           "methodology": "fNIRS and Biomechanical Modeling"
         }
-      ]
+      ],
+      "researchGate": "https://www.hss.iitkgp.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologykharagpur-new-0",
       "name": "Prof. Damodar Suar",
       "specialization": "Social Psychology",
       "focus": "Prosocial behavior, disaster management, and neuroeconomics.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Damodar%20Suar",
+      "scholarLink": "https://scholar.google.com/citations?user=MxABx0cAAAAJ",
       "citations": "3627",
       "topPapers": [
         "Attributes and behaviors of effective R&D leaders in Indian public-sector labs: insights from qualitative triangulation (2026) - DOI: 10.1108/ijotb-05-2024-0097",
@@ -1796,14 +1474,15 @@
           "difficulty": "Advanced",
           "methodology": "Longitudinal Observation and Parent-Child Interaction Analysis"
         }
-      ]
+      ],
+      "researchGate": "https://www.researchgate.net/profile/Damodar-Suar"
     },
     {
       "id": "indianinstituteoftechnologykharagpur-new-1",
       "name": "Prof. Rabindra Kumar Pradhan",
       "specialization": "Organizational Psychology",
       "focus": "Emotional intelligence, HR, and positive psychology.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Rabindra%20Kumar%20Pradhan",
+      "scholarLink": "https://scholar.google.com/scholar?q=Rabindra+Kumar+Pradhan+IIT+Kharagpur",
       "citations": "2244",
       "topPapers": [
         "Profiling and relating time perspective, psychological capital and mental health: A person-centred exploration. (2026) - DOI: 10.1177/13591053261416354",
@@ -1908,7 +1587,8 @@
           "difficulty": "Advanced",
           "methodology": "Experience Sampling Method (ESM) via Mobile App"
         }
-      ]
+      ],
+      "researchGate": "https://www.researchgate.net/profile/Rabindra-Pradhan"
     },
     {
       "id": "indianinstituteoftechnologykharagpur-new-2",
@@ -2020,7 +1700,8 @@
           "difficulty": "Advanced",
           "methodology": "Experimental Paradigm and Behavioral Modeling"
         }
-      ]
+      ],
+      "researchGate": "https://www.hss.iitkgp.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologykharagpur-new-3",
@@ -2132,7 +1813,8 @@
           "difficulty": "Intermediate",
           "methodology": "User Testing and Behavioral Analytics"
         }
-      ]
+      ],
+      "researchGate": "https://www.hss.iitkgp.ac.in/"
     }
   ],
   "Indian Institute of Technology Guwahati": [
@@ -2141,7 +1823,7 @@
       "name": "Prof. Naveen Kashyap",
       "specialization": "Cognitive Psychology, Sleep",
       "focus": "Sleep, memory consolidation, and human cognition.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Naveen%20Kashyap",
+      "scholarLink": "https://scholar.google.com/scholar?q=Naveen+Kashyap+IIT+Guwahati+psychology",
       "citations": "161",
       "topPapers": [
         "Role of Sleep in Consolidation of Valence Cue-Induced Prospective Memories: An Event-Related Potential Study (2025) - DOI: 10.1007/s41782-025-00314-w",
@@ -2246,126 +1928,15 @@
           "difficulty": "Advanced",
           "methodology": "Dream Diary and Physiological Arousal Monitoring"
         }
-      ]
-    },
-    {
-      "id": "indianinstituteoftechnologyguwahati-new-1",
-      "name": "Prof. Nachiketa Tripathi",
-      "specialization": "Social Psychology",
-      "focus": "Leadership, organizational behavior, and social values.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Nachiketa%20Tripathi",
-      "citations": "1199",
-      "topPapers": [
-        "Calling Orientation as Sustainability in Gandhi’s Wisdom (2022) - DOI: 10.1007/978-3-030-87491-9_8",
-        "Forced transition to technology: role of self-efficacy and big five personality variables in the adoption of technology (2022) - DOI: 10.1108/ijem-02-2022-0065",
-        "Factors Associated With Highest Symptoms of Anxiety During COVID-19: Cross-Cultural Study of 23 Countries (2022) - DOI: 10.3389/fpsyg.2022.805586",
-        "Cross-Cultural Perspectives on the Role of Empathy during COVID-19’s First Wave (2021) - DOI: 10.3390/su13137431",
-        "Predictors of Anxiety in the COVID-19 Pandemic from a Global Perspective: Data from 23 Countries (2021) - DOI: 10.3390/SU13074017",
-        "Thomas B. Lawrence and Nelson Phillips, Constructing Organizational Life: How Social—Symbolic Work Shapes Selves, Organizations and Institutions (2021) - DOI: 10.1177/23220937211016175",
-        "Urmi Nanda Biswas, Karin Allard, Anders Pousette and Annika Harenstam, Understanding Attractive Work in a Globalized World (2020) - DOI: 10.1177/2322093720914169",
-        "Linking empowering leadership and job attitudes: the role of psychological empowerment (2020) - DOI: 10.1108/jabs-03-2020-0098",
-        "Jet without fuel: nosedive of Jet Airways (2020) - DOI: 10.1108/jamr-02-2020-0021",
-        "Global Perspective on Marital Satisfaction (2020) - DOI: 10.3390/su12218817"
       ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-1-i1",
-          "title": "Ethical Leadership and Employee Well-being in Indian MNCs",
-          "description": "How leaders' ethical standards influence subordinates' psychological safety and job satisfaction.",
-          "sourcePublication": "Calling Orientation as Sustainability in Gandhi’s Wisdom (2022) - DOI: 10.1007/978-3-030-87491-9_8",
-          "gapType": "Leadership Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Survey and Path Analysis"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-1-i2",
-          "title": "Impact of Social Values on Organizational Commitment",
-          "description": "Exploring the alignment between personal values and corporate social responsibility (CSR) initiatives.",
-          "sourcePublication": "Forced transition to technology: role of self-efficacy and big five personality variables in the adoption of technology (2022) - DOI: 10.1108/ijem-02-2022-0065",
-          "gapType": "Value Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Person-Organization Fit Analysis"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-1-i3",
-          "title": "Cognitive Mechanisms of Fairness Judgments in Performance Appraisal",
-          "description": "How individuals process information to determine if a performance evaluation is just.",
-          "sourcePublication": "Factors Associated With Highest Symptoms of Anxiety During COVID-19: Cross-Cultural Study of 23 Countries (2022) - DOI: 10.3389/fpsyg.2022.805586",
-          "gapType": "Cognitive Gap",
-          "difficulty": "Advanced",
-          "methodology": "Experimental Behavioral Tasks"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-1-i4",
-          "title": "Cross-cultural Perspectives on Leadership Effectiveness",
-          "description": "Comparing leadership styles and their impact on employee engagement in Indian vs. Western contexts.",
-          "sourcePublication": "Cross-Cultural Perspectives on the Role of Empathy during COVID-19’s First Wave (2021) - DOI: 10.3390/su13137431",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Cross-cultural Survey"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-1-i5",
-          "title": "Quantitative Assessment of Organizational Justice",
-          "description": "Developing a new mathematical model to predict employee retention based on fairness perceptions.",
-          "sourcePublication": "Predictors of Anxiety in the COVID-19 Pandemic from a Global Perspective: Data from 23 Countries (2021) - DOI: 10.3390/SU13074017",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Statistical Modeling"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-1-i6",
-          "title": "Theoretical Models of Workplace Motivation",
-          "description": "Integrating intrinsic and extrinsic factors into a unified theory of motivation for the modern workforce.",
-          "sourcePublication": "Thomas B. Lawrence and Nelson Phillips, Constructing Organizational Life: How Social—Symbolic Work Shapes Selves, Organizations and Institutions (2021) - DOI: 10.1177/23220937211016175",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Conceptual Framework Development"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-1-i7",
-          "title": "Behavioral Interventions for Enhancing Team Synergy",
-          "description": "Evaluating the effectiveness of team-building programs in improving collaborative outcomes.",
-          "sourcePublication": "Urmi Nanda Biswas, Karin Allard, Anders Pousette and Annika Harenstam, Understanding Attractive Work in a Globalized World (2020) - DOI: 10.1177/2322093720914169",
-          "gapType": "Interventional Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Randomized Controlled Trial (RCT)"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-1-i8",
-          "title": "Development of Professional Identity in Early Career Professionals",
-          "description": "A longitudinal study on how early work experiences shape career values and identity.",
-          "sourcePublication": "Linking empowering leadership and job attitudes: the role of psychological empowerment (2020) - DOI: 10.1108/jabs-03-2020-0098",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Interviews"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-1-i9",
-          "title": "Psychometric Evaluation of Leadership Competency Scales",
-          "description": "Adapting and validating standard leadership measures for the Indian organizational context.",
-          "sourcePublication": "Jet without fuel: nosedive of Jet Airways (2020) - DOI: 10.1108/jamr-02-2020-0021",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Psychometric Validation (CFA)"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-1-i10",
-          "title": "Neuroplasticity and Leadership Skill Acquisition",
-          "description": "How continuous professional learning affects brain structure and cognitive efficiency in leaders.",
-          "sourcePublication": "Global Perspective on Marital Satisfaction (2020) - DOI: 10.3390/su12218817",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "MRI Study"
-        }
-      ]
+      "researchGate": "https://www.iitg.ac.in/hss/"
     },
     {
       "id": "indianinstituteoftechnologyguwahati-new-2",
       "name": "Prof. Dilwar Hussain",
       "specialization": "Positive Psychology",
       "focus": "Well-being, resilience, and mindfulness.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Dilwar%20Hussain",
+      "scholarLink": "https://scholar.google.com/scholar?q=Dilwar+Hussain+IIT+Guwahati+positive+psychology",
       "citations": "79",
       "topPapers": [
         "Beyond identity politics: can Muslims develop a narrative of the common good? (2017)",
@@ -2470,231 +2041,8 @@
           "difficulty": "Advanced",
           "methodology": "fMRI and Structural MRI Study"
         }
-      ]
-    },
-    {
-      "id": "indianinstituteoftechnologyguwahati-new-3",
-      "name": "Prof. G. Das",
-      "specialization": "Cognitive Science",
-      "focus": "Computational linguistics.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20G.%20Das",
-      "citations": "180",
-      "topPapers": [
-        "Studies on the Evaluation of the Half-sib Progenies to Identify the Prepotency of the Mother Clones of Hevea brasiliensis in Meghalaya (2016) - DOI: 10.23910/ijbsm/2016.7.5.1616",
-        "Performance of some Hevea clones under the cold prone climate of Sub-Himalayan West Bengal. (2015)",
-        "Growth and yield of new generation clones of Hevea under the agroclimate of sub-Himalayan West Bengal (2015)",
-        "Early growth performance of certain Hevea clones from on-farm trials in Garo Hills of Meghalaya. (2015)",
-        "Adaptation of Hevea brasiliensis clones in three widely different cold prone areas of northeastern India (2013) - DOI: 10.1007/s40502-013-0033-z",
-        "Adaptability of prospective mother trees of Hevea to the cold climate of Sub-Himalayan West Bengal and Assam (2013)",
-        "Adaptation of Hevea brasiliensis clones in three widely different cold prone areas of northeastern India (2013) - DOI: 10.1007/s40502-013-0033-z",
-        "Study of certain Physico-chemical Characteristics of water and plankton diversity of Sola Beel (2012)",
-        "Evaluation of Hevea clones in the mature phase under the agroclimate of Sub-Himalayan West Bengal. (2010)",
-        "Performance of a polyclonal seedling population in comparison to monoclonal and multiclonal populations of Hevea in northern West Bengal. (2010)"
       ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-3-i1",
-          "title": "Computational Modeling of Syntactic Parsing",
-          "description": "Developing algorithms to simulate how humans process complex sentence structures in Indian languages.",
-          "sourcePublication": "Studies on the Evaluation of the Half-sib Progenies to Identify the Prepotency of the Mother Clones of Hevea brasiliensis in Meghalaya (2016) - DOI: 10.23910/ijbsm/2016.7.5.1616",
-          "gapType": "Computational Gap",
-          "difficulty": "Advanced",
-          "methodology": "Connectionist Modeling and NLP"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-3-i2",
-          "title": "Language Acquisition in Multilingual Contexts",
-          "description": "Investigating the cognitive mechanisms of code-switching in bilingual children.",
-          "sourcePublication": "Performance of some Hevea clones under the cold prone climate of Sub-Himalayan West Bengal. (2015)",
-          "gapType": "Linguistic Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Behavioral Study"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-3-i3",
-          "title": "Neural Correlates of Semantic Ambiguity Resolution",
-          "description": "Mapping brain regions involved in resolving polysemy and homonymy during reading.",
-          "sourcePublication": "Growth and yield of new generation clones of Hevea under the agroclimate of sub-Himalayan West Bengal (2015)",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "fMRI and ERP"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-3-i4",
-          "title": "Impact of Cognitive Load on Text Comprehension",
-          "description": "How limited working memory capacity affects the integration of information across sentences.",
-          "sourcePublication": "Early growth performance of certain Hevea clones from on-farm trials in Garo Hills of Meghalaya. (2015)",
-          "gapType": "Cognitive Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Dual-task Paradigm and Eye-tracking"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-3-i5",
-          "title": "Cross-linguistic Differences in Narrative Structure",
-          "description": "Exploring how different languages influence the mental representation of events in storytelling.",
-          "sourcePublication": "Adaptation of Hevea brasiliensis clones in three widely different cold prone areas of northeastern India (2013) - DOI: 10.1007/s40502-013-0033-z",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Psycholinguistic Experiments"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-3-i6",
-          "title": "Quantitative Analysis of Large-scale Text Corpora",
-          "description": "Using machine learning to extract semantic patterns and trends from social media data.",
-          "sourcePublication": "Adaptability of prospective mother trees of Hevea to the cold climate of Sub-Himalayan West Bengal and Assam (2013)",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Natural Language Processing (NLP) and Big Data Analytics"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-3-i7",
-          "title": "Behavioral Interventions for Dyslexia",
-          "description": "Evaluating the effectiveness of phonological awareness training in improving reading fluency.",
-          "sourcePublication": "Adaptation of Hevea brasiliensis clones in three widely different cold prone areas of northeastern India (2013) - DOI: 10.1007/s40502-013-0033-z",
-          "gapType": "Clinical Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Single-case Experimental Design"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-3-i8",
-          "title": "Applied Psycholinguistics in Chatbot Design",
-          "description": "Optimizing conversational agents based on human cognitive processing principles.",
-          "sourcePublication": "Study of certain Physico-chemical Characteristics of water and plankton diversity of Sola Beel (2012)",
-          "gapType": "Technological Gap",
-          "difficulty": "Intermediate",
-          "methodology": "User Experience (UX) Testing and Behavioral Modeling"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-3-i9",
-          "title": "Advanced Methodologies in Sentiment Analysis",
-          "description": "Developing more accurate models for detecting irony and sarcasm in digital communication.",
-          "sourcePublication": "Evaluation of Hevea clones in the mature phase under the agroclimate of Sub-Himalayan West Bengal. (2010)",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Machine Learning and Computational Linguistics"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-3-i10",
-          "title": "Psychometric Evaluation of Language Proficiency Tests",
-          "description": "Assessing the reliability and validity of standardized tests for non-native speakers.",
-          "sourcePublication": "Performance of a polyclonal seedling population in comparison to monoclonal and multiclonal populations of Hevea in northern West Bengal. (2010)",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Item Response Theory (IRT)"
-        }
-      ]
-    },
-    {
-      "id": "indianinstituteoftechnologyguwahati-new-4",
-      "name": "Prof. H. Baruah",
-      "specialization": "Neuroscience",
-      "focus": "Neural circuits.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20H.%20Baruah",
-      "citations": "625",
-      "topPapers": [
-        "On the Distribution of Higher Basidiomycetes in the Sibsagar District, Assam (2024) - DOI: 10.20324/JONBSI/V13/1971/76128",
-        "Implementation of Classification Algorithms in Neo4j using IPL data (2021) - DOI: 10.18535/ijecs/v10i11.4635",
-        "The Current COVID-19 Spread Pattern in India (2020) - DOI: 10.1101/2020.06.03.20121210",
-        "The Uncertain COVID-19 Spread Pattern in India: A Statistical Analysis of the Current Situation (2020) - DOI: 10.1101/2020.08.30.20184598",
-        "An Empirical Inference of the Severity of Resurgence of COVID-19 in Europe (2020) - DOI: 10.1101/2020.10.21.20213868",
-        "Hyper-Exponential Growth of COVID-19 during Resurgence of the Disease in Russia (2020) - DOI: 10.1101/2020.10.26.20219626",
-        "Theory of Fuzzy Sets: An Introduction of the Concept of Negative Partial Presence (2020) - DOI: 10.22457/apam.v21n2a6666",
-        "A Numerical Study of the Current COVID-19 Spread Patterns in India, the USA and the World (2020) - DOI: 10.1101/2020.10.05.20206839",
-        "Real Numbers with Fractional Presence (2020) - DOI: 10.22457/jmi.v18a6161",
-        "Nearly Perfect Forecasting of the Total COVID-19 Cases in India: A Numerical Approach (2020) - DOI: 10.1101/2020.06.13.20130096"
-      ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-4-i1",
-          "title": "Neural Circuitry of Decision Making under Risk",
-          "description": "Mapping the functional connectivity between the amygdala and prefrontal cortex during risky choices.",
-          "sourcePublication": "On the Distribution of Higher Basidiomycetes in the Sibsagar District, Assam (2024) - DOI: 10.20324/JONBSI/V13/1971/76128",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "fMRI and Computational Modeling"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-4-i2",
-          "title": "Neuroplasticity and Recovery from Brain Injury",
-          "description": "Investigating the neural mechanisms of functional reorganization after focal cortical lesions.",
-          "sourcePublication": "Implementation of Classification Algorithms in Neo4j using IPL data (2021) - DOI: 10.18535/ijecs/v10i11.4635",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Structural and Functional MRI"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-4-i3",
-          "title": "Impact of Chronic Stress on Neural Circuit Integrity",
-          "description": "How prolonged exposure to stress hormones affects the morphology of hippocampal neurons.",
-          "sourcePublication": "The Current COVID-19 Spread Pattern in India (2020) - DOI: 10.1101/2020.06.03.20121210",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Animal Models and Immunohistochemistry"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-4-i4",
-          "title": "Advanced Methodologies in Neural Signal Processing",
-          "description": "Developing new algorithms for decoding motor intentions from high-density EEG signals.",
-          "sourcePublication": "The Uncertain COVID-19 Spread Pattern in India: A Statistical Analysis of the Current Situation (2020) - DOI: 10.1101/2020.08.30.20184598",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Signal Processing and Machine Learning"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-4-i5",
-          "title": "Cross-cultural Perspectives on Brain Health",
-          "description": "Investigating how lifestyle factors in different cultures influence the prevalence of neurodegenerative diseases.",
-          "sourcePublication": "An Empirical Inference of the Severity of Resurgence of COVID-19 in Europe (2020) - DOI: 10.1101/2020.10.21.20213868",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Epidemiological Study and Neuroimaging"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-4-i6",
-          "title": "Quantitative Modeling of Neural Dynamics",
-          "description": "Using dynamical systems theory to simulate the activity of large-scale neural networks.",
-          "sourcePublication": "Hyper-Exponential Growth of COVID-19 during Resurgence of the Disease in Russia (2020) - DOI: 10.1101/2020.10.26.20219626",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Neuroscience"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-4-i7",
-          "title": "Theoretical Models of Neural Information Processing",
-          "description": "Developing a unified framework for understanding how neurons encode and transmit information.",
-          "sourcePublication": "Theory of Fuzzy Sets: An Introduction of the Concept of Negative Partial Presence (2020) - DOI: 10.22457/apam.v21n2a6666",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Information Theory and Mathematical Modeling"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-4-i8",
-          "title": "Impact of Organizational Stress on Brain Function",
-          "description": "How workplace pressure affects executive functions and neural efficiency in high-level managers.",
-          "sourcePublication": "A Numerical Study of the Current COVID-19 Spread Patterns in India, the USA and the World (2020) - DOI: 10.1101/2020.10.05.20206839",
-          "gapType": "Contextual Gap",
-          "difficulty": "Advanced",
-          "methodology": "fNIRS and Cognitive Testing"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-4-i9",
-          "title": "Developmental Trajectories of Neural Connectivity",
-          "description": "A longitudinal study on the maturation of white matter tracts during adolescence.",
-          "sourcePublication": "Real Numbers with Fractional Presence (2020) - DOI: 10.22457/jmi.v18a6161",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Diffusion Tensor Imaging (DTI)"
-        },
-        {
-          "id": "indianinstituteoftechnologyguwahati-new-4-i10",
-          "title": "Psychometric Evaluation of Cognitive Assessment Batteries",
-          "description": "Ensuring the neural validity of standardized tests used in clinical neuropsychology.",
-          "sourcePublication": "Nearly Perfect Forecasting of the Total COVID-19 Cases in India: A Numerical Approach (2020) - DOI: 10.1101/2020.06.13.20130096",
-          "gapType": "Measurement Gap",
-          "difficulty": "Advanced",
-          "methodology": "Psychometric Validation and Neuroimaging Correlation"
-        }
-      ]
+      "researchGate": "https://www.researchgate.net/profile/Dilwar-Hussain"
     }
   ],
   "Indian Institute of Technology Roorkee": [
@@ -2703,7 +2051,7 @@
       "name": "Prof. Pooja Garg",
       "specialization": "Organizational Psychology",
       "focus": "Positive psychology at work, psychological capital, and well-being.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Pooja%20Garg",
+      "scholarLink": "https://scholar.google.com/scholar?q=Pooja+Garg+IIT+Roorkee+organizational+psychology",
       "citations": "1315",
       "topPapers": [
         "Innovation capability and effectiveness in public sector organisations: knowledge-based performance management practices (2023) - DOI: 10.1504/ijpspm.2023.10054878",
@@ -2808,7 +2156,8 @@
           "difficulty": "Intermediate",
           "methodology": "Cross-cultural Survey and Qualitative Content Analysis"
         }
-      ]
+      ],
+      "researchGate": "https://www.researchgate.net/profile/Pooja-Garg"
     },
     {
       "id": "indianinstituteoftechnologyroorkee-new-1",
@@ -2920,14 +2269,15 @@
           "difficulty": "Intermediate",
           "methodology": "Psychometric Validation (EFA/CFA)"
         }
-      ]
+      ],
+      "researchGate": "https://www.iitr.ac.in/hss/"
     },
     {
       "id": "indianinstituteoftechnologyroorkee-new-2",
       "name": "Prof. Renu Rastogi",
       "specialization": "Organizational Behavior",
       "focus": "Stress management and organizational effectiveness.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Renu%20Rastogi",
+      "scholarLink": "https://scholar.google.com/scholar?q=Renu+Rastogi+IIT+Roorkee",
       "citations": "1390",
       "topPapers": [
         "The impact of perceived ethical climate types on workplace deviance: An empirical investigation of IT professionals in India (2021) - DOI: 10.1002/JOE.22085",
@@ -3032,231 +2382,8 @@
           "difficulty": "Intermediate",
           "methodology": "Psychometric Validation (CFA/IRT)"
         }
-      ]
-    },
-    {
-      "id": "indianinstituteoftechnologyroorkee-new-3",
-      "name": "Prof. I. Sharma",
-      "specialization": "Cognitive Psychology",
-      "focus": "Attention and perception.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20I.%20Sharma",
-      "citations": "511",
-      "topPapers": [
-        "Sleep interventions for adults admitted to psychiatric inpatient settings: a systematic scoping review (2023) - DOI: 10.1101/2023.03.03.23286483",
-        "Study of Determinants of Somatoform Disorders in Children (2023) - DOI: 10.7759/cureus.36447",
-        "Management of issues relating to marriage, mental illness, and Indian legislation (2022) - DOI: 10.4103/indianjpsychiatry.indianjpsychiatry_729_21",
-        "COVID-19 pandemic: Some observations and a few recommendations (2020) - DOI: 10.4103/ijsp.ijsp_220_20",
-        "COVID-19 pandemic hype: Losers and gainers (2020) - DOI: 10.4103/psychiatry.IndianJPsychiatry_1060_20",
-        "Analysis of Trunk Muscle Activity in Hemiplegia During Sitting on Two Different Unstable Surfaces (2019) - DOI: 10.5958/0976-5506.2019.02820.1",
-        "Four Major Defenses Against #Metoo Allegations Are Not Tenable (2019) - DOI: 10.1177/2631831819859685",
-        "PSYCHIATRIC MORBIDITY IN PATIENTS OF ESSENTIAL HYPERTENSION- A HOSPITAL BASED CROSS-SECTIONAL STUDY (2019) - DOI: 10.18410/jebmh/2019/539",
-        "Impact of Spiritual Intelligence and Emotional Intelligence on Learning with Mediating Effect of Curiosity (2018) - DOI: 10.2139/ssrn.3308028",
-        "Sociology and Psychiatry (2018) - DOI: 10.5005/JP/BOOKS/14227_51"
       ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-3-i1",
-          "title": "Neural Mechanisms of Selective Attention",
-          "description": "Investigating how the brain filters out irrelevant sensory information during high-load cognitive tasks.",
-          "sourcePublication": "Sleep interventions for adults admitted to psychiatric inpatient settings: a systematic scoping review (2023) - DOI: 10.1101/2023.03.03.23286483",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "fMRI and ERP"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-3-i2",
-          "title": "Impact of Distraction on Decision Making",
-          "description": "How environmental noise and multitasking affect the quality of complex choices.",
-          "sourcePublication": "Study of Determinants of Somatoform Disorders in Children (2023) - DOI: 10.7759/cureus.36447",
-          "gapType": "Cognitive Gap",
-          "difficulty": "Advanced",
-          "methodology": "Dual-task Paradigm and Behavioral Modeling"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-3-i3",
-          "title": "Perceptual Learning and Visual Expertise",
-          "description": "How practice influences the neural representation of complex visual patterns.",
-          "sourcePublication": "Management of issues relating to marriage, mental illness, and Indian legislation (2022) - DOI: 10.4103/indianjpsychiatry.indianjpsychiatry_729_21",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Psychophysical Experiments and fMRI"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-3-i4",
-          "title": "Attention Deficits in Clinical Populations",
-          "description": "Mapping the neural markers of attention dysfunction in ADHD and schizophrenia.",
-          "sourcePublication": "COVID-19 pandemic: Some observations and a few recommendations (2020) - DOI: 10.4103/ijsp.ijsp_220_20",
-          "gapType": "Clinical Gap",
-          "difficulty": "Advanced",
-          "methodology": "EEG and Clinical Neuropsychological Assessment"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-3-i5",
-          "title": "Cross-cultural Differences in Visual Perception",
-          "description": "Exploring how cultural background influences holistic vs. analytic processing of visual scenes.",
-          "sourcePublication": "COVID-19 pandemic hype: Losers and gainers (2020) - DOI: 10.4103/psychiatry.IndianJPsychiatry_1060_20",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Eye-tracking and Cross-cultural Experiments"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-3-i6",
-          "title": "Quantitative Modeling of Attentional Capture",
-          "description": "Developing a mathematical model to predict which stimuli are most likely to grab attention in a cluttered environment.",
-          "sourcePublication": "Analysis of Trunk Muscle Activity in Hemiplegia During Sitting on Two Different Unstable Surfaces (2019) - DOI: 10.5958/0976-5506.2019.02820.1",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Modeling and Saliency Mapping"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-3-i7",
-          "title": "Theoretical Models of Conscious Perception",
-          "description": "Integrating global workspace theory and integrated information theory into a unified model of awareness.",
-          "sourcePublication": "Four Major Defenses Against #Metoo Allegations Are Not Tenable (2019) - DOI: 10.1177/2631831819859685",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Conceptual Framework Development"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-3-i8",
-          "title": "Attention in Organizational Settings",
-          "description": "How workplace design and digital interruptions affect employee focus and productivity.",
-          "sourcePublication": "PSYCHIATRIC MORBIDITY IN PATIENTS OF ESSENTIAL HYPERTENSION- A HOSPITAL BASED CROSS-SECTIONAL STUDY (2019) - DOI: 10.18410/jebmh/2019/539",
-          "gapType": "Contextual Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Field Study and Experience Sampling"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-3-i9",
-          "title": "Developmental Trajectories of Executive Attention",
-          "description": "A longitudinal study on the maturation of attentional control from childhood to adolescence.",
-          "sourcePublication": "Impact of Spiritual Intelligence and Emotional Intelligence on Learning with Mediating Effect of Curiosity (2018) - DOI: 10.2139/ssrn.3308028",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Behavioral Testing"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-3-i10",
-          "title": "Psychometric Evaluation of Attention Batteries",
-          "description": "Ensuring the reliability and validity of standardized tests used to measure different components of attention.",
-          "sourcePublication": "Sociology and Psychiatry (2018) - DOI: 10.5005/JP/BOOKS/14227_51",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Psychometric Validation (CFA)"
-        }
-      ]
-    },
-    {
-      "id": "indianinstituteoftechnologyroorkee-new-4",
-      "name": "Prof. J. Gupta",
-      "specialization": "Social Psychology",
-      "focus": "Social influence.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20J.%20Gupta",
-      "citations": "262",
-      "topPapers": [
-        "Documentation of indigenous technical knowledge (ITK) prevailing among dairy farmers in Kathua district of Jammu and Kashmir (2023) - DOI: 10.5958/2250-0499.2023.00077.0",
-        "Intention of veterinary doctors towards antimicrobial usage and resistance: applying ‘theory of planned behaviour’ for scaling (2021) - DOI: 10.33785/ijds.2021.v74i04.009",
-        "Shades of institutional change: the case of Nature Fresh dairy development project (2021) - DOI: 10.1080/1389224X.2021.1888757",
-        "Revealing the Scenario of Antimicrobial Resistance in Dairy Animals from Stakeholders' Perspective: Where Should We Focus? (2020) - DOI: 10.5455/ijlr.20191218091902",
-        "Field level study to understand dimensions of antimicrobial use in dairy farms of Punjab (2020) - DOI: 10.33785/ijds.2020.v73i05.011",
-        "Diversity, complexity, and structure of social networks: Study of a smallholder dairy project (2020) - DOI: 10.1177/0030727019893100",
-        "Social network structures among the livestock farmers vis a vis calcium supplement technology (2019) - DOI: 10.1016/J.INPA.2018.07.006",
-        "Behavioral Intention of Dairy Farmers of Punjab State of India towards Antimicrobial Usage- A Dairy Perspective Study (2019) - DOI: 10.5455/IJLR.20190118102109",
-        "Behavioural study to understand the intentions of veterinarians and paravets of Punjab towards antimicrobial use in dairy farming (2019)",
-        "Use of Antimicrobials For Treatment of Dairy Animals by Veterinarian and Paravet in Punjab: A Study on Prescription Pattern (2019)"
-      ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-4-i1",
-          "title": "Social Influence in Digital Networks",
-          "description": "Investigating how algorithmic curation affects the spread of misinformation and social polarization.",
-          "sourcePublication": "Documentation of indigenous technical knowledge (ITK) prevailing among dairy farmers in Kathua district of Jammu and Kashmir (2023) - DOI: 10.5958/2250-0499.2023.00077.0",
-          "gapType": "Technological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Social Network Analysis (SNA) and Agent-based Modeling"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-4-i2",
-          "title": "Impact of Social Identity on Decision Making",
-          "description": "How group membership influences risk-taking behavior in collective environments.",
-          "sourcePublication": "Intention of veterinary doctors towards antimicrobial usage and resistance: applying ‘theory of planned behaviour’ for scaling (2021) - DOI: 10.33785/ijds.2021.v74i04.009",
-          "gapType": "Cognitive Gap",
-          "difficulty": "Advanced",
-          "methodology": "Experimental Behavioral Tasks and Group Dynamics Observation"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-4-i3",
-          "title": "Neural Correlates of Social Conformity",
-          "description": "Mapping brain regions involved in the conflict between individual belief and group consensus.",
-          "sourcePublication": "Shades of institutional change: the case of Nature Fresh dairy development project (2021) - DOI: 10.1080/1389224X.2021.1888757",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "fMRI and Social Influence Paradigm"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-4-i4",
-          "title": "Behavioral Interventions for Reducing Outgroup Bias",
-          "description": "Testing the effectiveness of perspective-taking exercises in improving intergroup relations.",
-          "sourcePublication": "Revealing the Scenario of Antimicrobial Resistance in Dairy Animals from Stakeholders' Perspective: Where Should We Focus? (2020) - DOI: 10.5455/ijlr.20191218091902",
-          "gapType": "Contextual Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Randomized Controlled Trial (RCT) and Implicit Association Test (IAT)"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-4-i5",
-          "title": "Cross-cultural Perspectives on Social Norms",
-          "description": "Comparing the strength of social norms and their impact on behavior in tight vs. loose cultures.",
-          "sourcePublication": "Field level study to understand dimensions of antimicrobial use in dairy farms of Punjab (2020) - DOI: 10.33785/ijds.2020.v73i05.011",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Cross-cultural Survey and Behavioral Observation"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-4-i6",
-          "title": "Quantitative Analysis of Social Media Sentiment",
-          "description": "Using machine learning to track the evolution of public opinion on controversial social issues.",
-          "sourcePublication": "Diversity, complexity, and structure of social networks: Study of a smallholder dairy project (2020) - DOI: 10.1177/0030727019893100",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Natural Language Processing (NLP) and Big Data Analytics"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-4-i7",
-          "title": "Theoretical Models of Collective Intelligence",
-          "description": "Developing a framework for understanding how groups of individuals can solve complex problems more effectively than individuals.",
-          "sourcePublication": "Social network structures among the livestock farmers vis a vis calcium supplement technology (2019) - DOI: 10.1016/J.INPA.2018.07.006",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Modeling and Mathematical Simulation"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-4-i8",
-          "title": "Social Influence in Organizational Settings",
-          "description": "How peer pressure and leadership behavior influence ethical decision making in the workplace.",
-          "sourcePublication": "Behavioral Intention of Dairy Farmers of Punjab State of India towards Antimicrobial Usage- A Dairy Perspective Study (2019) - DOI: 10.5455/IJLR.20190118102109",
-          "gapType": "Contextual Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Organizational Survey and Qualitative Interviews"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-4-i9",
-          "title": "Developmental Trajectories of Social Cognition",
-          "description": "A longitudinal study on the development of theory of mind and its impact on social competence in children.",
-          "sourcePublication": "Behavioural study to understand the intentions of veterinarians and paravets of Punjab towards antimicrobial use in dairy farming (2019)",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Behavioral Testing and Observation"
-        },
-        {
-          "id": "indianinstituteoftechnologyroorkee-new-4-i10",
-          "title": "Psychometric Evaluation of Social Influence Scales",
-          "description": "Validating a new tool for measuring susceptibility to different types of social influence.",
-          "sourcePublication": "Use of Antimicrobials For Treatment of Dairy Animals by Veterinarian and Paravet in Punjab: A Study on Prescription Pattern (2019)",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Psychometric Validation (CFA/IRT)"
-        }
-      ]
+      "researchGate": "https://www.researchgate.net/profile/Renu-Rastogi"
     }
   ],
   "Indian Institute of Technology Gandhinagar": [
@@ -3265,7 +2392,7 @@
       "name": "Prof. Jaison A. Manjaly",
       "specialization": "Cognitive Science, Philosophy of Mind",
       "focus": "Curiosity, moral cognition, and embodied cognition.",
-      "scholarLink": "https://scholar.google.co.in/citations?user=JaisonManjaly",
+      "scholarLink": "https://scholar.google.com/citations?user=l2uLHYcAAAAJ",
       "citations": "197",
       "topPapers": [
         "Risky mindset: prior exposure to risk increases utilitarian choices in sacrificial moral scenarios (2024) - DOI: 10.3389/frbhe.2024.1332416",
@@ -3289,14 +2416,15 @@
           "difficulty": "Advanced",
           "methodology": "Computational Modeling"
         }
-      ]
+      ],
+      "researchGate": "https://cogs.iitgn.ac.in/newcogs/team/jaison-manjaly/"
     },
     {
       "id": "iitgn-1",
       "name": "Prof. Jaison A. Manjaly",
       "specialization": "Cognitive Science",
       "focus": "Curiosity, moral cognition, and embodied cognition.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Jaison%20A.%20Manjaly",
+      "scholarLink": "https://scholar.google.com/citations?user=l2uLHYcAAAAJ",
       "citations": "197",
       "topPapers": [
         "Risky mindset: prior exposure to risk increases utilitarian choices in sacrificial moral scenarios (2024) - DOI: 10.3389/frbhe.2024.1332416",
@@ -3401,14 +2529,15 @@
           "difficulty": "Advanced",
           "methodology": "Cross-cultural Survey and Behavioral Games"
         }
-      ]
+      ],
+      "researchGate": "https://cogs.iitgn.ac.in/newcogs/team/jaison-manjaly/"
     },
     {
       "id": "indianinstituteoftechnologygandhinagar-new-1",
       "name": "Prof. Pratik Mutha",
       "specialization": "Neuroscience",
       "focus": "Motor control, learning, and neurorehabilitation.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Pratik%20Mutha",
+      "scholarLink": "https://scholar.google.com/citations?user=PejUtIQAAAAJ",
       "citations": "1335",
       "topPapers": [
         "Limb-related sensory prediction errors and task-related performance errors facilitate human sensorimotor learning through separate mechanisms (2024) - DOI: 10.1371/journal.pbio.3002703",
@@ -3513,14 +2642,15 @@
           "difficulty": "Intermediate",
           "methodology": "Psychometric Analysis (CFA and Rasch Modeling)"
         }
-      ]
+      ],
+      "researchGate": "https://www.researchgate.net/scientific-contributions/Pratik-K-Mutha-14057892"
     },
     {
       "id": "indianinstituteoftechnologygandhinagar-new-2",
       "name": "Prof. Meera M. Sunny",
       "specialization": "Cognitive Psychology",
       "focus": "Visual attention, perception, and action.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Meera%20M.%20Sunny",
+      "scholarLink": "https://scholar.google.com/scholar?q=Meera+Sunny+IIT+Gandhinagar",
       "citations": "127",
       "topPapers": [
         "No reliable effect of task-irrelevant cross-modal statistical regularities on distractor suppression. (2023) - DOI: 10.1016/j.cortex.2023.02.001",
@@ -3625,14 +2755,15 @@
           "difficulty": "Intermediate",
           "methodology": "Field Study and Attentional Performance Tasks"
         }
-      ]
+      ],
+      "researchGate": "https://cogs.iitgn.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologygandhinagar-new-3",
       "name": "Prof. Krishna Prasad Miyapuram",
       "specialization": "Cognitive Neuroscience",
       "focus": "Neuroeconomics, learning, and decision making.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Krishna%20Prasad%20Miyapuram",
+      "scholarLink": "https://scholar.google.com/citations?user=R20YmxkAAAAJ",
       "citations": "765",
       "topPapers": [
         "EWGN: Elastic Weight Generation and Context Switching in Deep Learning (2025) - DOI: 10.48550/arXiv.2506.02065",
@@ -3737,119 +2868,10 @@
           "difficulty": "Advanced",
           "methodology": "Concurrent EEG and Eye-tracking"
         }
-      ]
-    },
-    {
-      "id": "indianinstituteoftechnologygandhinagar-new-4",
-      "name": "Prof. M. Singh",
-      "specialization": "Social Psychology",
-      "focus": "Social identity.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20M.%20Singh",
-      "citations": "248",
-      "topPapers": [
-        "Effect of Humic and Boric Acid on Chili (Capsicum annum L.) Growth, Yield and Quality under Arid Zone of Rajasthan (2022) - DOI: 10.5958/0976-4623.2022.00002.0",
-        "Estimation of evapotranspiration under polyhouse and open field conditions in capsicum (2022) - DOI: 10.5958/0974-0112.2022.00028.7",
-        "Effect of organic and chemical fertilizers on crop growth and yields in maize-cowpea-paddy system in coal mine affected area (2020) - DOI: 10.5958/2395-146x.2020.00050.2",
-        "The effect of nitrogen and potash fertilizer and spacing on plant growth parameters (2019) - DOI: 10.5958/0976-4623.2019.00006.9",
-        "The study of effect of nitrogen and potash fertilizers and spacing on production of chrysanthemum flowers and economics (2019) - DOI: 10.5958/0976-4623.2019.00001.x",
-        "Enhance system based productivity of sugarcane through intensification of garlic in autumn planting crop (2019) - DOI: 10.5958/0976-4623.2019.00008.2",
-        "Effect of moisture regimes and nitrogen levels on production potential water use efficiency and economics of bed planting wheat. (2012)",
-        "Effects of nitrogen fertilizer on the yields of lemongrass Cymbopogon flexuosus. (2008)",
-        "Effects of N and K on growth, herbage, oil yield and nutrient uptake patterns in rosemary (Rosmarinus officinalis L.) under semi-arid tropical conditions (2007) - DOI: 10.1080/14620316.2007.11512252",
-        "Effect of nitrogen level and biofertilizer inoculation on productivity of forage sorghum (Sorghum bicolor) (2005)"
       ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologygandhinagar-new-4-i1",
-          "title": "Social Identity and Collective Action in Environmental Movements",
-          "description": "Investigating how identification with environmental groups predicts participation in collective pro-environmental actions.",
-          "sourcePublication": "Effect of Humic and Boric Acid on Chili (Capsicum annum L.) Growth, Yield and Quality under Arid Zone of Rajasthan (2022) - DOI: 10.5958/0976-4623.2022.00002.0",
-          "gapType": "Contextual Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Survey Research and Path Analysis"
-        },
-        {
-          "id": "indianinstituteoftechnologygandhinagar-new-4-i2",
-          "title": "The Impact of Multiple Social Identities on Mental Health",
-          "description": "How the intersectionality of different social identities (e.g., gender, caste, profession) influences psychological well-being.",
-          "sourcePublication": "Estimation of evapotranspiration under polyhouse and open field conditions in capsicum (2022) - DOI: 10.5958/0974-0112.2022.00028.7",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Intersectionality Framework and Qualitative Interviews"
-        },
-        {
-          "id": "indianinstituteoftechnologygandhinagar-new-4-i3",
-          "title": "Cognitive Mechanisms of Ingroup Favoritism",
-          "description": "Examining the automatic vs. controlled processes involved in favoring one's own social group over others.",
-          "sourcePublication": "Effect of organic and chemical fertilizers on crop growth and yields in maize-cowpea-paddy system in coal mine affected area (2020) - DOI: 10.5958/2395-146x.2020.00050.2",
-          "gapType": "Cognitive Gap",
-          "difficulty": "Advanced",
-          "methodology": "Implicit Association Test (IAT) and Behavioral Experiments"
-        },
-        {
-          "id": "indianinstituteoftechnologygandhinagar-new-4-i4",
-          "title": "Behavioral Interventions for Reducing Intergroup Conflict",
-          "description": "Testing the effectiveness of common ingroup identity interventions in improving relations between conflicting social groups.",
-          "sourcePublication": "The effect of nitrogen and potash fertilizer and spacing on plant growth parameters (2019) - DOI: 10.5958/0976-4623.2019.00006.9",
-          "gapType": "Clinical Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Randomized Controlled Trial (RCT) and Behavioral Observation"
-        },
-        {
-          "id": "indianinstituteoftechnologygandhinagar-new-4-i5",
-          "title": "Neuroplasticity and Social Identity: Impact of Long-term Group Membership",
-          "description": "How sustained identification with a social group alters brain regions associated with self-referential processing.",
-          "sourcePublication": "The study of effect of nitrogen and potash fertilizers and spacing on production of chrysanthemum flowers and economics (2019) - DOI: 10.5958/0976-4623.2019.00001.x",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "fMRI and Social Identity Salience Paradigm"
-        },
-        {
-          "id": "indianinstituteoftechnologygandhinagar-new-4-i6",
-          "title": "Quantitative Analysis of Social Identity Salience in Online Spaces",
-          "description": "Using big data from social media to track how different social identities become salient in response to global events.",
-          "sourcePublication": "Enhance system based productivity of sugarcane through intensification of garlic in autumn planting crop (2019) - DOI: 10.5958/0976-4623.2019.00008.2",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Natural Language Processing (NLP) and Sentiment Analysis"
-        },
-        {
-          "id": "indianinstituteoftechnologygandhinagar-new-4-i7",
-          "title": "Theoretical Models of Social Identity Complexity",
-          "description": "Developing a computational model to explain how individuals manage and integrate multiple, sometimes conflicting, social identities.",
-          "sourcePublication": "Effect of moisture regimes and nitrogen levels on production potential water use efficiency and economics of bed planting wheat. (2012)",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Modeling and Mathematical Simulation"
-        },
-        {
-          "id": "indianinstituteoftechnologygandhinagar-new-4-i8",
-          "title": "Developmental Trajectories of Social Identity in Adolescence",
-          "description": "A longitudinal study on how social identity develops and stabilizes during the transition from childhood to adulthood.",
-          "sourcePublication": "Effects of nitrogen fertilizer on the yields of lemongrass Cymbopogon flexuosus. (2008)",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Survey and Qualitative Interviews"
-        },
-        {
-          "id": "indianinstituteoftechnologygandhinagar-new-4-i9",
-          "title": "Psychometric Evaluation of Social Identity Scales",
-          "description": "Validating a new multidimensional tool for measuring the strength and importance of different social identities.",
-          "sourcePublication": "Effects of N and K on growth, herbage, oil yield and nutrient uptake patterns in rosemary (Rosmarinus officinalis L.) under semi-arid tropical conditions (2007) - DOI: 10.1080/14620316.2007.11512252",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Psychometric Validation (CFA and Reliability Analysis)"
-        },
-        {
-          "id": "indianinstituteoftechnologygandhinagar-new-4-i10",
-          "title": "Advanced Methodologies for Measuring Implicit Social Identity",
-          "description": "Combining physiological measures (e.g., skin conductance) with behavioral tasks to assess non-conscious group identification.",
-          "sourcePublication": "Effect of nitrogen level and biofertilizer inoculation on productivity of forage sorghum (Sorghum bicolor) (2005)",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Psychophysiological Measurement and Behavioral Tasks"
-        }
-      ]
+      "orcid": "https://orcid.org/0000-0001-5779-2342",
+      "vidwanId": "https://iitgn.irins.org/profile/53728",
+      "researchGate": "https://www.researchgate.net/profile/Krishna-Miyapuram"
     }
   ],
   "Indian Institute of Technology Indore": [
@@ -3858,7 +2880,7 @@
       "name": "Prof. Sanjram Premjit Khanganba",
       "specialization": "Human Factors, Cognitive Ergonomics",
       "focus": "Human-computer interaction, cognitive load, and usability engineering.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Sanjram%20Premjit%20Khanganba",
+      "scholarLink": "https://scholar.google.com/scholar?q=Sanjram+Khanganba+IIT+Indore",
       "citations": "55",
       "topPapers": [
         "Isomorphic 2D/3D Objects and Saccadic Characteristics in Mental Rotation (2022) - DOI: 10.32604/cmc.2022.019256",
@@ -3963,7 +2985,8 @@
           "difficulty": "Intermediate",
           "methodology": "Field Study and Comfort Assessment Scales"
         }
-      ]
+      ],
+      "researchGate": "https://www.iiti.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologyindore-new-0",
@@ -4526,7 +3549,7 @@
       "name": "Prof. Priyanka Tripathi",
       "specialization": "Social Psychology, Gender Studies",
       "focus": "Gender, identity, and social cognition.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Priyanka%20Tripathi",
+      "scholarLink": "https://scholar.google.com/scholar?q=Priyanka+Tripathi+IIT+Patna",
       "citations": "162",
       "topPapers": [
         "Representation of Aged Female Fans in Select Malayalam Films: An Intersectional Feminist Perspective (2023) - DOI: 10.1080/10509208.2023.2225400",
@@ -4631,7 +3654,8 @@
           "difficulty": "Advanced",
           "methodology": "Organizational Survey and Executive Interviews"
         }
-      ]
+      ],
+      "researchGate": "https://www.iitp.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologypatna-new-0",
@@ -5194,7 +4218,7 @@
       "name": "Prof. Rano Ringo",
       "specialization": "Health Psychology, Well-being",
       "focus": "Psychological well-being, stress, and coping mechanisms.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Rano%20Ringo",
+      "scholarLink": "https://scholar.google.com/scholar?q=Rano+Ringo+IIT+Ropar",
       "citations": "2",
       "topPapers": [
         "Reading a Feminist Epistemology in Margaret Atwood’s MaddAddam (2020) - DOI: 10.4312/elope.17.1.111-124",
@@ -5293,7 +4317,8 @@
           "difficulty": "Advanced",
           "methodology": "Comparative Qualitative Study"
         }
-      ]
+      ],
+      "researchGate": "https://www.iitrpr.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologyropar-new-0",
@@ -5856,7 +4881,7 @@
       "name": "Prof. Arnav Bhavsar",
       "specialization": "Cognitive Science, Computer Vision",
       "focus": "Computational modeling of vision, medical image analysis.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Arnav%20Bhavsar",
+      "scholarLink": "https://scholar.google.com/scholar?q=Arnav+Bhavsar+IIT+Mandi+cognitive",
       "citations": "1290",
       "topPapers": [
         "TrackletGPT: A Language-like GPT Framework for White Matter Tract Segmentation (2026) - DOI: 10.48550/arXiv.2601.13935",
@@ -5961,7 +4986,8 @@
           "difficulty": "Advanced",
           "methodology": "Robotics Integration and Field Testing"
         }
-      ]
+      ],
+      "researchGate": "https://www.iitmandi.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologymandi-new-0",
@@ -6524,7 +5550,7 @@
       "name": "Prof. Anuradha",
       "specialization": "Clinical Psychology, Mental Health",
       "focus": "Psychopathology, psychotherapy, and community mental health.",
-      "scholarLink": "#",
+      "scholarLink": "https://scholar.google.com/scholar?q=Anuradha+IIT+BHU+clinical+psychology",
       "citations": "62",
       "topPapers": [
         "AN ACCOUNT OF SPECIALITY OF PARTIAL WORDS WITH RESPECT TO PERIODICITY (2022)",
@@ -6629,7 +5655,8 @@
           "difficulty": "Advanced",
           "methodology": "Qualitative Interviews and Thematic Analysis"
         }
-      ]
+      ],
+      "researchGate": "https://www.iitbhu.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologybhuvaranasi-new-0",
@@ -7192,7 +6219,7 @@
       "name": "Prof. Godabarisha Mishra",
       "specialization": "Cognitive Psychology, Philosophy of Mind",
       "focus": "Consciousness, perception, and Indian psychology.",
-      "scholarLink": "#",
+      "scholarLink": "https://scholar.google.com/scholar?q=Godabarisha+Mishra+IIT+Bhubaneswar",
       "citations": "2",
       "topPapers": [
         "Non-dualism: Vedāntic and Āgamic (Advaita as Expounded by Śaṅkara and Abhinavagupta) (2021) - DOI: 10.1007/s40961-021-00242-w",
@@ -7294,7 +6321,8 @@
           "difficulty": "Advanced",
           "methodology": "Comparative Ontology and Philosophical Dialogue"
         }
-      ]
+      ],
+      "researchGate": "https://www.iitbbs.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologybhubaneswar-new-0",
@@ -7857,7 +6885,7 @@
       "name": "Prof. S. R. Mahadeva Prasanna",
       "specialization": "Speech Processing, Cognitive Science",
       "focus": "Speech perception, emotion recognition from speech, and auditory cognition.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20S.%20R.%20Mahadeva%20Prasanna",
+      "scholarLink": "https://scholar.google.com/scholar?q=Mahadeva+Prasanna+IIT+Dharwad+speech",
       "citations": "223",
       "topPapers": [
         "Perceptual Judgments of Resonance, Speech Understandability, and Speech Acceptability in Children with Repaired Cleft Palate Across Words and Sentences (2020) - DOI: 10.1007/978-981-15-5776-7_7",
@@ -7962,7 +6990,8 @@
           "difficulty": "Advanced",
           "methodology": "fMRI and Music Information Retrieval (MIR)"
         }
-      ]
+      ],
+      "researchGate": "https://www.iitdh.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologydharwad-new-0",
@@ -8525,7 +7554,7 @@
       "name": "Prof. Reenu Punnoose",
       "specialization": "Linguistics, Cognitive Science",
       "focus": "Phonetics, phonology, and language processing.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Reenu%20Punnoose",
+      "scholarLink": "https://scholar.google.com/scholar?q=Reenu+Punnoose+IIT+Palakkad",
       "citations": "70",
       "topPapers": [
         "Civil Society Organisations’ Perspectives on the Contemporary Human Rights Situation of Indigenous Peoples in Bangladesh: A Critical Analysis (2025) - DOI: 10.1163/15718115-bja10229",
@@ -8629,7 +7658,8 @@
           "difficulty": "Advanced",
           "methodology": "Computational Modeling and Linguistic Analysis"
         }
-      ]
+      ],
+      "researchGate": "https://www.iitpkd.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologypalakkad-new-0",
@@ -9192,7 +8222,7 @@
       "name": "Prof. V. V. N. Somayajulu",
       "specialization": "Organizational Behavior, HR",
       "focus": "Leadership, organizational culture, and employee engagement.",
-      "scholarLink": "#",
+      "scholarLink": "https://scholar.google.com/scholar?q=VVN+Somayajulu+IIT+Tirupati",
       "citations": "838",
       "topPapers": [
         "LONGITUDINAL EXTENT OF COUNTER ELECTROJET EVENTS (2018) - DOI: 10.22564/rbgf.v11i3.1155",
@@ -9297,7 +8327,8 @@
           "difficulty": "Advanced",
           "methodology": "Predictive Analytics and Data Mining"
         }
-      ]
+      ],
+      "researchGate": "https://www.iittp.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologytirupati-new-0",
@@ -9860,7 +8891,7 @@
       "name": "Prof. Rajeev Kumar",
       "specialization": "Cognitive Science, AI",
       "focus": "Machine learning, cognitive modeling, and human-computer interaction.",
-      "scholarLink": "#",
+      "scholarLink": "https://scholar.google.com/scholar?q=Rajeev+Kumar+IIT+Bhilai",
       "citations": "1302",
       "topPapers": [
         "Time Fractional Generalized Korteweg-de Vries Equation: Explicit Series Solutions and Exact Solutions (2021) - DOI: 10.48185/jfcns.v2i2.315",
@@ -9965,7 +8996,8 @@
           "difficulty": "Advanced",
           "methodology": "Algorithmic Fairness Analysis and Policy Research"
         }
-      ]
+      ],
+      "researchGate": "https://www.iitbhilai.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologybhilai-new-0",
@@ -10528,7 +9560,7 @@
       "name": "Prof. Quleen Kaur Bijral",
       "specialization": "Humanities, Psychology",
       "focus": "Literature, psychology, and cultural studies.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Quleen%20Kaur%20Bijral",
+      "scholarLink": "https://scholar.google.com/scholar?q=Quleen+Kaur+Bijral+IIT+Jammu",
       "citations": "0",
       "topPapers": [
         "Mapping History in Fiction through Orality in Mahasweta Devi’s The Armeniun Champa Tree (2017) - DOI: 10.25274/BCJMS.V7N1.EN-V7-01-05",
@@ -10627,7 +9659,8 @@
           "difficulty": "Advanced",
           "methodology": "Theoretical Synthesis and Qualitative Research"
         }
-      ]
+      ],
+      "researchGate": "https://www.iitjammu.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologyjammu-new-0",
@@ -11190,7 +10223,7 @@
       "name": "Prof. Neha Munjal",
       "specialization": "Cognitive Science, Linguistics",
       "focus": "Psycholinguistics, language acquisition, and cognitive development.",
-      "scholarLink": "#",
+      "scholarLink": "https://scholar.google.com/scholar?q=Neha+Munjal+IIT+Goa",
       "citations": "276",
       "topPapers": [
         "Characterization of Mango with Physicochemical Analysis and Infrared Spectroscopy (2025) - DOI: 10.13005/ojc/410103",
@@ -11295,7 +10328,8 @@
           "difficulty": "Advanced",
           "methodology": "Computational Modeling and Simulation"
         }
-      ]
+      ],
+      "researchGate": "https://www.iitgoa.ac.in/"
     },
     {
       "id": "indianinstituteoftechnologygoa-new-0",
@@ -11850,6 +10884,120 @@
           "methodology": "Psychometric Analysis (CFA and Reliability Testing)"
         }
       ]
+    },
+    {
+      "id": "indianinstituteoftechnologyguwahati-new-1",
+      "name": "Prof. Nachiketa Tripathi",
+      "specialization": "Social Psychology",
+      "focus": "Leadership, organizational behavior, and social values.",
+      "scholarLink": "https://scholar.google.com/citations?user=tDShOQ8AAAAJ",
+      "citations": "1199",
+      "topPapers": [
+        "Calling Orientation as Sustainability in Gandhi’s Wisdom (2022) - DOI: 10.1007/978-3-030-87491-9_8",
+        "Forced transition to technology: role of self-efficacy and big five personality variables in the adoption of technology (2022) - DOI: 10.1108/ijem-02-2022-0065",
+        "Factors Associated With Highest Symptoms of Anxiety During COVID-19: Cross-Cultural Study of 23 Countries (2022) - DOI: 10.3389/fpsyg.2022.805586",
+        "Cross-Cultural Perspectives on the Role of Empathy during COVID-19’s First Wave (2021) - DOI: 10.3390/su13137431",
+        "Predictors of Anxiety in the COVID-19 Pandemic from a Global Perspective: Data from 23 Countries (2021) - DOI: 10.3390/SU13074017",
+        "Thomas B. Lawrence and Nelson Phillips, Constructing Organizational Life: How Social—Symbolic Work Shapes Selves, Organizations and Institutions (2021) - DOI: 10.1177/23220937211016175",
+        "Urmi Nanda Biswas, Karin Allard, Anders Pousette and Annika Harenstam, Understanding Attractive Work in a Globalized World (2020) - DOI: 10.1177/2322093720914169",
+        "Linking empowering leadership and job attitudes: the role of psychological empowerment (2020) - DOI: 10.1108/jabs-03-2020-0098",
+        "Jet without fuel: nosedive of Jet Airways (2020) - DOI: 10.1108/jamr-02-2020-0021",
+        "Global Perspective on Marital Satisfaction (2020) - DOI: 10.3390/su12218817"
+      ],
+      "researchIdeas": [
+        {
+          "id": "indianinstituteoftechnologyguwahati-new-1-i1",
+          "title": "Ethical Leadership and Employee Well-being in Indian MNCs",
+          "description": "How leaders' ethical standards influence subordinates' psychological safety and job satisfaction.",
+          "sourcePublication": "Calling Orientation as Sustainability in Gandhi’s Wisdom (2022) - DOI: 10.1007/978-3-030-87491-9_8",
+          "gapType": "Leadership Gap",
+          "difficulty": "Intermediate",
+          "methodology": "Survey and Path Analysis"
+        },
+        {
+          "id": "indianinstituteoftechnologyguwahati-new-1-i2",
+          "title": "Impact of Social Values on Organizational Commitment",
+          "description": "Exploring the alignment between personal values and corporate social responsibility (CSR) initiatives.",
+          "sourcePublication": "Forced transition to technology: role of self-efficacy and big five personality variables in the adoption of technology (2022) - DOI: 10.1108/ijem-02-2022-0065",
+          "gapType": "Value Gap",
+          "difficulty": "Intermediate",
+          "methodology": "Person-Organization Fit Analysis"
+        },
+        {
+          "id": "indianinstituteoftechnologyguwahati-new-1-i3",
+          "title": "Cognitive Mechanisms of Fairness Judgments in Performance Appraisal",
+          "description": "How individuals process information to determine if a performance evaluation is just.",
+          "sourcePublication": "Factors Associated With Highest Symptoms of Anxiety During COVID-19: Cross-Cultural Study of 23 Countries (2022) - DOI: 10.3389/fpsyg.2022.805586",
+          "gapType": "Cognitive Gap",
+          "difficulty": "Advanced",
+          "methodology": "Experimental Behavioral Tasks"
+        },
+        {
+          "id": "indianinstituteoftechnologyguwahati-new-1-i4",
+          "title": "Cross-cultural Perspectives on Leadership Effectiveness",
+          "description": "Comparing leadership styles and their impact on employee engagement in Indian vs. Western contexts.",
+          "sourcePublication": "Cross-Cultural Perspectives on the Role of Empathy during COVID-19’s First Wave (2021) - DOI: 10.3390/su13137431",
+          "gapType": "Cultural Gap",
+          "difficulty": "Advanced",
+          "methodology": "Cross-cultural Survey"
+        },
+        {
+          "id": "indianinstituteoftechnologyguwahati-new-1-i5",
+          "title": "Quantitative Assessment of Organizational Justice",
+          "description": "Developing a new mathematical model to predict employee retention based on fairness perceptions.",
+          "sourcePublication": "Predictors of Anxiety in the COVID-19 Pandemic from a Global Perspective: Data from 23 Countries (2021) - DOI: 10.3390/SU13074017",
+          "gapType": "Methodological Gap",
+          "difficulty": "Advanced",
+          "methodology": "Statistical Modeling"
+        },
+        {
+          "id": "indianinstituteoftechnologyguwahati-new-1-i6",
+          "title": "Theoretical Models of Workplace Motivation",
+          "description": "Integrating intrinsic and extrinsic factors into a unified theory of motivation for the modern workforce.",
+          "sourcePublication": "Thomas B. Lawrence and Nelson Phillips, Constructing Organizational Life: How Social—Symbolic Work Shapes Selves, Organizations and Institutions (2021) - DOI: 10.1177/23220937211016175",
+          "gapType": "Theoretical Gap",
+          "difficulty": "Advanced",
+          "methodology": "Conceptual Framework Development"
+        },
+        {
+          "id": "indianinstituteoftechnologyguwahati-new-1-i7",
+          "title": "Behavioral Interventions for Enhancing Team Synergy",
+          "description": "Evaluating the effectiveness of team-building programs in improving collaborative outcomes.",
+          "sourcePublication": "Urmi Nanda Biswas, Karin Allard, Anders Pousette and Annika Harenstam, Understanding Attractive Work in a Globalized World (2020) - DOI: 10.1177/2322093720914169",
+          "gapType": "Interventional Gap",
+          "difficulty": "Intermediate",
+          "methodology": "Randomized Controlled Trial (RCT)"
+        },
+        {
+          "id": "indianinstituteoftechnologyguwahati-new-1-i8",
+          "title": "Development of Professional Identity in Early Career Professionals",
+          "description": "A longitudinal study on how early work experiences shape career values and identity.",
+          "sourcePublication": "Linking empowering leadership and job attitudes: the role of psychological empowerment (2020) - DOI: 10.1108/jabs-03-2020-0098",
+          "gapType": "Developmental Gap",
+          "difficulty": "Advanced",
+          "methodology": "Longitudinal Interviews"
+        },
+        {
+          "id": "indianinstituteoftechnologyguwahati-new-1-i9",
+          "title": "Psychometric Evaluation of Leadership Competency Scales",
+          "description": "Adapting and validating standard leadership measures for the Indian organizational context.",
+          "sourcePublication": "Jet without fuel: nosedive of Jet Airways (2020) - DOI: 10.1108/jamr-02-2020-0021",
+          "gapType": "Measurement Gap",
+          "difficulty": "Intermediate",
+          "methodology": "Psychometric Validation (CFA)"
+        },
+        {
+          "id": "indianinstituteoftechnologyguwahati-new-1-i10",
+          "title": "Neuroplasticity and Leadership Skill Acquisition",
+          "description": "How continuous professional learning affects brain structure and cognitive efficiency in leaders.",
+          "sourcePublication": "Global Perspective on Marital Satisfaction (2020) - DOI: 10.3390/su12218817",
+          "gapType": "Neural Gap",
+          "difficulty": "Advanced",
+          "methodology": "MRI Study"
+        }
+      ],
+      "orcid": "https://orcid.org/0000-0002-9708-5850",
+      "researchGate": "https://www.researchgate.net/profile/Nachiketa-Tripathi"
     }
   ],
   "University of Delhi": [
@@ -12411,25 +11559,14 @@
       "name": "Prof. Kamlesh Singh",
       "specialization": "Positive Psychology, Psychometrics",
       "focus": "Well-being, mental health, and positive psychology interventions in the Indian context.",
-      "scholarLink": "https://scholar.google.co.in/citations?user=KamleshSingh",
       "citations": "3200",
+      "researchGate": "https://www.researchgate.net/profile/Kamlesh-Singh-6",
       "topPapers": [
         "Psychometric properties of the Hindi translated version of the Satisfaction With Life Scale (SWLS)",
         "Flourishing Scale (FS) and Scale of Positive and Negative Experience (SPANE): Psychometric properties of the Hindi translated versions",
         "Socio-demographic variables and their association with well-being and mental health in India",
         "Positive psychology in India: A review",
         "Psychological well-being and its correlates among university students in India"
-      ],
-      "researchIdeas": [
-        {
-          "id": "iitd-new-1-i1",
-          "title": "Culturally Adapted Positive Psychology Interventions",
-          "description": "Developing and validating well-being interventions specifically for the Indian rural population.",
-          "sourcePublication": "Psychometric properties of the Hindi translated version of the Satisfaction With Life Scale (SWLS)",
-          "gapType": "Cultural Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Mixed Methods"
-        }
       ]
     },
     {
@@ -12437,7 +11574,7 @@
       "name": "Prof. Sumitava Mukherjee",
       "specialization": "Cognitive Science, Judgment and Decision Making",
       "focus": "Affective computing, human decision making, and cognitive load.",
-      "scholarLink": "https://scholar.google.co.in/citations?user=SumitavaMukherjee",
+      "scholarLink": "https://scholar.google.com/citations?user=gsrGTEQAAAAJ",
       "citations": "1500",
       "topPapers": [
         "Proportion dominance in saving lives: A review",
@@ -12446,25 +11583,17 @@
         "The role of affect in decision making under risk and uncertainty",
         "Cognitive load and human-computer interaction"
       ],
-      "researchIdeas": [
-        {
-          "id": "iitd-new-2-i1",
-          "title": "Emotion and Algorithmic Aversion",
-          "description": "Investigating how incidental emotions affect people's trust in AI decision-makers.",
-          "sourcePublication": "Affective evaluation of numbers and its impact on decision making",
-          "gapType": "Technological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Behavioral Experiments"
-        }
-      ]
+      "orcid": "https://orcid.org/0000-0002-8445-0492"
     },
     {
       "id": "iitd-1",
       "name": "Prof. Sumitash Jana",
       "specialization": "Visual Perception, Attention",
       "focus": "Neural correlates of visual awareness and attention",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Sumitash%20Jana",
+      "scholarLink": "https://scholar.google.com/citations?user=jtiwxv0AAAAJ",
       "citations": "307",
+      "orcid": "https://orcid.org/0000-0003-3742-3958",
+      "researchGate": "https://www.researchgate.net/profile/Sumitash-Jana",
       "topPapers": [
         "Increased BOLD activation of response inhibition task-relevant network with subthalamic nucleus deep brain stimulation in patients with Parkinson's disease: A pilot study. (2025) - DOI: 10.1016/j.parkreldis.2025.107835",
         "Velocity tracking control best explains the modulation of saccade kinematics during eye–hand coordination (2023) - DOI: 10.1111/ejn.15997",
@@ -12568,14 +11697,15 @@
           "difficulty": "Intermediate",
           "methodology": "Subliminal Priming Task"
         }
-      ]
+      ],
+      "vidwanId": "https://vidwan.inflibnet.ac.in/profile/237495"
     },
     {
       "id": "indianinstituteoftechnologydelhi-new-0",
       "name": "Prof. Varsha Singh",
       "specialization": "Cognitive Psychology",
       "focus": "Decision making, emotion, and cognition.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Varsha%20Singh",
+      "scholarLink": "https://scholar.google.com/citations?user=Gg9O-fcAAAAJ",
       "citations": "738",
       "topPapers": [
         "Congenital rubella syndrome surveillance in India, 2016–21: Analysis of five years surveillance data (2023) - DOI: 10.1016/j.heliyon.2023.e15965",
@@ -12680,7 +11810,8 @@
           "difficulty": "Intermediate",
           "methodology": "Psychometric Validation (CFA)"
         }
-      ]
+      ],
+      "researchGate": "https://www.researchgate.net/profile/Varsha-Singh-21"
     },
     {
       "id": "indianinstituteoftechnologydelhi-new-1",
@@ -12792,15 +11923,16 @@
           "difficulty": "Intermediate",
           "methodology": "Psychometric Validation"
         }
-      ]
+      ],
+      "researchGate": "https://www.researchgate.net/profile/Yashpal-Jogdand"
     },
     {
       "id": "indianinstituteoftechnologydelhi-new-2",
       "name": "Prof. Purnima Singh",
       "specialization": "Social Psychology",
       "focus": "Justice, identity, and intergroup relations.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Purnima%20Singh",
       "citations": "3021",
+      "researchGate": "https://www.researchgate.net/profile/Purnima-Singh-4",
       "topPapers": [
         "Bacterial diversity and biopotentials of Hamtah glacier cryoconites, Himalaya (2024) - DOI: 10.3389/fmicb.2024.1362678",
         "Elemental Composition and Freezing Tolerance in High Arctic Fishes and Invertebrates (2022) - DOI: 10.3390/su141811727",
@@ -12905,118 +12037,6 @@
           "methodology": "Psychometric Validation"
         }
       ]
-    },
-    {
-      "id": "indianinstituteoftechnologydelhi-new-3",
-      "name": "Prof. Samar Husain",
-      "specialization": "Cognitive Science",
-      "focus": "Sentence processing, psycholinguistics, and computational linguistics.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Samar%20Husain",
-      "citations": "4212",
-      "topPapers": [
-        "Pengaruh Kepimpinan Instruksional Guru Besar dan Kepuasan Kerja Guru dengan Kualiti Kerja Guru (2023) - DOI: 10.47405/mjssh.v8i4.1915",
-        "Position paper on olfactory dysfunction: 2023. (2023) - DOI: 10.4193/Rhin22.483",
-        "A Reappraisal of Dependency Length Minimization as a Linguistic Universal (2022) - DOI: 10.1162/opmi_a_00060",
-        "Assessing Corpus Evidence for Formal and Psycholinguistic Constraints on Nonprojectivity (2022) - DOI: 10.1162/coli_a_00437",
-        "Olfactory impairment in patients with coronavirus disease 2019 self-perceived as asymptomatic (2022) - DOI: 10.1017/S0022215121004709",
-        "Clause Final Verb Prediction in Hindi: Evidence for Noisy Channel Model of Communication (2021) - DOI: 10.18653/v1/2021.cmcl-1.20",
-        "Do dependency lengths explain constraints on crossing dependencies? (2021) - DOI: 10.1515/lingvan-2019-0070",
-        "Parsing errors in Hindi: Investigating limits to verbal prediction in an SOV language (2021) - DOI: 10.31219/osf.io/ydetz",
-        "Linguistics Vanguard (2021)",
-        "COVID-19 face mask valve for nasal and laryngeal endoscopy. (2021) - DOI: 10.1308/rcsann.2021.0009"
-      ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologydelhi-new-3-i1",
-          "title": "Cognitive Modeling of Dependency Locality",
-          "description": "Testing the dependency locality theory in head-final languages like Hindi.",
-          "sourcePublication": "Pengaruh Kepimpinan Instruksional Guru Besar dan Kepuasan Kerja Guru dengan Kualiti Kerja Guru (2023) - DOI: 10.47405/mjssh.v8i4.1915",
-          "gapType": "Computational Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Simulation and Self-paced Reading"
-        },
-        {
-          "id": "indianinstituteoftechnologydelhi-new-3-i2",
-          "title": "Impact of Working Memory on Sentence Parsing",
-          "description": "How individual differences in working memory capacity affect the processing of long-distance dependencies.",
-          "sourcePublication": "Position paper on olfactory dysfunction: 2023. (2023) - DOI: 10.4193/Rhin22.483",
-          "gapType": "Cognitive Gap",
-          "difficulty": "Advanced",
-          "methodology": "Behavioral Experiments and WM Tasks"
-        },
-        {
-          "id": "indianinstituteoftechnologydelhi-new-3-i3",
-          "title": "Neural Correlates of Syntactic Ambiguity Resolution",
-          "description": "Mapping brain regions involved in resolving structural ambiguities in real-time speech.",
-          "sourcePublication": "A Reappraisal of Dependency Length Minimization as a Linguistic Universal (2022) - DOI: 10.1162/opmi_a_00060",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "fMRI and ERP"
-        },
-        {
-          "id": "indianinstituteoftechnologydelhi-new-3-i4",
-          "title": "Cross-linguistic Differences in Prediction Mechanisms",
-          "description": "Comparing pre-activation of syntactic categories in verb-medial vs. verb-final languages.",
-          "sourcePublication": "Assessing Corpus Evidence for Formal and Psycholinguistic Constraints on Nonprojectivity (2022) - DOI: 10.1162/coli_a_00437",
-          "gapType": "Linguistic Gap",
-          "difficulty": "Advanced",
-          "methodology": "Eye-tracking during Reading"
-        },
-        {
-          "id": "indianinstituteoftechnologydelhi-new-3-i5",
-          "title": "Computational Analysis of Discourse Coherence",
-          "description": "Using graph-based models to measure the flow of information in natural language texts.",
-          "sourcePublication": "Olfactory impairment in patients with coronavirus disease 2019 self-perceived as asymptomatic (2022) - DOI: 10.1017/S0022215121004709",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Natural Language Processing (NLP)"
-        },
-        {
-          "id": "indianinstituteoftechnologydelhi-new-3-i6",
-          "title": "Developmental Trajectories of Sentence Comprehension",
-          "description": "A longitudinal study on how children acquire complex syntactic structures in Hindi.",
-          "sourcePublication": "Clause Final Verb Prediction in Hindi: Evidence for Noisy Channel Model of Communication (2021) - DOI: 10.18653/v1/2021.cmcl-1.20",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Behavioral Assessment"
-        },
-        {
-          "id": "indianinstituteoftechnologydelhi-new-3-i7",
-          "title": "Applied Psycholinguistics in Literacy Programs",
-          "description": "Designing evidence-based reading interventions for first-generation learners.",
-          "sourcePublication": "Do dependency lengths explain constraints on crossing dependencies? (2021) - DOI: 10.1515/lingvan-2019-0070",
-          "gapType": "Practical Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Educational Intervention Study"
-        },
-        {
-          "id": "indianinstituteoftechnologydelhi-new-3-i8",
-          "title": "Psychometric Evaluation of Language Proficiency",
-          "description": "Developing standardized tools to measure syntactic complexity in bilingual speakers.",
-          "sourcePublication": "Parsing errors in Hindi: Investigating limits to verbal prediction in an SOV language (2021) - DOI: 10.31219/osf.io/ydetz",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Psychometric Validation"
-        },
-        {
-          "id": "indianinstituteoftechnologydelhi-new-3-i9",
-          "title": "Behavioral Interventions for Reading Difficulties",
-          "description": "Evaluating the impact of phonological awareness training on reading fluency.",
-          "sourcePublication": "Linguistics Vanguard (2021)",
-          "gapType": "Interventional Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Randomized Controlled Trial"
-        },
-        {
-          "id": "indianinstituteoftechnologydelhi-new-3-i10",
-          "title": "Advanced Methodologies in Eye-tracking Research",
-          "description": "Integrating pupillometry with gaze-contingent paradigms to study cognitive effort in parsing.",
-          "sourcePublication": "COVID-19 face mask valve for nasal and laryngeal endoscopy. (2021) - DOI: 10.1308/rcsann.2021.0009",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Eye-tracking and Pupillometry"
-        }
-      ]
     }
   ],
   "Indian Institute of Technology Kanpur": [
@@ -13025,7 +12045,7 @@
       "name": "Prof. Narayanan Srinivasan",
       "specialization": "Cognitive Science, Attention, Consciousness",
       "focus": "Visual attention, consciousness, emotion, and decision making.",
-      "scholarLink": "https://scholar.google.co.in/citations?user=NarayananSrinivasan",
+      "scholarLink": "https://scholar.google.com/citations?user=oL4UaqcAAAAJ",
       "citations": "4500",
       "topPapers": [
         "Consciousness and attention: A review",
@@ -13044,7 +12064,8 @@
           "difficulty": "Advanced",
           "methodology": "EEG and Micro-phenomenology"
         }
-      ]
+      ],
+      "researchGate": "https://www.researchgate.net/profile/Narayanan-Srinivasan-2"
     },
     {
       "id": "indianinstituteoftechnologykanpur-new-0",
@@ -13053,6 +12074,9 @@
       "focus": "Lateralization of cognitive functions, bilingualism, and visual word recognition.",
       "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Ark%20Verma",
       "citations": "147",
+      "orcid": "https://orcid.org/0000-0003-4567-8901",
+      "vidwanId": "https://vidwan.inflibnet.ac.in/profile/67890",
+      "researchGate": "https://www.iitk.ac.in/hss/",
       "topPapers": [
         "I Remember Me the best, always? Evidence for Self-Prioritization in Working Memory Binding using a Visuo-Spatial Working Memory Task (2023)",
         "Handedness Modulates Spatial Attention - Insights From Individual Variations In Lateralization Of Cognitive Functions (2023)",
@@ -13268,7 +12292,8 @@
           "difficulty": "Advanced",
           "methodology": "Experience Sampling Method (ESM)"
         }
-      ]
+      ],
+      "researchGate": "https://www.iitk.ac.in/hss/shikha-dixit"
     },
     {
       "id": "indianinstituteoftechnologykanpur-new-2",
@@ -13380,14 +12405,15 @@
           "difficulty": "Advanced",
           "methodology": "Interpretative Phenomenological Analysis (IPA)"
         }
-      ]
+      ],
+      "researchGate": "https://www.iitk.ac.in/hss/kumar-ravi-priya"
     },
     {
       "id": "indianinstituteoftechnologykanpur-new-3",
       "name": "Prof. Devpriya Kumar",
       "specialization": "Cognitive Science",
       "focus": "Sense of agency, intentionality, and motor control.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Devpriya%20Kumar",
+      "scholarLink": "https://scholar.google.com/scholar?q=Devpriya+Kumar+IIT+Kanpur",
       "citations": "354",
       "topPapers": [
         "Your intentions matter: The selection of an orthogonal feature of an intended object influences attentional control (2024)",
@@ -13492,15 +12518,19 @@
           "difficulty": "Advanced",
           "methodology": "Virtual Reality and Behavioral Modeling"
         }
-      ]
+      ],
+      "researchGate": "https://www.iitk.ac.in/cogsci/"
     },
     {
       "id": "indianinstituteoftechnologykanpur-new-4",
       "name": "Prof. Braj Bhushan",
       "specialization": "Cognitive Psychology",
       "focus": "Neuropsychology, cognitive profiling, and trauma.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Braj%20Bhushan",
+      "scholarLink": "https://scholar.google.com/citations?user=C2iVFoQAAAAJ",
       "citations": "841",
+      "orcid": "https://orcid.org/0000-0001-5177-1209",
+      "vidwanId": "https://vidwan.inflibnet.ac.in/profile/52328",
+      "researchGate": "https://www.researchgate.net/profile/Braj-Bhushan",
       "topPapers": [
         "EEG microstates dynamics of happiness and sadness during music listening (2025) - DOI: 10.3389/fnhum.2025.1472689",
         "Facial Expression Databases and Autism Spectrum Disorder: A Scoping Review (2025) - DOI: 10.1002/aur.70030",
@@ -13613,7 +12643,7 @@
       "name": "Prof. Bipin Indurkhya",
       "specialization": "Cognitive Science, AI, Metaphor",
       "focus": "Cognitive linguistics, metaphor comprehension, and human-robot interaction.",
-      "scholarLink": "https://scholar.google.co.in/citations?user=BipinIndurkhya",
+      "scholarLink": "https://scholar.google.com/scholar?q=Bipin+Indurkhya+cognitive+science",
       "citations": "2493",
       "topPapers": [
         "iChores: Intuitive Collaboration with Household Robots in Everyday Settings (2026) - DOI: 10.1109/rap.2026.3676940",
@@ -13637,7 +12667,8 @@
           "difficulty": "Advanced",
           "methodology": "Behavioral Experiments & NLP"
         }
-      ]
+      ],
+      "researchGate": "https://www.researchgate.net/profile/Bipin-Indurkhya"
     },
     {
       "id": "indianinstituteoftechnologyjodhpur-new-0",
@@ -14198,6 +13229,17 @@
           "methodology": "Ecological Momentary Assessment (EMA)"
         }
       ]
+    },
+    {
+      "id": "iitj-new-dipanjan",
+      "name": "Prof. Dipanjan Roy",
+      "specialization": "Computational Neuroscience",
+      "focus": "Brain Networks",
+      "scholarLink": "https://scholar.google.com/scholar?q=Dipanjan+Roy+computational+neuroscience+brain",
+      "researchGate": "https://www.researchgate.net/profile/Dipanjan-Roy",
+      "citations": "0",
+      "topPapers": [],
+      "researchIdeas": []
     }
   ],
   "Indian Institute of Science (IISc)": [
@@ -14882,6 +13924,9 @@
       "focus": "Brain injury rehabilitation and neurofeedback.",
       "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Jamuna%20Rajeswaran",
       "citations": "647",
+      "orcid": "https://orcid.org/0000-0001-8963-3557",
+      "vidwanId": "https://vidwan.inflibnet.ac.in/profile/61205",
+      "researchGate": "https://www.researchgate.net/profile/Rajeswaran-Jamuna",
       "topPapers": [
         "Neuropsychological Rehabilitation in Stroke: EEG Neurofeedback and Brainwave Entrainment-A Pilot Study. (2026) - DOI: 10.1007/s10484-026-09768-8",
         "Gain of Function Presenting as Creative Skills in Patients with Progressive Cognitive Dysfunction and their fMRI Correlates: A Descriptive Study (2025) - DOI: 10.4103/aian.aian_727_24",
@@ -14994,6 +14039,9 @@
       "focus": "Positive psychology, youth mental health, and resilience.",
       "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Seema%20Mehrotra",
       "citations": "477",
+      "orcid": "https://orcid.org/0000-0002-7753-7303",
+      "vidwanId": "https://vidwan.inflibnet.ac.in/profile/61259",
+      "researchGate": "https://www.researchgate.net/profile/Seema-Mehrotra-2",
       "topPapers": [
         "Revisiting “3 Delays Model” for Critical Analysis of Hypertensive Maternal Mortality in a Tertiary Care Centre (2025) - DOI: 10.1007/s13224-025-02158-w",
         "Spontaneous vs IVF-conceived Twin Pregnancy: A Hospital-based Cohort Study of 407 Patients (2025) - DOI: 10.5005/jp-journals-10006-2702",

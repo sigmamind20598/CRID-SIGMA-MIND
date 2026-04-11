@@ -22,6 +22,7 @@ import {
   AlertCircle,
   CheckCircle2,
   Users,
+  User,
   Instagram,
   ExternalLink,
   Menu,
@@ -39,6 +40,7 @@ import { FACULTY_DATABASE, NEWS_DATABASE, getFacultyForInstitute } from './stati
 import { PdfModal } from './components/PdfModal';
 import { loadRazorpay } from './utils/razorpay';
 import BrainBackground from './components/BrainBackground';
+import { BrainMapAnimation } from './components/BrainMapAnimation';
 
 const isSuperUser = (email: string, phone: string) => {
   const e = email?.toLowerCase().trim() || '';
@@ -46,7 +48,7 @@ const isSuperUser = (email: string, phone: string) => {
   return e === 'sigmamind20598@gmail.com' || p === '7092884311' || p === '8130330373';
 };
 
-const MAX_FREE_PROPOSALS = 0; // Set to 0 to disable free proposals
+const MAX_FREE_PROPOSALS = 1; // Set to 1 to enable free proposals
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -184,7 +186,15 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isAppInitializing, setIsAppInitializing] = useState(true);
   const [view, setView] = useState<'faculty' | 'topics' | 'proposal' | 'profile'>('faculty');
-  const [profDetails, setProfDetails] = useState<{ bio: string, publications: string[], citationTrend: any[], publicationTrend: any[] } | null>(null);
+  const [profDetails, setProfDetails] = useState<{ 
+    bio: string, 
+    publications: string[], 
+    citationTrend: any[], 
+    publicationTrend: any[],
+    orcid?: string,
+    vidwanId?: string,
+    researchGate?: string
+  } | null>(null);
   const [newInstituteLink, setNewInstituteLink] = useState('');
   const [isAddingInstitute, setIsAddingInstitute] = useState(false);
   const [news, setNews] = useState<NewsItem[]>([]);
@@ -220,6 +230,8 @@ export default function App() {
 
   const [searchTerm, setSearchTerm] = useState('');
   const [lastError, setLastError] = useState<string | null>(null);
+  const [showBrainAnimation, setShowBrainAnimation] = useState(false);
+  const [animationKeywords, setAnimationKeywords] = useState<string[]>([]);
 
   const filteredInstitutes = institutesList.filter(inst => 
     inst.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -284,7 +296,9 @@ export default function App() {
 
   const handleProfessorClick = async (prof: Professor) => {
     setSelectedProfessor(prof);
-    setIsLoading(true);
+    setProfDetails(null); // Clear previous details
+    // We don't set global isLoading here anymore to allow the profile header to show immediately
+    // Instead, the profile view handles its own loading state via profDetails null check
     setView('profile');
     
     // Use static data if available
@@ -293,47 +307,98 @@ export default function App() {
         bio: prof.focus || "Research profile information.",
         publications: prof.topPapers,
         citationTrend: prof.citationTrend || [],
-        publicationTrend: prof.publicationTrend || []
+        publicationTrend: prof.publicationTrend || [],
+        orcid: prof.orcid,
+        vidwanId: prof.vidwanId,
+        researchGate: prof.researchGate
       });
-      setIsLoading(false);
       return;
     }
 
     try {
       const details = await getProfessorPublications(prof.name, selectedInstitute?.name || '', prof.scholarLink);
-      setProfDetails(details);
+      // Merge with static IDs from prof object if AI didn't find them
+      setProfDetails({
+        ...details,
+        orcid: prof.orcid || details.orcid,
+        vidwanId: prof.vidwanId || details.vidwanId,
+        researchGate: prof.researchGate || details.researchGate
+      });
     } catch (error) {
       console.error("Failed to load professor profile:", error);
       setProfDetails({
         bio: "Information currently unavailable. Please try again later.",
         publications: [],
         citationTrend: [],
-        publicationTrend: []
+        publicationTrend: [],
+        orcid: prof.orcid,
+        vidwanId: prof.vidwanId,
+        researchGate: prof.researchGate
       });
-    } finally {
-      setIsLoading(false);
     }
   };
 
   const handleProfessorSelect = async (prof: Professor) => {
     setSelectedProfessor(prof);
-    
-    // Use static research ideas if available
-    if (prof.researchIdeas && prof.researchIdeas.length > 0) {
-      setTopics(prof.researchIdeas);
-      setView('topics');
-      return;
-    }
-
-    setIsLoading(true);
     setTopics([]); // Clear previous topics
     setLastError(null);
     
+    // Ensure we have profDetails (publications) for the animation
+    if (!profDetails || selectedProfessor?.id !== prof.id) {
+      if (prof.topPapers && prof.topPapers.length > 0) {
+        setProfDetails({
+          bio: prof.focus || "Research profile information.",
+          publications: prof.topPapers,
+          citationTrend: prof.citationTrend || [],
+          publicationTrend: prof.publicationTrend || [],
+          orcid: prof.orcid,
+          vidwanId: prof.vidwanId,
+          researchGate: prof.researchGate
+        });
+      } else {
+        // Fetch details if not in static data
+        try {
+          const details = await getProfessorPublications(prof.name, selectedInstitute?.name || '', prof.scholarLink);
+          setProfDetails({
+            ...details,
+            orcid: prof.orcid || details.orcid,
+            vidwanId: prof.vidwanId || details.vidwanId,
+            researchGate: prof.researchGate || details.researchGate
+          });
+        } catch (error) {
+          console.error("Failed to load professor profile for animation:", error);
+        }
+      }
+    }
+
+    // 1. Handle Static Data Case
+    if (prof.researchIdeas && prof.researchIdeas.length > 0) {
+      setTopics(prof.researchIdeas);
+      // Extract keywords from specialization or focus for the animation
+      let extracted: string[] = [];
+      if (prof.focus) {
+        extracted = [...extracted, ...prof.focus.split(/[,.]/).map(s => s.trim()).filter(Boolean)];
+      }
+      if (prof.specialization) {
+        extracted = [...extracted, ...prof.specialization.split(/[,.]/).map(s => s.trim()).filter(Boolean)];
+      }
+      
+      const keywords = extracted.length > 0 ? extracted : ["Research", "Innovation", "Methodology"];
+      setAnimationKeywords(keywords);
+      setShowBrainAnimation(true);
+      return;
+    }
+
+    // 2. Handle AI Generation Case (with Firestore Caching)
+    setIsLoading(true);
+    setLoadingMessage("Analyzing research profile and identifying gaps...");
+    
     try {
-      const generatedTopics = await generateResearchTopics(prof, selectedInstitute?.name || '');
-      if (generatedTopics && generatedTopics.length > 0) {
-        setTopics(generatedTopics);
-        setView('topics');
+      const result = await generateResearchTopics(prof, selectedInstitute?.name || '');
+      if (result && result.topics.length > 0) {
+        setAnimationKeywords(result.keywords.slice(0, 6));
+        setTopics(result.topics);
+        setShowBrainAnimation(true);
       } else {
         setLastError("Failed to generate research topics. Please try again.");
       }
@@ -342,6 +407,7 @@ export default function App() {
       setLastError(error instanceof Error ? error.message : "An unexpected error occurred while generating topics.");
     } finally {
       setIsLoading(false);
+      setLoadingMessage(null);
     }
   };
 
@@ -361,11 +427,60 @@ export default function App() {
       setShowLeadModal(true);
       return;
     }
-    if (proposalsGenerated >= MAX_FREE_PROPOSALS && !isSuperUser(userEmail, userPhone)) {
+    
+    // Always show pricing modal after details are captured (if not superuser)
+    if (!isSuperUser(userEmail, userPhone)) {
       setShowPricingModal(true);
       return;
     }
-    setShowLeadModal(true);
+    
+    // Superuser bypass
+    handleStartProposalGeneration(topic);
+  };
+
+  const handleStartProposalGeneration = async (topic: ResearchTopic) => {
+    setSelectedTopic(topic);
+    setIsLoading(true);
+    setLoadingMessage("Drafting your research proposal... This will take 3-4 minutes. While you wait, go to the services menu for guidance and custom made proposals by current PhD scholars.");
+    
+    try {
+      const fullProposal = await generateFullProposal(
+        topic, 
+        selectedProfessor?.name || '', 
+        selectedProfessor?.specialization || '',
+        selectedInstitute?.name || ''
+      );
+      
+      // Save to cache
+      const cacheKey = `proposal_${topic.id}_${selectedProfessor?.id}`;
+      localStorage.setItem(cacheKey, fullProposal);
+      
+      setProposalsGenerated(prev => {
+        const newVal = prev + 1;
+        localStorage.setItem('proposalsGenerated', newVal.toString());
+        return newVal;
+      });
+      
+      setProposal(fullProposal);
+      
+      // Send Emails
+      await sendProposalEmails(
+        userEmail,
+        userPhone,
+        userName,
+        fullProposal,
+        topic.title,
+        false
+      );
+      
+    } catch (error) {
+      console.error("Error in handleStartProposalGeneration:", error);
+      setProposal(error instanceof Error ? error.message : "An unexpected error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
+      setLoadingMessage(null);
+      setView('proposal');
+    }
   };
 
   const handleLeadSubmit = async (e: React.FormEvent) => {
@@ -385,53 +500,12 @@ export default function App() {
     
     setIsProposalUnlocked(isSuperUser(userEmail, userPhone));
     
-    if (proposalsGenerated >= MAX_FREE_PROPOSALS && !isSuperUser(userEmail, userPhone)) {
+    if (!isSuperUser(userEmail, userPhone)) {
       setShowPricingModal(true);
       return;
     }
 
-    setSelectedTopic(pendingTopic);
-    setIsLoading(true);
-    setLoadingMessage("Drafting your free proposal... This will take 3-4 minutes. While you wait, go to the services menu for guidance and custom made proposals by current PhD scholars.");
-    
-    try {
-      const fullProposal = await generateFullProposal(
-        pendingTopic, 
-        selectedProfessor?.name || '', 
-        selectedProfessor?.specialization || '',
-        selectedInstitute?.name || ''
-      );
-      
-      // Save to cache
-      const cacheKey = `proposal_${pendingTopic.id}_${selectedProfessor?.id}`;
-      localStorage.setItem(cacheKey, fullProposal);
-      
-      setProposalsGenerated(prev => {
-        const newVal = prev + 1;
-        localStorage.setItem('proposalsGenerated', newVal.toString());
-        return newVal;
-      });
-      
-      setProposal(fullProposal);
-      
-      // Send Emails
-      await sendProposalEmails(
-        userEmail,
-        userPhone,
-        userName,
-        fullProposal,
-        pendingTopic.title,
-        false
-      );
-      
-    } catch (error) {
-      console.error("Error in handleLeadSubmit:", error);
-      setProposal(error instanceof Error ? error.message : "An unexpected error occurred. Please try again.");
-    } finally {
-      setIsLoading(false);
-      setLoadingMessage(null);
-      setView('proposal');
-    }
+    handleStartProposalGeneration(pendingTopic);
   };
 
   const handleUnlockProposal = () => {
@@ -440,7 +514,7 @@ export default function App() {
       return;
     }
     loadRazorpay(
-      100,
+      99,
       'Unlock Full Research Proposal + PDF',
       userName,
       userEmail,
@@ -466,37 +540,8 @@ export default function App() {
       userName,
       userEmail,
       userPhone,
-      async (response) => {
-        // On Success
-        setIsLoading(true);
-        setLoadingMessage("Payment successful! Processing your request... This will take 3-4 minutes.");
-        
-        try {
-          // Generate the proposal for the admin
-          const fullProposal = await generateFullProposal(
-            pendingTopic, 
-            selectedProfessor?.name || '', 
-            selectedProfessor?.specialization || '',
-            selectedInstitute?.name || ''
-          );
-
-          // Send Emails for paid request (proposal generated and sent ONLY to admin)
-          await sendProposalEmails(
-            userEmail,
-            userPhone,
-            userName,
-            `Payment ID: ${response.razorpay_payment_id}\nType: ${type}\n\n${fullProposal}`,
-            pendingTopic.title,
-            true
-          );
-          alert("Payment successful and request processed! We will send you the proposal(s) within 12 hours.");
-        } catch (error) {
-          console.error("Error sending paid request:", error);
-          alert("Payment was successful, but we had trouble sending the email. Please contact us with your Payment ID: " + response.razorpay_payment_id);
-        } finally {
-          setIsLoading(false);
-          setLoadingMessage(null);
-        }
+      (response) => {
+        handleStartProposalGeneration(pendingTopic);
       }
     );
   };
@@ -549,7 +594,6 @@ export default function App() {
         "h-24 border-b flex items-center px-4 md:px-8 shrink-0 z-50 transition-colors duration-500 relative",
         "bg-black/40 border-white/5 backdrop-blur-md text-white justify-between"
       )}>
-        {/* Mobile Menu Toggle */}
         <div className="md:hidden flex-1 flex items-center">
           <button 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -611,9 +655,9 @@ export default function App() {
           <span className="hidden md:block text-[6px] font-bold tracking-[0.1em] text-white/40 uppercase mt-1 text-center whitespace-nowrap">
             Cognitive Research Intelligence Domain
           </span>
-          <div className="mt-1 md:mt-2 px-2 md:px-3 py-0.5 md:py-1 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 rounded-full flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
-            <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span className="text-[6px] md:text-[8px] font-black tracking-widest text-emerald-300 uppercase">Incubated at IIT Delhi</span>
+          <div className="mt-1 md:mt-2 px-2 md:px-3 py-0.5 md:py-1 bg-emerald-500/5 border border-emerald-500/20 rounded-full flex items-center gap-1.5 backdrop-blur-sm">
+            <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span className="text-[6px] md:text-[8px] font-black tracking-[0.2em] text-emerald-400 uppercase">Incubated at IIT Delhi</span>
           </div>
         </div>
 
@@ -857,10 +901,31 @@ export default function App() {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3, duration: 0.8 }}
-                        className="text-7xl md:text-8xl font-medium tracking-tight mb-16 leading-[0.9]"
+                        className="text-6xl md:text-7xl lg:text-8xl font-medium tracking-tight mb-8 leading-[1.1]"
                       >
-                        Simplifying <br /> Research Proposals
+                        Simplifying your <br /> path to PhD
                       </motion.h1>
+
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.4, duration: 0.8 }}
+                        className="relative w-40 h-48 mb-8 flex flex-col items-center"
+                      >
+                        {/* The Cap and Degree at the end of the road (top) */}
+                        <div className="absolute top-0 z-10 flex items-center gap-3 text-emerald-400 drop-shadow-[0_0_15px_rgba(16,185,129,0.5)] bg-[#050505] p-4 rounded-2xl border border-emerald-500/20">
+                          <GraduationCap size={40} />
+                          <FileText size={32} />
+                        </div>
+                        
+                        {/* The Road winding up to the cap */}
+                        <svg viewBox="0 0 100 120" className="absolute top-12 w-full h-36">
+                          {/* Road Base */}
+                          <path d="M 50 10 C 90 50, 10 80, 50 120" fill="none" stroke="#1a1a1a" strokeWidth="24" strokeLinecap="round" />
+                          {/* Road Dashed Line */}
+                          <path d="M 50 10 C 90 50, 10 80, 50 120" fill="none" stroke="#10b981" strokeWidth="2" strokeDasharray="6 6" />
+                        </svg>
+                      </motion.div>
                       
                       <motion.div 
                         initial={{ opacity: 0, y: 20 }}
@@ -893,6 +958,14 @@ export default function App() {
                           <div key={prof.id} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
                             <h3 className="text-xl font-bold text-white mb-2">{prof.name}</h3>
                             <p className="text-sm text-white/60 mb-4">{prof.specialization}</p>
+                            
+                            {(prof.orcid || prof.vidwanId || prof.researchGate) && (
+                              <div className="flex gap-2 mb-4">
+                                {prof.orcid && <div className="w-5 h-5 rounded bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center" title="ORCID Available"><ExternalLink size={10} className="text-emerald-400" /></div>}
+                                {prof.vidwanId && <div className="w-5 h-5 rounded bg-blue-500/10 border border-blue-500/20 flex items-center justify-center" title="Vidwan Available"><GraduationCap size={10} className="text-blue-400" /></div>}
+                                {prof.researchGate && <div className="w-5 h-5 rounded bg-orange-500/10 border border-orange-500/20 flex items-center justify-center" title="ResearchGate Available"><Database size={10} className="text-orange-400" /></div>}
+                              </div>
+                            )}
                             
                             {prof.researchIdeas && prof.researchIdeas.length > 0 && (
                               <div className="mb-4 space-y-2">
@@ -1111,19 +1184,116 @@ export default function App() {
                   </motion.div>
                 )}
 
-                {mode === 'directory' && view === 'profile' && selectedProfessor && profDetails && (
+                {mode === 'directory' && view === 'profile' && selectedProfessor && (
                   <motion.div
                     key="profile"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
                     className="max-w-4xl mx-auto space-y-8"
                   >
-                    <div className="bg-white/5 border border-white/10 rounded-3xl p-8">
-                      <h2 className="text-3xl font-bold mb-2">{selectedProfessor.name}</h2>
-                      <p className="text-emerald-400 font-medium mb-6">{selectedProfessor.specialization}</p>
-                      <div className="prose prose-invert max-w-none">
-                        <p className="text-white/80 leading-relaxed">{profDetails.bio}</p>
+                    {/* Profile Header */}
+                    <div className="relative overflow-hidden bg-white/5 border border-white/10 rounded-3xl">
+                      {/* Decorative Background */}
+                      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-r from-emerald-500/10 via-blue-500/10 to-purple-500/10" />
+                      
+                      <div className="relative p-8 pt-12">
+                        <button 
+                          onClick={() => setView('faculty')}
+                          className="absolute top-6 left-8 text-white/40 hover:text-white flex items-center gap-2 text-xs font-bold uppercase tracking-widest transition-colors group"
+                        >
+                          <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
+                          Back to Directory
+                        </button>
+
+                        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
+                          <div className="flex items-center gap-6">
+                            <div className="w-24 h-24 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-blue-500/20 border border-white/10 flex items-center justify-center shadow-2xl">
+                              <User size={48} className="text-white/20" />
+                            </div>
+                            <div>
+                              <h2 className="text-4xl font-bold mb-2 tracking-tight">{selectedProfessor.name}</h2>
+                              <div className="flex items-center gap-3">
+                                <span className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold rounded-full uppercase tracking-wider">
+                                  {selectedProfessor.department}
+                                </span>
+                                <span className="text-white/40 text-sm font-medium">
+                                  {selectedProfessor.specialization}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="flex flex-col items-start md:items-end gap-3">
+                            <p className="text-[10px] font-black uppercase tracking-[0.2em] text-white/20">Research Identifiers</p>
+                            <div className="flex flex-wrap items-center gap-2">
+                              {profDetails?.orcid ? (
+                                <a 
+                                  href={profDetails.orcid} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="h-11 px-5 rounded-xl bg-white/5 border border-white/10 flex items-center gap-3 hover:bg-emerald-500/20 hover:border-emerald-500/50 transition-all group shadow-lg"
+                                  title="ORCID Profile"
+                                >
+                                  <ExternalLink size={16} className="text-white/60 group-hover:text-emerald-400" />
+                                  <span className="text-xs font-bold text-white/60 group-hover:text-white uppercase tracking-widest">ORCID</span>
+                                </a>
+                              ) : profDetails ? null : (
+                                <div className="h-11 w-28 bg-white/5 animate-pulse rounded-xl" />
+                              )}
+                              
+                              {profDetails?.vidwanId ? (
+                                <a 
+                                  href={profDetails.vidwanId} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="h-11 px-5 rounded-xl bg-white/5 border border-white/10 flex items-center gap-3 hover:bg-blue-500/20 hover:border-blue-500/50 transition-all group shadow-lg"
+                                  title="Vidwan Profile"
+                                >
+                                  <GraduationCap size={16} className="text-white/60 group-hover:text-blue-400" />
+                                  <span className="text-xs font-bold text-white/60 group-hover:text-white uppercase tracking-widest">Vidwan</span>
+                                </a>
+                              ) : profDetails ? null : (
+                                <div className="h-11 w-28 bg-white/5 animate-pulse rounded-xl" />
+                              )}
+
+                              {profDetails?.researchGate ? (
+                                <a 
+                                  href={profDetails.researchGate} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="h-11 px-5 rounded-xl bg-white/5 border border-white/10 flex items-center gap-3 hover:bg-orange-500/20 hover:border-orange-500/50 transition-all group shadow-lg"
+                                  title="ResearchGate Profile"
+                                >
+                                  <Database size={16} className="text-white/60 group-hover:text-orange-400" />
+                                  <span className="text-xs font-bold text-white/60 group-hover:text-white uppercase tracking-widest">ResearchGate</span>
+                                </a>
+                              ) : profDetails ? null : (
+                                <div className="h-11 w-28 bg-white/5 animate-pulse rounded-xl" />
+                              )}
+
+                              {profDetails && !profDetails.orcid && !profDetails.vidwanId && !profDetails.researchGate && (
+                                <p className="text-xs text-white/20 italic bg-white/5 px-4 py-2 rounded-lg border border-white/5">No public identifiers found</p>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="mt-10 pt-8 border-t border-white/5">
+                          <div className="prose prose-invert max-w-none">
+                            {profDetails ? (
+                              <p className="text-white/70 leading-relaxed text-lg italic">
+                                "{profDetails.bio}"
+                              </p>
+                            ) : (
+                              <div className="space-y-3">
+                                <div className="h-4 w-full bg-white/5 animate-pulse rounded" />
+                                <div className="h-4 w-5/6 bg-white/5 animate-pulse rounded" />
+                                <div className="h-4 w-4/6 bg-white/5 animate-pulse rounded" />
+                              </div>
+                            )}
+                          </div>
+                        </div>
                       </div>
                     </div>
                     
@@ -1133,27 +1303,37 @@ export default function App() {
                         Recent Publications
                       </h3>
                       <div className="space-y-4">
-                        {profDetails.publications.map((pub, i) => {
-                          const hasDoi = pub.includes(' - DOI: ');
-                          const [titlePart, doiPart] = hasDoi ? pub.split(' - DOI: ') : [pub, null];
-                          const searchUrl = `https://scholar.google.com/scholar?q=${encodeURIComponent(titlePart)}`;
-                          
-                          return (
-                            <div key={i} className="bg-black/40 p-4 rounded-xl border border-white/5 flex flex-col gap-2">
-                              <p className="text-white/80 text-sm">{titlePart}</p>
-                              <div className="flex gap-4 mt-1">
-                                {doiPart && (
-                                  <a href={`https://doi.org/${doiPart}`} target="_blank" rel="noopener noreferrer" className="text-xs text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors">
-                                    <ExternalLink size={12} /> DOI: {doiPart}
-                                  </a>
-                                )}
-                                <a href={searchUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1 transition-colors">
-                                  <Search size={12} /> Google Scholar
-                                </a>
-                              </div>
-                            </div>
-                          );
-                        })}
+                        {profDetails ? (
+                          profDetails.publications.length > 0 ? (
+                            profDetails.publications.map((pub, i) => {
+                              const hasDoi = pub.includes(' - DOI: ');
+                              const [titlePart, doiPart] = hasDoi ? pub.split(' - DOI: ') : [pub, null];
+                              const searchUrl = `https://scholar.google.com/scholar?q=${encodeURIComponent(titlePart)}`;
+                              
+                              return (
+                                <div key={i} className="bg-black/40 p-4 rounded-xl border border-white/5 flex flex-col gap-2">
+                                  <p className="text-white/80 text-sm">{titlePart}</p>
+                                  <div className="flex gap-4 mt-1">
+                                    {doiPart && (
+                                      <a href={`https://doi.org/${doiPart}`} target="_blank" rel="noopener noreferrer" className="text-xs text-emerald-400 hover:text-emerald-300 flex items-center gap-1 transition-colors">
+                                        <ExternalLink size={12} /> DOI: {doiPart}
+                                      </a>
+                                    )}
+                                    <a href={searchUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:text-blue-300 flex items-center gap-1 transition-colors">
+                                      <Search size={12} /> Google Scholar
+                                    </a>
+                                  </div>
+                                </div>
+                              );
+                            })
+                          ) : (
+                            <p className="text-white/40 text-sm italic">No publications found.</p>
+                          )
+                        ) : (
+                          [...Array(3)].map((_, i) => (
+                            <div key={i} className="h-20 w-full bg-white/5 animate-pulse rounded-xl" />
+                          ))
+                        )}
                       </div>
                     </div>
                   </motion.div>
@@ -1753,7 +1933,9 @@ export default function App() {
                 type="submit"
                 className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] mt-4"
               >
-                {proposalsGenerated >= MAX_FREE_PROPOSALS && !isSuperUser(userEmail, userPhone) ? "Continue to Payment 💳" : "Generate Free Proposal 🚀"}
+                {proposalsGenerated >= MAX_FREE_PROPOSALS && !isSuperUser(userEmail, userPhone) 
+                  ? "Pay ₹99 & Save Your Career 🧠" 
+                  : "Generate Free Proposal 🚀"}
               </button>
             </form>
           </div>
@@ -1774,16 +1956,16 @@ export default function App() {
             </div>
             <h3 className="text-2xl font-bold mb-4">Wait a second, Einstein! 🧠</h3>
             <p className="text-white/60 mb-6 leading-relaxed">
-              Our app uses complex AI models that cost us more than a PhD student's monthly coffee budget! ☕️
+              Our AI is currently sweating bullets trying to calculate your future. 🥵
               <br /><br />
-              To keep the servers running, additional proposals cost just <strong className="text-emerald-400">₹100 each</strong>.
+              To keep the servers from exploding, additional proposals cost just <strong className="text-emerald-400">₹99</strong> (that's cheaper than a fancy latte and way more useful for your career! ☕️).
             </p>
             <div className="flex flex-col gap-3 mb-6">
               <button 
-                onClick={() => handleManualPaidRequest(100, 'single')}
+                onClick={() => handleManualPaidRequest(99, 'single')}
                 className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
               >
-                Pay ₹100 for 1 Proposal
+                Pay ₹99 & Save Your Career 🧠
               </button>
             </div>
             <button 
@@ -1793,10 +1975,23 @@ export default function App() {
               }}
               className="w-full mt-3 bg-transparent border border-white/20 hover:bg-white/5 text-white py-3 rounded-xl font-bold transition-all"
             >
-              Explore Other Services
+              I'll take my chances elsewhere
             </button>
           </div>
         </div>
+      )}
+
+      {showBrainAnimation && selectedProfessor && (
+        <BrainMapAnimation 
+          professorName={selectedProfessor.name}
+          keywords={animationKeywords}
+          specialization={selectedProfessor.specialization}
+          publications={profDetails?.publications || []}
+          onComplete={() => {
+            setShowBrainAnimation(false);
+            setView('topics');
+          }}
+        />
       )}
 
     </div>

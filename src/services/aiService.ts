@@ -1,43 +1,13 @@
 import { Professor, ResearchTopic, NewsItem } from "../types";
-import { GoogleGenAI, HarmCategory, HarmBlockThreshold, Type } from "@google/genai";
 import { IDEA_GENERATION_INSTRUCTIONS } from "./ideaInstructions.ts";
 import { PROPOSAL_SYSTEM_INSTRUCTIONS } from "./proposalInstructions.ts";
-
-async function callGroq(systemPrompt: string, userPrompt: string): Promise<string> {
-  // @ts-ignore
-  const apiKey = import.meta.env.VITE_GROQ_API_KEY;
-  
-  if (!apiKey) {
-    throw new Error("Missing Groq API Key");
-  }
-
-  const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
-      model: "llama-3.3-70b-versatile",
-      messages: [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: userPrompt }
-      ],
-      max_tokens: 2000,
-      temperature: 0.7
-    })
-  });
-
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(`Groq API error: ${error.error?.message}`);
-  }
-
-  const data = await response.json();
-  return data.choices[0]?.message?.content || "";
-}
+import { GoogleGenAI } from "@google/genai";
+import { db } from "../firebase";
+import { doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 
 const CACHE_TTL = 3600000; // 1 hour in milliseconds
+
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || '' });
 
 function getCachedData<T>(key: string): T | null {
   const cached = localStorage.getItem(key);
@@ -59,70 +29,63 @@ function setCachedData<T>(key: string, data: T) {
   localStorage.setItem(key, JSON.stringify({ data, timestamp: Date.now() }));
 }
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
-
 async function callGeminiAI(task: string, params: any = {}, retryCount = 0): Promise<{ text: string }> {
-  let prompt = "";
-  let systemInstruction = "";
-  let tools: any[] = [];
-  let responseMimeType = "text/plain";
-  let responseSchema: any = undefined;
-
-  switch (task) {
-    case 'news':
-      prompt = `Search for the 10 most recent and relevant updates, notifications, or research news related to Psychology, Neuroscience, and PhD admissions in India (2024-2025).
-      Return a JSON array of objects with exactly these keys: title, source, url, category, summary, imageKeyword.`;
-      tools = [{ googleSearch: {} }];
-      break;
-    case 'faculty':
-      prompt = `Search for the top 5-8 professors at ${params.instituteName} in the field of Psychology or Cognitive Neuroscience.
-      Return a JSON array of objects with these keys: name, department, researchArea, specialization, focus, scholarLink, citations.`;
-      tools = [{ googleSearch: {} }];
-      break;
-    case 'publications':
-      prompt = `Search for the professional profile of Prof. ${params.professorName} at ${params.institute} using Google Search. ${params.scholarLink && params.scholarLink !== "#" ? `You MUST use this URL as your primary source of information: ${params.scholarLink}` : ''}
-      Return the data as a JSON object with keys: bio, publications (array of strings), citationTrend (array of {year, count}), publicationTrend (array of {year, count}). If trends are not available, return empty arrays.`;
-      tools = [{ googleSearch: {} }];
-      break;
-    case 'topics':
-      prompt = `Professor Profile: ${params.professor.name}, ${params.instituteName}. Focus: ${params.professor.focus}. Specialization: ${params.professor.specialization}. Recent Publications: ${params.pubData?.publications?.length > 0 ? params.pubData.publications.join("\n") : "None found. Base ideas on focus and specialization."}. CRITICAL REQUIREMENT: You MUST generate EXACTLY 10 PhD research ideas.`;
-      systemInstruction = IDEA_GENERATION_INSTRUCTIONS;
-      responseMimeType = "application/json";
-      break;
-    case 'proposal':
-      prompt = `Professor: ${params.professorName}, ${params.specialization} University: ${params.instituteName} Source paper: ${params.topic.sourcePublication} Research idea: ${params.topic.title} Description: ${params.topic.description} Variables: IV: ${params.topic.keyVariables?.independent || "N/A"} DV: ${params.topic.keyVariables?.dependent || "N/A"} Population: ${params.topic.keyVariables?.population || "N/A"} Generate a full PhD research proposal.`;
-      systemInstruction = PROPOSAL_SYSTEM_INSTRUCTIONS + "\n\nCRITICAL RULE: DO NOT use markdown bold formatting (**) anywhere in the proposal.";
-      break;
-    case 'extract-institute':
-      prompt = `Extract the official name of the academic institution or department from this URL: ${params.url}. Return ONLY the name.`;
-      tools = [{ googleSearch: {} }];
-      break;
-    default:
-      throw new Error("Invalid task");
-  }
-
   try {
+    let prompt = "";
+    switch (task) {
+      case 'news':
+        prompt = `Provide 3-4 recent news items or breakthroughs in Cognitive Science and Psychology relevant to Indian research institutes (IITs, IISc, CBCS). Format as JSON array: [{title, excerpt, date, source}].`;
+        break;
+      case 'faculty':
+        prompt = `List 5 prominent faculty members in Cognitive Science at ${params?.instituteName || 'top Indian institutes'}. Include their research interests and lab names. Format as JSON array: [{name, institute, interests, lab}].`;
+        break;
+      case 'publications':
+        prompt = `Research Prof. ${params?.professorName} at ${params?.institute || 'Indian research institutes'}. 
+        
+        CRITICAL TASK: Find their professional research identifiers using this algorithm:
+        1. Search for a relevant paper/publication by this author.
+        2. Check the author metadata in those papers for ORCID or ResearchGate links.
+        3. Check the official institute website faculty profile for ${params?.professorName} at ${params?.institute}.
+        4. Look for Vidwan ID (from Vidwan Expert Database), ORCID, and ResearchGate.
+        
+        Identifiers to find:
+        - ORCID ID (e.g., https://orcid.org/0000-...)
+        - Vidwan ID (e.g., https://vidwan.inflibnet.ac.in/profile/...)
+        - ResearchGate Profile (e.g., https://www.researchgate.net/profile/...)
+        
+        Also provide:
+        - Top 10 most cited or recent publications.
+        - A short professional bio (2-3 sentences).
+        - Citation and publication trends for the last 5 years as arrays of {year, count}.
+        
+        Format as JSON: 
+        {
+          "bio": "...",
+          "publications": ["Title 1", "Title 2", ...],
+          "orcid": "VALID_ORCID_URL_OR_NULL",
+          "vidwanId": "VALID_VIDWAN_URL_OR_NULL",
+          "researchGate": "VALID_RESEARCHGATE_URL_OR_NULL",
+          "citationTrend": [{"year": 2020, "count": 50}, ...],
+          "publicationTrend": [{"year": 2020, "count": 2}, ...]
+        }
+        
+        If you cannot find a specific ID with 100% certainty, return null for that field. Do not guess.`;
+        break;
+      case 'topics':
+        prompt = `Suggest 5 trending PhD research topics in Cognitive Science specifically for the Indian academic landscape. Format as JSON array: [{title, description, relevance}].`;
+        break;
+      case 'proposal':
+        prompt = `${PROPOSAL_SYSTEM_INSTRUCTIONS}\n\nGenerate a full proposal based on:\nProfessor: ${params?.professorName}\nInstitute: ${params?.instituteName}\nResearch Area: ${params?.specialization}`;
+        break;
+      case 'extract-institute':
+        prompt = `Extract the most likely Indian research institute name from this text: "${params?.url}". Return only the name.`;
+        break;
+    }
+
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
       contents: prompt,
-      config: {
-        systemInstruction,
-        responseMimeType,
-        responseSchema,
-        tools: tools.length > 0 ? tools : undefined,
-        safetySettings: [
-          { category: HarmCategory.HARM_CATEGORY_HARASSMENT, threshold: HarmBlockThreshold.BLOCK_NONE },
-          { category: HarmCategory.HARM_CATEGORY_HATE_SPEECH, threshold: HarmBlockThreshold.BLOCK_NONE },
-          { category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT, threshold: HarmBlockThreshold.BLOCK_NONE },
-          { category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT, threshold: HarmBlockThreshold.BLOCK_NONE },
-        ],
-      },
     });
-
-    if (!response.text && retryCount < 2) {
-      console.warn(`Empty response for ${task}, retrying... (${retryCount + 1})`);
-      return callGeminiAI(task, params, retryCount + 1);
-    }
 
     return { text: response.text || "" };
   } catch (error: any) {
@@ -130,7 +93,7 @@ async function callGeminiAI(task: string, params: any = {}, retryCount = 0): Pro
       console.warn(`Error in ${task}, retrying... (${retryCount + 1})`, error);
       return callGeminiAI(task, params, retryCount + 1);
     }
-    console.error(`Gemini AI ${task} Final Error:`, error);
+    console.error(`AI ${task} Final Error:`, error);
     throw error;
   }
 }
@@ -209,8 +172,16 @@ function cleanJson(text: string): string {
   return text.replace(/```json\n?|```/g, "").trim();
 }
 
-export async function getProfessorPublications(professorName: string, institute: string, scholarLink?: string): Promise<{ publications: string[], bio: string, citationTrend: { year: number; count: number }[], publicationTrend: { year: number; count: number }[] }> {
-  const cacheKey = `crid_pub_v2_${professorName}`;
+export async function getProfessorPublications(professorName: string, institute: string, scholarLink?: string): Promise<{ 
+  publications: string[], 
+  bio: string, 
+  citationTrend: { year: number; count: number }[], 
+  publicationTrend: { year: number; count: number }[],
+  orcid?: string,
+  vidwanId?: string,
+  researchGate?: string
+}> {
+  const cacheKey = `crid_pub_v3_${professorName}`;
   const cached = getCachedData<any>(cacheKey);
   if (cached) return cached;
 
@@ -233,7 +204,10 @@ export async function getProfessorPublications(professorName: string, institute:
           bio: data.bio || "No biography available.",
           publications: Array.isArray(data.publications) ? data.publications : [],
           citationTrend: Array.isArray(data.citationTrend) ? data.citationTrend : [],
-          publicationTrend: Array.isArray(data.publicationTrend) ? data.publicationTrend : []
+          publicationTrend: Array.isArray(data.publicationTrend) ? data.publicationTrend : [],
+          orcid: data.orcid,
+          vidwanId: data.vidwanId,
+          researchGate: data.researchGate
         };
         setCachedData(cacheKey, result);
         return result;
@@ -249,34 +223,139 @@ export async function getProfessorPublications(professorName: string, institute:
   }
 }
 
-export async function generateResearchTopics(professor: Professor, instituteName: string): Promise<ResearchTopic[]> {
+export async function generateResearchTopics(professor: Professor, instituteName: string): Promise<{ topics: ResearchTopic[], keywords: string[] }> {
+  const professorId = professor.id;
+  
+  // 1. Check Firestore Cache First
+  try {
+    const docRef = doc(db, "professors", professorId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      const data = docSnap.data();
+      console.log("Returning cached topics from Firestore for:", professor.name);
+      return { 
+        topics: data.topics as ResearchTopic[], 
+        keywords: data.keywords || [] 
+      };
+    }
+  } catch (e) {
+    console.error("Firestore cache check failed:", e);
+  }
+
   const pubData = await getProfessorPublications(professor.name, instituteName, professor.scholarLink);
   
   try {
-    const { text } = await callGeminiAI('topics', { professor, instituteName, pubData });
-    if (!text) return [];
+    const prompt = `
+      ${IDEA_GENERATION_INSTRUCTIONS}
+
+      Analyze the following research profile for Prof. ${professor.name} at ${instituteName}:
+      
+      Publications & Bio:
+      ${JSON.stringify(pubData)}
+      
+      TASK:
+      1. Identify the top 6 most relevant research concepts/keywords from their work.
+      2. Identify a critical literature gap based on their recent publications.
+      3. Generate EXACTLY 5 innovative PhD research topics that address this gap.
+      
+      FORMAT: Return ONLY a JSON object:
+      {
+        "keywords": ["keyword1", "keyword2", "keyword3", "keyword4", "keyword5", "keyword6"],
+        "gap": "Description of the literature gap",
+        "topics": [
+          {
+            "title": "Topic Title",
+            "description": "Detailed description",
+            "sourcePublication": "Which paper inspired this?",
+            "gapType": "Theoretical/Empirical/Methodological",
+            "difficulty": "Feasible/Moderate/Advanced",
+            "methodology": "Proposed approach"
+          }
+        ]
+      }
+    `;
+
+    const response = await ai.models.generateContent({
+      model: "gemini-3-flash-preview",
+      contents: prompt,
+    });
+
+    const text = response.text || "";
+    if (!text) return { topics: [], keywords: [] };
 
     try {
-      const cleanedText = cleanJson(text);
-      const jsonMatch = cleanedText.match(/\[[\s\S]*\]/);
-      const jsonStr = jsonMatch ? jsonMatch[0] : cleanedText;
-      const data = JSON.parse(jsonStr);
+      // Robust JSON extraction: Find the first '{' and the last '}'
+      const firstBrace = text.indexOf('{');
+      const lastBrace = text.lastIndexOf('}');
       
-      if (!Array.isArray(data)) return [];
+      if (firstBrace === -1 || lastBrace === -1 || lastBrace < firstBrace) {
+        console.error("No valid JSON structure found in response:", text);
+        return { topics: [], keywords: [] };
+      }
 
-      return data.map((t: any, index: number) => ({
+      const jsonCandidate = text.substring(firstBrace, lastBrace + 1);
+      let data;
+      
+      try {
+        data = JSON.parse(jsonCandidate);
+      } catch (e) {
+        // If parsing the whole block fails, try to find the first balanced object
+        console.warn("Initial JSON parse failed, attempting balanced brace extraction...");
+        let braceCount = 0;
+        let foundFirst = false;
+        let endIndex = -1;
+        
+        for (let i = firstBrace; i < text.length; i++) {
+          if (text[i] === '{') {
+            braceCount++;
+            foundFirst = true;
+          } else if (text[i] === '}') {
+            braceCount--;
+          }
+          
+          if (foundFirst && braceCount === 0) {
+            endIndex = i;
+            break;
+          }
+        }
+        
+        if (endIndex !== -1) {
+          data = JSON.parse(text.substring(firstBrace, endIndex + 1));
+        } else {
+          throw new Error("Could not find balanced JSON object");
+        }
+      }
+      
+      const topics = (data.topics || []).map((t: any, index: number) => ({
         id: `topic-${index}-${Date.now()}`,
-        title: t.title || "Untitled Research Topic",
-        description: t.description || "No description provided.",
-        sourcePublication: t.sourcePublication || "General research gap",
-        gapType: t.gapType || "Extension",
-        difficulty: t.difficulty || "Moderate",
-        methodology: t.methodology || "Mixed",
-        keyVariables: t.keyVariables || { independent: "N/A", dependent: "N/A", population: "N/A" },
+        ...t
       }));
+
+      const keywords = data.keywords || [];
+
+      // 2. Cache to Firestore
+      try {
+        await setDoc(doc(db, "professors", professorId), {
+          professorId,
+          professorName: professor.name,
+          instituteName,
+          keywords,
+          topics,
+          updatedAt: serverTimestamp()
+        });
+      } catch (e: any) {
+        if (e.message?.includes("permissions")) {
+          // Log but don't crash the UI for caching failures
+          console.warn("Firestore caching failed due to permissions. This is expected if not logged in.");
+        } else {
+          console.error("Failed to cache to Firestore:", e);
+        }
+      }
+
+      return { topics, keywords };
     } catch (parseError) {
       console.error("JSON Parse Error in generateResearchTopics:", parseError);
-      return [];
+      return { topics: [], keywords: [] };
     }
   } catch (error: any) {
     console.error("Error generating topics:", error);
@@ -304,40 +383,20 @@ export async function generateFullProposal(
     return cached;
   }
 
-  const userPrompt = `Generate a full PhD research proposal for:
-Topic: "${topicTitle}"
-Target Professor: ${professorName}
-Specialization: ${specialization}
-Target Institution: ${instituteName}
-
-Follow your system instructions exactly.
-Proposal should be 1500-2000 words.
-Use formal academic tone.`;
-
   try {
-    // Try Groq first (free)
-    const result = await callGroq(PROPOSAL_SYSTEM_INSTRUCTIONS, userPrompt);
+    const { text } = await callGeminiAI('proposal', { 
+      topic: typeof topic === 'string' ? { title: topic } : topic, 
+      professorName, 
+      specialization, 
+      instituteName 
+    });
+    
+    const result = text || "Failed to generate proposal.";
     localStorage.setItem(cacheKey, result); // save to cache
     return result;
-  } catch (groqError) {
-    console.warn("Groq failed, falling back to Gemini:", groqError);
-    
-    try {
-      const response = await ai.models.generateContent({
-        model: "gemini-2.0-flash-lite",
-        contents: userPrompt,
-        config: {
-          systemInstruction: PROPOSAL_SYSTEM_INSTRUCTIONS,
-          maxOutputTokens: 1500,
-        }
-      });
-      const result = response.text || "Failed to generate proposal.";
-      localStorage.setItem(cacheKey, result); // save to cache
-      return result;
-    } catch (geminiError) {
-      console.error("Both APIs failed:", geminiError);
-      return "An error occurred. Please try again.";
-    }
+  } catch (error: any) {
+    console.error("Proposal generation failed:", error);
+    return "An error occurred while generating the proposal. Please try again.";
   }
 }
 

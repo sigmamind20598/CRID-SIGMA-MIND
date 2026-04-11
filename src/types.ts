@@ -13,6 +13,9 @@ export interface Professor {
   publicationTrend?: { year: number; count: number }[];
   topPapers?: string[];
   researchIdeas?: ResearchTopic[];
+  orcid?: string;
+  vidwanId?: string;
+  researchGate?: string;
 }
 
 export interface Institute {

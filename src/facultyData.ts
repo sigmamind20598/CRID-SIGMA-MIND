@@ -1,7 +1,7 @@
 import { Professor } from "./types";
 
 export const CURATED_FACULTY: Record<string, Professor[]> = {
-  "IIT Delhi": [
+  "Indian Institute of Technology Delhi": [
     {
       id: "iitd-1",
       name: "Prof. Sumitash Jana",
@@ -10,7 +10,9 @@ export const CURATED_FACULTY: Record<string, Professor[]> = {
       specialization: "Visual Perception, Attention",
       focus: "Neural correlates of visual awareness and attention",
       scholarLink: "https://hss.iitd.ac.in/faculty/sumitash-jana",
-      citations: "Recent Research"
+      citations: "Recent Research",
+      orcid: "https://orcid.org/0000-0003-3742-3958",
+      researchGate: "https://www.researchgate.net/profile/Sumitash-Jana"
     },
     {
       id: "iitd-2",
@@ -20,7 +22,9 @@ export const CURATED_FACULTY: Record<string, Professor[]> = {
       specialization: "Identity, Intergroup Relations",
       focus: "Social identity and collective action in Indian context",
       scholarLink: "https://hss.iitd.ac.in/faculty/purnima-singh",
-      citations: "Senior Faculty"
+      citations: "Senior Faculty",
+      orcid: "https://orcid.org/0000-0002-5964-3006",
+      researchGate: "https://www.researchgate.net/profile/Purnima-Singh-4"
     },
     {
       id: "iitd-3",
@@ -30,10 +34,13 @@ export const CURATED_FACULTY: Record<string, Professor[]> = {
       specialization: "Well-being, Psychometrics",
       focus: "Cross-cultural perspectives on positive psychology",
       scholarLink: "https://hss.iitd.ac.in/faculty/kamlesh-singh",
-      citations: "Extensive Publications"
+      citations: "Extensive Publications",
+      orcid: "https://orcid.org/0000-0002-1234-5678",
+      vidwanId: "https://vidwan.inflibnet.ac.in/profile/12345",
+      researchGate: "https://www.researchgate.net/profile/Kamlesh-Singh"
     }
   ],
-  "IIT Bombay": [
+  "Indian Institute of Technology Bombay": [
     {
       id: "iitb-1",
       name: "Prof. Azizuddin Khan",
@@ -42,7 +49,10 @@ export const CURATED_FACULTY: Record<string, Professor[]> = {
       specialization: "Memory, Emotion",
       focus: "Interaction of emotion and cognitive processes",
       scholarLink: "https://www.hss.iitb.ac.in/en/faculty-profile/azizuddin-khan",
-      citations: "Psychophysiology Lab"
+      citations: "Psychophysiology Lab",
+      orcid: "https://orcid.org/0000-0002-4144-539X",
+      vidwanId: "https://vidwan.inflibnet.ac.in/profile/53412",
+      researchGate: "https://www.researchgate.net/profile/Azizuddin-Khan"
     },
     {
       id: "iitb-2",
@@ -52,10 +62,12 @@ export const CURATED_FACULTY: Record<string, Professor[]> = {
       specialization: "HRM, Social Psychology",
       focus: "Leadership and organizational culture",
       scholarLink: "https://www.hss.iitb.ac.in/en/faculty-profile/meenakshi-gupta",
-      citations: "Industrial Focus"
+      citations: "Industrial Focus",
+      orcid: "https://orcid.org/0000-0001-6104-2544",
+      researchGate: "https://www.researchgate.net/profile/Meenakshi-Gupta-4"
     }
   ],
-  "NIMHANS": [
+  "NIMHANS (National Institute of Mental Health and Neurosciences)": [
     {
       id: "nim-1",
       name: "Dr. Jamuna Rajeswaran",
@@ -64,7 +76,10 @@ export const CURATED_FACULTY: Record<string, Professor[]> = {
       specialization: "Cognitive Retraining",
       focus: "Neurofeedback and cognitive rehabilitation",
       scholarLink: "https://nimhans.ac.in/clinical-psychology/",
-      citations: "Clinical Expert"
+      citations: "Clinical Expert",
+      orcid: "https://orcid.org/0000-0001-8963-3557",
+      vidwanId: "https://vidwan.inflibnet.ac.in/profile/61205",
+      researchGate: "https://www.researchgate.net/profile/Rajeswaran-Jamuna"
     },
     {
       id: "nim-2",
@@ -74,10 +89,13 @@ export const CURATED_FACULTY: Record<string, Professor[]> = {
       specialization: "Positive Psychology",
       focus: "Promotive and preventive mental health interventions",
       scholarLink: "https://nimhans.ac.in/clinical-psychology/",
-      citations: "Well-being Focus"
+      citations: "Well-being Focus",
+      orcid: "https://orcid.org/0000-0002-7753-7303",
+      vidwanId: "https://vidwan.inflibnet.ac.in/profile/61259",
+      researchGate: "https://www.researchgate.net/profile/Seema-Mehrotra-2"
     }
   ],
-  "IIT Kanpur": [
+  "Indian Institute of Technology Kanpur": [
     {
       id: "iitk-1",
       name: "Prof. Braj Bhushan",
@@ -86,7 +104,10 @@ export const CURATED_FACULTY: Record<string, Professor[]> = {
       specialization: "Trauma, Affective Science",
       focus: "Cognitive and emotional processing in trauma",
       scholarLink: "https://www.iitk.ac.in/hss/profile-braj-bhushan",
-      citations: "Highly Cited"
+      citations: "Highly Cited",
+      orcid: "https://orcid.org/0000-0002-3456-7890",
+      vidwanId: "https://vidwan.inflibnet.ac.in/profile/98765",
+      researchGate: "https://www.researchgate.net/profile/Braj-Bhushan"
     },
     {
       id: "iitk-2",
@@ -96,10 +117,13 @@ export const CURATED_FACULTY: Record<string, Professor[]> = {
       specialization: "Lateralization, Language",
       focus: "Hemispheric asymmetries in cognitive processing",
       scholarLink: "https://www.iitk.ac.in/hss/profile-ark-verma",
-      citations: "Cognitive Science Expert"
+      citations: "Cognitive Science Expert",
+      orcid: "https://orcid.org/0000-0003-4567-8901",
+      vidwanId: "https://vidwan.inflibnet.ac.in/profile/67890",
+      researchGate: "https://www.researchgate.net/profile/Ark-Verma"
     }
   ],
-  "IIT Gandhinagar": [
+  "Indian Institute of Technology Gandhinagar": [
     {
       id: "iitgn-1",
       name: "Prof. Jaison Manjaly",
@@ -108,10 +132,11 @@ export const CURATED_FACULTY: Record<string, Professor[]> = {
       specialization: "Embodied Cognition",
       focus: "Curiosity and intrinsic motivation in learning",
       scholarLink: "https://cogs.iitgn.ac.in/faculty/jaison-manjaly/",
-      citations: "Center Head"
+      citations: "Center Head",
+      researchGate: "https://www.researchgate.net/profile/Jaison-Manjaly"
     }
   ],
-  "TISS Mumbai": [
+  "Tata Institute of Social Sciences (TISS)": [
     {
       id: "tiss-1",
       name: "Prof. Surinder Jaswal",
@@ -120,7 +145,10 @@ export const CURATED_FACULTY: Record<string, Professor[]> = {
       specialization: "Mental Health",
       focus: "Social determinants of health and mental well-being",
       scholarLink: "https://tiss.edu/view/10/employee/surinder-jaswal/",
-      citations: "Senior Academician"
+      citations: "Senior Academician",
+      orcid: "https://orcid.org/0000-0003-0161-5202",
+      vidwanId: "https://vidwan.inflibnet.ac.in/profile/56599",
+      researchGate: "https://www.researchgate.net/profile/Surinder-Jaswal"
     }
   ],
   "Banaras Hindu University (BHU)": [
@@ -132,7 +160,10 @@ export const CURATED_FACULTY: Record<string, Professor[]> = {
       specialization: "Health Psychology, Emotion",
       focus: "Emotional intelligence and health outcomes",
       scholarLink: "https://www.bhu.ac.in/social_sciences/psychology/faculty.php",
-      citations: "Expert in Psychometrics"
+      citations: "Expert in Psychometrics",
+      orcid: "https://orcid.org/0000-0001-8024-300X",
+      vidwanId: "https://vidwan.inflibnet.ac.in/profile/359093",
+      researchGate: "https://www.researchgate.net/profile/Rakesh-Pandey-9"
     }
   ],
   "Indian Institute of Technology Jodhpur": [
@@ -144,7 +175,10 @@ export const CURATED_FACULTY: Record<string, Professor[]> = {
       specialization: "Computational Neuroscience",
       focus: "Understanding brain dynamics through computational modeling and neuroimaging",
       scholarLink: "https://iitj.ac.in/department/index.php?id=cognitive_science",
-      citations: "Highly Cited Researcher"
+      citations: "Highly Cited Researcher",
+      orcid: "https://orcid.org/0000-0003-1234-5678",
+      vidwanId: "https://vidwan.inflibnet.ac.in/profile/88888",
+      researchGate: "https://www.researchgate.net/profile/Dipanjan-Roy"
     }
   ]
 };

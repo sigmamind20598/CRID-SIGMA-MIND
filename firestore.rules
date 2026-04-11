@@ -1,0 +1,46 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: professors
+    // Document ID: {professorId} (string)
+    // Fields:
+    //   - professorId: string (required)
+    //   - professorName: string (required)
+    //   - instituteName: string (optional)
+    //   - keywords: list (optional)
+    //   - topics: list (required)
+    //   - updatedAt: timestamp (required)
+    //
+    // ===============================================================
+
+    // Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isValidProfessorData(data) {
+      return data.professorId is string &&
+             data.professorName is string &&
+             data.topics is list &&
+             data.topics.size() <= 10 &&
+             data.updatedAt is timestamp;
+    }
+
+    match /professors/{professorId} {
+      // Allow anyone to read cached data (to save costs)
+      allow read: if true;
+      
+      // Allow anyone to create/update cached data to reduce AI costs
+      // We still validate the data structure to prevent abuse
+      allow create: if isValidProfessorData(request.resource.data);
+      allow update: if isValidProfessorData(request.resource.data);
+      
+      // No deletions allowed via client
+      allow delete: if false;
+    }
+  }
+}
