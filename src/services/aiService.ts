@@ -84,7 +84,7 @@ async function callGeminiAI(task: string, params: any = {}, retryCount = 0): Pro
         break;
     }
 
-    const modelName = task === 'proposal' ? 'gemini-3.1-pro' : 'gemini-3.1-flash';
+    const modelName = 'gemini-3.1-flash';
 
     try {
       const response = await ai.models.generateContent({
