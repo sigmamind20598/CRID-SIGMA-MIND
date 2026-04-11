@@ -38,7 +38,6 @@ import { sendProposalEmails } from './services/emailService';
 import { CURATED_FACULTY } from './facultyData';
 import { FACULTY_DATABASE, NEWS_DATABASE, getFacultyForInstitute } from './staticDatabase';
 import { PdfModal } from './components/PdfModal';
-import { loadRazorpay } from './utils/razorpay';
 import BrainBackground from './components/BrainBackground';
 import { BrainMapAnimation } from './components/BrainMapAnimation';
 
@@ -497,43 +496,27 @@ export default function App() {
     setShowPricingModal(true);
   };
 
-  const handleUnlockProposal = () => {
+  const handleWhatsAppRedirect = (amount: number, context: string) => {
     if (!userEmail || !userPhone || !userName) {
       alert("Please ensure your contact details are filled out first.");
       return;
     }
-    const amount = isSuperUser(userEmail, userPhone) ? 1 : 99;
-    loadRazorpay(
-      amount,
-      'Unlock Full Research Proposal + PDF',
-      userName,
-      userEmail,
-      userPhone,
-      (response) => {
-        setIsProposalUnlocked(true);
-        alert(`Payment successful! (ID: ${response.razorpay_payment_id}). Your proposal is now unlocked and a formatted PDF will be emailed to you!`);
-      }
-    );
+    const topicName = pendingTopic?.title || selectedTopic?.title || 'Research Proposal';
+    const message = `Hello CRID team! I just made a payment of ₹${amount} for the ${context}.\n\nName: ${userName}\nEmail: ${userEmail}\nTopic: ${topicName}\n\nAttached is my payment screenshot.`;
+    const encodedMessage = encodeURIComponent(message);
+    window.open(`https://wa.me/917092884311?text=${encodedMessage}`, '_blank');
+    
+    setShowPricingModal(false);
+    alert("Thank you! Once we verify your screenshot on WhatsApp, we will email your proposal immediately.");
+  };
+
+  const handleUnlockProposal = () => {
+    const amount = isSuperUser(userEmail, userPhone) ? 1 : 100;
+    handleWhatsAppRedirect(amount, 'Unlock Full Research Proposal + PDF');
   };
 
   const handleManualPaidRequest = async (amount: number, type: 'single') => {
-    if (!userEmail || !userPhone || !userName || !pendingTopic) {
-      alert("Please ensure your contact details are filled out first.");
-      return;
-    }
-    
-    setShowPricingModal(false);
-
-    loadRazorpay(
-      amount,
-      '1 Additional Research Proposal',
-      userName,
-      userEmail,
-      userPhone,
-      (response) => {
-        handleStartProposalGeneration(pendingTopic);
-      }
-    );
+    handleWhatsAppRedirect(amount, 'Additional Research Proposal');
   };
 
   const handleServiceSubmit = async (e: React.FormEvent, serviceType: string, details: any) => {
@@ -1948,14 +1931,25 @@ export default function App() {
             <p className="text-white/60 mb-6 leading-relaxed">
               Our AI is currently sweating bullets trying to calculate your future. 🥵
               <br /><br />
-              To keep the servers from exploding, additional proposals cost just <strong className="text-emerald-400">₹{isSuperUser(userEmail, userPhone) ? 1 : 99}</strong> (that's cheaper than a fancy latte and way more useful for your career! ☕️).
+              To keep the servers from exploding, additional proposals cost just <strong className="text-emerald-400">₹{isSuperUser(userEmail, userPhone) ? 1 : 100}</strong>.
             </p>
+            
+            <div className="bg-white/5 border border-emerald-500/30 rounded-xl p-4 mb-6">
+              <p className="text-sm text-white/80 mb-2">Scan to Pay via UPI</p>
+              <img 
+                src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=8130330373@ibl&pn=CRID&am=${isSuperUser(userEmail, userPhone) ? 1 : 100}&cu=INR`} 
+                alt="UPI QR Code" 
+                className="w-32 h-32 mx-auto rounded-lg mb-3"
+              />
+              <p className="font-mono text-emerald-400 font-bold tracking-wider">8130330373@ibl</p>
+            </div>
+
             <div className="flex flex-col gap-3 mb-6">
               <button 
-                onClick={() => handleManualPaidRequest(isSuperUser(userEmail, userPhone) ? 1 : 99, 'single')}
-                className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+                onClick={() => handleManualPaidRequest(isSuperUser(userEmail, userPhone) ? 1 : 100, 'single')}
+                className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
               >
-                Pay ₹{isSuperUser(userEmail, userPhone) ? 1 : 99} & Save Your Career 🧠
+                I have paid, send screenshot on WhatsApp
               </button>
             </div>
             <button 
