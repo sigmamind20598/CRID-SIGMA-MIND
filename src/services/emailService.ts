@@ -29,7 +29,7 @@ export const sendProposalEmails = async (
           userEmail,
           userPhone,
           topicTitle,
-          isPaidRequest: isPaidRequest ? "YES - Awaiting Rs 150 Payment Screenshot" : "NO - Free Proposal",
+          isPaidRequest: isPaidRequest ? "YES - Awaiting Rs 100 Payment Screenshot" : "NO - Free Proposal",
           proposalContent: proposalContent
       })
     });

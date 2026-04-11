@@ -27,7 +27,8 @@ import {
   ExternalLink,
   Menu,
   X,
-  FileDown
+  FileDown,
+  Lock
 } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -182,6 +183,7 @@ export default function App() {
   const [selectedTopic, setSelectedTopic] = useState<ResearchTopic | null>(null);
   const [proposal, setProposal] = useState<string | null>(null);
   const [isProposalUnlocked, setIsProposalUnlocked] = useState(false);
+  const [isPremiumUnlocked, setIsPremiumUnlocked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isAppInitializing, setIsAppInitializing] = useState(true);
   const [view, setView] = useState<'faculty' | 'topics' | 'proposal' | 'profile'>('faculty');
@@ -415,9 +417,7 @@ export default function App() {
     const cacheKey = `proposal_${topic.id}_${selectedProfessor?.id}`;
     const cached = localStorage.getItem(cacheKey);
     if (cached) {
-      setProposal(cached);
-      setSelectedTopic(topic);
-      setView('proposal');
+      alert("This proposal has already been generated! We will email it to you once your payment is verified.");
       return;
     }
 
@@ -427,8 +427,16 @@ export default function App() {
       return;
     }
     
-    // Always show pricing modal after details are captured
-    setShowPricingModal(true);
+    if (!isPremiumUnlocked) {
+      // They haven't paid the initial ₹100 yet
+      setShowPricingModal(true);
+    } else if (proposalsGenerated >= 1) {
+      // They already generated their 1 included proposal, charge for additional
+      setShowPricingModal(true);
+    } else {
+      // Already unlocked and haven't generated a proposal yet
+      handleStartProposalGeneration(topic);
+    }
   };
 
   const handleStartProposalGeneration = async (topic: ResearchTopic) => {
@@ -456,23 +464,24 @@ export default function App() {
       
       setProposal(fullProposal);
       
-      // Send Emails
+      // Send Emails (isPaidRequest = true so it goes to admin, not user directly)
       await sendProposalEmails(
         userEmail,
         userPhone,
         userName,
         fullProposal,
         topic.title,
-        false
+        true
       );
+      
+      alert("Your proposal has been successfully generated! We will verify your payment and email the PDF to you shortly.");
       
     } catch (error) {
       console.error("Error in handleStartProposalGeneration:", error);
-      setProposal(error instanceof Error ? error.message : "An unexpected error occurred. Please try again.");
+      alert("An unexpected error occurred while generating the proposal. Please try again.");
     } finally {
       setIsLoading(false);
       setLoadingMessage(null);
-      setView('proposal');
     }
   };
 
@@ -489,25 +498,45 @@ export default function App() {
       return;
     }
 
-    if (!pendingTopic) return;
+    if (!pendingTopic) {
+      // If they just unlocked topics without selecting one
+      if (!isPremiumUnlocked) {
+        setShowPricingModal(true);
+      }
+      return;
+    }
     
-    setIsProposalUnlocked(isSuperUser(userEmail, userPhone));
-    
-    setShowPricingModal(true);
+    if (!isPremiumUnlocked) {
+      setShowPricingModal(true);
+    } else if (proposalsGenerated >= 1) {
+      setShowPricingModal(true);
+    } else {
+      handleStartProposalGeneration(pendingTopic);
+    }
   };
 
-  const handleWhatsAppRedirect = (amount: number, context: string) => {
+  const handleWhatsAppRedirect = async (amount: number, context: string) => {
     if (!userEmail || !userPhone || !userName) {
       alert("Please ensure your contact details are filled out first.");
       return;
     }
-    const topicName = pendingTopic?.title || selectedTopic?.title || 'Research Proposal';
+    const topicToGenerate = pendingTopic || selectedTopic;
+    const topicName = topicToGenerate?.title || 'Research Proposal';
     const message = `Hello CRID team! I just made a payment of ₹${amount} for the ${context}.\n\nName: ${userName}\nEmail: ${userEmail}\nTopic: ${topicName}\n\nAttached is my payment screenshot.`;
     const encodedMessage = encodeURIComponent(message);
+    
+    // Open WhatsApp immediately so the user can pay
     window.open(`https://wa.me/917092884311?text=${encodedMessage}`, '_blank');
     
     setShowPricingModal(false);
-    alert("Thank you! Once we verify your screenshot on WhatsApp, we will email your proposal immediately.");
+    setIsPremiumUnlocked(true);
+    
+    if (topicToGenerate) {
+      // Generate the proposal in the background and email it to the admin
+      handleStartProposalGeneration(topicToGenerate);
+    } else {
+      alert("Thank you! The premium topics have been unlocked. You can now view all topics and select one to generate a full proposal.");
+    }
   };
 
   const handleUnlockProposal = () => {
@@ -1007,57 +1036,94 @@ export default function App() {
                         <p className="text-white/40 font-bold uppercase tracking-widest text-xs">Generating innovative topics...</p>
                       </div>
                     ) : topics.length > 0 ? (
-                      topics.map((topic) => (
-                        <div key={topic.id} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
-                          <div className="flex justify-between items-start mb-2">
-                            <h4 className="text-lg font-bold text-emerald-400">{topic.title}</h4>
-                            <div className="flex gap-2">
-                              {topic.gapType && (
-                                <span className="px-2 py-1 rounded-full text-[8px] font-black uppercase tracking-widest border bg-emerald-500/10 text-emerald-400 border-emerald-500/20">
-                                  {topic.gapType}
-                                </span>
-                              )}
-                              {topic.difficulty && (
-                                <span className={cn(
-                                  "px-2 py-1 rounded-full text-[8px] font-black uppercase tracking-widest border",
-                                  topic.difficulty === 'Feasible' ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" :
-                                  topic.difficulty === 'Moderate' ? "bg-yellow-500/10 text-yellow-400 border-yellow-500/20" :
-                                  "bg-red-500/10 text-red-400 border-red-500/20"
-                                )}>
-                                  {topic.difficulty}
-                                </span>
-                              )}
+                      topics.map((topic, index) => {
+                        const isLocked = index > 0 && !isPremiumUnlocked;
+                        return (
+                        <div 
+                          key={topic.id} 
+                          className={cn(
+                            "relative bg-white/5 border border-white/10 rounded-2xl p-6 transition-colors",
+                            isLocked ? "overflow-hidden" : "hover:bg-white/10"
+                          )}
+                        >
+                          <div className={cn("transition-all duration-300", isLocked && "filter blur-[6px] opacity-40 select-none pointer-events-none")}>
+                            <div className="flex justify-between items-start mb-2">
+                              <h4 className="text-lg font-bold text-emerald-400">{topic.title}</h4>
+                              <div className="flex gap-2">
+                                {topic.gapType && (
+                                  <span className="px-2 py-1 rounded-full text-[8px] font-black uppercase tracking-widest border bg-emerald-500/10 text-emerald-400 border-emerald-500/20">
+                                    {topic.gapType}
+                                  </span>
+                                )}
+                                {topic.difficulty && (
+                                  <span className={cn(
+                                    "px-2 py-1 rounded-full text-[8px] font-black uppercase tracking-widest border",
+                                    topic.difficulty === 'Feasible' ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" :
+                                    topic.difficulty === 'Moderate' ? "bg-yellow-500/10 text-yellow-400 border-yellow-500/20" :
+                                    "bg-red-500/10 text-red-400 border-red-500/20"
+                                  )}>
+                                    {topic.difficulty}
+                                  </span>
+                                )}
+                              </div>
                             </div>
-                          </div>
-                          <p className="text-sm text-white/70 mb-4">{topic.description}</p>
-                          
-                          <div className="grid grid-cols-2 gap-4 mb-6">
-                            <div className="bg-white/5 p-3 rounded-xl border border-white/5">
-                              <p className="text-[8px] font-bold uppercase tracking-widest text-white/30 mb-1">Methodology</p>
-                              <p className="text-xs font-bold text-white/80">{topic.methodology}</p>
+                            <p className="text-sm text-white/70 mb-4">{topic.description}</p>
+                            
+                            <div className="grid grid-cols-2 gap-4 mb-6">
+                              <div className="bg-white/5 p-3 rounded-xl border border-white/5">
+                                <p className="text-[8px] font-bold uppercase tracking-widest text-white/30 mb-1">Methodology</p>
+                                <p className="text-xs font-bold text-white/80">{topic.methodology}</p>
+                              </div>
+                              <div className="bg-white/5 p-3 rounded-xl border border-white/5">
+                                <p className="text-[8px] font-bold uppercase tracking-widest text-white/30 mb-1">Source Inspiration</p>
+                                <p className="text-[10px] font-medium text-white/60 line-clamp-1 italic mb-1">"{topic.sourcePublication.split(' - DOI: ')[0]}"</p>
+                                <a 
+                                  href={`https://scholar.google.com/scholar?q=${encodeURIComponent(topic.sourcePublication.split(' - DOI: ')[0])}`} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer" 
+                                  className="text-[9px] text-blue-400 hover:text-blue-300 flex items-center gap-1 transition-colors"
+                                >
+                                  <Search size={10} /> Scholar
+                                </a>
+                              </div>
                             </div>
-                            <div className="bg-white/5 p-3 rounded-xl border border-white/5">
-                              <p className="text-[8px] font-bold uppercase tracking-widest text-white/30 mb-1">Source Inspiration</p>
-                              <p className="text-[10px] font-medium text-white/60 line-clamp-1 italic mb-1">"{topic.sourcePublication.split(' - DOI: ')[0]}"</p>
-                              <a 
-                                href={`https://scholar.google.com/scholar?q=${encodeURIComponent(topic.sourcePublication.split(' - DOI: ')[0])}`} 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className="text-[9px] text-blue-400 hover:text-blue-300 flex items-center gap-1 transition-colors"
-                              >
-                                <Search size={10} /> Scholar
-                              </a>
-                            </div>
+
+                            <button 
+                              onClick={() => handleTopicSelect(topic)}
+                              className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl text-xs font-bold transition-all hover:scale-[1.02] active:scale-[0.98]"
+                            >
+                              Generate Full Proposal
+                            </button>
                           </div>
 
-                          <button 
-                            onClick={() => handleTopicSelect(topic)}
-                            className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl text-xs font-bold transition-all hover:scale-[1.02] active:scale-[0.98]"
-                          >
-                            Generate Full Proposal
-                          </button>
+                          {isLocked && (
+                            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center bg-black/20 backdrop-blur-[2px]">
+                              <div className="bg-[#111] border border-white/10 p-6 rounded-2xl text-center max-w-[80%] shadow-2xl">
+                                <div className="w-12 h-12 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                                  <Lock size={20} className="text-emerald-400" />
+                                </div>
+                                <h5 className="font-bold text-white mb-2">Unlock Premium Topics</h5>
+                                <p className="text-xs text-white/60 mb-4">
+                                  Pay ₹100 to view all 5 curated research topics and generate a full 2,500-word proposal.
+                                </p>
+                                <button 
+                                  onClick={() => {
+                                    setPendingTopic(null);
+                                    if (!userEmail || !userPhone || !userName) {
+                                      setShowLeadModal(true);
+                                    } else {
+                                      setShowPricingModal(true);
+                                    }
+                                  }}
+                                  className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-2 rounded-lg text-xs font-bold transition-all hover:scale-[1.02] active:scale-[0.98]"
+                                >
+                                  Unlock Now - ₹100
+                                </button>
+                              </div>
+                            </div>
+                          )}
                         </div>
-                      ))
+                      )})
                     ) : (
                       <div className="text-center py-20 bg-white/5 rounded-2xl border border-white/10">
                         <p className="text-white/40">No topics generated. Please try again.</p>
