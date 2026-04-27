@@ -261,7 +261,13 @@ export async function getProfessorPublications(professorName: string, institute:
 export async function generateResearchTopics(professor: Professor, instituteName: string): Promise<{ topics: ResearchTopic[], keywords: string[] }> {
   const professorId = professor.id;
   
-  // 1. Check Firestore Cache First
+  // 1. Check Professor Static Data First
+  if (professor.researchIdeas && professor.researchIdeas.length >= 5) {
+    console.log("Returning static research ideas for:", professor.name);
+    return { topics: professor.researchIdeas, keywords: [] };
+  }
+
+  // 2. Check Firestore Cache
   try {
     const docRef = doc(db, "professors", professorId);
     const docSnap = await getDoc(docRef);
@@ -277,7 +283,21 @@ export async function generateResearchTopics(professor: Professor, instituteName
     console.error("Firestore cache check failed:", e);
   }
 
-  const pubData = await getProfessorPublications(professor.name, instituteName, professor.scholarLink);
+  // 3. Prepare Publication Data
+  let pubData: any;
+  if (professor.topPapers && professor.topPapers.length > 0) {
+    pubData = {
+      bio: professor.focus || `Prof. ${professor.name} is a researcher at ${instituteName}.`,
+      publications: professor.topPapers,
+      citationTrend: professor.citationTrend || [],
+      publicationTrend: professor.publicationTrend || [],
+      orcid: professor.orcid,
+      vidwanId: professor.vidwanId,
+      researchGate: professor.researchGate
+    };
+  } else {
+    pubData = await getProfessorPublications(professor.name, instituteName, professor.scholarLink);
+  }
   
   try {
     const prompt = `
@@ -292,6 +312,12 @@ export async function generateResearchTopics(professor: Professor, instituteName
       1. Identify the top 6 most relevant research concepts/keywords from their work.
       2. Identify a critical literature gap based on their recent publications.
       3. Generate EXACTLY 5 innovative PhD research topics that address this gap.
+      
+      STRICT FORMATTING RULES:
+      - The output MUST be valid JSON.
+      - Each topic 'title' must be a professional research title.
+      - DO NOT include the professor's designation (e.g., Assistant Professor) in the topic title.
+      - Avoid recycling the professor's bio description as a topic.
       
       FORMAT: Return ONLY a JSON object:
       {
@@ -361,12 +387,27 @@ export async function generateResearchTopics(professor: Professor, instituteName
         }
       }
       
-      const topics = (data.topics || []).map((t: any, index: number) => ({
-        id: `topic-${index}-${Date.now()}`,
-        ...t
-      }));
+      const rawTopics = Array.isArray(data.topics) ? data.topics : [];
+      const keywords = Array.isArray(data.keywords) ? data.keywords : [];
 
-      const keywords = data.keywords || [];
+      // Clean up topics and remove designations
+      const topics = rawTopics.map((t: any, index: number) => {
+        const cleanTitle = (t.title || `Research Idea ${index + 1}`)
+          .replace(/Assistant Professor|Associate Professor|Full Professor|Professor|Dr\.|Prof\./gi, '')
+          .trim();
+
+        return {
+          id: t.id || `topic-${index}-${Date.now()}`,
+          title: cleanTitle,
+          description: t.description || "No description provided.",
+          sourcePublication: (t.sourcePublication || "Original Research Idea")
+            .replace(/Assistant Professor|Associate Professor|Full Professor|Professor|Dr\.|Prof\./gi, '')
+            .trim(),
+          gapType: t.gapType || "Research Gap",
+          difficulty: t.difficulty || "Moderate",
+          methodology: t.methodology || "Not specified"
+        };
+      }).slice(0, 5);
 
       // 2. Cache to Firestore
       try {

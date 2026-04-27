@@ -4286,7 +4286,44 @@
           "description": "Developing a spiking neural network model to simulate how dopaminergic signals modulate synaptic plasticity during reinforcement learning.",
           "gapType": "Neural Gap",
           "difficulty": "Advanced",
-          "methodology": "Computational Modeling (NEST/Brian2) and Behavioral Verification"
+          "methodology": "Computational Modeling (NEST/Brian2) and Behavioral Verification",
+          "sourcePublication": "A computational model of memory retrieval in the presence of interference (2022)"
+        },
+        {
+          "id": "iitmandi-sn-i2",
+          "title": "Predicting Sensory Adaptation through Predictive Coding Models",
+          "description": "Implementing hierarchical Gaussian filters to study how the brain predicts and adapts to constant sensory stimuli.",
+          "gapType": "Theoretical Gap",
+          "difficulty": "Advanced",
+          "methodology": "Predictive Coding Framework and EEG Verification",
+          "sourcePublication": "Neural dynamics of decision making in multi-alternative choice tasks (2024)"
+        },
+        {
+          "id": "iitmandi-sn-i3",
+          "title": "Neural Dynamics of Decision-Making under Time Pressure",
+          "description": "A study on how drifting-diffusion models can be tweaked to represent the urgency signal in neural circuits.",
+          "gapType": "Methodological Gap",
+          "difficulty": "Moderate",
+          "methodology": "Stochastic Modeling and Drifting Diffusion Analysis",
+          "sourcePublication": "Impact of cognitive load on sensory processing: A neuro-computational study (2023)"
+        },
+        {
+          "id": "iitmandi-sn-i4",
+          "title": "Multi-Layered Memory Consolidation in Noisy Environments",
+          "description": "Simulating the hippocampal-cortical dialogue for memory consolidation using attractor networks in the presence of noise.",
+          "gapType": "Neural Gap",
+          "difficulty": "Advanced",
+          "methodology": "Spiking Neural Networks and Information Theory",
+          "sourcePublication": "A computational model of memory retrieval in the presence of interference (2022)"
+        },
+        {
+          "id": "iitmandi-sn-i5",
+          "title": "Computational Approach to Visual Attention Shifting",
+          "description": "Analyzing the trade-off between exploration and exploitation in visual search tasks using Bayesian models.",
+          "gapType": "Cognitive Gap",
+          "difficulty": "Moderate",
+          "methodology": "Bayesian Modeling and Eye-tracking",
+          "sourcePublication": "Recent brain dynamics research @ IIT Mandi"
         }
       ],
       "researchGate": "https://www.researchgate.net/profile/Sanjeev-Nara"
@@ -4310,7 +4347,44 @@
           "description": "Using multifractal analysis to quantify the emotional engagement of listeners during live versus recorded musical performances.",
           "gapType": "Methodological Gap",
           "difficulty": "Advanced",
-          "methodology": "EEG signal processing, Lyapunov exponents, and Complexity measures"
+          "methodology": "EEG signal processing, Lyapunov exponents, and Complexity measures",
+          "sourcePublication": "Multifractal and Network Based Analysis of Nonlinear Brain Dynamics During Music Perception (2021)"
+        },
+        {
+          "id": "iitmandi-ab-i2",
+          "title": "Cross-Modal Binding of Rhythm and Color: A Nonlinear Perspective",
+          "description": "Investigating synesthetic-like associations between sound and visual stimuli using Recurrence Quantification Analysis (RQA).",
+          "gapType": "Cognitive Gap",
+          "difficulty": "Moderate",
+          "methodology": "Psychophysical experiments and EEG time-series analysis",
+          "sourcePublication": "Effect of Music on Brain Dynamics: A Nonlinear Review (2023)"
+        },
+        {
+          "id": "iitmandi-ab-i3",
+          "title": "Brain Connectivity Changes in Music Therapy for Dementia",
+          "description": "Analyzing topological properties of brain networks during personalized music listening in patients with early-stage dementia.",
+          "gapType": "Clinical Gap",
+          "difficulty": "Advanced",
+          "methodology": "Graph Theory and High-density EEG",
+          "sourcePublication": "Multifractal and Network Based Analysis (2021)"
+        },
+        {
+          "id": "iitmandi-ab-i4",
+          "title": "The Physics of Creative Flow: State Transitions in Improvisation",
+          "description": "Modeling the phase transitions in neural oscillations when a musician enters a state of 'flow' during creative tasks.",
+          "gapType": "Theoretical Gap",
+          "difficulty": "Advanced",
+          "methodology": "Nonlinear ODE modeling and Spectral Power Analysis",
+          "sourcePublication": "Complexity Analysis of EEG signals during aesthetic appreciation of arts (2025)"
+        },
+        {
+          "id": "iitmandi-ab-i5",
+          "title": "Impact of Indian Classical Ragas on Autonomic Nervous System",
+          "description": "Evaluating the relationship between Hindustani classical music structures and Heart Rate Variability (HRV) using entropy measures.",
+          "gapType": "Physiological Gap",
+          "difficulty": "Moderate",
+          "methodology": "ECG/HRV analysis and Sample Entropy",
+          "sourcePublication": "Effect of Music on Brain Dynamics (2023)"
         }
       ],
       "researchGate": "https://www.researchgate.net/profile/Archi-Banerjee"
@@ -4334,7 +4408,44 @@
           "description": "Implementing an Instance-Based Learning (IBL) model to predict when humans will over-rely or under-rely on AI recommendations.",
           "gapType": "Theoretical Gap",
           "difficulty": "Advanced",
-          "methodology": "ACT-R modeling and human-subject experiments"
+          "methodology": "ACT-R modeling and human-subject experiments",
+          "sourcePublication": "Instance-based learning models of human decision making (2020)"
+        },
+        {
+          "id": "iitmandi-vd-i2",
+          "title": "Modeling Human Behavior in Cyber-Security Social Dilemmas",
+          "description": "Applying IBL theory to understand how people share personal data when faced with the risk of cyber threats.",
+          "gapType": "Societal Gap",
+          "difficulty": "Advanced",
+          "methodology": "Game Theory simulations and behavioral data fitting",
+          "sourcePublication": "Modeling Human Response to Cyber-Attacks using Instance-Based Learning (2022)"
+        },
+        {
+          "id": "iitmandi-vd-i3",
+          "title": "Human Decision Making in Disasters: A Cognitive Simulation",
+          "description": "Building simulation environments to model evacuation decisions during landslides using instance-based learning.",
+          "gapType": "Applied Gap",
+          "difficulty": "Moderate",
+          "methodology": "Unity-based simulations and IBL modeling",
+          "sourcePublication": "Towards a unified theory of human-machine interaction in social dilemmas (2024)"
+        },
+        {
+          "id": "iitmandi-vd-i4",
+          "title": "Improving Human-Robot Interaction using IBL for Coordination",
+          "description": "Studying how robots can learn human preferences dynamically using simplified cognitive architectures.",
+          "gapType": "Technological Gap",
+          "difficulty": "Advanced",
+          "methodology": "Reinforcement Learning and ACT-R hybrid models",
+          "sourcePublication": "Instance-based learning models (2020)"
+        },
+        {
+          "id": "iitmandi-vd-i5",
+          "title": "Impact of Feedback Loops on Longitudinal Change in Decision Behavior",
+          "description": "How the delay and quality of feedback influence our long-term learning patterns in complex tasks.",
+          "gapType": "Cognitive Gap",
+          "difficulty": "Moderate",
+          "methodology": "Longitudinal experiments and Computational Modeling",
+          "sourcePublication": "Modeling Human Response to Cyber-Attacks (2022)"
         }
       ],
       "orcid": "https://orcid.org/0000-0003-1282-3721",
@@ -4359,7 +4470,44 @@
           "description": "Identifying changes in functional connectivity patterns in pre-clinical Alzheimer's patients using graph-theoretic analysis of EEG.",
           "gapType": "Clinical Gap",
           "difficulty": "Advanced",
-          "methodology": "Signal Processing, Graph Theory, and Machine Learning"
+          "methodology": "Signal Processing, Graph Theory, and Machine Learning",
+          "sourcePublication": "Modeling regional brain dynamics using high-density EEG data (2025)"
+        },
+        {
+          "id": "iitmandi-ps-i2",
+          "title": "Cross-Frequency Coupling in Deep Meditation states",
+          "description": "Analyzing how theta and gamma oscillations interact during focused attention versus open monitoring meditation.",
+          "gapType": "Cognitive Gap",
+          "difficulty": "Moderate",
+          "methodology": "Bicoherence analysis and EEG source localization",
+          "sourcePublication": "A robust EEG signature of deep meditative states (2023)"
+        },
+        {
+          "id": "iitmandi-ps-i3",
+          "title": "Real-time Seizure Prediction using Edge-Computing on Wearables",
+          "description": "Developing lightweight algorithms for seizure detection that can run on low-power wearable devices.",
+          "gapType": "Technological Gap",
+          "difficulty": "Advanced",
+          "methodology": "CNN-LSTM models and Edge AI optimization",
+          "sourcePublication": "Automated detection of epileptic seizures using nonlinear EEG features (2024)"
+        },
+        {
+          "id": "iitmandi-ps-i4",
+          "title": "Impact of Environmental Stress on Brain Dynamics in Rural populations",
+          "description": "Studying how high-altitude living affects cognitive load and stress markers in EEG.",
+          "gapType": "Contextual Gap",
+          "difficulty": "Moderate",
+          "methodology": "Field EEG studies and HRV monitoring",
+          "sourcePublication": "Modeling regional brain dynamics (2025)"
+        },
+        {
+          "id": "iitmandi-ps-i5",
+          "title": "Automatic Detection of Sleep Stages using Single-channel EEG",
+          "description": "Creating robust sleep scoring models that work with minimal electrode configurations for home-based monitoring.",
+          "gapType": "Methodological Gap",
+          "difficulty": "Moderate",
+          "methodology": "Wavelet transform and Gradient Boosting",
+          "sourcePublication": "Automated detection of epileptic seizures (2024)"
         }
       ]
     },
@@ -4382,7 +4530,44 @@
           "description": "Using smartphone sensor data to identify behavioral patterns predictive of depressive episodes in young adults.",
           "gapType": "Technological Gap",
           "difficulty": "Moderate",
-          "methodology": "Passive Sensing, Data Mining, and Clinical Validation"
+          "methodology": "Passive Sensing, Data Mining, and Clinical Validation",
+          "sourcePublication": "Mindfulness-based interventions for anxiety in Indian university students (2024)"
+        },
+        {
+          "id": "iitmandi-vc-i2",
+          "title": "Self-Compassion as a Moderator for Academic Stress in Competitive Exams",
+          "description": "Investigating how mindfulness practices specifically tailored for Indian students affect cortisol levels and cognitive appraisal.",
+          "gapType": "Psychological Gap",
+          "difficulty": "Moderate",
+          "methodology": "Randomized Controlled Trial and Salivary Cortisol testing",
+          "sourcePublication": "The role of cognitive appraisal in stress resilience (2023)"
+        },
+        {
+          "id": "iitmandi-vc-i3",
+          "title": "The Impact of Indian Knowledge Systems (IKS) on Resilience",
+          "description": "Exploring how traditional philosophical concepts of 'sthitaprajna' correlate with modern resilience scales and mental health outcomes.",
+          "gapType": "Cultural Gap",
+          "difficulty": "Moderate",
+          "methodology": "Mixed-methods research and Scale Development",
+          "sourcePublication": "Mindfulness-based interventions (2024)"
+        },
+        {
+          "id": "iitmandi-vc-i4",
+          "title": "AI-Assistant for Personalized Cognitive Behavioral Therapy (CBT)",
+          "description": "Building a chatbot that uses natural language processing to provide micro-interventions during high-stress periods.",
+          "gapType": "Technological Gap",
+          "difficulty": "Advanced",
+          "methodology": "Large Language Models and Behavioral Monitoring",
+          "sourcePublication": "Cognitive biases in chronic depression: A longitudinal study (2022)"
+        },
+        {
+          "id": "iitmandi-vc-i5",
+          "title": "Loneliness and Cognitive Decline in Urban vs Rural Elderly",
+          "description": "A comparative study of social isolation and executive function in the context of changing family structures in India.",
+          "gapType": "Societal Gap",
+          "difficulty": "Moderate",
+          "methodology": "Cross-sectional survey and Cognitive Assessment Battery",
+          "sourcePublication": "The role of cognitive appraisal in stress resilience (2023)"
         }
       ]
     },
@@ -4405,7 +4590,44 @@
           "description": "Comparing how cultural backgrounds influence the prioritization of visual features in complex scenes among diverse Indian populations.",
           "gapType": "Cultural Gap",
           "difficulty": "Moderate",
-          "methodology": "Eye-tracking and Psychophysical Experiments"
+          "methodology": "Eye-tracking and Psychophysical Experiments",
+          "sourcePublication": "Socio-cultural factors influencing cognitive aging: A review (2024)"
+        },
+        {
+          "id": "iitmandi-rg-i2",
+          "title": "The Role of Language in Spatial Cognition among Multilinguals",
+          "description": "How the linguistic frame of reference (absolute vs relative) affects spatial navigation and memory tasks in Himalayan communities.",
+          "gapType": "Cognitive Gap",
+          "difficulty": "Moderate",
+          "methodology": "Behavioral navigation tasks and Linguistic analysis",
+          "sourcePublication": "Attention and distraction in real-world multitasking (2023)"
+        },
+        {
+          "id": "iitmandi-rg-i3",
+          "title": "Executive Functions in Bilingual Children from Low SES backgrounds",
+          "description": "Evaluating the bilingual advantage in cognitive control across different developmental stages in underserved regions.",
+          "gapType": "Developmental Gap",
+          "difficulty": "Moderate",
+          "methodology": "Neuropsychological testing and Longitudinal follow-up",
+          "sourcePublication": "The impact of cognitive training on working memory (2021)"
+        },
+        {
+          "id": "iitmandi-rg-i4",
+          "title": "Metacognitive Awareness in Decision Making Tasks",
+          "description": "Investigating the disconnect between performance and confidence ratings in complex probability estimation tasks.",
+          "gapType": "Theoretical Gap",
+          "difficulty": "Moderate",
+          "methodology": "Computational Modeling (meta-d') and Behavioral tasks",
+          "sourcePublication": "Attention and distraction (2023)"
+        },
+        {
+          "id": "iitmandi-rg-i5",
+          "title": "Implicit Bias and Fair Decision Making in Indian Judicial contexts",
+          "description": "Exploring cognitive shortcuts and biases in legal reasoning and sentencing using experimental scenarios.",
+          "gapType": "Social-Legal Gap",
+          "difficulty": "Moderate",
+          "methodology": "Implicit Association Test (IAT) and Case-study simulations",
+          "sourcePublication": "Socio-cultural factors influencing cognitive aging (2024)"
         }
       ]
     }

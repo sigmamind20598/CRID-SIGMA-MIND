@@ -1148,9 +1148,9 @@ export default function App() {
                               </div>
                               <div className="bg-white/5 p-3 rounded-xl border border-white/5">
                                 <p className="text-[8px] font-bold uppercase tracking-widest text-white/30 mb-1">Source Inspiration</p>
-                                <p className="text-[10px] font-medium text-white/60 line-clamp-1 italic mb-1">"{topic.sourcePublication.split(' - DOI: ')[0]}"</p>
+                                <p className="text-[10px] font-medium text-white/60 line-clamp-1 italic mb-1">"{topic.sourcePublication?.split(' - DOI: ')[0] || 'Original Research Idea'}"</p>
                                 <a 
-                                  href={`https://scholar.google.com/scholar?q=${encodeURIComponent(topic.sourcePublication.split(' - DOI: ')[0])}`} 
+                                  href={`https://scholar.google.com/scholar?q=${encodeURIComponent(topic.sourcePublication?.split(' - DOI: ')[0] || topic.title)}`} 
                                   target="_blank" 
                                   rel="noopener noreferrer" 
                                   className="text-[9px] text-blue-400 hover:text-blue-300 flex items-center gap-1 transition-colors"
