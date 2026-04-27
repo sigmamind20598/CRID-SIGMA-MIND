@@ -968,6 +968,44 @@ export default function App() {
                         >
                           Explore professors, their work, papers etc. university wise
                         </button>
+
+                        <div className="mt-8 space-y-6">
+                          <p className="text-white/40 text-[10px] font-medium max-w-lg leading-relaxed uppercase tracking-[0.2em]">
+                            Built by PhD scholars at IIT Delhi to bridge the gap in PhD admissions, mapping faculty, and drafting research proposals.
+                          </p>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+                            {[
+                              { 
+                                title: "Faculty Directory", 
+                                desc: "Find professors and map their research domains across colleges.",
+                                icon: <Users size={16} />
+                              },
+                              { 
+                                title: "Latest News", 
+                                desc: "Track PhD admissions and academic updates in one place.",
+                                icon: <Calendar size={16} />
+                              },
+                              { 
+                                title: "AI Brainstorming", 
+                                desc: "Generate tailored proposal ideas based on cited work and research gaps.",
+                                icon: <Sparkles size={16} />
+                              }
+                            ].map((feature, i) => (
+                              <div key={i} className="p-4 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-sm text-left">
+                                <div className="text-emerald-500 mb-2">{feature.icon}</div>
+                                <h3 className="text-[10px] font-bold uppercase tracking-widest mb-1">{feature.title}</h3>
+                                <p className="text-[9px] text-white/40 leading-tight">{feature.desc}</p>
+                              </div>
+                            ))}
+                          </div>
+
+                          <div className="px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full inline-block">
+                            <p className="text-[8px] font-bold text-emerald-400 uppercase tracking-widest">
+                              Focus: Psychology & Cognitive Science
+                            </p>
+                          </div>
+                        </div>
                       </motion.div>
                     </div>
                   </motion.div>

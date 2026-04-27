@@ -4237,681 +4237,81 @@
           "id": "indianinstituteoftechnologyropar-new-4-i10",
           "title": "The Influence of Organizational Culture on Professional Communication",
           "description": "Investigating how language use and communication styles within an organization impact employee collaboration and productivity.",
-          "sourcePublication": "Contributors (2019) - DOI: 10.1016/b978-0-12-814667-5.09990-6",
-          "gapType": "Organizational Gap",
-          "difficulty": "Advanced",
-          "methodology": "Qualitative Interviews and Discourse Analysis"
+          "sourcePublication": "Contributors (2019) - DOI: 10.1016/b978-0-12-814667-5.09990-6"
         }
       ]
     }
   ],
   "Indian Institute of Technology Mandi": [
     {
-      "id": "iitmandi-1",
+      "id": "iitmandi-bhavsar",
       "name": "Prof. Arnav Bhavsar",
-      "specialization": "Cognitive Science, Computer Vision",
-      "focus": "Computational modeling of vision, medical image analysis.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Arnav+Bhavsar+IIT+Mandi+cognitive",
-      "citations": "1290",
+      "specialization": "AI, ML, Medical Image Analysis",
+      "focus": "Professor & IKSMHA Chairperson. Specializing in AI/ML applications in healthcare and medical imaging.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Arnav+Bhavsar+IIT+Mandi",
+      "citations": "1350",
       "topPapers": [
-        "TrackletGPT: A Language-like GPT Framework for White Matter Tract Segmentation (2026) - DOI: 10.48550/arXiv.2601.13935",
-        "TractRLFusion: A GPT-Based Multi-Critic Policy Fusion Framework for Fiber Tractography (2026) - DOI: 10.48550/arXiv.2601.13897",
-        "MedSegDiffNCA: Diffusion Models With Neural Cellular Automata for Skin Lesion Segmentation (2025) - DOI: 10.1109/CBMS65348.2025.00017",
-        "Tractogpt: A GPT Architecture for White Matter Tract Segmentation (2025) - DOI: 10.1109/ISBI60581.2025.10981049",
-        "EAD: An EEG Adapter for Automated Classification (2025) - DOI: 10.48550/arXiv.2505.23107",
-        "TEEMIL : Towards Educational MCQ Difficulty Estimation in Indic Languages (2025)",
-        "SIGN-GAIL: Rewarding Online Signature Generation for Digital Imitation (2025) - DOI: 10.1109/WACVW65960.2025.00152",
-        "Searching Identity details across Local-Global Features for Generalized Cross-Domain ECG Recognition (2025) - DOI: 10.1109/IJCB65343.2025.11411144",
-        "SIGN-Diffusion: Generating User Specific Online Signature for Digital Verification (2024) - DOI: 10.1007/978-3-031-78341-8_3",
-        "Generating Visual Stimuli from EEG Recordings using Transformer-encoder based EEG encoder and GAN (2024) - DOI: 10.48550/arXiv.2402.10115"
+        "MedSegDiffNCA: Diffusion Models With Neural Cellular Automata for Skin Lesion Segmentation (2025)",
+        "TrackletGPT: A Language-like GPT Framework for White Matter Tract Segmentation (2026)",
+        "EAD: An EEG Adapter for Automated Classification (2025)"
       ],
       "researchIdeas": [
         {
-          "id": "iitmandi-1-i1",
-          "title": "Computational Models of Human Visual Saliency",
-          "description": "Developing and testing algorithms that mimic how the human brain prioritizes visual information in complex scenes.",
-          "sourcePublication": "TrackletGPT: A Language-like GPT Framework for White Matter Tract Segmentation (2026) - DOI: 10.48550/arXiv.2601.13935",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Modeling and Behavioral Validation"
-        },
-        {
-          "id": "iitmandi-1-i2",
-          "title": "Deep Learning for Automated Medical Image Analysis",
-          "description": "Applying advanced convolutional neural networks to automate the detection of abnormalities in chest X-rays and MRIs.",
-          "sourcePublication": "TractRLFusion: A GPT-Based Multi-Critic Policy Fusion Framework for Fiber Tractography (2026) - DOI: 10.48550/arXiv.2601.13897",
+          "id": "iitmandi-ab-i1",
+          "title": "Diffusion Models for Brain Connectivity Mapping",
+          "description": "Utilizing diffusion-based generative models to improve the resolution and accuracy of white matter tractography.",
           "gapType": "Technological Gap",
           "difficulty": "Advanced",
-          "methodology": "CNN Development and Performance Evaluation"
-        },
-        {
-          "id": "iitmandi-1-i3",
-          "title": "Object Recognition in Cluttered Natural Backgrounds",
-          "description": "Investigating the cognitive mechanisms that allow the human visual system to segment targets from complex, noisy backgrounds.",
-          "sourcePublication": "MedSegDiffNCA: Diffusion Models With Neural Cellular Automata for Skin Lesion Segmentation (2025) - DOI: 10.1109/CBMS65348.2025.00017",
-          "gapType": "Cognitive Gap",
-          "difficulty": "Advanced",
-          "methodology": "Behavioral Testing and Computational Modeling"
-        },
-        {
-          "id": "iitmandi-1-i4",
-          "title": "Human vs. Algorithmic Visual Search Strategies",
-          "description": "Using eye-tracking to compare how humans search for targets versus how computer vision algorithms perform the same task.",
-          "sourcePublication": "Tractogpt: A GPT Architecture for White Matter Tract Segmentation (2025) - DOI: 10.1109/ISBI60581.2025.10981049",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Eye-tracking and Comparative Analysis"
-        },
-        {
-          "id": "iitmandi-1-i5",
-          "title": "Decoding Cognitive States from EEG using Machine Learning",
-          "description": "Developing advanced classifiers to identify specific mental states and intentions from real-time brain activity recordings.",
-          "sourcePublication": "EAD: An EEG Adapter for Automated Classification (2025) - DOI: 10.48550/arXiv.2505.23107",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "EEG Signal Processing and Machine Learning"
-        },
-        {
-          "id": "iitmandi-1-i6",
-          "title": "Robust Facial Recognition across Pose and Lighting",
-          "description": "Improving the accuracy of facial recognition systems in real-world conditions with varying lighting and camera angles.",
-          "sourcePublication": "TEEMIL : Towards Educational MCQ Difficulty Estimation in Indic Languages (2025)",
-          "gapType": "Technological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Algorithm Development and Large-scale Testing"
-        },
-        {
-          "id": "iitmandi-1-i7",
-          "title": "Computational Models of Gestalt Grouping Principles",
-          "description": "Developing biologically inspired models that simulate how the brain organizes visual elements into coherent wholes.",
-          "sourcePublication": "SIGN-GAIL: Rewarding Online Signature Generation for Digital Imitation (2025) - DOI: 10.1109/WACVW65960.2025.00152",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Modeling and Simulation"
-        },
-        {
-          "id": "iitmandi-1-i8",
-          "title": "Real-time Neural Decoding for Brain-Computer Interfaces",
-          "description": "Developing low-latency algorithms for decoding intended movements from neural activity for BCI applications.",
-          "sourcePublication": "Searching Identity details across Local-Global Features for Generalized Cross-Domain ECG Recognition (2025) - DOI: 10.1109/IJCB65343.2025.11411144",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Real-time Signal Processing and Deep Learning"
-        },
-        {
-          "id": "iitmandi-1-i9",
-          "title": "Affective Computing for Facial Emotion Recognition",
-          "description": "Using computer vision and deep learning to accurately recognize human emotions from facial expressions in real-time.",
-          "sourcePublication": "SIGN-Diffusion: Generating User Specific Online Signature for Digital Verification (2024) - DOI: 10.1007/978-3-031-78341-8_3",
-          "gapType": "Affective Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computer Vision and Deep Learning"
-        },
-        {
-          "id": "iitmandi-1-i10",
-          "title": "Biologically Inspired Vision for Autonomous Robots",
-          "description": "Implementing neural-inspired vision systems in autonomous robots to improve their navigation and object handling in dynamic environments.",
-          "sourcePublication": "Generating Visual Stimuli from EEG Recordings using Transformer-encoder based EEG encoder and GAN (2024) - DOI: 10.48550/arXiv.2402.10115",
-          "gapType": "Technological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Robotics Integration and Field Testing"
+          "methodology": "Deep Learning and Diffusion Models"
         }
       ],
       "researchGate": "https://www.iitmandi.ac.in/"
     },
     {
-      "id": "indianinstituteoftechnologymandi-new-0",
-      "name": "Prof. A. Sharma",
+      "id": "iitmandi-nara",
+      "name": "Dr. Sanjeev Nara",
+      "specialization": "Cognitive and Computational Neuroscience",
+      "focus": "Assistant Professor. Research focuses on understanding neural mechanisms of cognition using computational models.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Sanjeev+Nara+IIT+Mandi",
+      "researchGate": "https://www.researchgate.net/profile/Sanjeev-Nara"
+    },
+    {
+      "id": "iitmandi-banerjee",
+      "name": "Dr. Archi Banerjee",
+      "specialization": "Neuro-cognition of Music and Arts",
+      "focus": "Assistant Professor. Exploring the intersection of nonlinear physics, music, and brain dynamics.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Archi+Banerjee+IIT+Mandi",
+      "researchGate": "https://www.researchgate.net/profile/Archi-Banerjee"
+    },
+    {
+      "id": "iitmandi-dutt",
+      "name": "Prof. Varun Dutt",
+      "specialization": "Cognitive Science, AI, HCI",
+      "focus": "Full Professor. Leading the Applied Cognitive Science (ACS) Lab. Research in decision making and human-computer interaction.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Varun+Dutt+IIT+Mandi",
+      "orcid": "https://orcid.org/0000-0003-1282-3721",
+      "researchGate": "https://www.researchgate.net/profile/Varun-Dutt"
+    },
+    {
+      "id": "iitmandi-singh",
+      "name": "Dr. Pushpendra Singh",
+      "specialization": "Human Brain Modelling, EEG",
+      "focus": "Assistant Professor. Research in EEG signal processing and brain modelling for diagnostic applications.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Pushpendra+Singh+IIT+Mandi"
+    },
+    {
+      "id": "iitmandi-chembrolu",
+      "name": "Dr. Venkatesh H. Rao Chembrolu",
+      "specialization": "Mental Health, Cognition",
+      "focus": "Associate Professor. Researching cognition and mental health at the IKSMHA Centre.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Venkatesh+Chembrolu+IIT+Mandi"
+    },
+    {
+      "id": "iitmandi-govindaraji",
+      "name": "Dr. Ramajayam Govindaraji",
       "specialization": "Cognitive Psychology",
-      "focus": "Human memory and attention.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20A.%20Sharma",
-      "citations": "101",
-      "topPapers": [
-        "Postnatal Exposure to A Low Dose of Imidacloprid: Oxidative Stress in Brain Without Affecting Learning and Behavior in Swiss Albino Mice (2023) - DOI: 10.46488/nept.2023.v22i03.045",
-        "1457P A UK multicentre retrospective review of metastatic renal cell carcinoma (mRCC) patients (pts) outcomes with brain metastases (BM) in the modern era (2022) - DOI: 10.1016/j.annonc.2022.07.1560",
-        "PD-0559 Interstitial HDR Brachytherapy in head and neck carcinomas: experience in COVID pandemic (2022) - DOI: 10.1016/s0167-8140(22)02874-2",
-        "Patterns of sexual transmission of monkeypox in the current outbreak: An international survey of physicians (2022) - DOI: 10.1111/jdv.18745",
-        "1463P Patterns of care and outcomes of metastatic renal cell carcinoma (mRCC) patients (pts) with bone metastases (BM): A UK multicenter review (2022) - DOI: 10.1016/j.annonc.2022.07.1566",
-        "A Rare Case of Upper Eyelid Cutaneous Horn (2021) - DOI: 10.7869/DJO.693",
-        "A decision support tool for the detection of pancreatic cancer in general practice: A modified Delphi consensus. (2021) - DOI: 10.1016/j.pan.2021.08.007",
-        "A novel clinical set‐up for examining healthy dermatology outpatients during the COVID‐19 pandemic (2020) - DOI: 10.1111/ced.14246",
-        "Makeshift face shield for healthcare professionals during the COVID‐19 pandemic (2020) - DOI: 10.1111/ced.14252",
-        "Crystal Structure of N-terminal Domain of Plasmodium vivax p43 in space group P21 (2019) - DOI: 10.2210/pdb5zkf/pdb"
-      ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologymandi-new-0-i1",
-          "title": "Attentional Blink and Emotional Stimuli",
-          "description": "Investigating how the emotional valence of a stimulus affects the duration and magnitude of the attentional blink.",
-          "sourcePublication": "Postnatal Exposure to A Low Dose of Imidacloprid: Oxidative Stress in Brain Without Affecting Learning and Behavior in Swiss Albino Mice (2023) - DOI: 10.46488/nept.2023.v22i03.045",
-          "gapType": "Cognitive Gap",
-          "difficulty": "Advanced",
-          "methodology": "Rapid Serial Visual Presentation (RSVP) and Behavioral Accuracy"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-0-i2",
-          "title": "The Role of Sleep in Memory Consolidation of Procedural Skills",
-          "description": "Examining whether a period of sleep following the acquisition of a new motor task leads to significant performance improvements compared to a period of wakefulness.",
-          "sourcePublication": "1457P A UK multicentre retrospective review of metastatic renal cell carcinoma (mRCC) patients (pts) outcomes with brain metastases (BM) in the modern era (2022) - DOI: 10.1016/j.annonc.2022.07.1560",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Behavioral Task (Finger Tapping) and Sleep Monitoring (Actigraphy)"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-0-i3",
-          "title": "Cognitive Load and Decision-Making under Pressure",
-          "description": "Investigating how high levels of cognitive load impact the quality and speed of decision-making in time-sensitive environments.",
-          "sourcePublication": "PD-0559 Interstitial HDR Brachytherapy in head and neck carcinomas: experience in COVID pandemic (2022) - DOI: 10.1016/s0167-8140(22)02874-2",
-          "gapType": "Contextual Gap",
-          "difficulty": "Advanced",
-          "methodology": "Dual-task Paradigm and Decision-making Scenarios"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-0-i4",
-          "title": "Cross-cultural Differences in Visual Attention Patterns",
-          "description": "Comparing eye-movement patterns between Indian and Western participants during the viewing of complex natural scenes.",
-          "sourcePublication": "Patterns of sexual transmission of monkeypox in the current outbreak: An international survey of physicians (2022) - DOI: 10.1111/jdv.18745",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Eye-tracking and Saliency Mapping"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-0-i5",
-          "title": "Developmental Trajectories of Working Memory Capacity",
-          "description": "A longitudinal study tracking the growth of working memory capacity from early childhood to adolescence.",
-          "sourcePublication": "1463P Patterns of care and outcomes of metastatic renal cell carcinoma (mRCC) patients (pts) with bone metastases (BM): A UK multicenter review (2022) - DOI: 10.1016/j.annonc.2022.07.1566",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Behavioral Testing (N-back, Span tasks)"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-0-i6",
-          "title": "Quantitative Analysis of Individual Differences in Attentional Control",
-          "description": "Using large-scale behavioral data to identify latent factors that contribute to variability in attentional performance.",
-          "sourcePublication": "A Rare Case of Upper Eyelid Cutaneous Horn (2021) - DOI: 10.7869/DJO.693",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Factor Analysis and Structural Equation Modeling (SEM)"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-0-i7",
-          "title": "Theoretical Models of Selective Attention in Multi-talker Environments",
-          "description": "Developing a computational model to explain how the brain filters out irrelevant auditory information in a \"cocktail party\" scenario.",
-          "sourcePublication": "A decision support tool for the detection of pancreatic cancer in general practice: A modified Delphi consensus. (2021) - DOI: 10.1016/j.pan.2021.08.007",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Modeling and Behavioral Testing"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-0-i8",
-          "title": "Behavioral Interventions for Enhancing Attention in ADHD",
-          "description": "Testing the efficacy of a computerized attention training program for children diagnosed with ADHD.",
-          "sourcePublication": "A novel clinical set‐up for examining healthy dermatology outpatients during the COVID‐19 pandemic (2020) - DOI: 10.1111/ced.14246",
-          "gapType": "Clinical Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Randomized Controlled Trial (RCT) and Clinical Assessment"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-0-i9",
-          "title": "Psychometric Evaluation of Attention Assessment Tools",
-          "description": "Validating a new digital tool for measuring different components of attention in a diverse population.",
-          "sourcePublication": "Makeshift face shield for healthcare professionals during the COVID‐19 pandemic (2020) - DOI: 10.1111/ced.14252",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Psychometric Validation (CFA and Reliability Analysis)"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-0-i10",
-          "title": "Advanced Methodologies for Measuring Real-time Attentional Fluctuations",
-          "description": "Using mobile eye-tracking and physiological sensors to track attentional engagement in real-world settings.",
-          "sourcePublication": "Crystal Structure of N-terminal Domain of Plasmodium vivax p43 in space group P21 (2019) - DOI: 10.2210/pdb5zkf/pdb",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Mobile Eye-tracking and Machine Learning"
-        }
-      ]
-    },
-    {
-      "id": "indianinstituteoftechnologymandi-new-1",
-      "name": "Prof. B. Kumar",
-      "specialization": "Social Psychology",
-      "focus": "Group dynamics and social influence.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20B.%20Kumar",
-      "citations": "78",
-      "topPapers": [
-        "An assessment of land use-land cover change using geoinformatics in Sonai-Rupai Wildlife Sanctuary, Assam, India. (2015)",
-        "Assessment of groundwater quality in Ghataprabha command area, Karnataka, India. (2011)",
-        "Evaluation of groundwater resource and estimation of its potential in Pathri Rao watershed, district Haridwar (Uttarakhand). (2010)",
-        "Groundwater-recharge estimation using a surface electrical resistivity method in the Himalayan foothill region, India (2006) - DOI: 10.1007/S10040-004-0391-8"
-      ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologymandi-new-1-i1",
-          "title": "Deindividuation and Aggression in Online Gaming Communities",
-          "description": "Investigating how anonymity and group identification in online multiplayer games contribute to toxic behavior and aggression.",
-          "sourcePublication": "An assessment of land use-land cover change using geoinformatics in Sonai-Rupai Wildlife Sanctuary, Assam, India. (2015)",
-          "gapType": "Contextual Gap",
-          "difficulty": "Advanced",
-          "methodology": "Online Survey and Behavioral Observation in Virtual Environments"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-1-i2",
-          "title": "The Impact of Social Identity on Pro-environmental Behavior",
-          "description": "Examining how identification with a particular social group (e.g., environmentalists) influences the adoption of sustainable practices.",
-          "sourcePublication": "Assessment of groundwater quality in Ghataprabha command area, Karnataka, India. (2011)",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Experimental Manipulation of Social Identity and Self-report Measures"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-1-i3",
-          "title": "Neurobiological Correlates of Social Conformity",
-          "description": "Using fMRI to identify brain regions involved when individuals change their opinions to align with a group majority.",
-          "sourcePublication": "Evaluation of groundwater resource and estimation of its potential in Pathri Rao watershed, district Haridwar (Uttarakhand). (2010)",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "fMRI and Social Influence Paradigm (Asch-like task)"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-1-i4",
-          "title": "Cross-cultural Variations in Leadership Styles and Employee Satisfaction",
-          "description": "Comparing the effectiveness of transformational vs. transactional leadership in Indian and Western organizational settings.",
-          "sourcePublication": "Groundwater-recharge estimation using a surface electrical resistivity method in the Himalayan foothill region, India (2006) - DOI: 10.1007/S10040-004-0391-8",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Multi-source Survey (360-degree feedback) and SEM"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-1-i5",
-          "title": "Developmental Trajectories of In-group Bias in Children",
-          "description": "A longitudinal study on how children's preferences for their own social groups develop and the role of parental influence.",
-          "sourcePublication": "An assessment of land use-land cover change using geoinformatics in Sonai-Rupai Wildlife Sanctuary, Assam, India. (2015)",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Behavioral Testing (Minimal Group Paradigm)"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-1-i6",
-          "title": "Quantitative Analysis of Social Network Influence on Health Behaviors",
-          "description": "Using social network analysis to map how healthy (or unhealthy) behaviors spread through a community.",
-          "sourcePublication": "Assessment of groundwater quality in Ghataprabha command area, Karnataka, India. (2011)",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Social Network Analysis (SNA) and Longitudinal Survey"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-1-i7",
-          "title": "Theoretical Models of Collective Action and Social Change",
-          "description": "Developing a framework to predict when individuals are likely to participate in collective efforts to address social injustices.",
-          "sourcePublication": "Evaluation of groundwater resource and estimation of its potential in Pathri Rao watershed, district Haridwar (Uttarakhand). (2010)",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Modeling and Experimental Surveys"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-1-i8",
-          "title": "Behavioral Interventions for Reducing Intergroup Conflict",
-          "description": "Testing the efficacy of a contact-based intervention program in reducing prejudice between different religious groups in India.",
-          "sourcePublication": "Groundwater-recharge estimation using a surface electrical resistivity method in the Himalayan foothill region, India (2006) - DOI: 10.1007/S10040-004-0391-8",
-          "gapType": "Clinical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Randomized Controlled Trial (RCT) and Implicit Association Test (IAT)"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-1-i9",
-          "title": "Psychometric Evaluation of Social Identification Scales",
-          "description": "Assessing the reliability and validity of tools used to measure the strength of social identity in diverse contexts.",
-          "sourcePublication": "An assessment of land use-land cover change using geoinformatics in Sonai-Rupai Wildlife Sanctuary, Assam, India. (2015)",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Psychometric Analysis (CFA and Reliability Analysis)"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-1-i10",
-          "title": "Advanced Methodologies for Studying Real-time Group Interactions",
-          "description": "Using wearable sensors and video analysis to track non-verbal communication and synchronization during group problem-solving.",
-          "sourcePublication": "Assessment of groundwater quality in Ghataprabha command area, Karnataka, India. (2011)",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Wearable Sensors (Sociometric Badges) and Automated Coding"
-        }
-      ]
-    },
-    {
-      "id": "indianinstituteoftechnologymandi-new-2",
-      "name": "Prof. C. Singh",
-      "specialization": "Neuroscience",
-      "focus": "Computational models of the brain.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20C.%20Singh",
-      "citations": "378",
-      "topPapers": [
-        "Response of bed planted wheat ( Tritcum aestivum L . ) under the different moisture regime on water use and it ’ s efficiency (2012)",
-        "Occurrence of leaf blight of wheat in reclaimed usar soils (2006)",
-        "Effect of crop-estabilshment methods, weed management and split nitrogen application on weeds and yield of rice (Oryza sativa) (2005)",
-        "Effect of Crop Establishment Methods, Weed Management and Splitting of N on Rice and Associated Weeds (2003)",
-        "Efficacy of cyhalofop-butyl in controlling weeds in transplanted rice (Oryza sativa) (2001)",
-        "Development and testing of a prototype fibre scutching machine. (2000)",
-        "Effect of agrotechniques on fibre quality of dual-purpose linseed (Linum usitatissimum) (1998)",
-        "Fertilizer management in flax (Linum usitatissimum) (1998)",
-        "PERFORMANCE OF BRASSICA SPECIES UNDER DIFFERENT DATES OF SOWING IN MID-HILLS OF HIMACHAL PRADESH (1998)",
-        "CONTRIBUTION OF AGRONOMIC INPUTS IN INDIAN MUSTARD (BRASSICA JUNCEA) UNDERMID-HILL CONDITIONS OF HIMACHAL PRADESH (1997)"
-      ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologymandi-new-2-i1",
-          "title": "Modeling the Neural Basis of Decision-Making under Uncertainty",
-          "description": "Developing a computational model that simulates how the brain integrates conflicting information to reach a decision.",
-          "sourcePublication": "Response of bed planted wheat ( Tritcum aestivum L . ) under the different moisture regime on water use and it ’ s efficiency (2012)",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Modeling (Reinforcement Learning) and Behavioral Validation"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-2-i2",
-          "title": "Simulating Synaptic Plasticity in Large-scale Neural Networks",
-          "description": "Investigating how different rules of synaptic plasticity contribute to the emergence of complex network dynamics and learning.",
-          "sourcePublication": "Occurrence of leaf blight of wheat in reclaimed usar soils (2006)",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Large-scale Neural Simulations (NEST or Brian2)"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-2-i3",
-          "title": "The Impact of Stress on Neural Connectivity: A Computational Approach",
-          "description": "Modeling how chronic stress alters the functional connectivity between the prefrontal cortex and the amygdala.",
-          "sourcePublication": "Effect of crop-estabilshment methods, weed management and split nitrogen application on weeds and yield of rice (Oryza sativa) (2005)",
-          "gapType": "Clinical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Dynamic Causal Modeling (DCM) and Simulation"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-2-i4",
-          "title": "Cross-cultural Differences in Neural Processing of Social Cues",
-          "description": "Comparing neural activation patterns during the perception of emotional faces between Indian and Western participants using simulated data.",
-          "sourcePublication": "Effect of Crop Establishment Methods, Weed Management and Splitting of N on Rice and Associated Weeds (2003)",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "fMRI Data Simulation and Pattern Analysis"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-2-i5",
-          "title": "Developmental Changes in Brain Network Efficiency",
-          "description": "A computational study on how the topological properties of brain networks evolve from childhood to adulthood.",
-          "sourcePublication": "Efficacy of cyhalofop-butyl in controlling weeds in transplanted rice (Oryza sativa) (2001)",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Graph Theoretical Analysis of Simulated Brain Networks"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-2-i6",
-          "title": "Quantitative Analysis of Neural Oscillations in Cognitive Tasks",
-          "description": "Using advanced signal processing techniques to identify the relationship between specific frequency bands and cognitive performance.",
-          "sourcePublication": "Development and testing of a prototype fibre scutching machine. (2000)",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Time-frequency Analysis and Machine Learning"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-2-i7",
-          "title": "Theoretical Frameworks for Understanding Consciousness",
-          "description": "Developing a mathematical model to explain the emergence of conscious experience from neural activity.",
-          "sourcePublication": "Effect of agrotechniques on fibre quality of dual-purpose linseed (Linum usitatissimum) (1998)",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Mathematical Modeling and Information Theory"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-2-i8",
-          "title": "Predicting Treatment Response in Depression using Neural Models",
-          "description": "Using simulated neural data to identify biomarkers that predict how an individual will respond to different antidepressant treatments.",
-          "sourcePublication": "Fertilizer management in flax (Linum usitatissimum) (1998)",
-          "gapType": "Clinical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Predictive Modeling and Machine Learning"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-2-i9",
-          "title": "Psychometric Evaluation of Neural Complexity Measures",
-          "description": "Assessing the reliability and validity of different measures of neural complexity (e.g., entropy) as indicators of cognitive health.",
-          "sourcePublication": "PERFORMANCE OF BRASSICA SPECIES UNDER DIFFERENT DATES OF SOWING IN MID-HILLS OF HIMACHAL PRADESH (1998)",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Psychometric Validation and Simulation"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-2-i10",
-          "title": "Advanced Methodologies for Real-time Brain-Computer Interfacing",
-          "description": "Developing new algorithms for faster and more accurate decoding of neural signals for BCI applications.",
-          "sourcePublication": "CONTRIBUTION OF AGRONOMIC INPUTS IN INDIAN MUSTARD (BRASSICA JUNCEA) UNDERMID-HILL CONDITIONS OF HIMACHAL PRADESH (1997)",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Real-time Signal Processing and Deep Learning"
-        }
-      ]
-    },
-    {
-      "id": "indianinstituteoftechnologymandi-new-3",
-      "name": "Prof. D. Patel",
-      "specialization": "Clinical Psychology",
-      "focus": "Mental health and behavioral interventions.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20D.%20Patel",
-      "citations": "2020",
-      "topPapers": [
-        "Functional studies of LDLR mutations (2012)",
-        "In silico versus in vitro analysis of LDLR mutations (2012)",
-        "Premature Senescence in Cells From Patients With Autosomal Recessive Hypercholesterolemia (ARH): Evidence for a Role for ARH in Mitosis (2011) - DOI: 10.1161/ATVBAHA.111.232223",
-        "Increased Secretion of Lipoproteins in Transgenic Mice Expressing Human D374Y PCSK9 Under Physiological Genetic Control (2010) - DOI: 10.1161/ATVBAHA.110.204040",
-        "Degradation of LDLR protein mediated by 'gain of function' PCSK9 mutants in normal and ARH cells. (2009) - DOI: 10.1016/j.atherosclerosis.2008.10.027",
-        "Peroxisome proliferator-activated receptor alpha deficiency abolishes the response of lipogenic gene expression to re-feeding: restoration of the normal response by activation of liver X receptor alpha. (2008)",
-        "Effects of ezetimibe and/or simvastatin on LDL receptor protein expression and on LDL receptor and HMG-CoA reductase gene expression: a randomized trial in healthy men. (2008) - DOI: 10.1016/J.ATHEROSCLEROSIS.2007.09.034",
-        "Peroxisome Proliferator-activated Receptor α Deficiency Abolishes the Response of Lipogenic Gene Expression to Re-feeding (2008) - DOI: 10.1074/jbc.M709471200",
-        "YI-800 FUNCTIONAL CHARACTERIZATION OF POINT MUTATIONS IN THE LDLR GENE FOUND IN PORTUGUESE PATIENTS WITH CLINICAL DIAGNOSIS OF FAMILIAL HYPERCHOLESTEROLAEMIA (2007) - DOI: 10.1016/S1567-5688(07)71810-X",
-        "Adaptor protein disabled-2 modulates low density lipoprotein receptor synthesis in fibroblasts from patients with autosomal recessive hypercholesterolaemia. (2007) - DOI: 10.1093/HMG/DDM232"
-      ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologymandi-new-3-i1",
-          "title": "Efficacy of Virtual Reality (VR) in Treating Social Anxiety",
-          "description": "Testing whether VR-based exposure therapy is as effective as traditional in-person exposure for individuals with social anxiety disorder.",
-          "sourcePublication": "Functional studies of LDLR mutations (2012)",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Randomized Controlled Trial (RCT) and VR Simulation"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-3-i2",
-          "title": "The Role of Resilience in Mitigating the Effects of Childhood Trauma",
-          "description": "Investigating the psychological factors that contribute to resilience and healthy functioning in adults who experienced early life adversity.",
-          "sourcePublication": "In silico versus in vitro analysis of LDLR mutations (2012)",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Study and Structural Equation Modeling (SEM)"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-3-i3",
-          "title": "Neuroplasticity and Recovery from Substance Use Disorders",
-          "description": "Examining brain changes associated with long-term abstinence and the impact of behavioral therapies on neural recovery.",
-          "sourcePublication": "Premature Senescence in Cells From Patients With Autosomal Recessive Hypercholesterolemia (ARH): Evidence for a Role for ARH in Mitosis (2011) - DOI: 10.1161/ATVBAHA.111.232223",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "fMRI and Clinical Assessment"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-3-i4",
-          "title": "Cross-cultural Differences in Coping Strategies for Depression",
-          "description": "Comparing how individuals in India and the West utilize different social and cognitive strategies to manage depressive symptoms.",
-          "sourcePublication": "Increased Secretion of Lipoproteins in Transgenic Mice Expressing Human D374Y PCSK9 Under Physiological Genetic Control (2010) - DOI: 10.1161/ATVBAHA.110.204040",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Cross-cultural Survey and Qualitative Interviews"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-3-i5",
-          "title": "Cognitive Mechanisms of Decision-Making in Addiction",
-          "description": "Investigating the relationship between impulsivity, reward processing, and the maintenance of addictive behaviors.",
-          "sourcePublication": "Degradation of LDLR protein mediated by 'gain of function' PCSK9 mutants in normal and ARH cells. (2009) - DOI: 10.1016/j.atherosclerosis.2008.10.027",
-          "gapType": "Cognitive Gap",
-          "difficulty": "Advanced",
-          "methodology": "Behavioral Tasks (Delay Discounting) and Clinical Assessment"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-3-i6",
-          "title": "Quantitative Analysis of Large-scale Mental Health Data",
-          "description": "Using machine learning to identify patterns and predictors of mental health crises from electronic health records.",
-          "sourcePublication": "Peroxisome proliferator-activated receptor alpha deficiency abolishes the response of lipogenic gene expression to re-feeding: restoration of the normal response by activation of liver X receptor alpha. (2008)",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Big Data Analytics and Machine Learning"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-3-i7",
-          "title": "Theoretical Models of Behavioral Change in Clinical Settings",
-          "description": "Developing a framework to explain the psychological processes that lead to successful outcomes in behavioral therapy.",
-          "sourcePublication": "Effects of ezetimibe and/or simvastatin on LDL receptor protein expression and on LDL receptor and HMG-CoA reductase gene expression: a randomized trial in healthy men. (2008) - DOI: 10.1016/J.ATHEROSCLEROSIS.2007.09.034",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Modeling and Longitudinal Study"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-3-i8",
-          "title": "The Impact of Workplace Stress on Mental Health and Productivity",
-          "description": "Investigating how organizational factors contribute to employee burnout and the effectiveness of workplace interventions.",
-          "sourcePublication": "Peroxisome Proliferator-activated Receptor α Deficiency Abolishes the Response of Lipogenic Gene Expression to Re-feeding (2008) - DOI: 10.1074/jbc.M709471200",
-          "gapType": "Organizational Gap",
-          "difficulty": "Advanced",
-          "methodology": "Multi-source Survey and Longitudinal Analysis"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-3-i9",
-          "title": "Psychometric Evaluation of Clinical Assessment Tools",
-          "description": "Validating a new tool for measuring the severity of symptoms in a specific clinical population.",
-          "sourcePublication": "YI-800 FUNCTIONAL CHARACTERIZATION OF POINT MUTATIONS IN THE LDLR GENE FOUND IN PORTUGUESE PATIENTS WITH CLINICAL DIAGNOSIS OF FAMILIAL HYPERCHOLESTEROLAEMIA (2007) - DOI: 10.1016/S1567-5688(07)71810-X",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Psychometric Validation (CFA and Reliability Analysis)"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-3-i10",
-          "title": "Advanced Methodologies for Tracking Real-time Behavioral Changes",
-          "description": "Using wearable sensors and mobile apps to track behavioral patterns and provide real-time interventions for clinical populations.",
-          "sourcePublication": "Adaptor protein disabled-2 modulates low density lipoprotein receptor synthesis in fibroblasts from patients with autosomal recessive hypercholesterolaemia. (2007) - DOI: 10.1093/HMG/DDM232",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Mobile Health (mHealth) and Wearable Sensors"
-        }
-      ]
-    },
-    {
-      "id": "indianinstituteoftechnologymandi-new-4",
-      "name": "Prof. E. Verma",
-      "specialization": "Cognitive Science",
-      "focus": "Language and thought.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20E.%20Verma",
-      "citations": "341",
-      "topPapers": [
-        "Nitrogen starvation–induced oxidative stress relieves PII-mediated inhibition of acetyl-CoA carboxylase (ACCase) activity and signals enhanced lipid synthesis in Synechococcus PCC 7942 (2020) - DOI: 10.1007/s10811-020-02316-9",
-        "Bacteria from oil contaminated sites as a viable source of potential biosurfactants with anti-microbial and anti-biofilm activities (2020) - DOI: 10.1007/s42398-020-00136-8",
-        "Nitrogen starvation–induced oxidative stress relieves PII-mediated inhibition of acetyl-CoA carboxylase (ACCase) activity and signals enhanced lipid synthesis in Synechococcus PCC 7942 (2020) - DOI: 10.1007/s10811-020-02316-9",
-        "In silico molecular docking analysis of cancer biomarkers with GC/MS identified compounds of Scytonema sp. (2020) - DOI: 10.1007/s13721-020-00235-w",
-        "Evaluation of Basic Fermentation Parameters and Effective Combinations of Predominant Yeasts from Traditional Starter Materials of Indigenous Communities from Northeast India (2020) - DOI: 10.1080/03610470.2020.1739601",
-        "Assessing the Stimulatory Effect of Indole-3-Acetic Acid on Growth and Sustenance of Yeasts Isolated from Traditional Fermentative Sources Maintained by Six Ethnic Communities of Asssam, North-East India (2019) - DOI: 10.22207/JPAM.13.2.27",
-        "Cyanobacterial Siderophores: Ecological and Biotechnological Significance (2019) - DOI: 10.1016/B978-0-12-814667-5.00019-2",
-        "Physiological mechanisms of aluminum (Al) toxicity tolerance in nitrogen-fixing aquatic macrophyte Azolla microphylla Kaulf: phytoremediation, metabolic rearrangements, and antioxidative enzyme responses (2019) - DOI: 10.1007/s11356-019-04408-7",
-        "Cyanobacterial bioactive compound EMTAHDCA recovers splenomegaly, affects protein profile of E. coli and spleen of lymphoma bearing mice (2019) - DOI: 10.1007/s11033-019-04659-0",
-        "Contributors (2019) - DOI: 10.1016/b978-0-12-814667-5.09990-6"
-      ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologymandi-new-4-i1",
-          "title": "The Impact of Bilingualism on Cognitive Flexibility in Indian Children",
-          "description": "Investigating whether speaking multiple Indian languages from an early age leads to enhanced executive function and task-switching abilities.",
-          "sourcePublication": "Nitrogen starvation–induced oxidative stress relieves PII-mediated inhibition of acetyl-CoA carboxylase (ACCase) activity and signals enhanced lipid synthesis in Synechococcus PCC 7942 (2020) - DOI: 10.1007/s10811-020-02316-9",
-          "gapType": "Contextual Gap",
-          "difficulty": "Advanced",
-          "methodology": "Behavioral Tasks (Stroop, Simon) and Linguistic Proficiency Assessment"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-4-i2",
-          "title": "Neuroplasticity and Second Language Learning in Adulthood",
-          "description": "Using longitudinal fMRI to track structural and functional brain changes as adults acquire a new language.",
-          "sourcePublication": "Bacteria from oil contaminated sites as a viable source of potential biosurfactants with anti-microbial and anti-biofilm activities (2020) - DOI: 10.1007/s42398-020-00136-8",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal fMRI and Language Testing"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-4-i3",
-          "title": "Language-Driven Perception of Time: A Cross-linguistic Study",
-          "description": "Examining whether the way time is encoded in a language (e.g., using spatial metaphors) influences how speakers perceive and estimate duration.",
-          "sourcePublication": "Nitrogen starvation–induced oxidative stress relieves PII-mediated inhibition of acetyl-CoA carboxylase (ACCase) activity and signals enhanced lipid synthesis in Synechococcus PCC 7942 (2020) - DOI: 10.1007/s10811-020-02316-9",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Psychophysical Time Estimation Tasks and Linguistic Analysis"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-4-i4",
-          "title": "The Role of Inner Speech in Logical Reasoning",
-          "description": "Investigating how the use of internal verbalization facilitates or hinders the process of solving complex logical problems.",
-          "sourcePublication": "In silico molecular docking analysis of cancer biomarkers with GC/MS identified compounds of Scytonema sp. (2020) - DOI: 10.1007/s13721-020-00235-w",
-          "gapType": "Cognitive Gap",
-          "difficulty": "Advanced",
-          "methodology": "Think-aloud Protocols and Behavioral Experiments"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-4-i5",
-          "title": "Developmental Trajectories of Metaphor Comprehension in Indian Schools",
-          "description": "Tracking how children's ability to understand figurative language evolves in a multilingual educational environment.",
-          "sourcePublication": "Evaluation of Basic Fermentation Parameters and Effective Combinations of Predominant Yeasts from Traditional Starter Materials of Indigenous Communities from Northeast India (2020) - DOI: 10.1080/03610470.2020.1739601",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Behavioral Testing and Storytelling Tasks"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-4-i6",
-          "title": "Quantitative Analysis of Semantic Networks in Multilingual Individuals",
-          "description": "Using computational models to map the organization of the mental lexicon in people who speak multiple languages.",
-          "sourcePublication": "Assessing the Stimulatory Effect of Indole-3-Acetic Acid on Growth and Sustenance of Yeasts Isolated from Traditional Fermentative Sources Maintained by Six Ethnic Communities of Asssam, North-East India (2019) - DOI: 10.22207/JPAM.13.2.27",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Linguistics and Semantic Priming Tasks"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-4-i7",
-          "title": "Behavioral Interventions for Improving Reading Comprehension",
-          "description": "Testing the efficacy of a new strategy-based intervention for children with reading difficulties in Indian languages.",
-          "sourcePublication": "Cyanobacterial Siderophores: Ecological and Biotechnological Significance (2019) - DOI: 10.1016/B978-0-12-814667-5.00019-2",
-          "gapType": "Clinical Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Randomized Controlled Trial (RCT) and Reading Assessments"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-4-i8",
-          "title": "Advanced Methodologies for Studying Language Processing in Real-time",
-          "description": "Using EEG and eye-tracking to investigate the cognitive load during the processing of complex grammatical structures in Indian languages.",
-          "sourcePublication": "Physiological mechanisms of aluminum (Al) toxicity tolerance in nitrogen-fixing aquatic macrophyte Azolla microphylla Kaulf: phytoremediation, metabolic rearrangements, and antioxidative enzyme responses (2019) - DOI: 10.1007/s11356-019-04408-7",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Co-registration of EEG and Eye-tracking"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-4-i9",
-          "title": "Psychometric Evaluation of Language Proficiency Assessment Tools",
-          "description": "Validating a new tool for measuring language proficiency in a diverse multilingual population.",
-          "sourcePublication": "Cyanobacterial bioactive compound EMTAHDCA recovers splenomegaly, affects protein profile of E. coli and spleen of lymphoma bearing mice (2019) - DOI: 10.1007/s11033-019-04659-0",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Psychometric Analysis (IRT and Factor Analysis)"
-        },
-        {
-          "id": "indianinstituteoftechnologymandi-new-4-i10",
-          "title": "The Influence of Language Use on Professional Identity and Communication",
-          "description": "Investigating how the choice of language in professional settings impacts employee identity and communication styles.",
-          "sourcePublication": "Contributors (2019) - DOI: 10.1016/b978-0-12-814667-5.09990-6",
-          "gapType": "Organizational Gap",
-          "difficulty": "Advanced",
-          "methodology": "Qualitative Interviews and Discourse Analysis"
-        }
-      ]
+      "focus": "Assistant Professor. Research interests in cognitive psychology and mental health.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Ramajayam+Govindaraji+IIT+Mandi"
     }
   ],
   "Indian Institute of Technology (BHU) Varanasi": [
