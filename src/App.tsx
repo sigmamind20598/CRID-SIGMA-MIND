@@ -979,24 +979,31 @@ export default function App() {
                               { 
                                 title: "Faculty Directory", 
                                 desc: "Find professors and map their research domains across colleges.",
-                                icon: <Users size={16} />
+                                icon: <Users size={16} />,
+                                action: () => setMode('directory')
                               },
                               { 
                                 title: "Latest News", 
-                                desc: "Track PhD admissions and academic updates in one place.",
-                                icon: <Calendar size={16} />
+                                desc: "IIT Bombay & Delhi call for PhD written tests. Check shortlisted candidates now.",
+                                icon: <Calendar size={16} />,
+                                action: () => setMode('news')
                               },
                               { 
                                 title: "AI Brainstorming", 
                                 desc: "Generate tailored proposal ideas based on cited work and research gaps.",
-                                icon: <Sparkles size={16} />
+                                icon: <Sparkles size={16} />,
+                                action: () => setMode('directory')
                               }
                             ].map((feature, i) => (
-                              <div key={i} className="p-4 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-sm text-left">
-                                <div className="text-emerald-500 mb-2">{feature.icon}</div>
-                                <h3 className="text-[10px] font-bold uppercase tracking-widest mb-1">{feature.title}</h3>
+                              <button 
+                                key={i} 
+                                onClick={feature.action}
+                                className="p-4 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-sm text-left hover:bg-white/10 hover:border-white/20 transition-all group cursor-pointer"
+                              >
+                                <div className="text-emerald-500 mb-2 group-hover:scale-110 transition-transform">{feature.icon}</div>
+                                <h3 className="text-[10px] font-bold uppercase tracking-widest mb-1 group-hover:text-emerald-400 transition-colors">{feature.title}</h3>
                                 <p className="text-[9px] text-white/40 leading-tight">{feature.desc}</p>
-                              </div>
+                              </button>
                             ))}
                           </div>
 
@@ -1494,7 +1501,11 @@ export default function App() {
                     {news.length > 0 ? (
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {news.map((item) => (
-                          <div key={item.id} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors">
+                          <div 
+                            key={item.id} 
+                            onClick={() => window.open(item.url || '#', '_blank')}
+                            className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors cursor-pointer group"
+                          >
                             <div className="flex justify-between items-start mb-4">
                               <span className="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold rounded-full uppercase tracking-wider">
                                 {item.category}
@@ -1503,18 +1514,13 @@ export default function App() {
                                 {new Date(item.timestamp).toLocaleDateString()}
                               </span>
                             </div>
-                            <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+                            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">{item.title}</h3>
                             <p className="text-sm text-white/60 mb-6 line-clamp-2">{item.summary}</p>
                             <div className="flex items-center justify-between">
                               <span className="text-xs text-white/40 font-medium">Source: {item.source}</span>
-                              <a 
-                                href={item.url} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-2 text-emerald-400 hover:text-emerald-300 text-xs font-bold transition-colors"
-                              >
+                              <div className="flex items-center gap-2 text-emerald-400 group-hover:translate-x-1 transition-transform text-xs font-bold">
                                 Read More <ArrowRight size={14} />
-                              </a>
+                              </div>
                             </div>
                           </div>
                         ))}

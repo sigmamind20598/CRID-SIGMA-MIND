@@ -36,7 +36,25 @@ async function callGeminiAI(task: string, params: any = {}, retryCount = 0): Pro
     let prompt = "";
     switch (task) {
       case 'news':
-        prompt = `Provide 3-4 recent news items or breakthroughs in Cognitive Science and Psychology relevant to Indian research institutes (IITs, IISc, CBCS). Format as JSON array: [{title, excerpt, date, source}].`;
+        prompt = `Provide 4-5 very recent and specific news items, alerts, or breakthroughs in Cognitive Science and Psychology relevant to Indian research institutes (IITs, IISc, CBCS, NIMHANS). 
+        
+        Focus on:
+        1. PhD Admission alerts (e.g., IIT Bombay and IIT Delhi have called for written tests/interviews).
+        2. New research project launches or funding.
+        3. Major publications from Indian labs.
+        
+        Format as a JSON array of objects:
+        [{
+          "title": "Clear concise headline",
+          "summary": "1-2 sentence description",
+          "timestamp": "2026-04-27T00:00:00Z",
+          "source": "Name of the institute or news portal",
+          "category": "PHD ADMISSION / RESEARCH / EXAM / FELLOWSHIP / GUIDELINES",
+          "url": "A plausible URL to the institute's admission or news page",
+          "imageKeyword": "relevant-keyword (e.g., iit-delhi, psychology, brain)"
+        }]. 
+        
+        Ensure the first 2 items are about the latest PhD written tests at IIT Bombay and IIT Delhi as they are currently active.`;
         break;
       case 'faculty':
         prompt = `List 5 prominent faculty members in Cognitive Science at ${params?.instituteName || 'top Indian institutes'}. Include their research interests and lab names. Format as JSON array: [{name, institute, interests, lab}].`;
@@ -132,6 +150,7 @@ export async function getLatestNews(): Promise<NewsItem[]> {
       const newsItems = data.map((item: any, index: number) => ({
         ...item,
         id: `news-${index}-${Date.now()}`,
+        url: item.url || "https://www.google.com/search?q=" + encodeURIComponent(item.title),
         timestamp: new Date().toISOString()
       }));
       setCachedData(cacheKey, newsItems);
