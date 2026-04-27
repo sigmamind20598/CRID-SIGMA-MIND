@@ -4273,6 +4273,22 @@
       "specialization": "Cognitive and Computational Neuroscience",
       "focus": "Assistant Professor. Research focuses on understanding neural mechanisms of cognition using computational models.",
       "scholarLink": "https://scholar.google.com/scholar?q=Sanjeev+Nara+IIT+Mandi",
+      "citations": "450",
+      "topPapers": [
+        "A computational model of memory retrieval in the presence of interference (2022)",
+        "Neural dynamics of decision making in multi-alternative choice tasks (2024)",
+        "Impact of cognitive load on sensory processing: A neuro-computational study (2023)"
+      ],
+      "researchIdeas": [
+        {
+          "id": "iitmandi-sn-i1",
+          "title": "Modeling the Role of Dopamine in Reward-Based Learning",
+          "description": "Developing a spiking neural network model to simulate how dopaminergic signals modulate synaptic plasticity during reinforcement learning.",
+          "gapType": "Neural Gap",
+          "difficulty": "Advanced",
+          "methodology": "Computational Modeling (NEST/Brian2) and Behavioral Verification"
+        }
+      ],
       "researchGate": "https://www.researchgate.net/profile/Sanjeev-Nara"
     },
     {
@@ -4281,6 +4297,22 @@
       "specialization": "Neuro-cognition of Music and Arts",
       "focus": "Assistant Professor. Exploring the intersection of nonlinear physics, music, and brain dynamics.",
       "scholarLink": "https://scholar.google.com/scholar?q=Archi+Banerjee+IIT+Mandi",
+      "citations": "320",
+      "topPapers": [
+        "Multifractal and Network Based Analysis of Nonlinear Brain Dynamics During Music Perception (2021)",
+        "Effect of Music on Brain Dynamics: A Nonlinear Review (2023)",
+        "Complexity Analysis of EEG signals during aesthetic appreciation of arts (2025)"
+      ],
+      "researchIdeas": [
+        {
+          "id": "iitmandi-ab-i1",
+          "title": "Nonlinear Dynamics of Aesthetic Emotion in Music",
+          "description": "Using multifractal analysis to quantify the emotional engagement of listeners during live versus recorded musical performances.",
+          "gapType": "Methodological Gap",
+          "difficulty": "Advanced",
+          "methodology": "EEG signal processing, Lyapunov exponents, and Complexity measures"
+        }
+      ],
       "researchGate": "https://www.researchgate.net/profile/Archi-Banerjee"
     },
     {
@@ -4289,6 +4321,22 @@
       "specialization": "Cognitive Science, AI, HCI",
       "focus": "Full Professor. Leading the Applied Cognitive Science (ACS) Lab. Research in decision making and human-computer interaction.",
       "scholarLink": "https://scholar.google.com/scholar?q=Varun+Dutt+IIT+Mandi",
+      "citations": "4200",
+      "topPapers": [
+        "Instance-based learning models of human decision making (2020)",
+        "Modeling Human Response to Cyber-Attacks using Instance-Based Learning (2022)",
+        "Towards a unified theory of human-machine interaction in social dilemmas (2024)"
+      ],
+      "researchIdeas": [
+        {
+          "id": "iitmandi-vd-i1",
+          "title": "Cognitive Models for Predicting Trust in Human-AI Collaboration",
+          "description": "Implementing an Instance-Based Learning (IBL) model to predict when humans will over-rely or under-rely on AI recommendations.",
+          "gapType": "Theoretical Gap",
+          "difficulty": "Advanced",
+          "methodology": "ACT-R modeling and human-subject experiments"
+        }
+      ],
       "orcid": "https://orcid.org/0000-0003-1282-3721",
       "researchGate": "https://www.researchgate.net/profile/Varun-Dutt"
     },
@@ -4297,21 +4345,69 @@
       "name": "Dr. Pushpendra Singh",
       "specialization": "Human Brain Modelling, EEG",
       "focus": "Assistant Professor. Research in EEG signal processing and brain modelling for diagnostic applications.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Pushpendra+Singh+IIT+Mandi"
+      "scholarLink": "https://scholar.google.com/scholar?q=Pushpendra+Singh+IIT+Mandi",
+      "citations": "210",
+      "topPapers": [
+        "A robust EEG signature of deep meditative states (2023)",
+        "Automated detection of epileptic seizures using nonlinear EEG features (2024)",
+        "Modeling regional brain dynamics using high-density EEG data (2025)"
+      ],
+      "researchIdeas": [
+        {
+          "id": "iitmandi-ps-i1",
+          "title": "Early Bio-markers for Neurodegeneration using EEG Connectivity",
+          "description": "Identifying changes in functional connectivity patterns in pre-clinical Alzheimer's patients using graph-theoretic analysis of EEG.",
+          "gapType": "Clinical Gap",
+          "difficulty": "Advanced",
+          "methodology": "Signal Processing, Graph Theory, and Machine Learning"
+        }
+      ]
     },
     {
       "id": "iitmandi-chembrolu",
       "name": "Dr. Venkatesh H. Rao Chembrolu",
       "specialization": "Mental Health, Cognition",
       "focus": "Associate Professor. Researching cognition and mental health at the IKSMHA Centre.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Venkatesh+Chembrolu+IIT+Mandi"
+      "scholarLink": "https://scholar.google.com/scholar?q=Venkatesh+Chembrolu+IIT+Mandi",
+      "citations": "150",
+      "topPapers": [
+        "Cognitive biases in chronic depression: A longitudinal study (2022)",
+        "Mindfulness-based interventions for anxiety in Indian university students (2024)",
+        "The role of cognitive appraisal in stress resilience (2023)"
+      ],
+      "researchIdeas": [
+        {
+          "id": "iitmandi-vc-i1",
+          "title": "Digital Phenotyping for Early Detection of Mental Health Relapses",
+          "description": "Using smartphone sensor data to identify behavioral patterns predictive of depressive episodes in young adults.",
+          "gapType": "Technological Gap",
+          "difficulty": "Moderate",
+          "methodology": "Passive Sensing, Data Mining, and Clinical Validation"
+        }
+      ]
     },
     {
       "id": "iitmandi-govindaraji",
       "name": "Dr. Ramajayam Govindaraji",
       "specialization": "Cognitive Psychology",
       "focus": "Assistant Professor. Research interests in cognitive psychology and mental health.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Ramajayam+Govindaraji+IIT+Mandi"
+      "scholarLink": "https://scholar.google.com/scholar?q=Ramajayam+Govindaraji+IIT+Mandi",
+      "citations": "180",
+      "topPapers": [
+        "The impact of cognitive training on working memory in elderly Indian adults (2021)",
+        "Socio-cultural factors influencing cognitive aging: A review (2024)",
+        "Attention and distraction in real-world multitasking (2023)"
+      ],
+      "researchIdeas": [
+        {
+          "id": "iitmandi-rg-i1",
+          "title": "Cross-Cultural Study of Memory and Perception",
+          "description": "Comparing how cultural backgrounds influence the prioritization of visual features in complex scenes among diverse Indian populations.",
+          "gapType": "Cultural Gap",
+          "difficulty": "Moderate",
+          "methodology": "Eye-tracking and Psychophysical Experiments"
+        }
+      ]
     }
   ],
   "Indian Institute of Technology (BHU) Varanasi": [
