@@ -1088,11 +1088,11 @@ export default function App() {
 
                 {mode === 'directory' && view === 'topics' && selectedProfessor && (
                   <motion.div
-                    key="topics"
+                    key={`topics-${selectedProfessor.id}-${topics.length}`}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="max-w-4xl mx-auto space-y-6"
+                    className="max-w-4xl mx-auto space-y-6 pb-20"
                   >
                     <h3 className="text-2xl font-bold mb-6">Research Topics for {selectedProfessor.name}</h3>
                     

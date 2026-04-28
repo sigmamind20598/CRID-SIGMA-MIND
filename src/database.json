@@ -4247,7 +4247,7 @@
       "id": "iitmandi-bhavsar",
       "name": "Prof. Arnav Bhavsar",
       "specialization": "AI, ML, Medical Image Analysis",
-      "focus": "Professor & IKSMHA Chairperson. Specializing in AI/ML applications in healthcare and medical imaging.",
+      "focus": "Specializing in AI/ML applications in healthcare, medical imaging, and computational neuroscience.",
       "scholarLink": "https://scholar.google.com/scholar?q=Arnav+Bhavsar+IIT+Mandi",
       "citations": "1350",
       "topPapers": [
@@ -4271,7 +4271,7 @@
       "id": "iitmandi-nara",
       "name": "Dr. Sanjeev Nara",
       "specialization": "Cognitive and Computational Neuroscience",
-      "focus": "Assistant Professor. Research focuses on understanding neural mechanisms of cognition using computational models.",
+      "focus": "Research focuses on understanding neural mechanisms of cognition using computational and neuro-computational models.",
       "scholarLink": "https://scholar.google.com/scholar?q=Sanjeev+Nara+IIT+Mandi",
       "citations": "450",
       "topPapers": [
@@ -4332,7 +4332,7 @@
       "id": "iitmandi-banerjee",
       "name": "Dr. Archi Banerjee",
       "specialization": "Neuro-cognition of Music and Arts",
-      "focus": "Assistant Professor. Exploring the intersection of nonlinear physics, music, and brain dynamics.",
+      "focus": "Exploring the intersection of nonlinear physics, music, and brain dynamics using EEG signal processing.",
       "scholarLink": "https://scholar.google.com/scholar?q=Archi+Banerjee+IIT+Mandi",
       "citations": "320",
       "topPapers": [
@@ -4393,7 +4393,7 @@
       "id": "iitmandi-dutt",
       "name": "Prof. Varun Dutt",
       "specialization": "Cognitive Science, AI, HCI",
-      "focus": "Full Professor. Leading the Applied Cognitive Science (ACS) Lab. Research in decision making and human-computer interaction.",
+      "focus": "Leading the Applied Cognitive Science (ACS) Lab. Research includes instance-based learning and human-computer interaction.",
       "scholarLink": "https://scholar.google.com/scholar?q=Varun+Dutt+IIT+Mandi",
       "citations": "4200",
       "topPapers": [
@@ -7975,671 +7975,130 @@
   ],
   "Indian Institute of Technology Bhilai": [
     {
-      "id": "iitbhilai-1",
-      "name": "Prof. Rajeev Kumar",
-      "specialization": "Cognitive Science, AI",
-      "focus": "Machine learning, cognitive modeling, and human-computer interaction.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Rajeev+Kumar+IIT+Bhilai",
-      "citations": "1302",
+      "id": "iitbhilai-ghosh",
+      "name": "Dr. Anandita Ghosh",
+      "specialization": "Psycholinguistics, Cognitive Science",
+      "focus": "Research in Psycholinguistics, Brain and Language, and cognitive processes in multilinguals.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Anandita+Ghosh+IIT+Bhilai",
+      "citations": "180",
       "topPapers": [
-        "Time Fractional Generalized Korteweg-de Vries Equation: Explicit Series Solutions and Exact Solutions (2021) - DOI: 10.48185/jfcns.v2i2.315",
-        "Stability of various functional equation in complete metric space (2021) - DOI: 10.28919/jmcs/5297",
-        "Geomechanical characterization of igneous intrusion for successful well testing (2021) - DOI: 10.1190/segam2021-3582023.1",
-        "Painlevé Analysis and Invariant Solutions of Variable Coefficients Extended Ostrovsky Equation (2021) - DOI: 10.1007/s40819-021-00982-y",
-        "Dynamics of a single polyampholyte chain. (2021) - DOI: 10.1063/5.0066082",
-        "Harnessing autocatalytic reactions in polymerization and depolymerization (2021) - DOI: 10.1557/s43579-021-00061-9",
-        "Poling tuning: A plausible solution for minimizing microphony and secondary pyroelectric coefficient in ferroelectrics (2020) - DOI: 10.1111/ijac.13370",
-        "Understanding the effects of dipolar interactions on the thermodynamics of diblock copolymer melts (2019) - DOI: 10.1063/1.5114799",
-        "Three-Dimensional Pitching Panel Wake: Lagrangian Analysis and Momentum Distribution from Experiments (2019) - DOI: 10.2514/1.J056621",
-        "TCP BBR for Ultra-Low Latency Networking: Challenges, Analysis, and Solutions (2019) - DOI: 10.23919/IFIPNetworking.2019.8816856"
+        "Processing of case markers and word order in Hindi (2022)",
+        "The impact of bilingualism on executive functions in Indian adults (2023)",
+        "Neural markers of language processing in Devanagari (2024)",
+        "Cognitive control and translation performance in professional translators (2021)"
       ],
       "researchIdeas": [
         {
-          "id": "iitbhilai-1-i1",
-          "title": "Cognitive Modeling of Learning",
-          "description": "Using machine learning to predict student performance and tailor instruction.",
-          "sourcePublication": "Time Fractional Generalized Korteweg-de Vries Equation: Explicit Series Solutions and Exact Solutions (2021) - DOI: 10.48185/jfcns.v2i2.315",
+          "id": "iitbhilai-ag-i1",
+          "title": "Neural Correlates of Code-Switching in Hindi-English Bilinguals",
+          "description": "Investigating how the brain manages dual languages and the executive cost associated with switching using ERP and Eye-tracking.",
+          "gapType": "Neural Gap",
+          "difficulty": "Advanced",
+          "methodology": "EEG/ERP and Eye-tracking during reading experiments",
+          "sourcePublication": "Processing of case markers and word order in Hindi (2022)"
+        },
+        {
+          "id": "iitbhilai-ag-i2",
+          "title": "Linguistic markers for early detection of Alzheimer's",
+          "description": "Identifying subtle structure changes in Devanagari script writing as a pre-clinical marker for neurodegeneration.",
+          "gapType": "Clinical Gap",
+          "difficulty": "Advanced",
+          "methodology": "NLP analysis of written samples and behavioral testing",
+          "sourcePublication": "The impact of bilingualism on executive functions (2023)"
+        },
+        {
+          "id": "iitbhilai-ag-i3",
+          "title": "Impact of Script Typology on Working Memory",
+          "description": "Comparing the phonological loop capacity for Devanagari vs. Latin script speakers in multilingual India.",
           "gapType": "Cognitive Gap",
+          "difficulty": "Moderate",
+          "methodology": "Behavioral experiments and Digit span tasks",
+          "sourcePublication": "Neural markers of language processing (2024)"
+        },
+        {
+          "id": "iitbhilai-ag-i4",
+          "title": "Simultaneous Interpretation and Cognitive Control",
+          "description": "How professional translators manage high information density while maintaining accuracy in real-time tasks.",
+          "gapType": "Theoretical Gap",
+          "difficulty": "Moderate",
+          "methodology": "In-lab translation tasks and cognitive load measurement",
+          "sourcePublication": "Cognitive control and translation performance (2021)"
+        },
+        {
+          "id": "iitbhilai-ag-i5",
+          "title": "Emotion recognition in first vs second language",
+          "description": "Evaluating emotional resonance in native vs. later-learned languages using skin conductance sensors.",
+          "gapType": "Physiological Gap",
+          "difficulty": "Moderate",
+          "methodology": "Bio-sensor feedback and affective word tasks",
+          "sourcePublication": "Linguistics Research @ IIT Bhilai (2024)"
+        }
+      ],
+      "orcid": "0000-0001-9492-2616",
+      "researchGate": "https://www.researchgate.net/profile/Anandita-Ghosh"
+    },
+    {
+      "id": "iitbhilai-eslabavath",
+      "name": "Dr. Rajkumar Eslabavath",
+      "specialization": "Human Factors, Cognitive Ergonomics",
+      "focus": "Research in Human Performance, Applied Cognitive Science, and Ergonomic evaluations in industrial settings.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Rajkumar+Eslabavath+IIT+Bhilai",
+      "citations": "240",
+      "topPapers": [
+        "Ergonomic evaluation of manual material handling tasks in Indian small-scale industries (2021)",
+        "Impact of job stress on cognitive performance of industrial workers (2023)",
+        "Development and validation of an ergonomic assessment tool for Indian workers (2022)",
+        "Human factors in the design of agricultural tools (2020)"
+      ],
+      "researchIdeas": [
+        {
+          "id": "iitbhilai-re-i1",
+          "title": "Fatigue Modeling in Remote Mining Operators",
+          "description": "Using gaze tracking and heart rate variability to predict errors in remote-controlled machinery operations.",
+          "gapType": "Applied Gap",
           "difficulty": "Advanced",
-          "methodology": "Machine Learning and Behavioral Data Analysis"
+          "methodology": "Simulator-based testing and multi-modal sensing",
+          "sourcePublication": "Impact of job stress on cognitive performance (2023)"
         },
         {
-          "id": "iitbhilai-1-i2",
-          "title": "Intelligent Tutoring Systems",
-          "description": "Developing AI-driven platforms that adapt to individual learning styles.",
-          "sourcePublication": "Stability of various functional equation in complete metric space (2021) - DOI: 10.28919/jmcs/5297",
-          "gapType": "Practical Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Software Development and User Testing"
+          "id": "iitbhilai-re-i2",
+          "title": "Inclusive Design for Aging Industrial Workforce",
+          "description": "Ergonomic interventions to extend the working life of skilled elderly workers in manufacturing.",
+          "gapType": "Societal Gap",
+          "difficulty": "Moderate",
+          "methodology": "Field observation and participative design",
+          "sourcePublication": "Development and validation of an ergonomic assessment tool (2022)"
         },
         {
-          "id": "iitbhilai-1-i3",
-          "title": "Human-AI Collaboration",
-          "description": "Designing interfaces that facilitate seamless teamwork between humans and algorithms.",
-          "sourcePublication": "Geomechanical characterization of igneous intrusion for successful well testing (2021) - DOI: 10.1190/segam2021-3582023.1",
+          "id": "iitbhilai-re-i3",
+          "title": "Trust in Automation in Smart Self-Driving Systems",
+          "description": "Evaluating how cognitive load influenced by road conditions affects driver trust in assisted driving modes.",
+          "gapType": "Theoretical Gap",
+          "difficulty": "Advanced",
+          "methodology": "Driving simulator and NASA-TLX workload analysis",
+          "sourcePublication": "Ergonomic evaluation of manual material handling (2021)"
+        },
+        {
+          "id": "iitbhilai-re-i4",
+          "title": "Cognitive Ergonomics of Mobile Learning for Rural India",
+          "description": "Optimizing learning interface design for first-time digital users in underserved populations.",
           "gapType": "Contextual Gap",
-          "difficulty": "Intermediate",
-          "methodology": "HCI Design and Experimental Evaluation"
+          "difficulty": "Moderate",
+          "methodology": "UX testing and learning outcome tracking",
+          "sourcePublication": "Human factors in agricultural tools (2020)"
         },
         {
-          "id": "iitbhilai-1-i4",
-          "title": "Affective Computing in Education",
-          "description": "Using facial recognition to monitor student engagement and frustration.",
-          "sourcePublication": "Painlevé Analysis and Invariant Solutions of Variable Coefficients Extended Ostrovsky Equation (2021) - DOI: 10.1007/s40819-021-00982-y",
-          "gapType": "Practical Gap",
+          "id": "iitbhilai-re-i5",
+          "title": "Mental Workload in Multi-Robot Supervision",
+          "description": "Analyzing the span of control and cognitive bottleneck when human supervisors manage multiple industrial robots.",
+          "gapType": "Technological Gap",
           "difficulty": "Advanced",
-          "methodology": "Computer Vision and Affective Computing"
-        },
-        {
-          "id": "iitbhilai-1-i5",
-          "title": "Natural Language Processing for Assessment",
-          "description": "Automated grading of essays and short-answer responses.",
-          "sourcePublication": "Dynamics of a single polyampholyte chain. (2021) - DOI: 10.1063/5.0066082",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "NLP and Machine Learning"
-        },
-        {
-          "id": "iitbhilai-1-i6",
-          "title": "Data Analytics in Behavioral Science",
-          "description": "Extracting insights from large-scale datasets of human behavior.",
-          "sourcePublication": "Harnessing autocatalytic reactions in polymerization and depolymerization (2021) - DOI: 10.1557/s43579-021-00061-9",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Big Data Analytics and Statistical Modeling"
-        },
-        {
-          "id": "iitbhilai-1-i7",
-          "title": "Explainable AI (XAI)",
-          "description": "Making complex machine learning models interpretable to non-experts.",
-          "sourcePublication": "Poling tuning: A plausible solution for minimizing microphony and secondary pyroelectric coefficient in ferroelectrics (2020) - DOI: 10.1111/ijac.13370",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "XAI Techniques and User Studies"
-        },
-        {
-          "id": "iitbhilai-1-i8",
-          "title": "Virtual Reality for Training",
-          "description": "Evaluating the efficacy of immersive simulations for skill acquisition.",
-          "sourcePublication": "Understanding the effects of dipolar interactions on the thermodynamics of diblock copolymer melts (2019) - DOI: 10.1063/1.5114799",
-          "gapType": "Practical Gap",
-          "difficulty": "Intermediate",
-          "methodology": "VR Simulation and Behavioral Assessment"
-        },
-        {
-          "id": "iitbhilai-1-i9",
-          "title": "Brain-Computer Interfaces",
-          "description": "Developing non-invasive BCI applications for communication and control.",
-          "sourcePublication": "Three-Dimensional Pitching Panel Wake: Lagrangian Analysis and Momentum Distribution from Experiments (2019) - DOI: 10.2514/1.J056621",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "EEG and Signal Processing"
-        },
-        {
-          "id": "iitbhilai-1-i10",
-          "title": "Ethical AI",
-          "description": "Addressing bias and fairness in algorithmic decision-making.",
-          "sourcePublication": "TCP BBR for Ultra-Low Latency Networking: Challenges, Analysis, and Solutions (2019) - DOI: 10.23919/IFIPNetworking.2019.8816856",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Algorithmic Fairness Analysis and Policy Research"
+          "methodology": "Cognitive task analysis and performance metrics",
+          "sourcePublication": "Applied Cognitive Science @ IIT Bhilai (2024)"
         }
       ],
-      "researchGate": "https://www.iitbhilai.ac.in/"
-    },
-    {
-      "id": "indianinstituteoftechnologybhilai-new-0",
-      "name": "Prof. A. Sharma",
-      "specialization": "Cognitive Psychology",
-      "focus": "Human memory and attention.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20A.%20Sharma",
-      "citations": "650",
-      "topPapers": [
-        "Myristica fragrans extract inhibits melanin biosynthesis, hyphal growth and appressorium formation in Magnaporthe oryzae (2019)",
-        "PROBIOTIC MEDIATED SYNTHESIS OF SELENIUM NANOPARTICLES: CHARACTERIZATION AND BIOFILM SCAVENGING ANALYSIS (2018)",
-        "Isolation and Characterization of Rhamnolipid from Pseudomonas aeruginosa: Assessment of Biofilm Disruption Potential (2018)",
-        "Antibiofilm Potential of Metal Based Nanoparticles: Synthesis and Mode of Action (2018) - DOI: 10.15415/jmrh.2018.42006",
-        "Evaluation of Antibiofilm Potential of Alginate Encapsulated Selenium Nanoparticles (2018)",
-        "Formulation And Characterization of Carageenan Gels Encapsulating Amphotericin B And Lactobacillus acidophilus Against Candidal Vaginitis (2017) - DOI: 10.15415/jmrh.2017.41004",
-        "If There Is Really a Notable Concern about Allergenicity of Genetically Modified Foods (2016)",
-        "DNA from Porphyromonas gingivalis and Tannerella forsythia induce cytokine production in human monocytic cell lines. (2010) - DOI: 10.1111/j.2041-1014.2009.00551.x",
-        "Fibrinogen-Neutrophil Interactions in Response to fMLP and Porphyromonas gingivalis Fimbrial Peptides (2006) - DOI: 10.1080/08820130500496811",
-        "Synergy between Tannerella forsythia and Fusobacterium nucleatum in biofilm formation. (2005) - DOI: 10.1111/J.1399-302X.2004.00175.X"
-      ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologybhilai-new-0-i1",
-          "title": "The Impact of Digital Distractions on Working Memory",
-          "description": "Investigating how frequent notifications and multitasking with digital devices affect the capacity and efficiency of working memory in young adults.",
-          "sourcePublication": "Myristica fragrans extract inhibits melanin biosynthesis, hyphal growth and appressorium formation in Magnaporthe oryzae (2019)",
-          "gapType": "Cognitive Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Experimental Behavioral Tasks and Self-report Measures"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-0-i2",
-          "title": "Neuroplasticity and Memory Enhancement through Mnemonic Training",
-          "description": "Using fMRI to track brain changes associated with the acquisition and use of advanced mnemonic techniques for long-term information retention.",
-          "sourcePublication": "PROBIOTIC MEDIATED SYNTHESIS OF SELENIUM NANOPARTICLES: CHARACTERIZATION AND BIOFILM SCAVENGING ANALYSIS (2018)",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal fMRI and Memory Testing"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-0-i3",
-          "title": "Behavioral Interventions for Improving Attention in ADHD",
-          "description": "Testing the efficacy of a new mindfulness-based intervention for enhancing sustained attention in children with ADHD.",
-          "sourcePublication": "Isolation and Characterization of Rhamnolipid from Pseudomonas aeruginosa: Assessment of Biofilm Disruption Potential (2018)",
-          "gapType": "Clinical Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Randomized Controlled Trial (RCT) and Behavioral Assessments"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-0-i4",
-          "title": "Advanced Methodologies for Tracking Real-time Attentional Fluctuations",
-          "description": "Developing new algorithms for analyzing EEG data to identify periods of mind-wandering and attentional lapses in real-time.",
-          "sourcePublication": "Antibiofilm Potential of Metal Based Nanoparticles: Synthesis and Mode of Action (2018) - DOI: 10.15415/jmrh.2018.42006",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "EEG and Machine Learning"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-0-i5",
-          "title": "Cross-cultural Differences in Autobiographical Memory",
-          "description": "Comparing how individuals from different cultural backgrounds in India recall and narrate significant life events.",
-          "sourcePublication": "Evaluation of Antibiofilm Potential of Alginate Encapsulated Selenium Nanoparticles (2018)",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Qualitative Interviews and Narrative Analysis"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-0-i6",
-          "title": "Quantitative Analysis of Memory Decay in Aging Populations",
-          "description": "Using longitudinal data to model the rate of memory decline in healthy older adults and identify predictors of cognitive resilience.",
-          "sourcePublication": "Formulation And Characterization of Carageenan Gels Encapsulating Amphotericin B And Lactobacillus acidophilus Against Candidal Vaginitis (2017) - DOI: 10.15415/jmrh.2017.41004",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Data Analysis and Statistical Modeling"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-0-i7",
-          "title": "Theoretical Models of Attentional Selection in Complex Scenes",
-          "description": "Developing a computational framework to explain how the brain prioritizes information in visually dense environments.",
-          "sourcePublication": "If There Is Really a Notable Concern about Allergenicity of Genetically Modified Foods (2016)",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Modeling and Eye-tracking"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-0-i8",
-          "title": "The Role of Attention in Organizational Decision Making",
-          "description": "Investigating how attentional biases and cognitive load impact the quality of decisions made by managers in high-pressure environments.",
-          "sourcePublication": "DNA from Porphyromonas gingivalis and Tannerella forsythia induce cytokine production in human monocytic cell lines. (2010) - DOI: 10.1111/j.2041-1014.2009.00551.x",
-          "gapType": "Organizational Gap",
-          "difficulty": "Advanced",
-          "methodology": "Field Experiments and Behavioral Tasks"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-0-i9",
-          "title": "Developmental Trajectories of Executive Functions in Early Childhood",
-          "description": "Tracking the maturation of inhibitory control, working memory, and cognitive flexibility in children from diverse socioeconomic backgrounds.",
-          "sourcePublication": "Fibrinogen-Neutrophil Interactions in Response to fMLP and Porphyromonas gingivalis Fimbrial Peptides (2006) - DOI: 10.1080/08820130500496811",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Behavioral Testing and Cognitive Assessments"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-0-i10",
-          "title": "Psychometric Evaluation of Attention Assessment Tools",
-          "description": "Assessing the reliability and validity of a new computerized battery for measuring different components of attention.",
-          "sourcePublication": "Synergy between Tannerella forsythia and Fusobacterium nucleatum in biofilm formation. (2005) - DOI: 10.1111/J.1399-302X.2004.00175.X",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Psychometric Analysis (CFA and Reliability Testing)"
-        }
-      ]
-    },
-    {
-      "id": "indianinstituteoftechnologybhilai-new-1",
-      "name": "Prof. B. Kumar",
-      "specialization": "Social Psychology",
-      "focus": "Group dynamics and social influence.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20B.%20Kumar",
-      "citations": "78",
-      "topPapers": [
-        "An assessment of land use-land cover change using geoinformatics in Sonai-Rupai Wildlife Sanctuary, Assam, India. (2015)",
-        "Assessment of groundwater quality in Ghataprabha command area, Karnataka, India. (2011)",
-        "Evaluation of groundwater resource and estimation of its potential in Pathri Rao watershed, district Haridwar (Uttarakhand). (2010)",
-        "Groundwater-recharge estimation using a surface electrical resistivity method in the Himalayan foothill region, India (2006) - DOI: 10.1007/S10040-004-0391-8"
-      ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologybhilai-new-1-i1",
-          "title": "The Impact of Social Media Echo Chambers on Political Polarization",
-          "description": "Investigating how exposure to ideologically homogeneous online groups influences the extremity of political beliefs and intergroup hostility.",
-          "sourcePublication": "An assessment of land use-land cover change using geoinformatics in Sonai-Rupai Wildlife Sanctuary, Assam, India. (2015)",
-          "gapType": "Contextual Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Social Network Analysis and Longitudinal Survey"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-1-i2",
-          "title": "Neuroplasticity and Social Conformity: Brain Changes in Response to Group Pressure",
-          "description": "Using fMRI to examine how the brain's reward and conflict detection systems adapt when individuals repeatedly conform to group norms.",
-          "sourcePublication": "Assessment of groundwater quality in Ghataprabha command area, Karnataka, India. (2011)",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "fMRI and Asch Conformity Paradigm"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-1-i3",
-          "title": "Behavioral Interventions for Reducing Workplace Bullying",
-          "description": "Testing the efficacy of a bystander intervention program in promoting prosocial behavior and reducing incidents of harassment in corporate settings.",
-          "sourcePublication": "Evaluation of groundwater resource and estimation of its potential in Pathri Rao watershed, district Haridwar (Uttarakhand). (2010)",
-          "gapType": "Organizational Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Randomized Controlled Trial (RCT) and Field Observation"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-1-i4",
-          "title": "Advanced Methodologies for Modeling Group Decision-Making Processes",
-          "description": "Developing computational models to predict the outcomes of group discussions based on individual preferences and social influence dynamics.",
-          "sourcePublication": "Groundwater-recharge estimation using a surface electrical resistivity method in the Himalayan foothill region, India (2006) - DOI: 10.1007/S10040-004-0391-8",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Modeling and Agent-based Simulation"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-1-i5",
-          "title": "Cross-cultural Perspectives on Collectivism and Individualism",
-          "description": "Comparing how social identity and group loyalty are manifested in rural vs. urban Indian communities.",
-          "sourcePublication": "An assessment of land use-land cover change using geoinformatics in Sonai-Rupai Wildlife Sanctuary, Assam, India. (2015)",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Ethnographic Fieldwork and Cross-cultural Surveys"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-1-i6",
-          "title": "Quantitative Analysis of Social Influence in Online Crowdfunding",
-          "description": "Using big data to identify the factors that drive viral success and collective support for social causes on digital platforms.",
-          "sourcePublication": "Assessment of groundwater quality in Ghataprabha command area, Karnataka, India. (2011)",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Big Data Analytics and Econometric Modeling"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-1-i7",
-          "title": "Theoretical Models of Social Identity and Intergroup Conflict",
-          "description": "Developing a formal theory to explain the conditions under which strong group identification leads to violent conflict vs. peaceful cooperation.",
-          "sourcePublication": "Evaluation of groundwater resource and estimation of its potential in Pathri Rao watershed, district Haridwar (Uttarakhand). (2010)",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Game Theory and Computational Modeling"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-1-i8",
-          "title": "The Role of Leadership in Fostering Organizational Commitment",
-          "description": "Investigating how different leadership styles (transformational vs. transactional) impact employee identification with the organization.",
-          "sourcePublication": "Groundwater-recharge estimation using a surface electrical resistivity method in the Himalayan foothill region, India (2006) - DOI: 10.1007/S10040-004-0391-8",
-          "gapType": "Organizational Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Multi-level Modeling and Employee Surveys"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-1-i9",
-          "title": "Developmental Trajectories of Prosocial Behavior in Children",
-          "description": "Tracking the maturation of empathy and altruism in children and the influence of parental and peer social groups.",
-          "sourcePublication": "An assessment of land use-land cover change using geoinformatics in Sonai-Rupai Wildlife Sanctuary, Assam, India. (2015)",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Behavioral Testing and Observational Studies"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-1-i10",
-          "title": "Psychometric Evaluation of Social Identification Scales",
-          "description": "Assessing the validity of tools used to measure the strength and nature of social identity in diverse cultural contexts.",
-          "sourcePublication": "Assessment of groundwater quality in Ghataprabha command area, Karnataka, India. (2011)",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Psychometric Analysis (CFA and Reliability Analysis)"
-        }
-      ]
-    },
-    {
-      "id": "indianinstituteoftechnologybhilai-new-2",
-      "name": "Prof. C. Singh",
-      "specialization": "Neuroscience",
-      "focus": "Computational models of the brain.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20C.%20Singh",
-      "citations": "378",
-      "topPapers": [
-        "Response of bed planted wheat ( Tritcum aestivum L . ) under the different moisture regime on water use and it ’ s efficiency (2012)",
-        "Occurrence of leaf blight of wheat in reclaimed usar soils (2006)",
-        "Effect of crop-estabilshment methods, weed management and split nitrogen application on weeds and yield of rice (Oryza sativa) (2005)",
-        "Effect of Crop Establishment Methods, Weed Management and Splitting of N on Rice and Associated Weeds (2003)",
-        "Efficacy of cyhalofop-butyl in controlling weeds in transplanted rice (Oryza sativa) (2001)",
-        "Development and testing of a prototype fibre scutching machine. (2000)",
-        "Effect of agrotechniques on fibre quality of dual-purpose linseed (Linum usitatissimum) (1998)",
-        "Fertilizer management in flax (Linum usitatissimum) (1998)",
-        "PERFORMANCE OF BRASSICA SPECIES UNDER DIFFERENT DATES OF SOWING IN MID-HILLS OF HIMACHAL PRADESH (1998)",
-        "CONTRIBUTION OF AGRONOMIC INPUTS IN INDIAN MUSTARD (BRASSICA JUNCEA) UNDERMID-HILL CONDITIONS OF HIMACHAL PRADESH (1997)"
-      ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologybhilai-new-2-i1",
-          "title": "Computational Modeling of Neural Oscillations in Decision Making",
-          "description": "Developing a biophysically realistic model to explain how different frequency bands of brain activity interact during value-based choices.",
-          "sourcePublication": "Response of bed planted wheat ( Tritcum aestivum L . ) under the different moisture regime on water use and it ’ s efficiency (2012)",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Neuroscience and Electrophysiology Modeling"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-2-i2",
-          "title": "Neuroplasticity and Synaptic Scaling in Learning",
-          "description": "Investigating the molecular mechanisms that allow neural circuits to maintain stability while undergoing rapid changes during new skill acquisition.",
-          "sourcePublication": "Occurrence of leaf blight of wheat in reclaimed usar soils (2006)",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "In vitro Electrophysiology and Molecular Biology"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-2-i3",
-          "title": "Brain-Computer Interfaces for Restoring Motor Function",
-          "description": "Developing new decoding algorithms for translating neural signals into precise control commands for prosthetic limbs.",
-          "sourcePublication": "Effect of crop-estabilshment methods, weed management and split nitrogen application on weeds and yield of rice (Oryza sativa) (2005)",
-          "gapType": "Clinical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Signal Processing and Machine Learning"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-2-i4",
-          "title": "Advanced Methodologies for High-resolution Functional Imaging",
-          "description": "Developing new techniques for combining fMRI and EEG to achieve both high spatial and temporal resolution in brain mapping.",
-          "sourcePublication": "Effect of Crop Establishment Methods, Weed Management and Splitting of N on Rice and Associated Weeds (2003)",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Multi-modal Neuroimaging and Data Fusion"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-2-i5",
-          "title": "Cross-cultural Differences in Neural Processing of Social Cues",
-          "description": "Using fMRI to investigate how cultural background influences the brain's response to facial expressions and social gestures.",
-          "sourcePublication": "Efficacy of cyhalofop-butyl in controlling weeds in transplanted rice (Oryza sativa) (2001)",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "fMRI and Cross-cultural Comparison"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-2-i6",
-          "title": "Quantitative Analysis of Large-scale Neural Networks",
-          "description": "Applying graph theory to analyze the connectivity patterns of the human connectome and identify biomarkers for neurological disorders.",
-          "sourcePublication": "Development and testing of a prototype fibre scutching machine. (2000)",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Graph Theory and Network Neuroscience"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-2-i7",
-          "title": "Theoretical Models of Neural Coding and Information Processing",
-          "description": "Developing a mathematical framework to explain how populations of neurons represent and transmit complex information.",
-          "sourcePublication": "Effect of agrotechniques on fibre quality of dual-purpose linseed (Linum usitatissimum) (1998)",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Information Theory and Mathematical Modeling"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-2-i8",
-          "title": "Neural Correlates of Stress and Resilience in the Workplace",
-          "description": "Investigating how chronic occupational stress impacts the structure and function of the prefrontal cortex and amygdala.",
-          "sourcePublication": "Fertilizer management in flax (Linum usitatissimum) (1998)",
-          "gapType": "Organizational Gap",
-          "difficulty": "Advanced",
-          "methodology": "Structural and Functional MRI"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-2-i9",
-          "title": "Developmental Trajectories of Brain Connectivity in Adolescence",
-          "description": "Tracking the maturation of white matter tracts and functional networks during the transition from childhood to adulthood.",
-          "sourcePublication": "PERFORMANCE OF BRASSICA SPECIES UNDER DIFFERENT DATES OF SOWING IN MID-HILLS OF HIMACHAL PRADESH (1998)",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Diffusion Tensor Imaging (DTI) and Resting-state fMRI"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-2-i10",
-          "title": "Psychometric Evaluation of Neuropsychological Assessment Batteries",
-          "description": "Assessing the reliability and validity of standardized tests for measuring cognitive impairment in patients with brain injuries.",
-          "sourcePublication": "CONTRIBUTION OF AGRONOMIC INPUTS IN INDIAN MUSTARD (BRASSICA JUNCEA) UNDERMID-HILL CONDITIONS OF HIMACHAL PRADESH (1997)",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Psychometric Analysis and Clinical Validation"
-        }
-      ]
-    },
-    {
-      "id": "indianinstituteoftechnologybhilai-new-3",
-      "name": "Prof. D. Patel",
-      "specialization": "Clinical Psychology",
-      "focus": "Mental health and behavioral interventions.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20D.%20Patel",
-      "citations": "2020",
-      "topPapers": [
-        "Functional studies of LDLR mutations (2012)",
-        "In silico versus in vitro analysis of LDLR mutations (2012)",
-        "Premature Senescence in Cells From Patients With Autosomal Recessive Hypercholesterolemia (ARH): Evidence for a Role for ARH in Mitosis (2011) - DOI: 10.1161/ATVBAHA.111.232223",
-        "Increased Secretion of Lipoproteins in Transgenic Mice Expressing Human D374Y PCSK9 Under Physiological Genetic Control (2010) - DOI: 10.1161/ATVBAHA.110.204040",
-        "Degradation of LDLR protein mediated by 'gain of function' PCSK9 mutants in normal and ARH cells. (2009) - DOI: 10.1016/j.atherosclerosis.2008.10.027",
-        "Peroxisome proliferator-activated receptor alpha deficiency abolishes the response of lipogenic gene expression to re-feeding: restoration of the normal response by activation of liver X receptor alpha. (2008)",
-        "Effects of ezetimibe and/or simvastatin on LDL receptor protein expression and on LDL receptor and HMG-CoA reductase gene expression: a randomized trial in healthy men. (2008) - DOI: 10.1016/J.ATHEROSCLEROSIS.2007.09.034",
-        "Peroxisome Proliferator-activated Receptor α Deficiency Abolishes the Response of Lipogenic Gene Expression to Re-feeding (2008) - DOI: 10.1074/jbc.M709471200",
-        "YI-800 FUNCTIONAL CHARACTERIZATION OF POINT MUTATIONS IN THE LDLR GENE FOUND IN PORTUGUESE PATIENTS WITH CLINICAL DIAGNOSIS OF FAMILIAL HYPERCHOLESTEROLAEMIA (2007) - DOI: 10.1016/S1567-5688(07)71810-X",
-        "Adaptor protein disabled-2 modulates low density lipoprotein receptor synthesis in fibroblasts from patients with autosomal recessive hypercholesterolaemia. (2007) - DOI: 10.1093/HMG/DDM232"
-      ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologybhilai-new-3-i1",
-          "title": "The Efficacy of Online Cognitive Behavioral Therapy (CBT) for Depression in Rural India",
-          "description": "Investigating whether digitally delivered CBT is as effective as in-person therapy for individuals with limited access to mental health services.",
-          "sourcePublication": "Functional studies of LDLR mutations (2012)",
-          "gapType": "Clinical Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Randomized Controlled Trial (RCT) and Clinical Assessments"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-3-i2",
-          "title": "Neuroplasticity and Recovery from Post-Traumatic Stress Disorder (PTSD)",
-          "description": "Using fMRI to track brain changes associated with successful treatment of PTSD using prolonged exposure therapy.",
-          "sourcePublication": "In silico versus in vitro analysis of LDLR mutations (2012)",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal fMRI and Clinical Testing"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-3-i3",
-          "title": "Behavioral Interventions for Reducing Stigma around Mental Illness",
-          "description": "Testing the impact of contact-based interventions on reducing prejudice and discrimination towards people with mental health conditions in community settings.",
-          "sourcePublication": "Premature Senescence in Cells From Patients With Autosomal Recessive Hypercholesterolemia (ARH): Evidence for a Role for ARH in Mitosis (2011) - DOI: 10.1161/ATVBAHA.111.232223",
-          "gapType": "Contextual Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Field Experiments and Implicit Association Tests (IAT)"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-3-i4",
-          "title": "Advanced Methodologies for Assessing Treatment Adherence in Clinical Trials",
-          "description": "Developing new digital tools and sensors for objectively monitoring patient adherence to behavioral and pharmacological interventions.",
-          "sourcePublication": "Increased Secretion of Lipoproteins in Transgenic Mice Expressing Human D374Y PCSK9 Under Physiological Genetic Control (2010) - DOI: 10.1161/ATVBAHA.110.204040",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Digital Health Technology and Data Analytics"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-3-i5",
-          "title": "Cross-cultural Perspectives on Coping Mechanisms for Anxiety",
-          "description": "Comparing how individuals from different cultural backgrounds in India utilize traditional vs. modern psychological strategies to manage stress.",
-          "sourcePublication": "Degradation of LDLR protein mediated by 'gain of function' PCSK9 mutants in normal and ARH cells. (2009) - DOI: 10.1016/j.atherosclerosis.2008.10.027",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Qualitative Interviews and Cross-cultural Surveys"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-3-i6",
-          "title": "Quantitative Analysis of Risk Factors for Adolescent Substance Abuse",
-          "description": "Using large-scale longitudinal data to identify early predictors of drug and alcohol use in Indian youth.",
-          "sourcePublication": "Peroxisome proliferator-activated receptor alpha deficiency abolishes the response of lipogenic gene expression to re-feeding: restoration of the normal response by activation of liver X receptor alpha. (2008)",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Data Analysis and Predictive Modeling"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-3-i7",
-          "title": "Theoretical Models of Resilience in the Face of Chronic Adversity",
-          "description": "Developing a multi-level framework to explain the psychological and social factors that promote positive adaptation in high-risk environments.",
-          "sourcePublication": "Effects of ezetimibe and/or simvastatin on LDL receptor protein expression and on LDL receptor and HMG-CoA reductase gene expression: a randomized trial in healthy men. (2008) - DOI: 10.1016/J.ATHEROSCLEROSIS.2007.09.034",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Modeling and Longitudinal Study"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-3-i8",
-          "title": "The Impact of Workplace Mental Health Programs on Employee Well-being",
-          "description": "Evaluating the effectiveness of corporate wellness initiatives in reducing burnout and improving job satisfaction.",
-          "sourcePublication": "Peroxisome Proliferator-activated Receptor α Deficiency Abolishes the Response of Lipogenic Gene Expression to Re-feeding (2008) - DOI: 10.1074/jbc.M709471200",
-          "gapType": "Organizational Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Pre-post Intervention Study and Employee Surveys"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-3-i9",
-          "title": "Developmental Trajectories of Emotional Regulation in Children",
-          "description": "Tracking the development of self-regulation skills in children and the role of early childhood experiences and parenting styles.",
-          "sourcePublication": "YI-800 FUNCTIONAL CHARACTERIZATION OF POINT MUTATIONS IN THE LDLR GENE FOUND IN PORTUGUESE PATIENTS WITH CLINICAL DIAGNOSIS OF FAMILIAL HYPERCHOLESTEROLAEMIA (2007) - DOI: 10.1016/S1567-5688(07)71810-X",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Behavioral Testing and Observational Studies"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-3-i10",
-          "title": "Psychometric Evaluation of Culturally Adapted Mental Health Screening Tools",
-          "description": "Assessing the reliability and validity of translated and culturally modified versions of standardized diagnostic instruments.",
-          "sourcePublication": "Adaptor protein disabled-2 modulates low density lipoprotein receptor synthesis in fibroblasts from patients with autosomal recessive hypercholesterolaemia. (2007) - DOI: 10.1093/HMG/DDM232",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Psychometric Analysis (CFA and Reliability Testing)"
-        }
-      ]
-    },
-    {
-      "id": "indianinstituteoftechnologybhilai-new-4",
-      "name": "Prof. E. Verma",
-      "specialization": "Cognitive Science",
-      "focus": "Language and thought.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20E.%20Verma",
-      "citations": "341",
-      "topPapers": [
-        "Nitrogen starvation–induced oxidative stress relieves PII-mediated inhibition of acetyl-CoA carboxylase (ACCase) activity and signals enhanced lipid synthesis in Synechococcus PCC 7942 (2020) - DOI: 10.1007/s10811-020-02316-9",
-        "Bacteria from oil contaminated sites as a viable source of potential biosurfactants with anti-microbial and anti-biofilm activities (2020) - DOI: 10.1007/s42398-020-00136-8",
-        "Nitrogen starvation–induced oxidative stress relieves PII-mediated inhibition of acetyl-CoA carboxylase (ACCase) activity and signals enhanced lipid synthesis in Synechococcus PCC 7942 (2020) - DOI: 10.1007/s10811-020-02316-9",
-        "In silico molecular docking analysis of cancer biomarkers with GC/MS identified compounds of Scytonema sp. (2020) - DOI: 10.1007/s13721-020-00235-w",
-        "Evaluation of Basic Fermentation Parameters and Effective Combinations of Predominant Yeasts from Traditional Starter Materials of Indigenous Communities from Northeast India (2020) - DOI: 10.1080/03610470.2020.1739601",
-        "Assessing the Stimulatory Effect of Indole-3-Acetic Acid on Growth and Sustenance of Yeasts Isolated from Traditional Fermentative Sources Maintained by Six Ethnic Communities of Asssam, North-East India (2019) - DOI: 10.22207/JPAM.13.2.27",
-        "Cyanobacterial Siderophores: Ecological and Biotechnological Significance (2019) - DOI: 10.1016/B978-0-12-814667-5.00019-2",
-        "Physiological mechanisms of aluminum (Al) toxicity tolerance in nitrogen-fixing aquatic macrophyte Azolla microphylla Kaulf: phytoremediation, metabolic rearrangements, and antioxidative enzyme responses (2019) - DOI: 10.1007/s11356-019-04408-7",
-        "Cyanobacterial bioactive compound EMTAHDCA recovers splenomegaly, affects protein profile of E. coli and spleen of lymphoma bearing mice (2019) - DOI: 10.1007/s11033-019-04659-0",
-        "Contributors (2019) - DOI: 10.1016/b978-0-12-814667-5.09990-6"
-      ],
-      "researchIdeas": [
-        {
-          "id": "indianinstituteoftechnologybhilai-new-4-i1",
-          "title": "The Impact of Bilingualism on Cognitive Control in Indian Children",
-          "description": "Investigating whether speaking multiple Indian languages provides a cognitive advantage in tasks requiring inhibitory control and task switching.",
-          "sourcePublication": "Nitrogen starvation–induced oxidative stress relieves PII-mediated inhibition of acetyl-CoA carboxylase (ACCase) activity and signals enhanced lipid synthesis in Synechococcus PCC 7942 (2020) - DOI: 10.1007/s10811-020-02316-9",
-          "gapType": "Contextual Gap",
-          "difficulty": "Advanced",
-          "methodology": "Behavioral Tasks and Linguistic Proficiency Assessment"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-4-i2",
-          "title": "Neuroplasticity and Second Language Acquisition in Adulthood",
-          "description": "Using fMRI to track brain changes associated with the acquisition of a new language in adults.",
-          "sourcePublication": "Bacteria from oil contaminated sites as a viable source of potential biosurfactants with anti-microbial and anti-biofilm activities (2020) - DOI: 10.1007/s42398-020-00136-8",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal fMRI and Language Testing"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-4-i3",
-          "title": "Behavioral Interventions for Improving Literacy in Rural Indian Schools",
-          "description": "Testing the efficacy of a new phonological awareness program for children with reading difficulties in rural settings.",
-          "sourcePublication": "Nitrogen starvation–induced oxidative stress relieves PII-mediated inhibition of acetyl-CoA carboxylase (ACCase) activity and signals enhanced lipid synthesis in Synechococcus PCC 7942 (2020) - DOI: 10.1007/s10811-020-02316-9",
-          "gapType": "Clinical Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Randomized Controlled Trial (RCT) and Reading Assessments"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-4-i4",
-          "title": "Advanced Methodologies for Analyzing Eye-tracking Data in Reading Research",
-          "description": "Developing new metrics for analyzing eye-movement patterns to better understand the cognitive processes involved in reading complex scripts.",
-          "sourcePublication": "In silico molecular docking analysis of cancer biomarkers with GC/MS identified compounds of Scytonema sp. (2020) - DOI: 10.1007/s13721-020-00235-w",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Eye-tracking and Computational Modeling"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-4-i5",
-          "title": "Cross-cultural Differences in Language Processing",
-          "description": "Comparing how individuals from different linguistic backgrounds in India process and understand complex sentences.",
-          "sourcePublication": "Evaluation of Basic Fermentation Parameters and Effective Combinations of Predominant Yeasts from Traditional Starter Materials of Indigenous Communities from Northeast India (2020) - DOI: 10.1080/03610470.2020.1739601",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Psycholinguistic Experiments and Cross-cultural Comparison"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-4-i6",
-          "title": "Quantitative Analysis of Semantic Networks in the Mental Lexicon",
-          "description": "Using computational models to map the organization of word meanings in the human brain.",
-          "sourcePublication": "Assessing the Stimulatory Effect of Indole-3-Acetic Acid on Growth and Sustenance of Yeasts Isolated from Traditional Fermentative Sources Maintained by Six Ethnic Communities of Asssam, North-East India (2019) - DOI: 10.22207/JPAM.13.2.27",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Linguistics and Behavioral Tasks"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-4-i7",
-          "title": "Theoretical Models of Language Acquisition and Cognitive Development",
-          "description": "Developing a computational framework to explain the relationship between language learning and the maturation of executive functions.",
-          "sourcePublication": "Cyanobacterial Siderophores: Ecological and Biotechnological Significance (2019) - DOI: 10.1016/B978-0-12-814667-5.00019-2",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Modeling and Longitudinal Study"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-4-i8",
-          "title": "The Role of Language in Organizational Communication and Collaboration",
-          "description": "Investigating how language use and communication styles within an organization impact employee collaboration and productivity.",
-          "sourcePublication": "Physiological mechanisms of aluminum (Al) toxicity tolerance in nitrogen-fixing aquatic macrophyte Azolla microphylla Kaulf: phytoremediation, metabolic rearrangements, and antioxidative enzyme responses (2019) - DOI: 10.1007/s11356-019-04408-7",
-          "gapType": "Organizational Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Qualitative Interviews and Discourse Analysis"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-4-i9",
-          "title": "Developmental Trajectories of Metaphor Comprehension in Children",
-          "description": "Tracking the development of figurative language understanding and its relationship to cognitive and social milestones.",
-          "sourcePublication": "Cyanobacterial bioactive compound EMTAHDCA recovers splenomegaly, affects protein profile of E. coli and spleen of lymphoma bearing mice (2019) - DOI: 10.1007/s11033-019-04659-0",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Behavioral Testing and Storytelling Tasks"
-        },
-        {
-          "id": "indianinstituteoftechnologybhilai-new-4-i10",
-          "title": "Psychometric Evaluation of Language Proficiency Assessment Tools",
-          "description": "Assessing the reliability and validity of standardized language tests for diverse Indian populations.",
-          "sourcePublication": "Contributors (2019) - DOI: 10.1016/b978-0-12-814667-5.09990-6",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Psychometric Analysis (CFA and Reliability Testing)"
-        }
-      ]
+      "orcid": "0000-0003-2415-3257",
+      "researchGate": "https://www.researchgate.net/profile/Rajkumar-Eslabavath"
     }
   ],
   "Indian Institute of Technology Jammu": [

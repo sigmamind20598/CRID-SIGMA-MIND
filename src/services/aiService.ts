@@ -393,7 +393,8 @@ export async function generateResearchTopics(professor: Professor, instituteName
       // Clean up topics and remove designations
       const topics = rawTopics.map((t: any, index: number) => {
         const cleanTitle = (t.title || `Research Idea ${index + 1}`)
-          .replace(/Assistant Professor|Associate Professor|Full Professor|Professor|Dr\.|Prof\./gi, '')
+          .replace(/^[0-9\.\s-]+/g, '') // Remove leading numbers like "1. "
+          .replace(/Assistant Professor|Associate Professor|Full Professor|Professor|Dr\.|Prof\.|Research Scholar|Researcher/gi, '')
           .trim();
 
         return {
@@ -401,7 +402,8 @@ export async function generateResearchTopics(professor: Professor, instituteName
           title: cleanTitle,
           description: t.description || "No description provided.",
           sourcePublication: (t.sourcePublication || "Original Research Idea")
-            .replace(/Assistant Professor|Associate Professor|Full Professor|Professor|Dr\.|Prof\./gi, '')
+            .replace(/^[0-9\.\s-]+/g, '') // Remove leading numbers
+            .replace(/Assistant Professor|Associate Professor|Full Professor|Professor|Dr\.|Prof\.|Research Scholar|Researcher/gi, '')
             .trim(),
           gapType: t.gapType || "Research Gap",
           difficulty: t.difficulty || "Moderate",
