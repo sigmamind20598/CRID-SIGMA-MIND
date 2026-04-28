@@ -1107,7 +1107,7 @@ export default function App() {
                         <div className="w-12 h-12 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin mb-4" />
                         <p className="text-white/40 font-bold uppercase tracking-widest text-xs">Generating innovative topics...</p>
                       </div>
-                    ) : topics.length > 0 ? (
+                    ) : (topics && topics.length > 0) ? (
                       topics.map((topic, index) => {
                         const isLocked = index > 0 && !isPremiumUnlocked;
                         return (

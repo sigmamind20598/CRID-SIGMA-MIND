@@ -394,16 +394,21 @@ export async function generateResearchTopics(professor: Professor, instituteName
       const topics = rawTopics.map((t: any, index: number) => {
         const cleanTitle = (t.title || `Research Idea ${index + 1}`)
           .replace(/^[0-9\.\s-]+/g, '') // Remove leading numbers like "1. "
-          .replace(/Assistant Professor|Associate Professor|Full Professor|Professor|Dr\.|Prof\.|Research Scholar|Researcher/gi, '')
+          .replace(/(Assistant Professor|Associate Professor|Full Professor|Professor|Dr\.|Prof\.|Research Scholar|Researcher|Asst\.?\s*Prof\.?|Assoc\.?\s*Prof\.?)/gi, '')
+          .replace(/^\s*as\s+/i, '') // Fix cases where "Assistant" was removed leaving "as"
+          .trim();
+
+        const cleanDescription = (t.description || "No description provided.")
+          .replace(/(Assistant Professor|Associate Professor|Full Professor|Professor|Dr\.|Prof\.|Research Scholar|Researcher|Asst\.?\s*Prof\.?|Assoc\.?\s*Prof\.?)/gi, '')
           .trim();
 
         return {
           id: t.id || `topic-${index}-${Date.now()}`,
           title: cleanTitle,
-          description: t.description || "No description provided.",
+          description: cleanDescription,
           sourcePublication: (t.sourcePublication || "Original Research Idea")
             .replace(/^[0-9\.\s-]+/g, '') // Remove leading numbers
-            .replace(/Assistant Professor|Associate Professor|Full Professor|Professor|Dr\.|Prof\.|Research Scholar|Researcher/gi, '')
+            .replace(/(Assistant Professor|Associate Professor|Full Professor|Professor|Dr\.|Prof\.|Research Scholar|Researcher|Asst\.?\s*Prof\.?|Assoc\.?\s*Prof\.?)/gi, '')
             .trim(),
           gapType: t.gapType || "Research Gap",
           difficulty: t.difficulty || "Moderate",

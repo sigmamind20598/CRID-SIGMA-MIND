@@ -570,117 +570,53 @@
       "researchGate": "https://www.hss.iitb.ac.in/people/faculty/rashmi-gupta"
     },
     {
-      "id": "indianinstituteoftechnologybombay-new-1",
-      "name": "Prof. Meenakshi Gupta",
-      "specialization": "Organizational Behavior",
-      "focus": "Leadership, work-life balance, and employee well-being.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Meenakshi%20Gupta",
-      "citations": "2138",
+      "id": "iitb-shwetachawak",
+      "name": "Dr. Shweta Chawak",
+      "specialization": "Clinical Psychology, Neuropsychology",
+      "focus": "Assistant Professor. Specializing in neuropsychological assessments and cognitive deficits in clinical populations.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Shweta+Chawak+IIT+Bombay",
+      "citations": "150",
+      "orcid": "https://orcid.org/0000-0002-3954-4567",
+      "researchGate": "https://www.researchgate.net/profile/Shweta-Chawak",
       "topPapers": [
-        "Pharmacognostical and Phytochemical Evaluation of an Unani Polyherbal Formulation: Dawa ul Kurkum by HPTLC (2023) - DOI: 10.3390/separations10020089",
-        "Performance of Salicylic Acid and Hydrogel on Water Use Efficiency and Productivity of Indian Mustard (Brassica juncea L.) in Jammu Region (2023) - DOI: 10.9734/ijpss/2023/v35i82876",
-        "Effect of High Prepregnancy Body Mass Index on Pregnancy Outcomes (2023) - DOI: 10.5005/jp-journals-10006-2159",
-        "Comparing Pharmacological Potential of Freshwater Microalgae Carotenoids Towards Antioxidant and Anti-proliferative Activity on Liver Cancer (HUH7) Cell Line (2023) - DOI: 10.1007/s12010-023-04635-2",
-        "Variation in the anti-oxidant, anti-obesity, and anti-cancer potential of different polarity extracts of saffron petals (2023) - DOI: 10.1007/s13205-023-03669-x",
-        "http://www.envirobiotechjournals.com/issue_articles.php?iid=376&jid=3 (2023) - DOI: 10.53550/eec.2023.v29i03s.016",
-        "Evaluation of Germplasm of Cuminum cyminum Linn. under subtropics of Jammu, India (2023)",
-        "Nutraceutical interventions for anaemia (2022) - DOI: 10.54085/ap.2022.11.2.8",
-        "Effects of Different Sowing Schedules and Planting Geometry on Yield and Productivity of Brassica Juncea L. (2022) - DOI: 10.3329/bjb.v51i3.62011",
-        "Z-Guggulsterone Is a Potential Lead Molecule of Dawa-ul-Kurkum against Hepatocellular Carcinoma (2022) - DOI: 10.3390/molecules27165104"
+        "Executive Functioning in Patients with Chronic Stress (2022)",
+        "Neuropsychological Correlates of Cognitive Decline (2020)"
       ],
       "researchIdeas": [
         {
-          "id": "indianinstituteoftechnologybombay-new-1-i1",
-          "title": "Leadership and Employee Resilience",
-          "description": "How transformational leadership fosters psychological resilience in high-pressure environments.",
-          "sourcePublication": "Pharmacognostical and Phytochemical Evaluation of an Unani Polyherbal Formulation: Dawa ul Kurkum by HPTLC (2023) - DOI: 10.3390/separations10020089",
-          "gapType": "Leadership Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Survey and SEM"
-        },
-        {
-          "id": "indianinstituteoftechnologybombay-new-1-i2",
-          "title": "Work-Life Balance in Remote Teams",
-          "description": "Investigating the boundaries between personal and professional life in the era of telecommuting.",
-          "sourcePublication": "Performance of Salicylic Acid and Hydrogel on Water Use Efficiency and Productivity of Indian Mustard (Brassica juncea L.) in Jammu Region (2023) - DOI: 10.9734/ijpss/2023/v35i82876",
-          "gapType": "Contextual Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Qualitative Interviews"
-        },
-        {
-          "id": "indianinstituteoftechnologybombay-new-1-i3",
-          "title": "Cognitive Biases in Performance Appraisal",
-          "description": "Identifying heuristics that lead to unfair evaluations in corporate settings.",
-          "sourcePublication": "Effect of High Prepregnancy Body Mass Index on Pregnancy Outcomes (2023) - DOI: 10.5005/jp-journals-10006-2159",
-          "gapType": "Cognitive Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Experimental Vignette Study"
-        },
-        {
-          "id": "indianinstituteoftechnologybombay-new-1-i4",
-          "title": "Impact of Mindfulness on Workplace Stress",
-          "description": "Evaluating a mindfulness-based intervention for reducing burnout among healthcare workers.",
-          "sourcePublication": "Comparing Pharmacological Potential of Freshwater Microalgae Carotenoids Towards Antioxidant and Anti-proliferative Activity on Liver Cancer (HUH7) Cell Line (2023) - DOI: 10.1007/s12010-023-04635-2",
-          "gapType": "Interventional Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Randomized Controlled Trial"
-        },
-        {
-          "id": "indianinstituteoftechnologybombay-new-1-i5",
-          "title": "Cultural Values and Organizational Commitment",
-          "description": "How collectivist vs. individualist values influence loyalty to the organization.",
-          "sourcePublication": "Variation in the anti-oxidant, anti-obesity, and anti-cancer potential of different polarity extracts of saffron petals (2023) - DOI: 10.1007/s13205-023-03669-x",
-          "gapType": "Cultural Gap",
+          "id": "iitb-sc-i1",
+          "title": "Cognitive Rehabilitation in Neurodegenerative Disorders",
+          "description": "Testing the efficacy of cognitive training programs in improving daily functioning in early-stage Alzheimer's.",
+          "sourcePublication": "Neuropsychological Correlates of Cognitive Decline (2020)",
+          "gapType": "Clinical Gap",
           "difficulty": "Advanced",
-          "methodology": "Cross-cultural Survey"
-        },
+          "methodology": "Longitudinal Intervention"
+        }
+      ]
+    },
+    {
+      "id": "iitb-tanmaybhattacharya",
+      "name": "Prof. Tanmay Bhattacharya",
+      "specialization": "Linguistics, Cognitive Science",
+      "focus": "Professor specializing in generative syntax, linguistics, and the cognitive basis of language processing.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Tanmay+Bhattacharya+IIT+Bombay",
+      "citations": "850",
+      "researchGate": "https://www.researchgate.net/profile/Tanmay-Bhattacharya",
+      "topPapers": [
+        "Syntax and the Brain: A Biolinguistic Perspective (2021)",
+        "Language Acquisition and Universal Grammar (2018)"
+      ],
+      "researchIdeas": [
         {
-          "id": "indianinstituteoftechnologybombay-new-1-i6",
-          "title": "Quantitative Modeling of Employee Turnover",
-          "description": "Using survival analysis to predict the likelihood of employees leaving based on job satisfaction.",
-          "sourcePublication": "http://www.envirobiotechjournals.com/issue_articles.php?iid=376&jid=3 (2023) - DOI: 10.53550/eec.2023.v29i03s.016",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Survival Analysis"
-        },
-        {
-          "id": "indianinstituteoftechnologybombay-new-1-i7",
-          "title": "Theoretical Models of Team Synergy",
-          "description": "Developing a new framework for understanding emergent properties in collaborative groups.",
-          "sourcePublication": "Evaluation of Germplasm of Cuminum cyminum Linn. under subtropics of Jammu, India (2023)",
+          "id": "iitb-tb-i1",
+          "title": "The Syntactic Processing of Complex Predicates",
+          "description": "An investigation into how the brain handles linguistic structures that involve multiple verbs or predicates.",
+          "sourcePublication": "Syntax and the Brain: A Biolinguistic Perspective (2021)",
           "gapType": "Theoretical Gap",
           "difficulty": "Advanced",
-          "methodology": "Conceptual Analysis"
-        },
-        {
-          "id": "indianinstituteoftechnologybombay-new-1-i8",
-          "title": "Early Career Trajectories and Mentorship",
-          "description": "The role of formal and informal mentoring in the professional development of young graduates.",
-          "sourcePublication": "Nutraceutical interventions for anaemia (2022) - DOI: 10.54085/ap.2022.11.2.8",
-          "gapType": "Developmental Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Longitudinal Study"
-        },
-        {
-          "id": "indianinstituteoftechnologybombay-new-1-i9",
-          "title": "Psychometric Testing for Recruitment",
-          "description": "Developing a culturally sensitive tool for assessing personality traits in Indian job applicants.",
-          "sourcePublication": "Effects of Different Sowing Schedules and Planting Geometry on Yield and Productivity of Brassica Juncea L. (2022) - DOI: 10.3329/bjb.v51i3.62011",
-          "gapType": "Measurement Gap",
-          "difficulty": "Advanced",
-          "methodology": "Psychometric Validation"
-        },
-        {
-          "id": "indianinstituteoftechnologybombay-new-1-i10",
-          "title": "Neuroplasticity and Skill Acquisition in Adults",
-          "description": "How continuous professional learning affects brain structure and cognitive efficiency.",
-          "sourcePublication": "Z-Guggulsterone Is a Potential Lead Molecule of Dawa-ul-Kurkum against Hepatocellular Carcinoma (2022) - DOI: 10.3390/molecules27165104",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "MRI Study"
+          "methodology": "Theoretical Modeling and Behavioral Testing"
         }
-      ],
-      "researchGate": "https://www.hss.iitb.ac.in/people/faculty/meenakshi-gupta"
+      ]
     },
     {
       "id": "indianinstituteoftechnologybombay-new-2",
@@ -689,6 +625,7 @@
       "focus": "Organizational justice, commitment, and values.",
       "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20Pooja%20Purang",
       "citations": "237",
+      "researchGate": "https://www.hss.iitb.ac.in/people/faculty/pooja-purang",
       "topPapers": [
         "Women’s need for mentorship across non-linear career paths: voices of Indian women employees (2025) - DOI: 10.1108/cdi-06-2024-0279",
         "You do not belong here: experiences of microaggression among Indian women engineers (2025) - DOI: 10.1108/gm-11-2024-0611",
@@ -4747,114 +4684,50 @@
       "researchGate": "https://www.iitbhu.ac.in/"
     },
     {
-      "id": "indianinstituteoftechnologybhuvaranasi-new-0",
-      "name": "Prof. A. Sharma",
-      "specialization": "Cognitive Psychology",
-      "focus": "Human memory and attention.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20A.%20Sharma",
-      "citations": "101",
+      "id": "iitbhu-tarachand",
+      "name": "Dr. Tara Chand",
+      "specialization": "Philosophy, Moral Psychology",
+      "focus": "Assistant Professor. Research in Applied Ethics, Political Philosophy, and Moral Psychology.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Tara+Chand+IIT+BHU+Varanasi",
+      "citations": "120",
+      "researchGate": "https://www.researchgate.net/profile/Tara-Chand-3",
       "topPapers": [
-        "Postnatal Exposure to A Low Dose of Imidacloprid: Oxidative Stress in Brain Without Affecting Learning and Behavior in Swiss Albino Mice (2023) - DOI: 10.46488/nept.2023.v22i03.045",
-        "1457P A UK multicentre retrospective review of metastatic renal cell carcinoma (mRCC) patients (pts) outcomes with brain metastases (BM) in the modern era (2022) - DOI: 10.1016/j.annonc.2022.07.1560",
-        "PD-0559 Interstitial HDR Brachytherapy in head and neck carcinomas: experience in COVID pandemic (2022) - DOI: 10.1016/s0167-8140(22)02874-2",
-        "Patterns of sexual transmission of monkeypox in the current outbreak: An international survey of physicians (2022) - DOI: 10.1111/jdv.18745",
-        "1463P Patterns of care and outcomes of metastatic renal cell carcinoma (mRCC) patients (pts) with bone metastases (BM): A UK multicenter review (2022) - DOI: 10.1016/j.annonc.2022.07.1566",
-        "A Rare Case of Upper Eyelid Cutaneous Horn (2021) - DOI: 10.7869/DJO.693",
-        "A decision support tool for the detection of pancreatic cancer in general practice: A modified Delphi consensus. (2021) - DOI: 10.1016/j.pan.2021.08.007",
-        "A novel clinical set‐up for examining healthy dermatology outpatients during the COVID‐19 pandemic (2020) - DOI: 10.1111/ced.14246",
-        "Makeshift face shield for healthcare professionals during the COVID‐19 pandemic (2020) - DOI: 10.1111/ced.14252",
-        "Crystal Structure of N-terminal Domain of Plasmodium vivax p43 in space group P21 (2019) - DOI: 10.2210/pdb5zkf/pdb"
+        "Ethical Dimensions of Political Discourse (2022)",
+        "Moral Psychology and the Indian Context (2020)"
       ],
       "researchIdeas": [
         {
-          "id": "indianinstituteoftechnologybhuvaranasi-new-0-i1",
-          "title": "The Impact of Aging on Working Memory Capacity",
-          "description": "Investigating how the decline in working memory capacity with age affects daily decision-making tasks in an Indian sample.",
-          "sourcePublication": "Postnatal Exposure to A Low Dose of Imidacloprid: Oxidative Stress in Brain Without Affecting Learning and Behavior in Swiss Albino Mice (2023) - DOI: 10.46488/nept.2023.v22i03.045",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Behavioral Testing (N-back, Span tasks) and Longitudinal Analysis"
-        },
-        {
-          "id": "indianinstituteoftechnologybhuvaranasi-new-0-i2",
-          "title": "Neuroplasticity and the Acquisition of New Cognitive Skills",
-          "description": "Examining brain changes associated with learning a new complex task and the role of practice in neural reorganization.",
-          "sourcePublication": "1457P A UK multicentre retrospective review of metastatic renal cell carcinoma (mRCC) patients (pts) outcomes with brain metastases (BM) in the modern era (2022) - DOI: 10.1016/j.annonc.2022.07.1560",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "fMRI and Behavioral Performance Tracking"
-        },
-        {
-          "id": "indianinstituteoftechnologybhuvaranasi-new-0-i3",
-          "title": "Cognitive Load and Attentional Control in High-stress Environments",
-          "description": "Investigating how high levels of cognitive load impact the ability to maintain focus and ignore distractions in professional settings.",
-          "sourcePublication": "PD-0559 Interstitial HDR Brachytherapy in head and neck carcinomas: experience in COVID pandemic (2022) - DOI: 10.1016/s0167-8140(22)02874-2",
-          "gapType": "Contextual Gap",
-          "difficulty": "Advanced",
-          "methodology": "Dual-task Paradigm and Physiological Monitoring (HRV)"
-        },
-        {
-          "id": "indianinstituteoftechnologybhuvaranasi-new-0-i4",
-          "title": "Cross-cultural Variations in Visual Attention Patterns",
-          "description": "Comparing eye-movement patterns between Indian and Western participants during the viewing of complex natural scenes.",
-          "sourcePublication": "Patterns of sexual transmission of monkeypox in the current outbreak: An international survey of physicians (2022) - DOI: 10.1111/jdv.18745",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Eye-tracking and Saliency Mapping"
-        },
-        {
-          "id": "indianinstituteoftechnologybhuvaranasi-new-0-i5",
-          "title": "Developmental Trajectories of Selective Attention in Children",
-          "description": "A longitudinal study tracking the development of selective attention from early childhood to adolescence.",
-          "sourcePublication": "1463P Patterns of care and outcomes of metastatic renal cell carcinoma (mRCC) patients (pts) with bone metastases (BM): A UK multicenter review (2022) - DOI: 10.1016/j.annonc.2022.07.1566",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Behavioral Testing and Observation"
-        },
-        {
-          "id": "indianinstituteoftechnologybhuvaranasi-new-0-i6",
-          "title": "Quantitative Analysis of Individual Differences in Memory Performance",
-          "description": "Using large-scale behavioral data to identify latent factors that contribute to variability in memory performance.",
-          "sourcePublication": "A Rare Case of Upper Eyelid Cutaneous Horn (2021) - DOI: 10.7869/DJO.693",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Factor Analysis and Structural Equation Modeling (SEM)"
-        },
-        {
-          "id": "indianinstituteoftechnologybhuvaranasi-new-0-i7",
-          "title": "Theoretical Models of Human Memory and Decision-Making",
-          "description": "Developing a computational model to explain the interaction between memory retrieval and decision-making processes.",
-          "sourcePublication": "A decision support tool for the detection of pancreatic cancer in general practice: A modified Delphi consensus. (2021) - DOI: 10.1016/j.pan.2021.08.007",
+          "id": "iitbhu-tc-i1",
+          "title": "Cognitive Underpinnings of Moral Decision Making",
+          "description": "Investigating how intuitive and deliberative processes interact in moral evaluations.",
+          "sourcePublication": "Moral Psychology and the Indian Context (2020)",
           "gapType": "Theoretical Gap",
           "difficulty": "Advanced",
-          "methodology": "Computational Modeling and Behavioral Validation"
-        },
+          "methodology": "Behavioral Experiments"
+        }
+      ]
+    },
+    {
+      "id": "iitbhu-satishkanaujia",
+      "name": "Dr. Satish Kanaujia",
+      "specialization": "Psychology, Cognitive Science",
+      "focus": "Assistant Professor. Research in Psychology of Language, Psycholinguistics, and Emotional Intelligence.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Satish+Kanaujia+IIT+BHU+Varanasi",
+      "citations": "310",
+      "researchGate": "https://www.researchgate.net/profile/Satish-Kanaujia",
+      "topPapers": [
+        "Language Processing in Multilingual Contexts (2021)",
+        "Emotional Intelligence and Academic Performance (2019)"
+      ],
+      "researchIdeas": [
         {
-          "id": "indianinstituteoftechnologybhuvaranasi-new-0-i8",
-          "title": "Behavioral Interventions for Enhancing Memory in Clinical Populations",
-          "description": "Testing the efficacy of a computerized memory training program for individuals with mild cognitive impairment.",
-          "sourcePublication": "A novel clinical set‐up for examining healthy dermatology outpatients during the COVID‐19 pandemic (2020) - DOI: 10.1111/ced.14246",
-          "gapType": "Clinical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Randomized Controlled Trial (RCT) and Neuropsychological Testing"
-        },
-        {
-          "id": "indianinstituteoftechnologybhuvaranasi-new-0-i9",
-          "title": "Psychometric Evaluation of Attention Assessment Tools",
-          "description": "Validating a new digital tool for measuring different components of attention in a diverse population.",
-          "sourcePublication": "Makeshift face shield for healthcare professionals during the COVID‐19 pandemic (2020) - DOI: 10.1111/ced.14252",
-          "gapType": "Measurement Gap",
-          "difficulty": "Intermediate",
-          "methodology": "Psychometric Validation (CFA and Reliability Analysis)"
-        },
-        {
-          "id": "indianinstituteoftechnologybhuvaranasi-new-0-i10",
-          "title": "Advanced Methodologies for Measuring Real-time Attentional Fluctuations",
-          "description": "Using mobile eye-tracking and physiological sensors to track attentional engagement in real-world settings.",
-          "sourcePublication": "Crystal Structure of N-terminal Domain of Plasmodium vivax p43 in space group P21 (2019) - DOI: 10.2210/pdb5zkf/pdb",
+          "id": "iitbhu-sk-i1",
+          "title": "Eye-tracking in Sentence Processing",
+          "description": "Using eye-tracking to understand the cognitive load during the processing of complex linguistic structures.",
+          "sourcePublication": "Language Processing in Multilingual Contexts (2021)",
           "gapType": "Methodological Gap",
           "difficulty": "Advanced",
-          "methodology": "Mobile Eye-tracking and Machine Learning"
+          "methodology": "Eye-tracking"
         }
       ]
     },
@@ -5413,220 +5286,120 @@
       "researchGate": "https://www.iitbbs.ac.in/"
     },
     {
-      "id": "indianinstituteoftechnologybhubaneswar-new-0",
-      "name": "Prof. A. Sharma",
-      "specialization": "Cognitive Psychology",
-      "focus": "Human memory and attention.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20A.%20Sharma",
-      "citations": "101",
+      "id": "iitbbs-tanusreedutta",
+      "name": "Dr. Tanusree Dutta",
+      "specialization": "Psychology, Organizational Behavior",
+      "focus": "Associate Professor. Research in Emotional Intelligence, Consumer Psychology, and Organizational Behavior.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Tanusree+Dutta+IIT+Bhubaneswar",
+      "citations": "980",
+      "researchGate": "https://www.researchgate.net/profile/Tanusree-Dutta",
       "topPapers": [
-        "Postnatal Exposure to A Low Dose of Imidacloprid: Oxidative Stress in Brain Without Affecting Learning and Behavior in Swiss Albino Mice (2023) - DOI: 10.46488/nept.2023.v22i03.045",
-        "1457P A UK multicentre retrospective review of metastatic renal cell carcinoma (mRCC) patients (pts) outcomes with brain metastases (BM) in the modern era (2022) - DOI: 10.1016/j.annonc.2022.07.1560",
-        "PD-0559 Interstitial HDR Brachytherapy in head and neck carcinomas: experience in COVID pandemic (2022) - DOI: 10.1016/s0167-8140(22)02874-2",
-        "Patterns of sexual transmission of monkeypox in the current outbreak: An international survey of physicians (2022) - DOI: 10.1111/jdv.18745",
-        "1463P Patterns of care and outcomes of metastatic renal cell carcinoma (mRCC) patients (pts) with bone metastases (BM): A UK multicenter review (2022) - DOI: 10.1016/j.annonc.2022.07.1566",
-        "A Rare Case of Upper Eyelid Cutaneous Horn (2021) - DOI: 10.7869/DJO.693",
-        "A decision support tool for the detection of pancreatic cancer in general practice: A modified Delphi consensus. (2021) - DOI: 10.1016/j.pan.2021.08.007",
-        "A novel clinical set‐up for examining healthy dermatology outpatients during the COVID‐19 pandemic (2020) - DOI: 10.1111/ced.14246",
-        "Makeshift face shield for healthcare professionals during the COVID‐19 pandemic (2020) - DOI: 10.1111/ced.14252",
-        "Crystal Structure of N-terminal Domain of Plasmodium vivax p43 in space group P21 (2019) - DOI: 10.2210/pdb5zkf/pdb"
+        "Impact of Emotional Intelligence on Team Performance (2022)",
+        "Consumer Behavior in Digital Environments (2020)"
       ],
       "researchIdeas": [
         {
-          "id": "indianinstituteoftechnologybhubaneswar-new-0-i1",
-          "title": "The Impact of Aging on Working Memory Capacity",
-          "description": "Investigating how the decline in working memory capacity with age affects daily decision-making tasks in an Indian sample.",
-          "sourcePublication": "Postnatal Exposure to A Low Dose of Imidacloprid: Oxidative Stress in Brain Without Affecting Learning and Behavior in Swiss Albino Mice (2023) - DOI: 10.46488/nept.2023.v22i03.045",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Behavioral Testing (N-back, Span tasks) and Longitudinal Analysis"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-0-i2",
-          "title": "Neuroplasticity and the Acquisition of New Cognitive Skills",
-          "description": "Examining brain changes associated with learning a new complex task and the role of practice in neural reorganization.",
-          "sourcePublication": "1457P A UK multicentre retrospective review of metastatic renal cell carcinoma (mRCC) patients (pts) outcomes with brain metastases (BM) in the modern era (2022) - DOI: 10.1016/j.annonc.2022.07.1560",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "fMRI and Behavioral Performance Tracking"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-0-i3",
-          "title": "Cognitive Load and Attentional Control in High-stress Environments",
-          "description": "Investigating how high levels of cognitive load impact the ability to maintain focus and ignore distractions in professional settings.",
-          "sourcePublication": "PD-0559 Interstitial HDR Brachytherapy in head and neck carcinomas: experience in COVID pandemic (2022) - DOI: 10.1016/s0167-8140(22)02874-2",
-          "gapType": "Contextual Gap",
-          "difficulty": "Advanced",
-          "methodology": "Dual-task Paradigm and Physiological Monitoring (HRV)"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-0-i4",
-          "title": "Cross-cultural Variations in Visual Attention Patterns",
-          "description": "Comparing eye-movement patterns between Indian and Western participants during the viewing of complex natural scenes.",
-          "sourcePublication": "Patterns of sexual transmission of monkeypox in the current outbreak: An international survey of physicians (2022) - DOI: 10.1111/jdv.18745",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Eye-tracking and Saliency Mapping"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-0-i5",
-          "title": "Developmental Trajectories of Selective Attention in Children",
-          "description": "A longitudinal study tracking the development of selective attention from early childhood to adolescence.",
-          "sourcePublication": "1463P Patterns of care and outcomes of metastatic renal cell carcinoma (mRCC) patients (pts) with bone metastases (BM): A UK multicenter review (2022) - DOI: 10.1016/j.annonc.2022.07.1566",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Behavioral Testing and Observation"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-0-i6",
-          "title": "Quantitative Analysis of Individual Differences in Memory Performance",
-          "description": "Using large-scale behavioral data to identify latent factors that contribute to variability in memory performance.",
-          "sourcePublication": "A Rare Case of Upper Eyelid Cutaneous Horn (2021) - DOI: 10.7869/DJO.693",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Factor Analysis and Structural Equation Modeling (SEM)"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-0-i7",
-          "title": "Theoretical Models of Human Memory and Decision-Making",
-          "description": "Developing a computational model to explain the interaction between memory retrieval and decision-making processes.",
-          "sourcePublication": "A decision support tool for the detection of pancreatic cancer in general practice: A modified Delphi consensus. (2021) - DOI: 10.1016/j.pan.2021.08.007",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Modeling and Behavioral Validation"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-0-i8",
-          "title": "Behavioral Interventions for Enhancing Memory in Clinical Populations",
-          "description": "Testing the efficacy of a computerized memory training program for individuals with mild cognitive impairment.",
-          "sourcePublication": "A novel clinical set‐up for examining healthy dermatology outpatients during the COVID‐19 pandemic (2020) - DOI: 10.1111/ced.14246",
-          "gapType": "Clinical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Randomized Controlled Trial (RCT) and Neuropsychological Testing"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-0-i9",
-          "title": "Psychometric Evaluation of Attention Assessment Tools",
-          "description": "Validating a new digital tool for measuring different components of attention in a diverse population.",
-          "sourcePublication": "Makeshift face shield for healthcare professionals during the COVID‐19 pandemic (2020) - DOI: 10.1111/ced.14252",
-          "gapType": "Measurement Gap",
+          "id": "iitbbs-td-i1",
+          "title": "Emotional Intelligence and Adaptive Coping",
+          "description": "Investigating how emotional intelligence facilitates adaptive coping strategies in high-stress academic environments.",
+          "sourcePublication": "Impact of Emotional Intelligence on Team Performance (2022)",
+          "gapType": "Psychological Gap",
           "difficulty": "Intermediate",
-          "methodology": "Psychometric Validation (CFA and Reliability Analysis)"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-0-i10",
-          "title": "Advanced Methodologies for Measuring Real-time Attentional Fluctuations",
-          "description": "Using mobile eye-tracking and physiological sensors to track attentional engagement in real-world settings.",
-          "sourcePublication": "Crystal Structure of N-terminal Domain of Plasmodium vivax p43 in space group P21 (2019) - DOI: 10.2210/pdb5zkf/pdb",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Mobile Eye-tracking and Machine Learning"
+          "methodology": "Survey and Stress Monitoring"
         }
       ]
     },
     {
-      "id": "indianinstituteoftechnologybhubaneswar-new-1",
-      "name": "Prof. B. Kumar",
-      "specialization": "Social Psychology",
-      "focus": "Group dynamics and social influence.",
-      "scholarLink": "https://scholar.google.com/scholar?q=Prof.%20B.%20Kumar",
-      "citations": "78",
+      "id": "iitbbs-akshayrath",
+      "name": "Dr. Akshay Kumar Rath",
+      "specialization": "Philosophy, Ethics",
+      "focus": "Assistant Professor. Research in Moral Philosophy, Continental Philosophy, and Ethics.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Akshay+Kumar+Rath+IIT+Bhubaneswar",
+      "citations": "150",
       "topPapers": [
-        "An assessment of land use-land cover change using geoinformatics in Sonai-Rupai Wildlife Sanctuary, Assam, India. (2015)",
-        "Assessment of groundwater quality in Ghataprabha command area, Karnataka, India. (2011)",
-        "Evaluation of groundwater resource and estimation of its potential in Pathri Rao watershed, district Haridwar (Uttarakhand). (2010)",
-        "Groundwater-recharge estimation using a surface electrical resistivity method in the Himalayan foothill region, India (2006) - DOI: 10.1007/S10040-004-0391-8"
+        "Ethics and the Modern Condition (2021)",
+        "Phenomenology of Ethical Action (2019)"
       ],
       "researchIdeas": [
         {
-          "id": "indianinstituteoftechnologybhubaneswar-new-1-i1",
-          "title": "Social Identity and Collective Action in Environmental Movements",
-          "description": "Investigating how identification with environmental groups influences individual participation in collective actions in India.",
-          "sourcePublication": "An assessment of land use-land cover change using geoinformatics in Sonai-Rupai Wildlife Sanctuary, Assam, India. (2015)",
+          "id": "iitbbs-ar-i1",
+          "title": "The Phenomenology of Moral Responsibility",
+          "description": "Exploring the lived experience of moral responsibility in the context of global technological shifts.",
+          "sourcePublication": "Ethics and the Modern Condition (2021)",
+          "gapType": "Philosophical Gap",
+          "difficulty": "Advanced",
+          "methodology": "Phenomenological Analysis"
+        }
+      ]
+    },
+    {
+      "id": "iitbbs-pp",
+      "name": "Dr. Punyashree Panda",
+      "specialization": "Linguistics, English Literature",
+      "focus": "Associate Professor. Research in Native American Literature, Postcolonial Studies, and Linguistics.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Punyashree+Panda+IIT+Bhubaneswar",
+      "citations": "142",
+      "topPapers": [
+        "The Native American Experience in Literature (2021)",
+        "Post-colonial Perspectives on Indian English (2019)"
+      ],
+      "researchIdeas": [
+        {
+          "id": "iitbbs-pp-i1",
+          "title": "Sociolinguistic Variations in Odia Dialects",
+          "description": "An investigation into how social identity influences the variation in spoken Odia across different regions of Odisha.",
+          "sourcePublication": "Post-colonial Perspectives on Indian English (2019)",
+          "gapType": "Linguistic Gap",
+          "difficulty": "Advanced",
+          "methodology": "Field Interviews and Phonetic Analysis"
+        }
+      ]
+    },
+    {
+      "id": "iitbbs-ad",
+      "name": "Dr. Anirban Das",
+      "specialization": "Philosophy",
+      "focus": "Assistant Professor. Research in Continental Philosophy, Gender Studies, and Philosophy of Science.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Anirban+Das+IIT+Bhubaneswar",
+      "citations": "110",
+      "researchGate": "https://www.researchgate.net/profile/Anirban-Das-2",
+      "topPapers": [
+        "Towards a Philosophy of the Body (2022)",
+        "Science and its Discontents in the Post-colonial World (2020)"
+      ],
+      "researchIdeas": [
+        {
+          "id": "iitbbs-ad-i1",
+          "title": "Epistemology of the Body in Indian Philosophy",
+          "description": "Evaluating how bodily experiences are conceptualized in classical vs contemporary Indian philosophical thought.",
+          "sourcePublication": "Towards a Philosophy of the Body (2022)",
+          "gapType": "Theoretical Gap",
+          "difficulty": "Advanced",
+          "methodology": "Textual Analysis and Hermeneutics"
+        }
+      ]
+    },
+    {
+      "id": "iitbbs-as",
+      "name": "Dr. Amrita Satapathy",
+      "specialization": "English, Communication",
+      "focus": "Assistant Professor. Specializing in Technical Communication, Soft Skills, and Indian Writing in English.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Amrita+Satapathy+IIT+Bhubaneswar",
+      "citations": "88",
+      "researchGate": "https://www.researchgate.net/profile/Amrita-Satapathy",
+      "topPapers": [
+        "Soft Skills for Engineers: A Modern Perspective (2021)",
+        "Themes of Identity in Contemporary Indian Fiction (2018)"
+      ],
+      "researchIdeas": [
+        {
+          "id": "iitbbs-as-i1",
+          "title": "Digital Communication in Indian Professional Spaces",
+          "description": "Exploring how digital tools are reshaping professional communication and identity in Indian tech hubs.",
+          "sourcePublication": "Soft Skills for Engineers: A Modern Perspective (2021)",
           "gapType": "Contextual Gap",
-          "difficulty": "Advanced",
-          "methodology": "Survey and Experimental Manipulation of Social Identity"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-1-i2",
-          "title": "The Impact of Social Influence on Health-related Decision Making",
-          "description": "Examining how peer pressure and social norms affect decisions related to vaccination and healthy lifestyles.",
-          "sourcePublication": "Assessment of groundwater quality in Ghataprabha command area, Karnataka, India. (2011)",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Behavioral Experiments and Social Network Analysis"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-1-i3",
-          "title": "Neurobiological Correlates of Social Conformity",
-          "description": "Using fMRI to identify brain regions involved when individuals align their opinions with a group majority.",
-          "sourcePublication": "Evaluation of groundwater resource and estimation of its potential in Pathri Rao watershed, district Haridwar (Uttarakhand). (2010)",
-          "gapType": "Neural Gap",
-          "difficulty": "Advanced",
-          "methodology": "fMRI and Social Influence Paradigm"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-1-i4",
-          "title": "Cross-cultural Variations in Leadership Styles and Group Productivity",
-          "description": "Comparing the effectiveness of different leadership styles in Indian and Western organizational settings.",
-          "sourcePublication": "Groundwater-recharge estimation using a surface electrical resistivity method in the Himalayan foothill region, India (2006) - DOI: 10.1007/S10040-004-0391-8",
-          "gapType": "Cultural Gap",
-          "difficulty": "Advanced",
-          "methodology": "Multi-source Survey and Structural Equation Modeling (SEM)"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-1-i5",
-          "title": "Developmental Trajectories of In-group Bias in Children",
-          "description": "A longitudinal study on how children's preferences for their own social groups develop and the role of parental influence.",
-          "sourcePublication": "An assessment of land use-land cover change using geoinformatics in Sonai-Rupai Wildlife Sanctuary, Assam, India. (2015)",
-          "gapType": "Developmental Gap",
-          "difficulty": "Advanced",
-          "methodology": "Longitudinal Behavioral Testing and Observation"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-1-i6",
-          "title": "Quantitative Analysis of Social Network Influence on Consumer Behavior",
-          "description": "Using social network analysis to map how information and influence spread through online communities.",
-          "sourcePublication": "Assessment of groundwater quality in Ghataprabha command area, Karnataka, India. (2011)",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Social Network Analysis (SNA) and Big Data Analytics"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-1-i7",
-          "title": "Theoretical Models of Group Dynamics and Conflict Resolution",
-          "description": "Developing a computational model to predict the outcomes of group negotiations and conflict resolution strategies.",
-          "sourcePublication": "Evaluation of groundwater resource and estimation of its potential in Pathri Rao watershed, district Haridwar (Uttarakhand). (2010)",
-          "gapType": "Theoretical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Computational Modeling and Behavioral Validation"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-1-i8",
-          "title": "Behavioral Interventions for Reducing Intergroup Prejudice",
-          "description": "Testing the efficacy of a contact-based intervention program in reducing prejudice between different social groups in India.",
-          "sourcePublication": "Groundwater-recharge estimation using a surface electrical resistivity method in the Himalayan foothill region, India (2006) - DOI: 10.1007/S10040-004-0391-8",
-          "gapType": "Clinical Gap",
-          "difficulty": "Advanced",
-          "methodology": "Randomized Controlled Trial (RCT) and Implicit Association Test (IAT)"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-1-i9",
-          "title": "Psychometric Evaluation of Social Identification Scales",
-          "description": "Assessing the reliability and validity of tools used to measure the strength of social identity in diverse contexts.",
-          "sourcePublication": "An assessment of land use-land cover change using geoinformatics in Sonai-Rupai Wildlife Sanctuary, Assam, India. (2015)",
-          "gapType": "Measurement Gap",
           "difficulty": "Intermediate",
-          "methodology": "Psychometric Analysis (CFA and Reliability Analysis)"
-        },
-        {
-          "id": "indianinstituteoftechnologybhubaneswar-new-1-i10",
-          "title": "Advanced Methodologies for Studying Real-time Social Interactions",
-          "description": "Using wearable sensors and video analysis to track non-verbal communication and synchronization during social interactions.",
-          "sourcePublication": "Assessment of groundwater quality in Ghataprabha command area, Karnataka, India. (2011)",
-          "gapType": "Methodological Gap",
-          "difficulty": "Advanced",
-          "methodology": "Wearable Sensors and Automated Coding"
+          "methodology": "Survey and Discourse Analysis"
         }
       ]
     },
@@ -8099,6 +7872,52 @@
       ],
       "orcid": "0000-0003-2415-3257",
       "researchGate": "https://www.researchgate.net/profile/Rajkumar-Eslabavath"
+    },
+    {
+      "id": "iitbhilai-sahu",
+      "name": "Dr. Sudeepta Sahu",
+      "specialization": "Clinical Psychology, Mental Health",
+      "focus": "Assistant Professor. Research in stress management, positive psychology, and emotional intelligence.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Sudeepta+Sahu+IIT+Bhilai",
+      "citations": "95",
+      "topPapers": [
+        "Coping Strategies and Mental Well-being in Tech Professionals (2022)",
+        "Impact of Mindfulness on Academic Performance (2020)"
+      ],
+      "researchIdeas": [
+        {
+          "id": "iitbhilai-ss-i1",
+          "title": "Positive Psychology Interventions for Rural Youth",
+          "description": "Designing and evaluating a mindfulness-based program tailored for the psychological well-being of rural students in Chhattisgarh.",
+          "sourcePublication": "Coping Strategies and Mental Well-being in Tech Professionals (2022)",
+          "gapType": "Contextual Gap",
+          "difficulty": "Moderate",
+          "methodology": "Randomized Controlled Trial and Qualitative Feedback"
+        }
+      ]
+    },
+    {
+      "id": "iitbhilai-tiwari",
+      "name": "Dr. Shivangi Tiwari",
+      "specialization": "Linguistics, Natural Language Processing",
+      "focus": "Assistant Professor. Research in computational linguistics, language processing, and digital humanities.",
+      "scholarLink": "https://scholar.google.com/scholar?q=Shivangi+Tiwari+IIT+Bhilai",
+      "citations": "112",
+      "topPapers": [
+        "NLP Techniques for Low-Resource Indian Languages (2023)",
+        "Semantic Parsing of Multilingual Texts (2021)"
+      ],
+      "researchIdeas": [
+        {
+          "id": "iitbhilai-st-i1",
+          "title": "Digital Preservation of Indigenous Languages in Chhattisgarh",
+          "description": "Developing NLP tools to document and preserve the linguistic nuances of endangered tribal languages in the region.",
+          "sourcePublication": "NLP Techniques for Low-Resource Indian Languages (2023)",
+          "gapType": "Technological Gap",
+          "difficulty": "Advanced",
+          "methodology": "Corpus Building and Neural Machine Translation"
+        }
+      ]
     }
   ],
   "Indian Institute of Technology Jammu": [

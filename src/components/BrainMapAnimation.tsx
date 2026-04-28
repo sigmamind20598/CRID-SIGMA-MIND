@@ -22,10 +22,10 @@ export const BrainMapAnimation: React.FC<BrainMapAnimationProps> = ({
 
   useEffect(() => {
     const timers = [
-      setTimeout(() => setStep(1), 2000), // Step 1: Flying Papers
-      setTimeout(() => setStep(2), 6000), // Step 2: Finding Literature Gaps + Star Animation
-      setTimeout(() => setStep(3), 13000), // Step 3: Show 5 Topics
-      setTimeout(() => onComplete(), 20000) // Finish
+      setTimeout(() => setStep(1), 1500), // Step 1: Flying Papers
+      setTimeout(() => setStep(2), 4500), // Step 2: Finding Literature Gaps + Star Animation
+      setTimeout(() => setStep(3), 9000), // Step 3: Show 5 Topics
+      setTimeout(() => onComplete(), 14000) // Finish
     ];
     return () => timers.forEach(clearTimeout);
   }, [onComplete]);
@@ -291,6 +291,14 @@ export const BrainMapAnimation: React.FC<BrainMapAnimationProps> = ({
             className="h-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]"
           />
         </div>
+
+        {/* Skip Button */}
+        <button 
+          onClick={onComplete}
+          className="absolute bottom-8 right-8 text-white/30 hover:text-white/60 text-[10px] font-bold uppercase tracking-[0.2em] border border-white/10 px-4 py-2 rounded-full transition-all"
+        >
+          Skip Animation
+        </button>
       </div>
     </div>
   );
