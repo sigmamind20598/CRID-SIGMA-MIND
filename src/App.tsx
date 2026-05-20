@@ -187,6 +187,7 @@ export default function App() {
   const [isPremiumUnlocked, setIsPremiumUnlocked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isAppInitializing, setIsAppInitializing] = useState(true);
+  const [newsCategoryFilter, setNewsCategoryFilter] = useState<string>('ALL');
   const [view, setView] = useState<'faculty' | 'topics' | 'proposal' | 'profile'>('faculty');
   const [profDetails, setProfDetails] = useState<{ 
     bio: string, 
@@ -1487,51 +1488,111 @@ export default function App() {
                     exit={{ opacity: 0, y: -20 }}
                     className="max-w-5xl mx-auto space-y-8"
                   >
-                    <div className="flex justify-between items-center mb-8">
-                      <h3 className="text-2xl font-bold">Latest Research & Admissions</h3>
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/5 pb-6">
+                      <div>
+                        <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white/90 to-white/60">
+                          Latest Research & admissions
+                        </h3>
+                        <p className="text-zinc-400 text-xs mt-1">Verified PhD portals, entrance notifications, and lab publications from across premier Indian institutes</p>
+                      </div>
                       <button 
                         onClick={() => fetchNews(false)}
-                        className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg text-xs font-bold transition-all"
+                        className="self-start md:self-auto flex items-center gap-2 px-4 py-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/20 rounded-xl text-xs font-bold transition-all shadow-[0_0_15px_rgba(16,185,129,0.05)] cursor-pointer"
                       >
                         <Loader2 className={cn("w-3 h-3", isLoading && "animate-spin")} />
                         Refresh News
                       </button>
                     </div>
 
-                    {news.length > 0 ? (
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {news.map((item) => (
-                          <div 
-                            key={item.id} 
-                            onClick={() => window.open(item.url || '#', '_blank')}
-                            className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 transition-colors cursor-pointer group"
-                          >
-                            <div className="flex justify-between items-start mb-4">
-                              <span className="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold rounded-full uppercase tracking-wider">
-                                {item.category}
-                              </span>
-                              <span className="text-[10px] text-white/30 font-mono">
-                                {new Date(item.timestamp).toLocaleDateString()}
-                              </span>
-                            </div>
-                            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">{item.title}</h3>
-                            <p className="text-sm text-white/60 mb-6 line-clamp-2">{item.summary}</p>
-                            <div className="flex items-center justify-between">
-                              <span className="text-xs text-white/40 font-medium">Source: {item.source}</span>
-                              <div className="flex items-center gap-2 text-emerald-400 group-hover:translate-x-1 transition-transform text-xs font-bold">
-                                Read More <ArrowRight size={14} />
-                              </div>
-                            </div>
+                    {/* Category Filter Pills */}
+                    <div className="flex flex-wrap gap-2 py-2">
+                      {['ALL', 'PHD ADMISSION', 'EXAM', 'RESEARCH', 'FELLOWSHIP'].map((cat) => (
+                        <button
+                          key={cat}
+                          onClick={() => setNewsCategoryFilter(cat)}
+                          className={cn(
+                            "px-4 py-1.5 rounded-full text-xs font-bold uppercase transition-all tracking-wide border cursor-pointer",
+                            newsCategoryFilter === cat
+                              ? "bg-emerald-500/20 border-emerald-500/40 text-emerald-400 shadow-[0_0_10px_rgba(16,185,129,0.1)]"
+                              : "bg-white/5 border-white/10 text-white/50 hover:bg-white/10 hover:text-white"
+                          )}
+                        >
+                          {cat.replace('_', ' ')}
+                        </button>
+                      ))}
+                    </div>
+
+                    {(() => {
+                      const filteredNews = newsCategoryFilter === 'ALL'
+                        ? news
+                        : news.filter(item => item.category === newsCategoryFilter);
+
+                      if (filteredNews.length > 0) {
+                        return (
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {filteredNews.map((item) => {
+                              // Define inline category styling
+                              let categoryColor = "bg-emerald-500/10 text-emerald-400 border-emerald-500/20";
+                              let categoryIcon = <FileText size={13} />;
+
+                              if (item.category === 'PHD ADMISSION') {
+                                categoryColor = "bg-emerald-500/10 text-emerald-400 border-emerald-500/20";
+                                categoryIcon = <GraduationCap size={13} />;
+                              } else if (item.category === 'EXAM') {
+                                categoryColor = "bg-blue-500/10 text-blue-400 border-blue-500/20";
+                                categoryIcon = <Calendar size={13} />;
+                              } else if (item.category === 'RESEARCH') {
+                                categoryColor = "bg-purple-500/10 text-purple-400 border-purple-500/20";
+                                categoryIcon = <Brain size={13} />;
+                              } else if (item.category === 'FELLOWSHIP') {
+                                categoryColor = "bg-amber-500/10 text-amber-400 border-amber-500/20";
+                                categoryIcon = <Sparkles size={13} />;
+                              }
+
+                              return (
+                                <div 
+                                  key={item.id} 
+                                  onClick={() => window.open(item.url || '#', '_blank')}
+                                  className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/[0.08] hover:border-white/20 transition-all cursor-pointer group flex flex-col justify-between shadow-lg relative overflow-hidden"
+                                >
+                                  <div>
+                                    <div className="flex justify-between items-start mb-4">
+                                      <span className={cn("px-3 py-1 flex items-center gap-1.5 border text-[10px] font-bold rounded-full uppercase tracking-wider", categoryColor)}>
+                                        {categoryIcon}
+                                        {item.category}
+                                      </span>
+                                      <span className="text-[10px] text-white/30 font-mono">
+                                        {new Date(item.timestamp).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
+                                      </span>
+                                    </div>
+                                    <h3 className="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors line-clamp-2">
+                                      {item.title}
+                                    </h3>
+                                    <p className="text-sm text-white/60 mb-6 line-clamp-3 leading-relaxed">
+                                      {item.summary}
+                                    </p>
+                                  </div>
+                                  <div className="flex items-center justify-between pt-4 border-t border-white/5">
+                                    <span className="text-xs text-white/40 font-medium">Source: {item.source}</span>
+                                    <div className="flex items-center gap-1 text-emerald-400 group-hover:translate-x-1 transition-transform text-xs font-bold">
+                                      Official Portal <ArrowRight size={14} />
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })}
                           </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="h-full flex flex-col items-center justify-center text-center py-20">
-                        <Database className="w-16 h-16 text-white/10 mb-4" />
-                        <p className="text-white/40 uppercase tracking-widest text-sm font-bold">No news updates found.</p>
-                        <p className="text-white/20 text-xs mt-2">The AI might be taking a break. Try refreshing in a moment.</p>
-                      </div>
-                    )}
+                        );
+                      } else {
+                        return (
+                          <div className="h-full flex flex-col items-center justify-center text-center py-20 border border-dashed border-white/10 rounded-2xl bg-white/[0.01]">
+                            <Database className="w-12 h-12 text-white/10 mb-4" />
+                            <p className="text-white/40 uppercase tracking-widest text-xs font-bold">No updates found in this category.</p>
+                            <p className="text-white/20 text-xs mt-2">Try switching filters or refresh to load the latest announcements.</p>
+                          </div>
+                        );
+                      }
+                    })()}
                   </motion.div>
                 )}
 
