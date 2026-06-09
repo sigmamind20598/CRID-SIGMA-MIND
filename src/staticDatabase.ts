@@ -9,93 +9,83 @@ export const getFacultyForInstitute = (instituteName: string): Professor[] => {
 
 export const NEWS_DATABASE: NewsItem[] = [
   {
-    id: "news-nimhans-2026",
-    title: "NIMHANS: PhD Clinical Psychology Entrance Exam Scheduled (June 2026)",
-    source: "NIMHANS Academic Section",
-    url: "https://nimhans.ac.in/admissions/",
-    timestamp: "2026-05-18T00:00:00Z",
-    category: "EXAM",
-    summary: "NIMHANS has announced the schedule for the highly competitive PhD in Clinical Psychology Entrance Exam. Hall tickets are available, and testing centers are set for mid-June 2026.",
-    imageKeyword: "nimhans"
-  },
-  {
-    id: "news-bombay-phd-2026",
-    title: "IIT Bombay: Cognitive Science PhD Shortlist & Written Test Guidelines",
-    source: "IIT Bombay IDRP CogSci",
-    url: "https://www.iitb.ac.in/newweb/phd-admissions",
-    timestamp: "2026-05-15T00:00:00Z",
-    category: "PHD ADMISSION",
-    summary: "IIT Bombay's IDRP in Cognitive Science has released the shortlist of candidates for the written admission test for the Autumn 2026 semester. Exams will be followed by online faculty interviews.",
-    imageKeyword: "iit-bombay"
-  },
-  {
-    id: "news-delhi-phd-2026",
-    title: "IIT Delhi: PhD Written Test Schedule Released for Psychology & Linguistics",
+    id: "news-iitd-selections-2026",
+    title: "IIT Delhi: Selected Candidates for PhD Programs Declared (Autumn 2026-27)",
     source: "IIT Delhi HSS Portal",
     url: "https://hss.iitd.ac.in/admissions",
-    timestamp: "2026-05-12T00:00:00Z",
+    timestamp: "2026-06-07T00:00:00Z",
     category: "PHD ADMISSION",
-    summary: "The Department of Humanities and Social Sciences (HSS) at IIT Delhi has declared the qualifying cutoffs and written-test shortlists for applicants to Psychology/Linguistics curricula.",
+    summary: "The Department of Humanities and Social Sciences (HSS) at IIT Delhi has finalized its interview cycles and published the list of candidates selected for admission to PhD streams (Psychology and Philosophy) for 2026.",
     imageKeyword: "iit-delhi"
   },
   {
-    id: "news-cogjet-results-2026",
-    title: "COGJET 2026: Cognitive Science Joint Test Results Declared",
-    source: "COGJET Joint Portal",
-    url: "https://cbcs.ac.in/admissions/cogjet/",
-    timestamp: "2026-05-10T00:00:00Z",
-    category: "EXAM",
-    summary: "The official scorecards of the Cognitive Science Joint Entrance Test (COGJET 2026) are now live. Participating institutes including CBCS Allahabad and IIT Kanpur are processing applications based on these scores.",
-    imageKeyword: "brain"
+    id: "news-iitb-selections-2026",
+    title: "IIT Bombay: CogSci and Psychology PhD Provisional Selection Lists Declared",
+    source: "IIT Bombay IDRP CogSci",
+    url: "https://www.iitb.ac.in/newweb/phd-admissions",
+    timestamp: "2026-06-04T00:00:00Z",
+    category: "PHD ADMISSION",
+    summary: "Provisional lists of recommended candidates for IIT Bombay's Cognitive Science (IDRP) and HSS PhD admissions have been uploaded. Final offer letters are being dispatched via the PG admissions portal.",
+    imageKeyword: "iit-bombay"
   },
   {
-    id: "news-kanpur-cogsci-2026",
-    title: "IIT Kanpur: Cognitive Science PhD Admission Interview Slots Announced",
+    id: "news-nimhans-exam-2026",
+    title: "NIMHANS: PhD in Clinical Psychology Entrance Guidelines Issued",
+    source: "NIMHANS Academic Section",
+    url: "https://nimhans.ac.in/admissions/",
+    timestamp: "2026-06-02T00:00:00Z",
+    category: "EXAM",
+    summary: "Official exam hall guidelines have been issued for the upcoming PhD in Clinical Psychology entrance test scheduled for mid-June 2026. Registered candidates can download hall tickets immediately.",
+    imageKeyword: "nimhans"
+  },
+  {
+    id: "news-iitk-offers-2026",
+    title: "IIT Kanpur: Cognitive Science PhD Admission First-List Offers Dispatched",
     source: "IITK CogSci Department",
     url: "https://www.iitk.ac.in/cogs/admissions",
-    timestamp: "2026-05-08T00:00:00Z",
+    timestamp: "2026-05-31T00:00:00Z",
     category: "PHD ADMISSION",
-    summary: "IIT Kanpur's Department of Cognitive Science has sent interview invites to candidates qualifying through COGJET and national fellowships. Remote panels will run through late May.",
+    summary: "IIT Kanpur's Department of Cognitive Science has issued first-round selection offer letters for the July 2026 academic term. Admitted students must confirm and pay fees by June 15.",
     imageKeyword: "iit-kanpur"
   },
   {
-    id: "news-iisc-2026",
-    title: "IISc Bangalore: Center for Neuroscience PhD Evaluation Timelines",
-    source: "IISc CNS Division",
-    url: "https://admissions.iisc.ac.in/",
-    timestamp: "2026-05-05T00:00:00Z",
-    category: "RESEARCH",
-    summary: "The CNS at IISc Bangalore has finalized selection schedules for candidate evaluations in visual coding, neurobiology, and computational neuroscience for the 2026-27 academic session.",
-    imageKeyword: "iisc-bangalore"
-  },
-  {
-    id: "news-gandhinagar-research-2026",
-    title: "IIT Gandhinagar: Cognitive Science Research Residencies Open",
+    id: "news-iitgn-summer-2026",
+    title: "IIT Gandhinagar: Selected Interns for Cognitive Science Program Declared",
     source: "IITGN Cognitive Science",
     url: "https://cogs.iitgn.ac.in/",
-    timestamp: "2026-05-02T00:00:00Z",
+    timestamp: "2026-05-28T00:00:00Z",
     category: "RESEARCH",
-    summary: "IIT Gandhinagar welcomes applications for fully-funded short-term research residency programs focusing on eye-tracking, decision-making, and spatial navigation.",
+    summary: "IIT Gandhinagar has announced the final list of summer research scholars. Selected interns will undergo a residency program focusing on eye-tracking, decision-making, and spatial navigation.",
     imageKeyword: "iit-gandhinagar"
   },
   {
-    id: "news-madras-cns-2026",
-    title: "IIT Madras: Sudha Gopalakrishnan Brain Centre PhD Fellowships Open",
-    source: "IITM Admissions",
+    id: "news-iith-shortlist-2026",
+    title: "IIT Hyderabad: PhD in Liberal Arts Final Interview Results Out",
+    source: "IITH Liberal Arts Portal",
+    url: "https://www.iith.ac.in/phdadmissions/",
+    timestamp: "2026-05-24T00:00:00Z",
+    category: "PHD ADMISSION",
+    summary: "The Department of Liberal Arts has announced the list of selected doctoral scholars in Psychology for the Autumn term. Offers have been communicated to individual emails.",
+    imageKeyword: "iit-hyderabad"
+  },
+  {
+    id: "news-iitm-brain-2026",
+    title: "IIT Madras: Sudha Gopalakrishnan Brain Centre Launches Mapping Cohort",
+    source: "IITM Division",
     url: "https://www.iitm.ac.in/academics/phd-admissions",
-    timestamp: "2026-04-28T00:00:00Z",
-    category: "FELLOWSHIP",
-    summary: "Applications are open for funded national fellowships at IIT Madras Brain Centre, supporting computational mapping, brain-inspired modeling, and high-resolution imaging projects.",
+    timestamp: "2026-05-20T00:00:00Z",
+    category: "RESEARCH",
+    summary: "In a massive step for neuroscience, the Brain Centre at IIT Madras has inaugurated a specialized cohort for human brain atlas projects, incorporating high-throughput imaging pipeline setups.",
     imageKeyword: "iit-madras"
   },
   {
-    id: "news-hyderabad-phd-2026",
-    title: "IIT Hyderabad: Liberal Arts PhD psychology Shortlist for Autumn Batch",
-    source: "IITH Liberal Arts Portal",
-    url: "https://www.iith.ac.in/phdadmissions/",
-    timestamp: "2026-04-25T00:00:00Z",
-    category: "PHD ADMISSION",
-    summary: "IIT Hyderabad Psychology / Liberal Arts section has updated shortlists for written and presentation rounds. Primary areas of focus are Human Factors, Social Psychology and Mental Health.",
-    imageKeyword: "iit-hyderabad"
+    id: "news-cogjet-scores-2026",
+    title: "COGJET 2026: Entrance Scores Validated and Forwarded to Central Labs",
+    source: "COGJET Joint Portal",
+    url: "https://cbcs.ac.in/admissions/cogjet/",
+    timestamp: "2026-05-15T00:00:00Z",
+    category: "EXAM",
+    summary: "COGJET scores have been securely verified and transmitted to partner labs, including CBCS Allahabad and IIT Kanpur, to support final-round ranking and screening filters.",
+    imageKeyword: "brain"
   }
 ];

@@ -36,25 +36,26 @@ async function callGeminiAI(task: string, params: any = {}, retryCount = 0): Pro
     let prompt = "";
     switch (task) {
       case 'news':
-        prompt = `Provide 4-5 very recent and specific news items, alerts, or breakthroughs in Cognitive Science and Psychology relevant to Indian research institutes (IITs, IISc, CBCS, NIMHANS). 
+        prompt = `Provide 4-5 very recent and specific news items, alerts, or breakthroughs in Cognitive Science and Psychology relevant to Indian research institutes (IITs, IISc, CBCS, NIMHANS) representing the current date range of late May to early June 2026. 
         
         Focus on:
-        1. PhD Admission alerts (e.g., IIT Bombay and IIT Delhi have called for written tests/interviews).
-        2. New research project launches or funding.
-        3. Major publications from Indian labs.
+        1. PhD Selection lists and admissions results (e.g., IIT Delhi and IIT Bombay declaring PhD selection results).
+        2. NIMHANS PhD Clinical Psychology exam hall guidelines (exams in mid-June 2026).
+        3. New research projects, lab activities, or funding.
+        4. Major publications or fellowships from Indian labs.
         
         Format as a JSON array of objects:
         [{
           "title": "Clear concise headline",
           "summary": "1-2 sentence description",
-          "timestamp": "2026-04-27T00:00:00Z",
+          "timestamp": "2026-06-05T00:00:00Z",
           "source": "Name of the institute or news portal",
           "category": "PHD ADMISSION / RESEARCH / EXAM / FELLOWSHIP / GUIDELINES",
           "url": "A plausible URL to the institute's admission or news page",
           "imageKeyword": "relevant-keyword (e.g., iit-delhi, psychology, brain)"
         }]. 
         
-        Ensure the first 2 items are about the latest PhD written tests at IIT Bombay and IIT Delhi as they are currently active.`;
+        Ensure the first 2 items are about the latest June 2026 PhD results at IIT Bombay and IIT Delhi as they have recently released their selection decisions.`;
         break;
       case 'faculty':
         prompt = `List 5 prominent faculty members in Cognitive Science at ${params?.instituteName || 'top Indian institutes'}. Include their research interests and lab names. Format as JSON array: [{name, institute, interests, lab}].`;
