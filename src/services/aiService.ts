@@ -36,26 +36,26 @@ async function callGeminiAI(task: string, params: any = {}, retryCount = 0): Pro
     let prompt = "";
     switch (task) {
       case 'news':
-        prompt = `Provide 4-5 very recent and specific news items, alerts, or breakthroughs in Cognitive Science and Psychology relevant to Indian research institutes (IITs, IISc, CBCS, NIMHANS) representing the current date range of late May to early June 2026. 
+        prompt = `Provide 4-5 very recent and specific news items, alerts, or breakthroughs in Cognitive Science and Psychology relevant to Indian research institutes (IITs, IISc, CBCS, NIMHANS) representing the current date range of mid-June 2026 (current date is June 14, 2026). 
         
         Focus on:
-        1. PhD Selection lists and admissions results (e.g., IIT Delhi and IIT Bombay declaring PhD selection results).
-        2. NIMHANS PhD Clinical Psychology exam hall guidelines (exams in mid-June 2026).
-        3. New research projects, lab activities, or funding.
-        4. Major publications or fellowships from Indian labs.
+        1. PhD Selection waitlists and second-round admissions offers (e.g., IIT Kanpur releasing second list, IIT Bombay or IIT Delhi concluding admission cycle registrations).
+        2. NIMHANS PhD Clinical Psychology final exam advisory and reporting guidelines for exams taking place June 15-16, 2026.
+        3. Breakthrough publications, new research, or brain mapping launches in top labs like IISc Bangalore or IIT Madras.
+        4. Fellowships and residency notifications.
         
         Format as a JSON array of objects:
         [{
           "title": "Clear concise headline",
           "summary": "1-2 sentence description",
-          "timestamp": "2026-06-05T00:00:00Z",
+          "timestamp": "2026-06-14T00:00:00Z",
           "source": "Name of the institute or news portal",
           "category": "PHD ADMISSION / RESEARCH / EXAM / FELLOWSHIP / GUIDELINES",
           "url": "A plausible URL to the institute's admission or news page",
           "imageKeyword": "relevant-keyword (e.g., iit-delhi, psychology, brain)"
         }]. 
         
-        Ensure the first 2 items are about the latest June 2026 PhD results at IIT Bombay and IIT Delhi as they have recently released their selection decisions.`;
+        Ensure the items are highly realistic and up-to-date with current June 2026 timelines.`;
         break;
       case 'faculty':
         prompt = `List 5 prominent faculty members in Cognitive Science at ${params?.instituteName || 'top Indian institutes'}. Include their research interests and lab names. Format as JSON array: [{name, institute, interests, lab}].`;

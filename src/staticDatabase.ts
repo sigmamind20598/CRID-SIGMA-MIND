@@ -9,6 +9,36 @@ export const getFacultyForInstitute = (instituteName: string): Professor[] => {
 
 export const NEWS_DATABASE: NewsItem[] = [
   {
+    id: "news-nimhans-entrance-2026",
+    title: "NIMHANS: PhD Clinical Psychology Entrance Exam Advisory for June 15-16 Candidates",
+    source: "NIMHANS Academic Desk",
+    url: "https://nimhans.ac.in/admissions/",
+    timestamp: "2026-06-14T08:30:00Z",
+    category: "EXAM",
+    summary: "NIMHANS has issued final candidate guidelines and reporting schedules for the competitive PhD in Clinical Psychology entrance test starting on June 15, 2026. Hand sanitization, original admit cards, and identification documents are mandatory.",
+    imageKeyword: "nimhans"
+  },
+  {
+    id: "news-iisc-visual-cortex-2026",
+    title: "IISc Bangalore: Center for Neuroscience Unveils Visual Cortex Plasticity Maps",
+    source: "IISc CNS Media Office",
+    url: "https://admissions.iisc.ac.in/",
+    timestamp: "2026-06-12T14:15:00Z",
+    category: "RESEARCH",
+    summary: "Researchers at IISc's Center for Neuroscience have mapped the synaptic plasticity of the visual cortex under dynamic gaze-direction shifts, illustrating pattern adaptability relevant to brain-inspired neural networks.",
+    imageKeyword: "iisc-bangalore"
+  },
+  {
+    id: "news-iitk-waitlist-2026",
+    title: "IIT Kanpur: Cognitive Science PhD Second Offer Lists and Waitlists Dispatched",
+    source: "IITK Admissions",
+    url: "https://www.iitk.ac.in/cogs/admissions",
+    timestamp: "2026-06-10T11:00:00Z",
+    category: "PHD ADMISSION",
+    summary: "Following the first-round confirmation deadline, the Department of Cognitive Science at IIT Kanpur has compiled and dispatched second-round selection offer letters. Responses remain open until June 18, 2026.",
+    imageKeyword: "iit-kanpur"
+  },
+  {
     id: "news-iitd-selections-2026",
     title: "IIT Delhi: Selected Candidates for PhD Programs Declared (Autumn 2026-27)",
     source: "IIT Delhi HSS Portal",
