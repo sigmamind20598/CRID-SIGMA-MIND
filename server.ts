@@ -121,7 +121,6 @@ async function startServer() {
       doc.text('------------------------------------------------------------');
       doc.moveDown();
       doc.fontSize(11).text(proposalContent);
-      doc.end();
 
       doc.on('end', async () => {
         try {
@@ -158,6 +157,8 @@ async function startServer() {
           }
         }
       });
+
+      doc.end();
     } catch (error: any) {
       console.error("PDF Email Error:", error);
       res.status(500).json({ error: error.message });

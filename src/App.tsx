@@ -496,7 +496,13 @@ export default function App() {
     const cacheKey = `proposal_${topic.id}_${selectedProfessor?.id}`;
     const cached = localStorage.getItem(cacheKey);
     if (cached) {
-      alert("This proposal has already been generated! We will email it to you once your payment is verified.");
+      const index = topics.findIndex(t => t.id === topic.id);
+      const unlocked = isPremiumUnlocked || isSuperUser(userEmail, userPhone) || (index === 0);
+      
+      setSelectedTopic(topic);
+      setProposal(cached);
+      setIsProposalUnlocked(unlocked);
+      setView('proposal');
       return;
     }
 
@@ -553,6 +559,12 @@ export default function App() {
         instituteName: selectedInstitute?.name || '',
         content: fullProposal
       }).catch(err => console.error("Error saving proposal to Firestore:", err));
+      
+      // Set unlocked status and view the proposal
+      const index = topics.findIndex(t => t.id === topic.id);
+      const unlocked = isPremiumUnlocked || isSuperUser(userEmail, userPhone) || (index === 0);
+      setIsProposalUnlocked(unlocked);
+      setView('proposal');
       
       // Send Emails (isPaidRequest = true so it goes to admin, not user directly)
       await sendProposalEmails(
