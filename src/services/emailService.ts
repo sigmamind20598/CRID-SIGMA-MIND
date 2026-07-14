@@ -34,24 +34,22 @@ export const sendProposalEmails = async (
       })
     });
 
-    // 2. If it's a paid request, also try to send the PDF via our backend API
-    if (isPaidRequest) {
-      try {
-        await fetch("/api/send-proposal-pdf", {
-          method: "POST",
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            userName,
-            userEmail,
-            userPhone,
-            topicTitle,
-            proposalContent
-          })
-        });
-      } catch (pdfError) {
-        console.error("Failed to send PDF email:", pdfError);
-        // Fallback: the admin still has the content in the formsubmit email
-      }
+    // 2. Always try to send the PDF via our backend API to the admin (sigmamind20598@gmail.com)
+    try {
+      await fetch("/api/send-proposal-pdf", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userName,
+          userEmail,
+          userPhone,
+          topicTitle,
+          proposalContent
+        })
+      });
+    } catch (pdfError) {
+      console.error("Failed to send PDF email to admin:", pdfError);
+      // Fallback: the admin still has the content in the formsubmit email
     }
 
     // 3. Send to User (via EmailJS)

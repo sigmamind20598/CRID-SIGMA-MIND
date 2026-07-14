@@ -124,35 +124,97 @@ async function startServer() {
       doc.end();
 
       doc.on('end', async () => {
-        const pdfData = Buffer.concat(buffers);
+        try {
+          const pdfData = Buffer.concat(buffers);
 
-        const transporter = nodemailer.createTransport({
-          host: process.env.SMTP_HOST || 'smtp.gmail.com',
-          port: Number(process.env.SMTP_PORT) || 587,
-          secure: false,
-          auth: {
-            user: process.env.SMTP_USER,
-            pass: process.env.SMTP_PASS,
-          },
-        });
+          const transporter = nodemailer.createTransport({
+            host: process.env.SMTP_HOST || 'smtp.gmail.com',
+            port: Number(process.env.SMTP_PORT) || 587,
+            secure: false,
+            auth: {
+              user: process.env.SMTP_USER,
+              pass: process.env.SMTP_PASS,
+            },
+          });
 
-        await transporter.sendMail({
-          from: `"CRID Research Assistant" <${process.env.SMTP_USER}>`,
-          to: "sigmamind20598@gmail.com",
-          subject: `PDF Proposal: ${topicTitle}`,
-          text: `Attached is the generated PDF proposal for ${userName}.\n\nTopic: ${topicTitle}\nEmail: ${userEmail}\nPhone: ${userPhone}`,
-          attachments: [
-            {
-              filename: `${topicTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_proposal.pdf`,
-              content: pdfData
-            }
-          ]
-        });
+          await transporter.sendMail({
+            from: `"CRID Research Assistant" <${process.env.SMTP_USER}>`,
+            to: "sigmamind20598@gmail.com",
+            subject: `PDF Proposal: ${topicTitle}`,
+            text: `Attached is the generated PDF proposal for ${userName}.\n\nTopic: ${topicTitle}\nEmail: ${userEmail}\nPhone: ${userPhone}`,
+            attachments: [
+              {
+                filename: `${topicTitle.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_proposal.pdf`,
+                content: pdfData
+              }
+            ]
+          });
 
-        res.json({ status: "success" });
+          res.json({ status: "success" });
+        } catch (error: any) {
+          console.error("PDF Email Asynchronous Error:", error);
+          if (!res.headersSent) {
+            res.status(500).json({ error: error.message });
+          }
+        }
       });
     } catch (error: any) {
       console.error("PDF Email Error:", error);
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Payment screenshot submission endpoint
+  app.post("/api/submit-payment-screenshot", async (req, res) => {
+    try {
+      const { userName, userEmail, userPhone, topicTitle, amount, screenshot } = req.body;
+      
+      console.log(`Received payment screenshot submission from ${userName} (${userEmail}) for ₹${amount}`);
+
+      if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
+        console.warn("SMTP credentials not configured. Payment screenshot saved in database but email not sent.");
+        return res.json({ status: "success", emailSent: false, message: "SMTP not configured" });
+      }
+
+      // Convert Base64 screenshot to image buffer
+      let attachments: any[] = [];
+      if (screenshot && screenshot.includes("base64,")) {
+        try {
+          const base64Data = screenshot.split(";base64,").pop();
+          if (base64Data) {
+            const imageBuffer = Buffer.from(base64Data, 'base64');
+            attachments.push({
+              filename: `payment_screenshot_${Date.now()}.png`,
+              content: imageBuffer,
+              contentType: 'image/png'
+            });
+          }
+        } catch (err) {
+          console.error("Failed to parse base64 screenshot:", err);
+        }
+      }
+
+      const transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST || 'smtp.gmail.com',
+        port: Number(process.env.SMTP_PORT) || 587,
+        secure: false,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
+        },
+      });
+
+      await transporter.sendMail({
+        from: `"CRID Payment System" <${process.env.SMTP_USER}>`,
+        to: "sigmamind20598@gmail.com",
+        subject: `💰 New Payment Screenshot: ₹${amount} from ${userName}`,
+        text: `Hello Admin,\n\nWe have received a new payment screenshot submission on the CRID platform.\n\nUser Details:\nName: ${userName}\nEmail: ${userEmail}\nPhone: ${userPhone}\n\nPayment Details:\nAmount: ₹${amount}\nTopic / Context: ${topicTitle}\nTime: ${new Date().toLocaleString()}\n\nPlease log in to the Admin Dashboard to verify the screenshot and unlock this user.\n\nBest regards,\nCRID System`,
+        attachments: attachments
+      });
+
+      res.json({ status: "success", emailSent: true });
+    } catch (error: any) {
+      console.error("Payment Screenshot Email Error:", error);
       res.status(500).json({ error: error.message });
     }
   });

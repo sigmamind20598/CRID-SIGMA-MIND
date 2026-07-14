@@ -9,6 +9,46 @@ export const getFacultyForInstitute = (instituteName: string): Professor[] => {
 
 export const NEWS_DATABASE: NewsItem[] = [
   {
+    id: "news-iitb-semester-registration-2026",
+    title: "IIT Bombay: Autumn Semester Registration Commences for Cognitive Science Cohort",
+    source: "IIT Bombay Academic Office",
+    url: "https://www.iitb.ac.in/newweb/phd-admissions",
+    timestamp: "2026-07-12T09:00:00Z",
+    category: "PHD ADMISSION",
+    summary: "Formal enrollment and physical registration for the newly selected Autumn 2026 PhD batch in Cognitive Science and Psychology have commenced. Candidates must complete portal registration and pay semester fees by July 22, 2026.",
+    imageKeyword: "iit-bombay"
+  },
+  {
+    id: "news-nimhans-shortlists-2026",
+    title: "NIMHANS: PhD Clinical Psychology Selection Interview Shortlists Declared",
+    source: "NIMHANS Academic Desk",
+    url: "https://nimhans.ac.in/admissions/",
+    timestamp: "2026-07-08T11:30:00Z",
+    category: "PHD ADMISSION",
+    summary: "Following the written entrance examination held on June 15-16, NIMHANS has officially released the list of qualified candidates shortlisted for the final selection interview rounds in Clinical Psychology and Neuropsychology.",
+    imageKeyword: "nimhans"
+  },
+  {
+    id: "news-dst-csri-guidelines-2026",
+    title: "DST CSRI 2026: Official Guidelines and Funding Framework Released",
+    source: "DST Scientific Division",
+    url: "https://dst.gov.in/scientific-programmes/scientific-engineering-research/cognitive-science-research-initiative-csri",
+    timestamp: "2026-07-05T14:45:00Z",
+    category: "FELLOWSHIP",
+    summary: "The Department of Science and Technology (DST) has released updated guidelines for the 2026 Cognitive Science Research Initiative (CSRI). Changes include enhanced research fellowship rates for doctoral/postdoctoral candidates and revised equipment grants.",
+    imageKeyword: "fellowship"
+  },
+  {
+    id: "news-iitd-dynamic-neuromapping-2026",
+    title: "IIT Delhi: Dynamic Neuromapping Lab Publishes EEG Study on Virtual Attention",
+    source: "IITD HSS Research",
+    url: "https://hss.iitd.ac.in/admissions",
+    timestamp: "2026-07-01T10:00:00Z",
+    category: "RESEARCH",
+    summary: "Scholars at IIT Delhi's Dynamic Neuromapping Laboratory have published a high-impact paper using joint EEG-Eye Tracking to analyze spatial attention drift during immersive virtual learning tasks, proposing new adaptive scaffolding interfaces.",
+    imageKeyword: "iit-delhi"
+  },
+  {
     id: "news-nimhans-entrance-2026",
     title: "NIMHANS: PhD Clinical Psychology Entrance Exam Advisory for June 15-16 Candidates",
     source: "NIMHANS Academic Desk",

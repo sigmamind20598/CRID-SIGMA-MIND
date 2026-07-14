@@ -43,6 +43,25 @@ import BrainBackground from './components/BrainBackground';
 import { BrainMapAnimation } from './components/BrainMapAnimation';
 import { jsPDF } from 'jspdf';
 
+// Firebase Firestore & Db Service Integrations
+import { db } from './firebase';
+import { doc, onSnapshot } from 'firebase/firestore';
+import {
+  saveUserProfile,
+  getUserProfile,
+  submitPaymentScreenshot,
+  saveProposal,
+  getUserProposals,
+  getAllPaymentSubmissions,
+  getAllUserProfiles,
+  getAllProposals,
+  updatePaymentStatus,
+  updateUserPremiumStatus,
+  UserProfile,
+  PaymentSubmission,
+  SavedProposal
+} from './services/dbService';
+
 const isSuperUser = (email: string, phone: string) => {
   const e = email?.toLowerCase().trim() || '';
   const p = phone?.trim() || '';
@@ -210,8 +229,22 @@ export default function App() {
   const [pendingTopic, setPendingTopic] = useState<ResearchTopic | null>(null);
   const [pendingProfessor, setPendingProfessor] = useState<Professor | null>(null);
   const [loadingMessage, setLoadingMessage] = useState<string | null>(null);
-  const [userName, setUserName] = useState('');
+  const [userName, setUserName] = useState(() => localStorage.getItem('crid_userName') || '');
   const [showPricingModal, setShowPricingModal] = useState(false);
+
+  // Database-driven Unlocks & Payment Screenshot states
+  const [screenshotBase64, setScreenshotBase64] = useState<string | null>(null);
+  const [paymentPending, setPaymentPending] = useState(false);
+  const [isUploadingScreenshot, setIsUploadingScreenshot] = useState(false);
+
+  // Admin Panel states
+  const [adminPayments, setAdminPayments] = useState<PaymentSubmission[]>([]);
+  const [adminUsers, setAdminUsers] = useState<UserProfile[]>([]);
+  const [adminProposals, setAdminProposals] = useState<SavedProposal[]>([]);
+  const [adminPasscode, setAdminPasscode] = useState('');
+  const [viewingScreenshot, setViewingScreenshot] = useState<PaymentSubmission | null>(null);
+  const [adminSearch, setAdminSearch] = useState('');
+  const [adminActiveTab, setAdminActiveTab] = useState<'payments' | 'users' | 'proposals'>('payments');
 
   // Custom Proposal Form State
   const [customDomain, setCustomDomain] = useState('');
@@ -220,8 +253,8 @@ export default function App() {
   const [customTopic, setCustomTopic] = useState('');
 
   // Contact Info State
-  const [userEmail, setUserEmail] = useState('');
-  const [userPhone, setUserPhone] = useState('');
+  const [userEmail, setUserEmail] = useState(() => localStorage.getItem('crid_userEmail') || '');
+  const [userPhone, setUserPhone] = useState(() => localStorage.getItem('crid_userPhone') || '');
 
   // Mock Interview Form State
   const [bachelorsDetails, setBachelorsDetails] = useState('');
@@ -272,6 +305,50 @@ export default function App() {
     }, 8000); // 8 seconds initial funny loading
     return () => clearTimeout(timer);
   }, []);
+
+  // Save contact details to localStorage & sync profile in Firestore
+  useEffect(() => {
+    if (userName) {
+      localStorage.setItem('crid_userName', userName);
+    }
+  }, [userName]);
+
+  useEffect(() => {
+    if (userEmail) {
+      localStorage.setItem('crid_userEmail', userEmail);
+      // Sync user profile in background
+      saveUserProfile({
+        email: userEmail,
+        name: userName,
+        phone: userPhone,
+        proposalsGeneratedCount: proposalsGenerated
+      }).catch(err => console.error("Error syncing profile:", err));
+    }
+  }, [userEmail, userName, userPhone, proposalsGenerated]);
+
+  useEffect(() => {
+    if (userPhone) {
+      localStorage.setItem('crid_userPhone', userPhone);
+    }
+  }, [userPhone]);
+
+  // Real-time Firestore Sync for premium status
+  useEffect(() => {
+    if (!userEmail) return;
+    const emailClean = userEmail.toLowerCase().trim();
+    
+    const unsub = onSnapshot(doc(db, 'users', emailClean), (snap) => {
+      if (snap.exists()) {
+        const data = snap.data() as UserProfile;
+        setIsPremiumUnlocked(data.premiumUnlocked);
+        console.log("Real-time premium state synced:", data.premiumUnlocked);
+      }
+    }, (error) => {
+      console.error("Error listening to user profile:", error);
+    });
+    
+    return () => unsub();
+  }, [userEmail]);
 
   useEffect(() => {
     setIsSubmitted(false);
@@ -466,6 +543,17 @@ export default function App() {
       
       setProposal(fullProposal);
       
+      // Save proposal to Firestore for persistence & history
+      await saveProposal({
+        email: userEmail,
+        userName,
+        userPhone,
+        topicTitle: topic.title,
+        professorName: selectedProfessor?.name || '',
+        instituteName: selectedInstitute?.name || '',
+        content: fullProposal
+      }).catch(err => console.error("Error saving proposal to Firestore:", err));
+      
       // Send Emails (isPaidRequest = true so it goes to admin, not user directly)
       await sendProposalEmails(
         userEmail,
@@ -574,6 +662,158 @@ export default function App() {
 
   const handleManualPaidRequest = async (amount: number, type: 'single') => {
     handleWhatsAppRedirect(amount, 'Additional Research Proposal');
+  };
+
+  const handleScreenshotChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    
+    if (file.size > 4 * 1024 * 1024) {
+      alert("Image is too large. Please upload an image under 4MB.");
+      return;
+    }
+    
+    const reader = new FileReader();
+    reader.onload = () => {
+      setScreenshotBase64(reader.result as string);
+    };
+    reader.onerror = (err) => {
+      console.error("FileReader Error:", err);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleScreenshotSubmit = async () => {
+    if (!screenshotBase64) {
+      alert("Please upload a payment screenshot first.");
+      return;
+    }
+    
+    setIsUploadingScreenshot(true);
+    const amount = isSuperUser(userEmail, userPhone) ? 1 : 100;
+    const topicToGenerate = pendingTopic || selectedTopic;
+    const topicName = topicToGenerate?.title || 'Unlock Premium Topics';
+    
+    try {
+      // 1. Submit to Firestore
+      await submitPaymentScreenshot({
+        email: userEmail,
+        name: userName,
+        phone: userPhone,
+        screenshot: screenshotBase64,
+        topicTitle: topicName,
+        amount
+      });
+      
+      // 2. Submit to Backend API (sends email with image buffer)
+      await fetch('/api/submit-payment-screenshot', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          userName,
+          userEmail,
+          userPhone,
+          topicTitle: topicName,
+          amount,
+          screenshot: screenshotBase64
+        })
+      });
+      
+      setPaymentPending(true);
+      
+      // Auto-redirect to WhatsApp to notify the admin instantly
+      const message = `Hello CRID team! I just made a payment of ₹${amount} and uploaded my screenshot on the app for: ${topicName}.\n\nName: ${userName}\nEmail: ${userEmail}\nPhone: ${userPhone}\n\nPlease verify and unlock my proposal!`;
+      const encodedMessage = encodeURIComponent(message);
+      
+      try {
+        window.open(`https://wa.me/917092884311?text=${encodedMessage}`, '_blank');
+      } catch (e) {
+        console.error("Failed to auto-open WhatsApp:", e);
+      }
+      
+      alert("Payment screenshot uploaded successfully! The admin has been notified. We have also opened WhatsApp so you can send the message to the admin for instant manual activation.");
+      
+    } catch (error) {
+      console.error("Screenshot submission error:", error);
+      alert("Failed to upload screenshot. Please try again or send it directly on WhatsApp.");
+    } finally {
+      setIsUploadingScreenshot(false);
+    }
+  };
+
+  // ADMIN DASHBOARD FUNCTIONS
+  const loadAdminData = async () => {
+    setIsLoading(true);
+    setLoadingMessage("Fetching admin data from Firestore...");
+    try {
+      const [payments, users, proposals] = await Promise.all([
+        getAllPaymentSubmissions(),
+        getAllUserProfiles(),
+        getAllProposals()
+      ]);
+      setAdminPayments(payments);
+      setAdminUsers(users);
+      setAdminProposals(proposals);
+    } catch (error) {
+      console.error("Error loading admin data:", error);
+      alert("Failed to load admin data. Please check your Firestore rules.");
+    } finally {
+      setIsLoading(false);
+      setLoadingMessage(null);
+    }
+  };
+
+  const handleApprovePayment = async (payment: PaymentSubmission) => {
+    if (!confirm(`Are you sure you want to APPROVE payment of ₹${payment.amount} from ${payment.name}? This will instantly unlock premium content for them.`)) {
+      return;
+    }
+    setIsLoading(true);
+    try {
+      await updatePaymentStatus(payment.id!, 'approved', payment.email);
+      await updateUserPremiumStatus(payment.email, true);
+      await loadAdminData();
+      alert(`Successfully approved payment. ${payment.name} is now premium-enabled!`);
+    } catch (err) {
+      console.error("Error approving payment:", err);
+      alert("Failed to approve payment.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleRejectPayment = async (payment: PaymentSubmission) => {
+    if (!confirm(`Are you sure you want to REJECT payment of ₹${payment.amount} from ${payment.name}?`)) {
+      return;
+    }
+    setIsLoading(true);
+    try {
+      await updatePaymentStatus(payment.id!, 'rejected', payment.email);
+      await loadAdminData();
+      alert(`Rejected payment for ${payment.name}.`);
+    } catch (err) {
+      console.error("Error rejecting payment:", err);
+      alert("Failed to reject payment.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleTogglePremium = async (email: string, currentStatus: boolean) => {
+    const actionName = currentStatus ? 'Lock' : 'Unlock';
+    if (!confirm(`Are you sure you want to ${actionName} premium access for user ${email}?`)) {
+      return;
+    }
+    setIsLoading(true);
+    try {
+      await updateUserPremiumStatus(email, !currentStatus);
+      await loadAdminData();
+      alert(`Successfully ${currentStatus ? 'locked' : 'unlocked'} access for ${email}.`);
+    } catch (err) {
+      console.error("Error toggling premium status:", err);
+      alert("Failed to change premium status.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleServiceSubmit = async (e: React.FormEvent, serviceType: string, details: any) => {
@@ -692,7 +932,29 @@ export default function App() {
         </div>
 
         {/* Desktop Right Nav & Mobile Spacer */}
-        <div className="flex-1 flex items-center justify-end gap-6">
+        <div className="flex-1 flex items-center justify-end gap-3 md:gap-6">
+          <button 
+            onClick={() => {
+              const pass = prompt("Enter Admin Passcode (Hint: check your phone numbers 7092 or 8130):");
+              if (pass === '7092' || pass === '8130') {
+                setAdminPasscode(pass);
+                setMode('review');
+                loadAdminData();
+              } else if (pass !== null) {
+                alert("Incorrect passcode!");
+              }
+            }}
+            className={cn(
+              "flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-wider transition-all border",
+              mode === 'review'
+                ? "bg-purple-600 text-white border-purple-500 shadow-[0_0_15px_rgba(147,51,234,0.4)]"
+                : "bg-white/5 text-purple-400 hover:bg-purple-500/10 border-purple-500/20"
+            )}
+          >
+            <Lock size={10} />
+            Admin Panel
+          </button>
+
           <button 
             onClick={() => setMode('contact')}
             className={cn(
@@ -917,6 +1179,298 @@ export default function App() {
               <FunnyLoader customMessage={loadingMessage} />
             ) : (
               <AnimatePresence mode="wait">
+                {mode === 'review' && (
+                  <motion.div
+                    key="admin_dashboard"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="space-y-6 text-white max-w-6xl mx-auto py-6"
+                  >
+                    {/* Header bar */}
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+                      <div>
+                        <div className="flex items-center gap-3">
+                          <h1 className="text-2xl font-extrabold tracking-tight">CRID Control Centre</h1>
+                          <span className="flex h-2 w-2 relative">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
+                          </span>
+                        </div>
+                        <p className="text-xs text-white/40 mt-1">Real-time payment screenshot verification & user lock overrides</p>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <button
+                          onClick={loadAdminData}
+                          className="px-4 py-2 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer"
+                        >
+                          Refresh Data
+                        </button>
+                        <button
+                          onClick={() => setMode('home')}
+                          className="px-4 py-2 bg-purple-600 hover:bg-purple-500 text-white rounded-xl text-xs font-bold transition-all cursor-pointer"
+                        >
+                          Exit Control Centre
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Quick Stats Grid */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div className="bg-[#111] border border-white/5 rounded-2xl p-5 flex flex-col justify-between">
+                        <span className="text-[10px] font-bold text-white/30 uppercase tracking-wider">Pending Approvals</span>
+                        <div className="flex items-baseline gap-2 mt-2">
+                          <span className="text-3xl font-black text-amber-500">
+                            {adminPayments.filter(p => p.status === 'pending').length}
+                          </span>
+                          <span className="text-xs text-white/40">screenshot(s)</span>
+                        </div>
+                      </div>
+                      <div className="bg-[#111] border border-white/5 rounded-2xl p-5 flex flex-col justify-between">
+                        <span className="text-[10px] font-bold text-white/30 uppercase tracking-wider">Total Active Users</span>
+                        <div className="flex items-baseline gap-2 mt-2">
+                          <span className="text-3xl font-black text-emerald-400">
+                            {adminUsers.length}
+                          </span>
+                          <span className="text-xs text-white/40">registered</span>
+                        </div>
+                      </div>
+                      <div className="bg-[#111] border border-white/5 rounded-2xl p-5 flex flex-col justify-between">
+                        <span className="text-[10px] font-bold text-white/30 uppercase tracking-wider">Saved Proposals</span>
+                        <div className="flex items-baseline gap-2 mt-2">
+                          <span className="text-3xl font-black text-purple-400">
+                            {adminProposals.length}
+                          </span>
+                          <span className="text-xs text-white/40">generated</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Navigation Tabs & Search */}
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white/5 p-2 rounded-2xl border border-white/5">
+                      <div className="flex items-center gap-2">
+                        {(['payments', 'users', 'proposals'] as const).map(tab => (
+                          <button
+                            key={tab}
+                            onClick={() => setAdminActiveTab(tab)}
+                            className={cn(
+                              "px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer",
+                              adminActiveTab === tab
+                                ? "bg-purple-600 text-white shadow-md"
+                                : "text-white/60 hover:text-white hover:bg-white/5"
+                            )}
+                          >
+                            {tab === 'payments' ? '💰 Payments' : tab === 'users' ? '👥 User Management' : '📄 Proposals Log'}
+                          </button>
+                        ))}
+                      </div>
+
+                      <div className="relative max-w-xs w-full">
+                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-white/40" size={14} />
+                        <input
+                          type="text"
+                          placeholder="Filter list..."
+                          value={adminSearch}
+                          onChange={e => setAdminSearch(e.target.value)}
+                          className="w-full bg-black/40 border border-white/10 rounded-xl py-2 pl-9 pr-4 text-xs text-white focus:outline-none focus:border-purple-500 placeholder:text-white/30"
+                        />
+                      </div>
+                    </div>
+
+                    {/* TABLE / LIST ACCORDING TO ACTIVE TAB */}
+                    <div className="bg-[#111] border border-white/5 rounded-3xl overflow-hidden min-h-[300px]">
+                      {adminActiveTab === 'payments' && (
+                        <div className="overflow-x-auto">
+                          <table className="w-full border-collapse text-left text-xs">
+                            <thead>
+                              <tr className="bg-white/5 border-b border-white/10 text-[10px] font-bold text-white/40 uppercase tracking-widest">
+                                <th className="px-6 py-4">User Info</th>
+                                <th className="px-6 py-4">Topic / Context</th>
+                                <th className="px-6 py-4 text-center">Amount</th>
+                                <th className="px-6 py-4">Screenshot</th>
+                                <th className="px-6 py-4 text-center">Status</th>
+                                <th className="px-6 py-4 text-right">Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-white/5 font-medium">
+                              {adminPayments
+                                .filter(p => p.name.toLowerCase().includes(adminSearch.toLowerCase()) || p.email.toLowerCase().includes(adminSearch.toLowerCase()) || p.topicTitle.toLowerCase().includes(adminSearch.toLowerCase()))
+                                .map(payment => (
+                                  <tr key={payment.id} className="hover:bg-white/[0.02] transition-colors">
+                                    <td className="px-6 py-4">
+                                      <p className="font-bold text-sm text-white">{payment.name}</p>
+                                      <p className="text-white/40 text-[10px] mt-0.5">{payment.email}</p>
+                                      <p className="text-white/40 text-[10px]">{payment.phone}</p>
+                                    </td>
+                                    <td className="px-6 py-4 max-w-xs truncate" title={payment.topicTitle}>
+                                      {payment.topicTitle}
+                                    </td>
+                                    <td className="px-6 py-4 text-center text-sm font-bold text-emerald-400">
+                                      ₹{payment.amount}
+                                    </td>
+                                    <td className="px-6 py-4">
+                                      {payment.screenshot ? (
+                                        <button
+                                          onClick={() => setViewingScreenshot(payment)}
+                                          className="px-3 py-1.5 bg-purple-500/10 border border-purple-500/20 hover:bg-purple-500/20 text-purple-400 rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer"
+                                        >
+                                          View Image
+                                        </button>
+                                      ) : (
+                                        <span className="text-white/20 italic">None</span>
+                                      )}
+                                    </td>
+                                    <td className="px-6 py-4 text-center">
+                                      <span className={cn(
+                                        "px-2.5 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-widest",
+                                        payment.status === 'approved' && "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20",
+                                        payment.status === 'pending' && "bg-amber-500/10 text-amber-400 border border-amber-500/20",
+                                        payment.status === 'rejected' && "bg-red-500/10 text-red-400 border border-red-500/20"
+                                      )}>
+                                        {payment.status}
+                                      </span>
+                                    </td>
+                                    <td className="px-6 py-4 text-right space-x-2">
+                                      {payment.status === 'pending' && (
+                                        <>
+                                          <button
+                                            onClick={() => handleApprovePayment(payment)}
+                                            className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer"
+                                          >
+                                            Approve
+                                          </button>
+                                          <button
+                                            onClick={() => handleRejectPayment(payment)}
+                                            className="px-3 py-1.5 bg-red-600 hover:bg-red-500 text-white rounded-lg text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer"
+                                          >
+                                            Reject
+                                          </button>
+                                        </>
+                                      )}
+                                    </td>
+                                  </tr>
+                                ))}
+                              {adminPayments.length === 0 && (
+                                <tr>
+                                  <td colSpan={6} className="px-6 py-12 text-center text-white/40 italic">
+                                    No payment submissions found.
+                                  </td>
+                                </tr>
+                              )}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+
+                      {adminActiveTab === 'users' && (
+                        <div className="overflow-x-auto">
+                          <table className="w-full border-collapse text-left text-xs">
+                            <thead>
+                              <tr className="bg-white/5 border-b border-white/10 text-[10px] font-bold text-white/40 uppercase tracking-widest">
+                                <th className="px-6 py-4">User Details</th>
+                                <th className="px-6 py-4 text-center">Premium Access</th>
+                                <th className="px-6 py-4 text-center">Proposals Count</th>
+                                <th className="px-6 py-4 text-right">Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-white/5 font-medium">
+                              {adminUsers
+                                .filter(u => (u.name || '').toLowerCase().includes(adminSearch.toLowerCase()) || u.email.toLowerCase().includes(adminSearch.toLowerCase()))
+                                .map(user => (
+                                  <tr key={user.email} className="hover:bg-white/[0.02] transition-colors">
+                                    <td className="px-6 py-4">
+                                      <p className="font-bold text-sm text-white">{user.name || "Anonymous"}</p>
+                                      <p className="text-white/40 text-[10px] mt-0.5">{user.email}</p>
+                                      <p className="text-white/40 text-[10px]">{user.phone}</p>
+                                    </td>
+                                    <td className="px-6 py-4 text-center">
+                                      <span className={cn(
+                                        "px-2.5 py-1 rounded-full text-[9px] font-extrabold uppercase tracking-widest border",
+                                        user.premiumUnlocked 
+                                          ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" 
+                                          : "bg-red-500/10 text-red-400 border-red-500/20"
+                                      )}>
+                                        {user.premiumUnlocked ? "Unlocked ✨" : "Locked 🔒"}
+                                      </span>
+                                    </td>
+                                    <td className="px-6 py-4 text-center text-sm font-bold text-white/60">
+                                      {user.proposalsGeneratedCount || 0}
+                                    </td>
+                                    <td className="px-6 py-4 text-right">
+                                      <button
+                                        onClick={() => handleTogglePremium(user.email, user.premiumUnlocked)}
+                                        className={cn(
+                                          "px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer",
+                                          user.premiumUnlocked 
+                                            ? "bg-red-600/20 hover:bg-red-600 text-red-400 hover:text-white border border-red-500/20" 
+                                            : "bg-emerald-600 text-white hover:bg-emerald-500"
+                                        )}
+                                      >
+                                        {user.premiumUnlocked ? "Lock Access" : "Unlock Premium"}
+                                      </button>
+                                    </td>
+                                  </tr>
+                                ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+
+                      {adminActiveTab === 'proposals' && (
+                        <div className="overflow-x-auto">
+                          <table className="w-full border-collapse text-left text-xs">
+                            <thead>
+                              <tr className="bg-white/5 border-b border-white/10 text-[10px] font-bold text-white/40 uppercase tracking-widest">
+                                <th className="px-6 py-4">User</th>
+                                <th className="px-6 py-4">Target Faculty</th>
+                                <th className="px-6 py-4">Research Topic</th>
+                                <th className="px-6 py-4 text-center">Date</th>
+                                <th className="px-6 py-4 text-right">Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-white/5 font-medium">
+                              {adminProposals
+                                .filter(p => p.userName.toLowerCase().includes(adminSearch.toLowerCase()) || p.email.toLowerCase().includes(adminSearch.toLowerCase()) || p.topicTitle.toLowerCase().includes(adminSearch.toLowerCase()))
+                                .map(proposal => (
+                                  <tr key={proposal.id} className="hover:bg-white/[0.02] transition-colors">
+                                    <td className="px-6 py-4">
+                                      <p className="font-bold text-white">{proposal.userName}</p>
+                                      <p className="text-white/40 text-[10px]">{proposal.email}</p>
+                                    </td>
+                                    <td className="px-6 py-4">
+                                      <p className="font-medium text-white">{proposal.professorName}</p>
+                                      <p className="text-white/40 text-[10px]">{proposal.instituteName}</p>
+                                    </td>
+                                    <td className="px-6 py-4 max-w-xs truncate" title={proposal.topicTitle}>
+                                      {proposal.topicTitle}
+                                    </td>
+                                    <td className="px-6 py-4 text-center text-white/40 font-mono text-[10px]">
+                                      {proposal.timestamp ? new Date(proposal.timestamp).toLocaleDateString() : 'N/A'}
+                                    </td>
+                                    <td className="px-6 py-4 text-right">
+                                      <button
+                                        onClick={() => {
+                                          const win = window.open();
+                                          if (win) {
+                                            win.document.write(`<pre style="background:#111;color:#fff;padding:20px;font-family:monospace;white-space:pre-wrap;font-size:14px;line-height:1.6;max-width:800px;margin:20px auto;border-radius:12px;border:1px solid #333;">${proposal.content}</pre>`);
+                                            win.document.title = proposal.topicTitle;
+                                          }
+                                        }}
+                                        className="px-3 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-[10px] font-bold uppercase tracking-wider transition-all cursor-pointer"
+                                      >
+                                        Read Proposal
+                                      </button>
+                                    </td>
+                                  </tr>
+                                ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                )}
+
                 {mode === 'home' && (
                   <motion.div
                     key="home"
@@ -2171,6 +2725,59 @@ export default function App() {
               <p className="font-mono text-emerald-400 font-bold tracking-wider">8130330373@ibl</p>
             </div>
 
+            {/* SCREENSHOT UPLOAD AREA */}
+            <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-6 text-left">
+              <p className="text-[9px] font-bold text-white/40 uppercase tracking-widest mb-2">Upload Payment Screenshot</p>
+              
+              {!screenshotBase64 ? (
+                <label className="flex flex-col items-center justify-center border border-dashed border-white/20 rounded-xl p-4 cursor-pointer hover:border-emerald-500 hover:bg-emerald-500/5 transition-all text-center">
+                  <Plus className="text-white/40 mb-1" size={18} />
+                  <span className="text-[9px] text-white/60 font-bold uppercase tracking-wider">Select payment screenshot</span>
+                  <input 
+                    type="file" 
+                    accept="image/*" 
+                    onChange={handleScreenshotChange} 
+                    className="hidden" 
+                  />
+                </label>
+              ) : (
+                <div className="space-y-3">
+                  <div className="relative rounded-xl overflow-hidden border border-white/20 max-h-40 bg-black/40 flex items-center justify-center p-2">
+                    <img src={screenshotBase64} alt="Screenshot Preview" className="object-contain max-h-32 rounded-lg" />
+                    <button 
+                      onClick={() => setScreenshotBase64(null)}
+                      className="absolute top-2 right-2 w-5 h-5 bg-red-500 hover:bg-red-600 text-white rounded-full flex items-center justify-center text-[10px] font-bold transition-all shadow-md"
+                      title="Remove image"
+                    >
+                      ✕
+                    </button>
+                  </div>
+                  
+                  {!paymentPending && (
+                    <button
+                      onClick={handleScreenshotSubmit}
+                      disabled={isUploadingScreenshot}
+                      className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl font-bold text-[10px] uppercase tracking-wider transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                      {isUploadingScreenshot ? (
+                        <>
+                          <Loader2 size={12} className="animate-spin" />
+                          Uploading screenshot...
+                        </>
+                      ) : "Submit Screenshot for Verification"}
+                    </button>
+                  )}
+                </div>
+              )}
+
+              {paymentPending && (
+                <div className="mt-3 p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl text-center flex flex-col items-center gap-1.5 animate-pulse">
+                  <p className="text-[9px] font-bold text-amber-400 uppercase tracking-wider">Verification Pending</p>
+                  <p className="text-[8px] text-white/60 leading-tight">Our team has been notified. This screen will automatically unlock once verified!</p>
+                </div>
+              )}
+            </div>
+
             <div className="flex flex-col gap-3 mb-6">
               <button 
                 onClick={() => handleManualPaidRequest(isSuperUser(userEmail, userPhone) ? 1 : 100, 'single')}
@@ -2203,6 +2810,54 @@ export default function App() {
             setView('topics');
           }}
         />
+      )}
+
+      {/* Lightbox screenshot viewer */}
+      {viewingScreenshot && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-4">
+          <div className="bg-[#111] border border-white/10 rounded-3xl p-6 max-w-lg w-full relative flex flex-col max-h-[90vh]">
+            <button
+              onClick={() => setViewingScreenshot(null)}
+              className="absolute top-4 right-4 w-8 h-8 bg-black/60 hover:bg-red-500 text-white rounded-full flex items-center justify-center text-sm transition-all cursor-pointer"
+            >
+              ✕
+            </button>
+            
+            <h3 className="text-lg font-bold mb-1 text-white pr-10">{viewingScreenshot.name}'s Payment</h3>
+            <p className="text-xs text-white/40 mb-4">Submitted ₹{viewingScreenshot.amount} for: {viewingScreenshot.topicTitle}</p>
+            
+            <div className="flex-1 overflow-auto bg-black rounded-xl p-2 flex items-center justify-center">
+              <img
+                src={viewingScreenshot.screenshot}
+                alt="Payment Screenshot"
+                className="max-h-[50vh] object-contain rounded-lg"
+              />
+            </div>
+            
+            {viewingScreenshot.status === 'pending' && (
+              <div className="mt-4 grid grid-cols-2 gap-3">
+                <button
+                  onClick={() => {
+                    handleApprovePayment(viewingScreenshot);
+                    setViewingScreenshot(null);
+                  }}
+                  className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all cursor-pointer"
+                >
+                  Approve & Unlock
+                </button>
+                <button
+                  onClick={() => {
+                    handleRejectPayment(viewingScreenshot);
+                    setViewingScreenshot(null);
+                  }}
+                  className="w-full bg-red-600 hover:bg-red-500 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider transition-all cursor-pointer"
+                >
+                  Reject
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
       )}
 
     </div>

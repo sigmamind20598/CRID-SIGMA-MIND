@@ -42,5 +42,17 @@ service cloud.firestore {
       // No deletions allowed via client
       allow delete: if false;
     }
+
+    match /users/{email} {
+      allow read, write: if true;
+    }
+
+    match /payments/{paymentId} {
+      allow read, write: if true;
+    }
+
+    match /proposals/{proposalId} {
+      allow read, write: if true;
+    }
   }
 }
