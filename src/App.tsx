@@ -28,7 +28,8 @@ import {
   Menu,
   X,
   FileDown,
-  Lock
+  Lock,
+  Copy
 } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -643,6 +644,33 @@ export default function App() {
     doc.save(`${selectedTopic.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_proposal.pdf`);
   };
 
+  const [proposalCopied, setProposalCopied] = useState(false);
+
+  const handleDownloadTXT = () => {
+    if (!proposal || !selectedTopic) return;
+    const element = document.createElement("a");
+    const file = new Blob([`RESEARCH PROPOSAL\nTopic: ${selectedTopic.title}\nGenerated for: ${userName} (${userEmail})\nPhone: ${userPhone}\n\n${proposal}`], {type: 'text/plain'});
+    element.href = URL.createObjectURL(file);
+    element.download = `${selectedTopic.title.replace(/[^a-z0-9]/gi, '_').toLowerCase()}_proposal.txt`;
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+  };
+
+  const handleCopyProposal = () => {
+    if (!proposal) return;
+    navigator.clipboard.writeText(proposal);
+    setProposalCopied(true);
+    setTimeout(() => setProposalCopied(false), 2000);
+  };
+
+  const handleShareWhatsApp = () => {
+    if (!proposal || !selectedTopic) return;
+    const briefText = proposal.slice(0, 800) + (proposal.length > 800 ? "...\n\n[Full proposal available on the app!]" : "");
+    const message = `Hello CRID Team! I generated a PhD proposal on the platform:\n\n*Topic:* ${selectedTopic.title}\n*Student Name:* ${userName}\n*Email:* ${userEmail}\n*Phone:* ${userPhone}\n\n*Proposal Preview:*\n${briefText}`;
+    window.open(`https://wa.me/917092884311?text=${encodeURIComponent(message)}`, '_blank');
+  };
+
   const handleWhatsAppRedirect = async (amount: number, context: string) => {
     if (!userEmail || !userPhone || !userName) {
       alert("Please ensure your contact details are filled out first.");
@@ -1191,7 +1219,7 @@ export default function App() {
               <FunnyLoader customMessage={loadingMessage} />
             ) : (
               <AnimatePresence mode="wait">
-                {mode === 'review' && (
+                {mode === 'review' && (adminPasscode === '7092' || adminPasscode === '8130') && (
                   <motion.div
                     key="admin_dashboard"
                     initial={{ opacity: 0, y: 10 }}
@@ -1785,15 +1813,41 @@ export default function App() {
                     exit={{ opacity: 0 }}
                     className="max-w-4xl mx-auto space-y-6"
                   >
-                    <div className="flex justify-end gap-4">
+                    <div className="flex flex-wrap justify-end gap-3 md:gap-4">
                       {isProposalUnlocked && (
-                        <button
-                          onClick={handleDownloadPDF}
-                          className="bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-3 rounded-xl font-bold transition-all flex items-center gap-2 shadow-lg shadow-emerald-500/20"
-                        >
-                          <FileDown size={20} />
-                          Download PDF
-                        </button>
+                        <>
+                          <button
+                            onClick={handleDownloadPDF}
+                            className="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 md:px-6 md:py-3 rounded-xl font-bold transition-all flex items-center gap-2 shadow-lg shadow-emerald-500/10 text-xs md:text-sm"
+                          >
+                            <FileDown size={18} />
+                            Download PDF
+                          </button>
+                          
+                          <button
+                            onClick={handleDownloadTXT}
+                            className="bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-2.5 md:px-6 md:py-3 rounded-xl font-bold transition-all flex items-center gap-2 shadow-lg text-xs md:text-sm border border-white/5"
+                          >
+                            <FileText size={18} />
+                            Download TXT
+                          </button>
+                          
+                          <button
+                            onClick={handleCopyProposal}
+                            className="bg-zinc-800 hover:bg-zinc-700 text-white px-4 py-2.5 md:px-6 md:py-3 rounded-xl font-bold transition-all flex items-center gap-2 shadow-lg text-xs md:text-sm border border-white/5"
+                          >
+                            <Copy size={18} />
+                            {proposalCopied ? "Copied!" : "Copy Proposal"}
+                          </button>
+
+                          <button
+                            onClick={handleShareWhatsApp}
+                            className="bg-green-600 hover:bg-green-500 text-white px-4 py-2.5 md:px-6 md:py-3 rounded-xl font-bold transition-all flex items-center gap-2 shadow-lg shadow-green-500/10 text-xs md:text-sm"
+                          >
+                            <MessageSquare size={18} />
+                            Text on WhatsApp
+                          </button>
+                        </>
                       )}
                       {isSuperUser(userEmail, userPhone) && (
                         <button
@@ -2297,7 +2351,7 @@ export default function App() {
                   </motion.div>
                 )}
 
-                {mode === 'review' && (
+                {mode === 'review' && !(adminPasscode === '7092' || adminPasscode === '8130') && (
                   <motion.div
                     key="review"
                     initial={{ opacity: 0, y: 20 }}
