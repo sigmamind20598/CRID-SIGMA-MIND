@@ -9,6 +9,76 @@ export const getFacultyForInstitute = (instituteName: string): Professor[] => {
 
 export const NEWS_DATABASE: NewsItem[] = [
   {
+    id: "news-iitd-winter-phd-2026",
+    title: "IIT Delhi: Winter/Spring 2026-27 PhD Admissions Open for Cognitive Science & Psychology",
+    source: "IIT Delhi HSS & CART Academic Desk",
+    url: "https://hss.iitd.ac.in/admissions",
+    timestamp: "2026-11-02T10:00:00Z",
+    category: "PHD ADMISSION",
+    summary: "The Department of Humanities & Social Sciences at IIT Delhi has opened portal applications for the Winter/Spring 2026-27 PhD admissions session in Cognitive Science, Neuropsychology, and AI-Positive Psychology. Applications close late November 2026.",
+    imageKeyword: "iit-delhi"
+  },
+  {
+    id: "news-iitb-spring-session-2026",
+    title: "IIT Bombay: Spring 2026-27 Interdisciplinary PhD in Cognitive Science Registration Open",
+    source: "IIT Bombay IDRP Cognitive Science",
+    url: "https://www.iitb.ac.in/newweb/phd-admissions",
+    timestamp: "2026-10-29T11:30:00Z",
+    category: "PHD ADMISSION",
+    summary: "IIT Bombay has announced Spring 2026-27 admissions for its Interdisciplinary Dual-Degree and PhD Program in Cognitive Science. Written tests and interviews for GATE/JRF/NET qualified candidates are scheduled for early December.",
+    imageKeyword: "iit-bombay"
+  },
+  {
+    id: "news-iitk-winter-admissions-2026",
+    title: "IIT Kanpur: Department of Cognitive Science Invites Applications for Semester II PhD Batch",
+    source: "IITK Cognitive Science Portal",
+    url: "https://www.iitk.ac.in/cogs/admissions",
+    timestamp: "2026-10-26T08:45:00Z",
+    category: "PHD ADMISSION",
+    summary: "IIT Kanpur has released the notification for Semester II (Winter 2026-27) PhD admissions in Cognitive Science. Core areas include Decision Making, Visual Perception, Language Processing, and Computational Neuroscience.",
+    imageKeyword: "iit-kanpur"
+  },
+  {
+    id: "news-nimhans-session2-2026",
+    title: "NIMHANS: Session II PhD Entrance Schedule Announced for Clinical Psychology & Neurosciences",
+    source: "NIMHANS Academic Division",
+    url: "https://nimhans.ac.in/admissions/",
+    timestamp: "2026-10-22T14:15:00Z",
+    category: "EXAM",
+    summary: "NIMHANS Bengaluru has published entrance exam guidelines and syllabus weightages for Session II PhD in Clinical Psychology and Neuropsychology. Online hall tickets and reporting instructions are now accessible.",
+    imageKeyword: "nimhans"
+  },
+  {
+    id: "news-iisc-midyear-cns-2026",
+    title: "IISc Bangalore: Centre for Neuroscience (CNS) Announces Mid-Year Research Admissions",
+    source: "IISc CNS Admissions Office",
+    url: "https://admissions.iisc.ac.in/",
+    timestamp: "2026-10-18T09:00:00Z",
+    category: "PHD ADMISSION",
+    summary: "The Centre for Neuroscience at the Indian Institute of Science (IISc) invites eligible CSIR-UGC NET JRF and GATE scholars for mid-year research interviews in motor systems, neural circuitry, and cognitive neurobiology.",
+    imageKeyword: "iisc-bangalore"
+  },
+  {
+    id: "news-dst-icmr-youth-mentalhealth-2026",
+    title: "DST-CSRI & ICMR: Joint Call for Research Proposals on AI-Positive Psychology Interventions",
+    source: "DST Scientific Division",
+    url: "https://dst.gov.in/scientific-programmes/scientific-engineering-research/cognitive-science-research-initiative-csri",
+    timestamp: "2026-10-14T12:00:00Z",
+    category: "FELLOWSHIP",
+    summary: "DST-CSRI together with ICMR has announced competitive grant funding for Indian universities investigating AI-driven personalized psychological interventions, youth stress resilience, and digital cognitive biomarkers.",
+    imageKeyword: "fellowship"
+  },
+  {
+    id: "news-nta-ugcnet-dec2026",
+    title: "NTA UGC-NET: December 2026 Psychology & Cognitive Science Exam Schedule Published",
+    source: "National Testing Agency (NTA)",
+    url: "https://ugcnet.nta.nic.in",
+    timestamp: "2026-10-10T15:30:00Z",
+    category: "GUIDELINES",
+    summary: "NTA has updated exam centers and city intimation slips for December 2026 UGC-NET in Psychology (Code 04). Candidates qualifying JRF will be directly eligible for PhD stipend grants across Indian central institutes.",
+    imageKeyword: "guidelines"
+  },
+  {
     id: "news-iitb-semester-registration-2026",
     title: "IIT Bombay: Autumn Semester Registration Commences for Cognitive Science Cohort",
     source: "IIT Bombay Academic Office",

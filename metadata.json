@@ -1,5 +1,6 @@
 {
   "name": "Cognitive Research Intelligence Dashboard",
   "description": "A comprehensive platform for researching faculty, mapping publications, and generating high-fidelity research proposals in Cognitive Science and Psychology for top Indian institutes.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

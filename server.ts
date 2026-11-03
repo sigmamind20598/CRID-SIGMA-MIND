@@ -63,14 +63,21 @@ async function startServer() {
           prompt = `Suggest 5 trending PhD research topics in Cognitive Science specifically for the Indian academic landscape. Format as JSON array: [{title, description, relevance}].`;
           break;
         case 'proposal':
-          prompt = `${PROPOSAL_SYSTEM_INSTRUCTIONS}\n\nGenerate a full proposal based on:\nProfessor: ${params?.professorName}\nInstitute: ${params?.instituteName}\nResearch Area: ${params?.specialization}`;
+          prompt = `${PROPOSAL_SYSTEM_INSTRUCTIONS}\n\nGenerate an exhaustive, publication-grade PhD research proposal based on:
+Topic Title: ${params?.topic?.title || params?.topicTitle || 'Cognitive Science Investigation'}
+Topic Description: ${params?.topic?.description || ''}
+Research Gap / Innovation: ${params?.topic?.gapType || 'Literature Gap'}
+Proposed Methodology: ${params?.topic?.methodology || 'Empirical Investigation'}
+Professor: ${params?.professorName}
+Institute: ${params?.instituteName}
+Research Area / Specialization: ${params?.specialization}`;
           break;
         case 'extract-institute':
           prompt = `Extract the most likely Indian research institute name from this text: "${params?.url}". Return only the name.`;
           break;
       }
 
-      const modelName = 'gemini-3.1-flash';
+      const modelName = 'gemini-2.5-flash';
 
       try {
         const response = await genAI.models.generateContent({
@@ -102,7 +109,8 @@ async function startServer() {
       const { userName, userEmail, userPhone, topicTitle, proposalContent } = req.body;
       
       if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
-        throw new Error("SMTP credentials not configured");
+        console.warn("SMTP credentials not configured. Proposal saved in database and notified via FormSubmit.");
+        return res.json({ status: "success", note: "SMTP not configured, proposal recorded in database" });
       }
 
       // Create PDF

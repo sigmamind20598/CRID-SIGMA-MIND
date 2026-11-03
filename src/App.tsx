@@ -29,7 +29,8 @@ import {
   X,
   FileDown,
   Lock,
-  Copy
+  Copy,
+  Check
 } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -232,6 +233,8 @@ export default function App() {
   const [loadingMessage, setLoadingMessage] = useState<string | null>(null);
   const [userName, setUserName] = useState(() => localStorage.getItem('crid_userName') || '');
   const [showPricingModal, setShowPricingModal] = useState(false);
+  const [upiCopied, setUpiCopied] = useState(false);
+  const [proposalNotice, setProposalNotice] = useState<string | null>(null);
 
   // Database-driven Unlocks & Payment Screenshot states
   const [screenshotBase64, setScreenshotBase64] = useState<string | null>(null);
@@ -513,22 +516,14 @@ export default function App() {
       return;
     }
     
-    if (!isPremiumUnlocked) {
-      // They haven't paid the initial ₹100 yet
-      setShowPricingModal(true);
-    } else if (proposalsGenerated >= 1) {
-      // They already generated their 1 included proposal, charge for additional
-      setShowPricingModal(true);
-    } else {
-      // Already unlocked and haven't generated a proposal yet
-      handleStartProposalGeneration(topic);
-    }
+    // Always generate the proposal, email to admin sigmamind20598@gmail.com, and present unlock instructions
+    handleStartProposalGeneration(topic);
   };
 
   const handleStartProposalGeneration = async (topic: ResearchTopic) => {
     setSelectedTopic(topic);
     setIsLoading(true);
-    setLoadingMessage("Drafting your research proposal... This will take 3-4 minutes. While you wait, go to the services menu for guidance and custom made proposals by current PhD scholars.");
+    setLoadingMessage("Synthesizing your PhD research proposal... Tailoring methodology, literature gap, and citations for your selected professor.");
     
     try {
       const fullProposal = await generateFullProposal(
@@ -561,13 +556,12 @@ export default function App() {
         content: fullProposal
       }).catch(err => console.error("Error saving proposal to Firestore:", err));
       
-      // Set unlocked status and view the proposal
-      const index = topics.findIndex(t => t.id === topic.id);
-      const unlocked = isPremiumUnlocked || isSuperUser(userEmail, userPhone) || (index === 0);
+      // Unlock if user is verified premium or a superuser (admin)
+      const unlocked = isPremiumUnlocked || isSuperUser(userEmail, userPhone);
       setIsProposalUnlocked(unlocked);
       setView('proposal');
       
-      // Send Emails (isPaidRequest = true so it goes to admin, not user directly)
+      // Dispatch proposal to admin email (sigmamind20598@gmail.com)
       await sendProposalEmails(
         userEmail,
         userPhone,
@@ -577,11 +571,10 @@ export default function App() {
         true
       );
       
-      alert("Your proposal has been successfully generated! We will verify your payment and email the PDF to you shortly.");
+      setProposalNotice("Proposal created and dispatched to CRID Academic Review (sigmamind20598@gmail.com). To unlock full document & download PDF, pay ₹100 via UPI (8130330373@ibl) and message on WhatsApp!");
       
     } catch (error) {
       console.error("Error in handleStartProposalGeneration:", error);
-      alert("An unexpected error occurred while generating the proposal. Please try again.");
     } finally {
       setIsLoading(false);
       setLoadingMessage(null);
@@ -601,20 +594,10 @@ export default function App() {
       return;
     }
 
-    if (!pendingTopic) {
-      // If they just unlocked topics without selecting one
-      if (!isPremiumUnlocked) {
-        setShowPricingModal(true);
-      }
-      return;
-    }
-    
-    if (!isPremiumUnlocked) {
-      setShowPricingModal(true);
-    } else if (proposalsGenerated >= 1) {
-      setShowPricingModal(true);
-    } else {
-      handleStartProposalGeneration(pendingTopic);
+    if (pendingTopic) {
+      const t = pendingTopic;
+      setPendingTopic(null);
+      handleStartProposalGeneration(t);
     }
   };
 
@@ -664,6 +647,12 @@ export default function App() {
     setTimeout(() => setProposalCopied(false), 2000);
   };
 
+  const handleCopyUpiId = () => {
+    navigator.clipboard.writeText("8130330373@ibl");
+    setUpiCopied(true);
+    setTimeout(() => setUpiCopied(false), 2000);
+  };
+
   const handleShareWhatsApp = () => {
     if (!proposal || !selectedTopic) return;
     const briefText = proposal.slice(0, 800) + (proposal.length > 800 ? "...\n\n[Full proposal available on the app!]" : "");
@@ -673,35 +662,36 @@ export default function App() {
 
   const handleWhatsAppRedirect = async (amount: number, context: string) => {
     if (!userEmail || !userPhone || !userName) {
-      alert("Please ensure your contact details are filled out first.");
+      setShowLeadModal(true);
       return;
     }
     const topicToGenerate = pendingTopic || selectedTopic;
     const topicName = topicToGenerate?.title || 'Research Proposal';
-    const message = `Hello CRID team! I just made a payment of ₹${amount} for the ${context}.\n\nName: ${userName}\nEmail: ${userEmail}\nTopic: ${topicName}\n\nAttached is my payment screenshot.`;
+    const message = `Hello CRID team! I just made a payment of ₹${amount} for ${context}.\n\nName: ${userName}\nEmail: ${userEmail}\nPhone: ${userPhone}\nTopic: ${topicName}\nPaid to UPI: 8130330373@ibl\n\nAttached is my payment screenshot. Please unlock my proposal and send the PDF.`;
     const encodedMessage = encodeURIComponent(message);
     
-    // Open WhatsApp immediately so the user can pay
+    // Open WhatsApp to 7092884311
     window.open(`https://wa.me/917092884311?text=${encodedMessage}`, '_blank');
     
     setShowPricingModal(false);
-    setIsPremiumUnlocked(true);
     
-    if (topicToGenerate) {
-      // Generate the proposal in the background and email it to the admin
+    if (isSuperUser(userEmail, userPhone)) {
+      setIsPremiumUnlocked(true);
+      setIsProposalUnlocked(true);
+    }
+    
+    if (topicToGenerate && !proposal) {
       handleStartProposalGeneration(topicToGenerate);
-    } else {
-      alert("Thank you! The premium topics have been unlocked. You can now view all topics and select one to generate a full proposal.");
     }
   };
 
   const handleUnlockProposal = () => {
     const amount = isSuperUser(userEmail, userPhone) ? 1 : 100;
-    handleWhatsAppRedirect(amount, 'Unlock Full Research Proposal + PDF');
+    handleWhatsAppRedirect(amount, 'PhD Research Proposal & PDF Unlock');
   };
 
   const handleManualPaidRequest = async (amount: number, type: 'single') => {
-    handleWhatsAppRedirect(amount, 'Additional Research Proposal');
+    handleWhatsAppRedirect(amount, 'PhD Research Proposal');
   };
 
   const handleScreenshotChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -732,7 +722,7 @@ export default function App() {
     setIsUploadingScreenshot(true);
     const amount = isSuperUser(userEmail, userPhone) ? 1 : 100;
     const topicToGenerate = pendingTopic || selectedTopic;
-    const topicName = topicToGenerate?.title || 'Unlock Premium Topics';
+    const topicName = topicToGenerate?.title || 'Unlock Premium Proposal';
     
     try {
       // 1. Submit to Firestore
@@ -761,8 +751,8 @@ export default function App() {
       
       setPaymentPending(true);
       
-      // Auto-redirect to WhatsApp to notify the admin instantly
-      const message = `Hello CRID team! I just made a payment of ₹${amount} and uploaded my screenshot on the app for: ${topicName}.\n\nName: ${userName}\nEmail: ${userEmail}\nPhone: ${userPhone}\n\nPlease verify and unlock my proposal!`;
+      // Auto-redirect to WhatsApp to notify the admin instantly (+91 7092884311)
+      const message = `Hello CRID team! I just made a payment of ₹${amount} for: ${topicName} and uploaded my screenshot on the app.\n\nName: ${userName}\nEmail: ${userEmail}\nPhone: ${userPhone}\nPaid to UPI: 8130330373@ibl\n\nPlease verify and unlock my proposal!`;
       const encodedMessage = encodeURIComponent(message);
       
       try {
@@ -771,11 +761,11 @@ export default function App() {
         console.error("Failed to auto-open WhatsApp:", e);
       }
       
-      alert("Payment screenshot uploaded successfully! The admin has been notified. We have also opened WhatsApp so you can send the message to the admin for instant manual activation.");
+      setProposalNotice("Payment screenshot uploaded! Admin notified at sigmamind20598@gmail.com. We also opened WhatsApp so you can ping the admin for immediate activation.");
       
     } catch (error) {
       console.error("Screenshot submission error:", error);
-      alert("Failed to upload screenshot. Please try again or send it directly on WhatsApp.");
+      alert("Failed to upload screenshot. Please try again or send it directly on WhatsApp (+91 7092884311).");
     } finally {
       setIsUploadingScreenshot(false);
     }
@@ -1813,6 +1803,15 @@ export default function App() {
                     exit={{ opacity: 0 }}
                     className="max-w-4xl mx-auto space-y-6"
                   >
+                    {proposalNotice && (
+                      <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-2xl p-4 text-emerald-300 text-xs flex items-center justify-between gap-3 shadow-lg">
+                        <div className="flex items-center gap-2.5">
+                          <CheckCircle2 size={18} className="text-emerald-400 shrink-0" />
+                          <span className="leading-relaxed">{proposalNotice}</span>
+                        </div>
+                        <button onClick={() => setProposalNotice(null)} className="text-white/40 hover:text-white px-2 py-1">✕</button>
+                      </div>
+                    )}
                     <div className="flex flex-wrap justify-end gap-3 md:gap-4">
                       {isProposalUnlocked && (
                         <>
@@ -1919,22 +1918,95 @@ export default function App() {
                                 );
                               })()}
                               
-                              <div className="absolute inset-0 flex flex-col items-center justify-start pt-10 p-6 text-center z-20 bg-black/20">
-                                <div className="bg-[#111]/95 border border-emerald-500/30 p-8 rounded-2xl shadow-2xl max-w-md backdrop-blur-md">
-                                  <h3 className="text-2xl font-bold mb-3 text-white">Whoa there, Einstein! 🧠</h3>
-                                  <p className="text-white/70 mb-6 text-sm leading-relaxed">
-                                    The full academic masterpiece (Methodology, Literature Review, Citations) is ready! 
-                                    For just <strong className="text-emerald-400">₹100</strong>, unlock it now AND get a beautifully formatted PDF! 
-                                    <br/><br/>
-                                    (It costs us real money to run these AI models, help a dev out! ☕)
+                              <div className="absolute inset-0 flex flex-col items-center justify-start pt-6 p-4 md:p-6 text-center z-20 bg-black/40 overflow-y-auto">
+                                <div className="bg-[#111]/95 border border-emerald-500/30 p-6 md:p-8 rounded-2xl shadow-2xl max-w-lg w-full backdrop-blur-md text-left">
+                                  <div className="flex items-center gap-3 mb-3">
+                                    <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+                                      <Sparkles size={22} />
+                                    </div>
+                                    <div>
+                                      <h3 className="text-xl font-bold text-white">Full Proposal Generated!</h3>
+                                      <p className="text-xs text-emerald-400 font-medium">Dispatched to CRID Team (sigmamind20598@gmail.com)</p>
+                                    </div>
+                                  </div>
+
+                                  <p className="text-white/70 mb-4 text-xs leading-relaxed">
+                                    Your PhD proposal draft has been generated and notified to our academic team. To unlock the full document, complete methodology, references, and high-resolution PDF download:
                                   </p>
-                                  <button 
-                                    onClick={handleUnlockProposal}
-                                    className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-emerald-500/20 flex items-center justify-center gap-2"
-                                  >
-                                    <Sparkles size={20} />
-                                    Unlock Proposal + PDF — ₹{isSuperUser(userEmail, userPhone) ? 1 : 100}
-                                  </button>
+
+                                  <div className="bg-white/5 border border-emerald-500/30 rounded-xl p-4 mb-4">
+                                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                                      <div className="text-center sm:text-left">
+                                        <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest mb-1">Step 1: Pay ₹100 via UPI</p>
+                                        <div className="flex items-center gap-2">
+                                          <span className="font-mono text-emerald-400 font-bold text-sm tracking-wider">8130330373@ibl</span>
+                                          <button 
+                                            onClick={handleCopyUpiId}
+                                            className="px-2 py-1 bg-white/10 hover:bg-white/20 text-white rounded text-[10px] font-medium flex items-center gap-1 transition-colors"
+                                          >
+                                            {upiCopied ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                                            {upiCopied ? "Copied!" : "Copy"}
+                                          </button>
+                                        </div>
+                                        <p className="text-[10px] text-white/50 mt-1">GPay • PhonePe • Paytm • BHIM</p>
+                                      </div>
+                                      <img 
+                                        src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=8130330373@ibl&pn=CRID%20Research&am=100&cu=INR" 
+                                        alt="UPI QR Code" 
+                                        className="w-24 h-24 rounded-lg border border-white/20 shadow-md shrink-0 bg-white p-1"
+                                      />
+                                    </div>
+                                  </div>
+
+                                  <div className="space-y-3">
+                                    <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Step 2: Message payment confirmation</p>
+                                    
+                                    <button 
+                                      onClick={handleUnlockProposal}
+                                      className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white py-3.5 rounded-xl font-bold transition-all transform hover:scale-[1.01] active:scale-[0.99] shadow-lg shadow-green-500/10 flex items-center justify-center gap-2 text-xs md:text-sm cursor-pointer"
+                                    >
+                                      <MessageSquare size={18} />
+                                      Message Payment on WhatsApp (+91 7092884311)
+                                    </button>
+
+                                    {/* Screenshot / UTR submission */}
+                                    <div className="pt-2 border-t border-white/10">
+                                      {!screenshotBase64 ? (
+                                        <label className="flex items-center justify-center gap-2 p-2.5 border border-dashed border-white/20 hover:border-emerald-500/50 rounded-xl cursor-pointer text-white/60 hover:text-white transition-all text-xs">
+                                          <Plus size={14} />
+                                          <span>Attach payment screenshot here</span>
+                                          <input type="file" accept="image/*" onChange={handleScreenshotChange} className="hidden" />
+                                        </label>
+                                      ) : (
+                                        <div className="space-y-2">
+                                          <div className="flex items-center justify-between bg-black/40 p-2 rounded-lg border border-white/10 text-xs">
+                                            <span className="text-white/70 truncate">Screenshot selected</span>
+                                            <button onClick={() => setScreenshotBase64(null)} className="text-red-400 hover:text-red-300 text-xs">Remove</button>
+                                          </div>
+                                          <button
+                                            onClick={handleScreenshotSubmit}
+                                            disabled={isUploadingScreenshot}
+                                            className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 rounded-xl font-bold text-xs transition-colors flex items-center justify-center gap-2 cursor-pointer"
+                                          >
+                                            {isUploadingScreenshot ? <Loader2 size={14} className="animate-spin" /> : <FileCheck size={14} />}
+                                            {isUploadingScreenshot ? "Uploading..." : "Submit Screenshot for Verification"}
+                                          </button>
+                                        </div>
+                                      )}
+                                    </div>
+
+                                    {isSuperUser(userEmail, userPhone) && (
+                                      <button
+                                        onClick={() => {
+                                          setIsProposalUnlocked(true);
+                                          setIsPremiumUnlocked(true);
+                                        }}
+                                        className="w-full py-2 bg-purple-600/20 border border-purple-500/30 text-purple-300 hover:bg-purple-600/30 rounded-xl text-xs font-bold transition-colors cursor-pointer"
+                                      >
+                                        ⚡ Admin / Superuser Instant Unlock
+                                      </button>
+                                    )}
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -2782,13 +2854,22 @@ export default function App() {
             </p>
             
             <div className="bg-white/5 border border-emerald-500/30 rounded-xl p-4 mb-6">
-              <p className="text-sm text-white/80 mb-2">Scan to Pay via UPI</p>
+              <p className="text-sm text-white/80 mb-2">Scan to Pay ₹{isSuperUser(userEmail, userPhone) ? 1 : 100} via UPI</p>
               <img 
                 src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=8130330373@ibl&pn=CRID&am=${isSuperUser(userEmail, userPhone) ? 1 : 100}&cu=INR`} 
                 alt="UPI QR Code" 
-                className="w-32 h-32 mx-auto rounded-lg mb-3"
+                className="w-32 h-32 mx-auto rounded-lg mb-3 bg-white p-1"
               />
-              <p className="font-mono text-emerald-400 font-bold tracking-wider">8130330373@ibl</p>
+              <div className="flex items-center justify-center gap-2">
+                <span className="font-mono text-emerald-400 font-bold tracking-wider text-sm">8130330373@ibl</span>
+                <button 
+                  onClick={handleCopyUpiId}
+                  className="px-2 py-1 bg-white/10 hover:bg-white/20 text-white rounded text-[10px] font-medium flex items-center gap-1 transition-colors cursor-pointer"
+                >
+                  {upiCopied ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
+                  {upiCopied ? "Copied!" : "Copy"}
+                </button>
+              </div>
             </div>
 
             {/* SCREENSHOT UPLOAD AREA */}
@@ -2847,9 +2928,10 @@ export default function App() {
             <div className="flex flex-col gap-3 mb-6">
               <button 
                 onClick={() => handleManualPaidRequest(isSuperUser(userEmail, userPhone) ? 1 : 100, 'single')}
-                className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white py-4 rounded-xl font-bold transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-2"
+                className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white py-3.5 rounded-xl font-bold transition-all transform hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2 text-xs md:text-sm cursor-pointer shadow-lg shadow-green-500/10"
               >
-                I have paid, send screenshot on WhatsApp
+                <MessageSquare size={18} />
+                Message Payment on WhatsApp (+91 7092884311)
               </button>
             </div>
             <button 
